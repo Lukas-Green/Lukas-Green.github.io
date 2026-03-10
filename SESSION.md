@@ -78,7 +78,7 @@ Domain: `lukasdgreen.com` (DNS not yet pointed)
 ## Brand Context
 
 - Story: GD background → systems thinker → AI builder. Incarceration arc informs values only (not front-and-center on site).
-- Projects shown: ContactFlow (GH2 renamed), InvoiceFlow (Invoice System renamed), DentalFlow AI
+- Projects shown: CanvassKit (formerly GH2), SoloBill (formerly Invoice System), RecallAI (formerly DentalFlow AI)
 - Email: `lukas@lukasdgreen.com`
 - GitHub: `Lukas-Green`
 - LinkedIn: `linkedin.com/in/lukas-green-designer` (to be updated)
