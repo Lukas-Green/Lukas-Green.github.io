@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lukas Green — AI Systems Designer</title>
+  <meta name="description" content="AI Systems Designer based in Portland, OR. I build tools that solve real operational problems.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #111116;
+      --bg2:        #1a1a22;
+      --accent:     #E05A3A;
+      --accent-dk:  #c04a2e;
+      --white:      #ffffff;
+      --gray:       #9ca3af;
+      --gray-dim:   #4b5563;
+      --border:     #2a2a35;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ─────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 80px;
+      height: 72px;
+      background: rgba(17,17,22,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links { display: flex; gap: 40px; list-style: none; }
+    .nav-links a {
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color .2s;
+    }
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--white); }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: transform .2s, opacity .2s;
+    }
+
+    /* ── HERO ────────────────────────────────────── */
+    #home {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 72px 80px 0;
+      gap: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content { flex: 1; max-width: 560px; z-index: 2; }
+
+    .hero-greeting {
+      font-size: 56px;
+      font-weight: 800;
+      line-height: 1.05;
+      margin-bottom: 10px;
+    }
+    .hero-greeting .dot { color: var(--accent); }
+
+    .hero-subtitle {
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--gray);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .hero-subtitle::before {
+      content: '';
+      display: inline-block;
+      width: 40px; height: 2px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .hero-title {
+      font-size: 50px;
+      font-weight: 800;
+      line-height: 1.08;
+      margin-bottom: 36px;
+    }
+
+    .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--white);
+      border: none;
+      padding: 14px 30px;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background .2s, transform .15s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--accent-dk); transform: translateY(-2px); }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--white);
+      border: 2px solid rgba(255,255,255,0.35);
+      padding: 12px 30px;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color .2s, color .2s, transform .15s;
+      display: inline-block;
+    }
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* Photo */
+    .hero-photo {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      min-height: 520px;
+    }
+
+    .bracket-l, .bracket-r {
+      position: absolute;
+      font-size: 200px;
+      font-weight: 200;
+      color: var(--accent);
+      opacity: 0.3;
+      line-height: 1;
+      user-select: none;
+      font-family: 'Inter', monospace;
+      top: 50%; transform: translateY(-50%);
+    }
+    .bracket-l { left: 0; }
+    .bracket-r { right: 0; }
+
+    .photo-ring {
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      border: 3px solid var(--accent);
+      overflow: hidden;
+      position: relative;
+      z-index: 2;
+      background: #1a0e0a;
+      box-shadow: 0 0 80px rgba(224,90,58,0.18);
+    }
+    .photo-ring img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      filter: grayscale(100%) contrast(1.08);
+    }
+
+    /* ── TICKER ──────────────────────────────────── */
+    .ticker-wrap {
+      overflow: hidden;
+      background: rgba(26,26,34,0.9);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 0;
+    }
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      animation: ticker 28s linear infinite;
+    }
+    .ticker-track:hover { animation-play-state: paused; }
+    .ticker-item {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray-dim);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0 36px;
+      white-space: nowrap;
+    }
+    .ticker-dot {
+      color: var(--accent);
+      padding: 0 4px;
+    }
+    @keyframes ticker {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── SECTIONS ────────────────────────────────── */
+    section { padding: 100px 80px; }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-size: 44px;
+      font-weight: 800;
+      line-height: 1.08;
+      margin-bottom: 52px;
+    }
+
+    /* ── ABOUT ───────────────────────────────────── */
+    #about { background: var(--bg2); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.7fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .services-list { display: flex; flex-direction: column; }
+
+    .service-item {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .service-item:first-child { border-top: 1px solid var(--border); }
+
+    .service-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+    .service-icon { font-size: 20px; width: 32px; text-align: center; flex-shrink: 0; }
+    .service-name { font-size: 16px; font-weight: 600; }
+
+    .about-right p {
+      font-size: 16px;
+      color: var(--gray);
+      line-height: 1.85;
+      margin-bottom: 18px;
+    }
+    .about-right p:last-of-type { margin-bottom: 44px; }
+
+    .stats-row { display: flex; gap: 52px; flex-wrap: wrap; }
+
+    .stat-num {
+      font-size: 44px;
+      font-weight: 800;
+      line-height: 1;
+    }
+    .stat-num span { color: var(--accent); font-size: 30px; }
+    .stat-label { font-size: 13px; color: var(--gray); margin-top: 5px; }
+
+    /* ── PROJECTS ────────────────────────────────── */
+    #projects { background: var(--bg); }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .project-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 32px;
+      transition: border-color .2s, transform .2s, box-shadow .2s;
+    }
+    .project-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+    }
+
+    .project-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(224,90,58,0.1);
+      border: 1px solid rgba(224,90,58,0.28);
+      border-radius: 4px;
+      padding: 3px 10px;
+      margin-bottom: 20px;
+    }
+
+    .project-name { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+
+    .project-origin {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent);
+      margin-bottom: 14px;
+      opacity: 0.85;
+      font-style: italic;
+    }
+
+    .project-desc {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.75;
+      margin-bottom: 28px;
+    }
+
+    .project-stack { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .stack-tag {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gray);
+      background: rgba(255,255,255,0.06);
+      border-radius: 4px;
+      padding: 3px 10px;
+    }
+
+    /* ── CONTACT ─────────────────────────────────── */
+    #contact { background: var(--bg2); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .contact-form { display: flex; flex-direction: column; gap: 18px; }
+
+    .form-group { display: flex; flex-direction: column; gap: 7px; }
+
+    .form-group label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 13px 16px;
+      color: var(--white);
+      font-size: 15px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color .2s;
+      resize: vertical;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--accent); }
+
+    .form-group textarea { min-height: 150px; }
+
+    .form-status {
+      font-size: 13px;
+      font-weight: 600;
+      margin-top: 8px;
+      min-height: 20px;
+    }
+    .form-status.success { color: #4ade80; }
+    .form-status.error   { color: #f87171; }
+
+    .contact-info h3 { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
+    .contact-info > p {
+      font-size: 15px;
+      color: var(--gray);
+      line-height: 1.75;
+      margin-bottom: 36px;
+    }
+
+    .contact-links { display: flex; flex-direction: column; gap: 16px; }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: var(--gray);
+      font-size: 15px;
+      font-weight: 500;
+      transition: color .2s;
+    }
+    .contact-link:hover { color: var(--white); }
+
+    .contact-link-icon {
+      width: 42px; height: 42px;
+      border-radius: 9px;
+      background: rgba(224,90,58,0.1);
+      border: 1px solid rgba(224,90,58,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+      transition: background .2s;
+    }
+    .contact-link:hover .contact-link-icon { background: rgba(224,90,58,0.22); }
+
+    /* ── FOOTER ──────────────────────────────────── */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 32px 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-logo { font-size: 18px; font-weight: 800; letter-spacing: 0.06em; }
+    .footer-logo span { color: var(--accent); }
+    footer p { font-size: 13px; color: var(--gray-dim); }
+
+    /* ── RESPONSIVE ──────────────────────────────── */
+    @media (max-width: 1100px) {
+      nav, section, footer { padding-left: 40px; padding-right: 40px; }
+      #home { padding: 72px 40px 0; }
+      .projects-grid { grid-template-columns: 1fr 1fr; }
+      .hero-title { font-size: 42px; }
+      .hero-greeting { font-size: 48px; }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 24px; }
+
+      .nav-links {
+        display: none;
+        position: fixed;
+        top: 72px; left: 0; right: 0;
+        background: var(--bg);
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        border-bottom: 1px solid var(--border);
+        padding: 16px 0;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 14px 0; font-size: 16px; }
+      .nav-toggle { display: flex; }
+
+      #home {
+        flex-direction: column;
+        padding: 100px 24px 60px;
+        min-height: auto;
+        gap: 56px;
+        text-align: center;
+      }
+      .hero-subtitle { justify-content: center; }
+      .hero-ctas { justify-content: center; }
+      .hero-greeting { font-size: 42px; }
+      .hero-title { font-size: 36px; }
+      .hero-photo { min-height: auto; }
+      .photo-ring { width: 280px; height: 280px; }
+      .bracket-l, .bracket-r { font-size: 130px; }
+
+      section { padding: 80px 24px; }
+      .section-title { font-size: 34px; }
+
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; gap: 52px; }
+      .stats-row { gap: 32px; }
+
+      footer {
+        flex-direction: column;
+        gap: 12px;
+        padding: 28px 24px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-logo">LUX<span>.</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-content">
+    <div class="hero-greeting">Hello<span class="dot">.</span></div>
+    <div class="hero-subtitle">I'm Lukas</div>
+    <div class="hero-title">AI Systems<br>Designer</div>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary">Got a project?</a>
+      <a href="#" class="btn-secondary" id="resumeBtn">My resume</a>
+    </div>
+  </div>
+
+  <div class="hero-photo">
+    <div class="bracket-l">&lt;</div>
+    <div class="photo-ring">
+      <img src="assets/img/headshot.jpg" alt="Lukas Green — AI Systems Designer">
+    </div>
+    <div class="bracket-r">&gt;</div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track" aria-hidden="true">
+    <span class="ticker-item">Python</span>
+    <span class="ticker-item">FastAPI</span>
+    <span class="ticker-item">AI Integration</span>
+    <span class="ticker-item">UX &amp; Design</span>
+    <span class="ticker-item">Google Apps Script</span>
+    <span class="ticker-item">Automation</span>
+    <span class="ticker-item">Figma</span>
+    <span class="ticker-item">Git</span>
+    <span class="ticker-item">Prompt Engineering</span>
+    <span class="ticker-item">GitHub Pages</span>
+    <!-- duplicate for seamless loop -->
+    <span class="ticker-item">Python</span>
+    <span class="ticker-item">FastAPI</span>
+    <span class="ticker-item">AI Integration</span>
+    <span class="ticker-item">UX &amp; Design</span>
+    <span class="ticker-item">Google Apps Script</span>
+    <span class="ticker-item">Automation</span>
+    <span class="ticker-item">Figma</span>
+    <span class="ticker-item">Git</span>
+    <span class="ticker-item">Prompt Engineering</span>
+    <span class="ticker-item">GitHub Pages</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">Who I Am</div>
+  <div class="about-grid">
+
+    <div class="services-list">
+      <div class="service-item">
+        <div class="service-dot"></div>
+        <div class="service-icon">⚙️</div>
+        <div class="service-name">AI Consulting</div>
+      </div>
+      <div class="service-item">
+        <div class="service-dot"></div>
+        <div class="service-icon">🔗</div>
+        <div class="service-name">Systems Automation</div>
+      </div>
+      <div class="service-item">
+        <div class="service-dot"></div>
+        <div class="service-icon">✦</div>
+        <div class="service-name">UX-Informed Design</div>
+      </div>
+    </div>
+
+    <div class="about-right">
+      <div class="section-title">About Me</div>
+      <p>
+        I came up through graphic design — print shops, nonprofits, a UX bootcamp, a design degree at Portland State.
+        I developed an eye for what works and what doesn't. But I was always more drawn to the system
+        behind the design than the creative grey area. I think in structure. I solve in black and white.
+      </p>
+      <p>
+        When AI tools arrived and I realized I could <em>build</em> — not just design — everything clicked.
+        Every project I've made started with a specific friction point: a team losing track of contacts,
+        a contractor buried in invoice admin, a clinic bleeding revenue to no-shows.
+        I find the pain point and I build the fix.
+      </p>
+      <p>
+        I'm a freelance consultant and I partner with teams who want to move faster and smarter with AI.
+        I'm a nerd about systems. I love this work.
+      </p>
+      <div class="stats-row">
+        <div>
+          <div class="stat-num">6<span>+</span></div>
+          <div class="stat-label">Projects Built</div>
+        </div>
+        <div>
+          <div class="stat-num">3<span>+</span></div>
+          <div class="stat-label">Years Design</div>
+        </div>
+        <div>
+          <div class="stat-num">100<span>%</span></div>
+          <div class="stat-label">Pain-Point Driven</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Work</div>
+  <div class="section-title">Projects</div>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-tag">CRM / Outreach</div>
+      <div class="project-name">ContactFlow</div>
+      <div class="project-origin">Origin: outreach team drowning in spreadsheets</div>
+      <div class="project-desc">
+        A lightweight contact tracker built for teams managing community outreach — no CRM subscription,
+        no onboarding required. Log calls, emails, and meetings from a Google Sheets sidebar.
+        Status tracking, auto-formatting, and a UI designed for non-technical staff.
+      </div>
+      <div class="project-stack">
+        <span class="stack-tag">Google Apps Script</span>
+        <span class="stack-tag">Google Sheets</span>
+        <span class="stack-tag">HTML / Tailwind</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-tag">Invoicing / Finance</div>
+      <div class="project-name">InvoiceFlow</div>
+      <div class="project-origin">Origin: contractor overpaying for 10% of a platform's features</div>
+      <div class="project-desc">
+        A contractor invoicing tool that generates, tracks, and sends invoices directly from Google Sheets —
+        no paid platform needed. PDF export via Google Docs, client and line-item tracking,
+        and an email send trigger built in.
+      </div>
+      <div class="project-stack">
+        <span class="stack-tag">Google Apps Script</span>
+        <span class="stack-tag">Google Docs</span>
+        <span class="stack-tag">PDF Export</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-tag">AI / Healthcare</div>
+      <div class="project-name">DentalFlow AI</div>
+      <div class="project-origin">Origin: dental clinics losing $3k–$5k/mo to no-shows</div>
+      <div class="project-desc">
+        An AI scheduling and patient reactivation system for dental practices.
+        Automated reminders, cancellation handling, and a clear ROI model —
+        recover 4 missed appointments and the system pays for itself.
+      </div>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">FastAPI</span>
+        <span class="stack-tag">AI Integration</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Let's Talk</div>
+  <div class="section-title">Get In Touch</div>
+  <div class="contact-grid">
+
+    <form
+      class="contact-form"
+      id="contactForm"
+      action="https://formspree.io/f/REPLACE_WITH_YOUR_FORMSPREE_ID"
+      method="POST"
+    >
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Your name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="your@email.com" required>
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Tell me about your project or challenge…" required></textarea>
+      </div>
+      <div>
+        <button type="submit" class="btn-primary">Send Message</button>
+        <div class="form-status" id="formStatus"></div>
+      </div>
+    </form>
+
+    <div class="contact-info">
+      <h3>Other ways to connect</h3>
+      <p>Open to consulting engagements, partnerships, and conversations about AI and systems design.</p>
+      <div class="contact-links">
+        <a href="mailto:lukas@lukasdgreen.com" class="contact-link">
+          <div class="contact-link-icon">✉</div>
+          lukas@lukasdgreen.com
+        </a>
+        <a href="https://github.com/Lukas-Green" target="_blank" rel="noopener" class="contact-link">
+          <div class="contact-link-icon">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577
+              0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756
+              -1.09-.745.083-.73.083-.73 1.205.085 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998
+              .108-.776.418-1.305.762-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22
+              -.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405
+              1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176
+              .765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22
+              0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12
+              c0-6.63-5.37-12-12-12"/>
+            </svg>
+          </div>
+          github.com/Lukas-Green
+        </a>
+        <a href="https://www.linkedin.com/in/lukas-green-designer/" target="_blank" rel="noopener" class="contact-link">
+          <div class="contact-link-icon">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136
+              2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267
+              5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782
+              13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24
+              1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </div>
+          linkedin.com/in/lukas-green-designer
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">LUX<span>.</span></div>
+  <p>© 2026 Lukas Green. All rights reserved.</p>
+</footer>
+
+<script>
+  // Mobile nav
+  function toggleNav() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+
+  // Contact form via Formspree
+  const form = document.getElementById('contactForm');
+  const status = document.getElementById('formStatus');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('button[type="submit"]');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        status.textContent = "Thanks — I'll get back to you soon.";
+        status.className = 'form-status success';
+        form.reset();
+      } else { throw new Error(); }
+    } catch {
+      status.textContent = 'Something went wrong. Email me directly at lukas@lukasdgreen.com';
+      status.className = 'form-status error';
+    }
+    btn.textContent = 'Send Message';
+    btn.disabled = false;
+  });
+
+  // Active nav highlight on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navAs = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    navAs.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  }, { passive: true });
+</script>
+
+</body>
+</html>
