@@ -1,6 +1,6 @@
 # LUX Personal Site — SESSION
 
-_Last updated: 2026-03-10 (Session 2)_
+_Last updated: 2026-03-10 (Session 3)_
 
 ---
 
@@ -9,9 +9,19 @@ _Last updated: 2026-03-10 (Session 2)_
 Personal portfolio + brand site for Lukas Green.
 Brand: **LUX** (Lukas + UX) — AI Systems Designer
 Live repo: `Lukas-Green/Lukas-Green.github.io`
-Domain: `lukasdgreen.com` (DNS not yet pointed)
+Domain: `lukasdgreen.com` (A records added, www CNAME pending)
 
 ---
+
+## Last Session — 2026-03-10 (Session 3)
+
+- DNS fix identified: `www` subdomain needs CNAME record → `Lukas-Green.github.io` in Namecheap (A records were apex only)
+- Joe Lukens / MBS Portland meeting prep completed — 3 files created in `projects-hq/`:
+  - `joe-lukens-discovery-guide.md` — interview script, 8 topic areas, contract opportunity matrix
+  - `joe-lukens-deck-copy.md` — 6-slide deck copy (bring to meeting, not a follow-up)
+  - `joe-lukens-canva-build-guide.md` — full Canva visual/layout specs, slide by slide
+- Deck structure: Cover → Challenge → What I Build (CanvassKit/SoloBill/RecallAI) → MBS Opportunity (4 areas from research) → Process → CTA
+- Slide 4 built from MBS website research — no placeholders, ready to present as-is
 
 ## Last Session — 2026-03-10 (Session 2)
 
@@ -34,23 +44,23 @@ Domain: `lukasdgreen.com` (DNS not yet pointed)
 
 ## Pending — Do These Before Next Session
 
-1. **DNS check** → wait for propagation, then click "Check again" in GitHub Pages settings → enable Enforce HTTPS
+1. **DNS fix** → Namecheap → add CNAME record: Host=`www`, Value=`Lukas-Green.github.io` → then GitHub Pages "Check again" → Enforce HTTPS
 2. **Formspree** → formspree.io → create free account → new form → copy the ID → replace `REPLACE_WITH_YOUR_FORMSPREE_ID` in `index.html` line ~588
 3. **ImprovMX** → improvmx.com → connect `lukasdgreen.com` → forward `lukas@` to your Gmail
-4. **Check headshot crop** in browser — if face is still off, report and adjust `object-position` in `index.html` line 203
+4. **Build Joe Lukens deck in Canva** → use `joe-lukens-deck-copy.md` + `joe-lukens-canva-build-guide.md`
+5. **Resume PDF** → upload to `assets/` when ready
 
 ---
 
 ## Next Steps — Build Queue
 
-1. DNS propagation confirm + Enforce HTTPS
-2. Fix headshot crop if needed (adjust `object-position` %)
-3. Logo — waiting on Lukas's ideas, currently styled text placeholder `LUX.`
-4. Resume PDF — upload to `assets/` and wire up the "My resume" button
-5. **Pitch deck** — Canva, 6 slides, targeting local service/dental businesses. Copy not written yet. Format: dark `#111116`, teal `#64FFDA`, Inter font
-6. **Business card** — digital (shareable link/image) + print-ready
-7. **Joe Lukens pitch deck** — AI consulting intro for Millennium Building Services
-8. LinkedIn URL update — change handle from `/lukas-green-designer` to something current
+1. DNS fix + Enforce HTTPS (see pending above)
+2. Build Joe Lukens deck in Canva — all files ready
+3. Resume PDF — upload to `assets/` and wire up "My resume" button
+4. Logo — waiting on Lukas's direction, currently `LUX.` styled text
+5. General pitch deck — dental/local service businesses (copy not yet written)
+6. Business card — digital + print-ready
+7. LinkedIn handle update — from `/lukas-green-designer`
 
 ---
 
@@ -62,6 +72,9 @@ Domain: `lukasdgreen.com` (DNS not yet pointed)
 | `assets/img/headshot.jpg` | B&W portrait headshot |
 | `CNAME` | Contains: `lukasdgreen.com` |
 | `README.md` | DNS setup instructions |
+| `projects-hq/joe-lukens-discovery-guide.md` | MBS interview script + contract opportunity matrix |
+| `projects-hq/joe-lukens-deck-copy.md` | 6-slide deck copy for Joe Lukens meeting |
+| `projects-hq/joe-lukens-canva-build-guide.md` | Canva visual/layout specs for the deck |
 
 ---
 
