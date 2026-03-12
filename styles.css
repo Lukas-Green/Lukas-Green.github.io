@@ -7,7 +7,7 @@
   --accent-dk:  #4ecdc4;
   --white:      #ffffff;
   --gray:       #9ca3af;
-  --gray-dim:   #4b5563;
+  --gray-dim:   #6b7280;
   --border:     #2a2a35;
 }
 
@@ -76,17 +76,18 @@ nav {
   min-height: 100vh;
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 72px 80px 0;
-  gap: 40px;
+  gap: 80px;
   position: relative;
   overflow: hidden;
 }
 
-.hero-content { flex: 1; max-width: 560px; z-index: 2; }
+.hero-content { max-width: 520px; z-index: 2; }
 
 /* Small label above name */
 .hero-label {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -162,12 +163,12 @@ nav {
 
 /* ── HERO PHOTO ───────────────────────────────── */
 .hero-photo {
-  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   min-height: 520px;
+  flex-shrink: 0;
 }
 
 .bracket-l, .bracket-r {
