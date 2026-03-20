@@ -248,6 +248,42 @@ section { padding: 100px 80px; }
   margin-bottom: 52px;
 }
 
+/* ── STATS STRIP ─────────────────────────────── */
+.stats-strip {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 48px 80px;
+  display: flex;
+  justify-content: center;
+}
+
+.stats-strip-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 72px;
+  border-right: 1px solid var(--border);
+}
+.stats-strip-item:last-child { border-right: none; }
+
+.strip-num {
+  font-size: 52px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--white);
+}
+.strip-num span { color: var(--accent); font-size: 34px; }
+
+.strip-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-top: 10px;
+}
+
 /* ── WHAT I DO ───────────────────────────────── */
 #services { background: var(--bg); }
 
@@ -316,17 +352,7 @@ section { padding: 100px 80px; }
   line-height: 1.85;
   margin-bottom: 18px;
 }
-.about-content p:last-of-type { margin-bottom: 44px; }
-
-.stats-row { display: flex; gap: 52px; flex-wrap: wrap; }
-
-.stat-num {
-  font-size: 44px;
-  font-weight: 800;
-  line-height: 1;
-}
-.stat-num span { color: var(--accent); font-size: 30px; }
-.stat-label { font-size: 13px; color: var(--gray); margin-top: 5px; }
+.about-content p:last-of-type { margin-bottom: 0; }
 
 /* ── PROJECTS ────────────────────────────────── */
 #projects { background: var(--bg); }
@@ -527,6 +553,9 @@ footer p { font-size: 13px; color: var(--gray-dim); }
   section { padding: 72px 24px; }
   .section-title { font-size: 32px; margin-bottom: 36px; }
 
+  .stats-strip { padding: 36px 24px; }
+  .stats-strip-item { padding: 0 28px; }
+  .strip-num { font-size: 38px; }
   .services-grid { grid-template-columns: 1fr; }
   .about-grid { grid-template-columns: 1fr; }
   .about-cartoon { max-width: 280px; margin: 0 auto; }
