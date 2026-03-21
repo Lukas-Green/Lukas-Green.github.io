@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lukas Green | Resume</title>
+  <meta name="description" content="Resume of Lukas Green — AI Design Technologist based in Portland, OR.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+
+    /* ── RESUME LAYOUT ───────────────────────────── */
+
+    .resume-page {
+      padding-top: 72px;
+      min-height: 100vh;
+    }
+
+    /* Header band */
+    .resume-header {
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 64px 80px 56px;
+    }
+
+    .resume-header-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .resume-name {
+      font-size: 56px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+
+    .resume-title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .resume-contact-bar {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+      padding-top: 6px;
+    }
+
+    .resume-contact-bar a,
+    .resume-contact-bar span {
+      font-size: 13px;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color .2s;
+      font-weight: 500;
+    }
+
+    .resume-contact-bar a:hover { color: var(--accent); }
+
+    .resume-tagline {
+      margin-top: 28px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+      font-size: 16px;
+      color: var(--gray);
+      line-height: 1.7;
+      max-width: 720px;
+    }
+
+    .resume-tagline strong {
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    /* Download button */
+    .resume-actions {
+      margin-top: 28px;
+      display: flex;
+      gap: 16px;
+    }
+
+    /* ── BODY GRID ───────────────────────────────── */
+
+    .resume-body {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 0;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 80px 100px;
+    }
+
+    /* Left column */
+    .resume-left {
+      padding: 52px 40px 52px 0;
+      border-right: 1px solid var(--border);
+    }
+
+    .resume-left-section {
+      margin-bottom: 44px;
+    }
+
+    .resume-left-section:last-child { margin-bottom: 0; }
+
+    .resume-col-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .skill-group {
+      margin-bottom: 24px;
+    }
+
+    .skill-group:last-child { margin-bottom: 0; }
+
+    .skill-group-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 10px;
+      letter-spacing: 0.05em;
+    }
+
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .skill-tag {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--gray);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 3px 9px;
+    }
+
+    .edu-entry {
+      margin-bottom: 20px;
+    }
+
+    .edu-school {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .edu-degree {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.55;
+      margin-bottom: 3px;
+    }
+
+    .edu-status {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .approach-note {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    /* Right column */
+    .resume-right {
+      padding: 52px 0 52px 52px;
+    }
+
+    .resume-right-section {
+      margin-bottom: 52px;
+    }
+
+    .resume-right-section:last-child { margin-bottom: 0; }
+
+    .resume-section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Project entries */
+    .project-entry {
+      margin-bottom: 36px;
+      padding-bottom: 36px;
+      border-bottom: 1px solid rgba(42,42,53,0.6);
+    }
+
+    .project-entry:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .project-entry-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 6px;
+    }
+
+    .project-entry-name {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .project-entry-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(100,255,218,0.08);
+      border: 1px solid rgba(100,255,218,0.2);
+      border-radius: 4px;
+      padding: 3px 8px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .project-entry-origin {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--accent);
+      opacity: 0.75;
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+
+    .project-entry-desc {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.75;
+      margin-bottom: 14px;
+    }
+
+    .project-entry-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .project-entry-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .project-entry-status {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gray-dim);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── PRINT ───────────────────────────────────── */
+    @media print {
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+      nav, .resume-actions, footer { display: none; }
+
+      body {
+        background: #ffffff;
+        color: #111116;
+      }
+
+      .resume-page { padding-top: 0; }
+
+      .resume-header {
+        background: #f7f7f9;
+        border-bottom: 1px solid #ddd;
+        padding: 40px 48px 36px;
+      }
+
+      .resume-name { color: #111116; font-size: 40px; }
+      .resume-title { color: #2a7a6a; }
+      .resume-tagline { color: #444; border-top-color: #ddd; }
+      .resume-tagline strong { color: #111116; }
+      .resume-contact-bar a,
+      .resume-contact-bar span { color: #555; }
+
+      .resume-body {
+        padding: 0 48px 60px;
+        grid-template-columns: 240px 1fr;
+      }
+
+      .resume-left { border-right-color: #ddd; padding: 36px 32px 36px 0; }
+      .resume-right { padding: 36px 0 36px 40px; }
+
+      .resume-col-label,
+      .resume-section-label { color: #2a7a6a; border-bottom-color: #ddd; }
+
+      .skill-tag {
+        background: #f0f0f0;
+        border-color: #ddd;
+        color: #444;
+      }
+
+      .edu-school { color: #111116; }
+      .edu-degree { color: #555; }
+      .edu-status { color: #2a7a6a; }
+
+      .project-entry-name { color: #111116; }
+      .project-entry-tag {
+        background: #e8f8f5;
+        border-color: #a8ddd4;
+        color: #2a7a6a;
+      }
+      .project-entry-origin { color: #2a7a6a; }
+      .project-entry-desc { color: #444; }
+      .project-entry-status { color: #888; }
+      .project-entry { border-bottom-color: #eee; }
+      .resume-right-section { margin-bottom: 32px; }
+      .resume-section-label { margin-bottom: 18px; padding-bottom: 10px; }
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────── */
+    @media (max-width: 900px) {
+      .resume-header { padding: 48px 32px 40px; }
+      .resume-header-top { flex-direction: column; gap: 24px; }
+      .resume-contact-bar { align-items: flex-start; }
+      .resume-body { grid-template-columns: 1fr; padding: 0 32px 72px; }
+      .resume-left { border-right: none; border-bottom: 1px solid var(--border); padding: 40px 0 40px 0; }
+      .resume-right { padding: 40px 0 0 0; }
+    }
+
+    @media (max-width: 600px) {
+      .resume-name { font-size: 38px; }
+      .resume-header { padding: 40px 20px 32px; }
+      .resume-body { padding: 0 20px 60px; }
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="assets/lukas green icon-02.png" alt="Lukas Green" class="nav-logo-img">
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html#home">Home</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#projects">Projects</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="resume.html" class="active">Resume</a></li>
+  </ul>
+  <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="resume-page">
+
+  <!-- HEADER -->
+  <div class="resume-header">
+    <div class="resume-header-top">
+      <div>
+        <div class="resume-name">Lukas Green</div>
+        <div class="resume-title">AI Design Technologist</div>
+      </div>
+      <div class="resume-contact-bar">
+        <span>Portland, OR</span>
+        <a href="mailto:lukasgreen3@pm.me">lukasgreen3@pm.me</a>
+        <a href="https://lukasdgreen.com" target="_blank" rel="noopener">lukasdgreen.com</a>
+        <a href="https://github.com/Lukas-Green" target="_blank" rel="noopener">github.com/Lukas-Green</a>
+        <a href="https://www.linkedin.com/in/lukas-green-designer/" target="_blank" rel="noopener">linkedin.com/in/lukas-green-designer</a>
+      </div>
+    </div>
+    <div class="resume-tagline">
+      <strong>22+ years designing systems that work for the people using them.</strong>
+      I started in print and brand, spent two decades developing an eye for what actually works across media, and transitioned into building when AI tools made it possible to go from identifying a problem to constructing a solution. I work from real operational painpoints, build lean, and design everything around the person at the keyboard. My projects are not demos — they are functional builds in active development, each one started because someone's workflow was broken and nothing off the shelf fit.
+    </div>
+    <div class="resume-actions">
+      <button class="btn-primary" onclick="window.print()">Download PDF ↓</button>
+      <a href="index.html" class="btn-secondary">Back to Site</a>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="resume-body">
+
+    <!-- LEFT -->
+    <div class="resume-left">
+
+      <div class="resume-left-section">
+        <div class="resume-col-label">Skills</div>
+
+        <div class="skill-group">
+          <div class="skill-group-name">Design</div>
+          <div class="skill-list">
+            <span class="skill-tag">UX Research</span>
+            <span class="skill-tag">UI Systems</span>
+            <span class="skill-tag">Figma</span>
+            <span class="skill-tag">Typography</span>
+            <span class="skill-tag">Accessibility</span>
+            <span class="skill-tag">Information Design</span>
+            <span class="skill-tag">Print & Brand</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-name">Development</div>
+          <div class="skill-list">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">FastAPI</span>
+            <span class="skill-tag">Google Apps Script</span>
+            <span class="skill-tag">Vanilla JS</span>
+            <span class="skill-tag">HTML / CSS</span>
+            <span class="skill-tag">SQLite</span>
+            <span class="skill-tag">Ollama</span>
+            <span class="skill-tag">PWA</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-name">Methods</div>
+          <div class="skill-list">
+            <span class="skill-tag">Painpoint-First Design</span>
+            <span class="skill-tag">Prompt Engineering</span>
+            <span class="skill-tag">AI-Assisted Development</span>
+            <span class="skill-tag">Systems Thinking</span>
+            <span class="skill-tag">Workflow Automation</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-left-section">
+        <div class="resume-col-label">Education</div>
+
+        <div class="edu-entry">
+          <div class="edu-school">Portland State University</div>
+          <div class="edu-degree">General Bachelor of Science<br>Focus: Systems Science</div>
+          <div class="edu-status">In Progress</div>
+        </div>
+
+        <div class="edu-entry">
+          <div class="edu-school">Self-Directed</div>
+          <div class="edu-degree">AI-assisted development, prompt engineering, full-stack tooling — learned by building real systems from real problems</div>
+          <div class="edu-status">Ongoing since 2023</div>
+        </div>
+      </div>
+
+      <div class="resume-left-section">
+        <div class="resume-col-label">Approach</div>
+        <p class="approach-note">Every project I have built started with a specific, real friction point. I do not build features — I build fixes. The methodology is: identify the pain, map the system around it, build the smallest thing that eliminates the problem, then refine.</p>
+      </div>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div class="resume-right">
+
+      <div class="resume-right-section">
+        <div class="resume-section-label">Projects & Builds</div>
+
+        <div class="project-entry">
+          <div class="project-entry-top">
+            <div class="project-entry-name">LUCID</div>
+            <div class="project-entry-tag">File Intelligence / AI</div>
+          </div>
+          <div class="project-entry-origin">Origin: no reliable way to understand what is actually on your machine</div>
+          <div class="project-entry-desc">
+            Local file intelligence tool that scans any directory and surfaces not just filenames but what is inside each file. On-device AI summaries via Ollama, duplicate detection, and size analysis. Designed around a strict privacy constraint: nothing leaves the machine. Built to solve a problem I hit personally when trying to audit years of accumulated project files.
+          </div>
+          <div class="project-entry-bottom">
+            <div class="project-entry-stack">
+              <span class="stack-tag">Python</span>
+              <span class="stack-tag">FastAPI</span>
+              <span class="stack-tag">Ollama</span>
+              <span class="stack-tag">SQLite</span>
+            </div>
+            <div class="project-entry-status">In active development</div>
+          </div>
+        </div>
+
+        <div class="project-entry">
+          <div class="project-entry-top">
+            <div class="project-entry-name">BRIGS</div>
+            <div class="project-entry-tag">LLM Systems / Context</div>
+          </div>
+          <div class="project-entry-origin">Origin: context rot — projects stall because AI sessions have no memory</div>
+          <div class="project-entry-desc">
+            A session continuity and context compression system for LLM workflows. The core concept: distill a full conversation into a dense, minimal token — a "gold coin" — that any model can use to pick up exactly where work left off. Designed to eliminate the manual context-rebuilding tax that slows every AI-assisted project. Architecture defined. Build in progress.
+          </div>
+          <div class="project-entry-bottom">
+            <div class="project-entry-stack">
+              <span class="stack-tag">Python</span>
+              <span class="stack-tag">Ollama</span>
+              <span class="stack-tag">Markdown</span>
+            </div>
+            <div class="project-entry-status">Architecture phase</div>
+          </div>
+        </div>
+
+        <div class="project-entry">
+          <div class="project-entry-top">
+            <div class="project-entry-name">CanvassKit</div>
+            <div class="project-entry-tag">CRM / Outreach</div>
+          </div>
+          <div class="project-entry-origin">Origin: outreach team drowning in unstructured spreadsheets</div>
+          <div class="project-entry-desc">
+            Contact tracker built for nonprofit outreach teams managing community engagement. No CRM subscription, no onboarding curve. Logs calls, emails, and meetings from a Google Sheets sidebar. Status tracking, auto-formatting, and an interface built specifically for non-technical staff who should not have to think about the tool.
+          </div>
+          <div class="project-entry-bottom">
+            <div class="project-entry-stack">
+              <span class="stack-tag">Google Apps Script</span>
+              <span class="stack-tag">Google Sheets</span>
+              <span class="stack-tag">HTML / Tailwind</span>
+            </div>
+            <div class="project-entry-status">Functional build</div>
+          </div>
+        </div>
+
+        <div class="project-entry">
+          <div class="project-entry-top">
+            <div class="project-entry-name">SoloBill</div>
+            <div class="project-entry-tag">Invoicing / Finance</div>
+          </div>
+          <div class="project-entry-origin">Origin: contractor paying for a full platform to use 10% of its features</div>
+          <div class="project-entry-desc">
+            Invoicing tool for independent contractors — generates, tracks, and sends invoices directly from Google Sheets. PDF export via Docs, client and line-item tracking, email trigger. Tested in one real-world billing cycle, which surfaced UX friction and output issues. Structure is sound. Refinement ongoing.
+          </div>
+          <div class="project-entry-bottom">
+            <div class="project-entry-stack">
+              <span class="stack-tag">Google Apps Script</span>
+              <span class="stack-tag">Google Docs</span>
+              <span class="stack-tag">PDF Export</span>
+            </div>
+            <div class="project-entry-status">Tested — in refinement</div>
+          </div>
+        </div>
+
+        <div class="project-entry">
+          <div class="project-entry-top">
+            <div class="project-entry-name">FreedEase</div>
+            <div class="project-entry-tag">Civic / UX</div>
+          </div>
+          <div class="project-entry-origin">Origin: re-entry systems are hostile by default — they should not be</div>
+          <div class="project-entry-desc">
+            Privacy-first, offline-capable PWA designed for people navigating re-entry after incarceration. Built around the specific constraints of that context: low-trust environments, limited or inconsistent connectivity, and high-stakes information needs. Designed with the assumption that the interface will be someone's first interaction with a tool that actually works for them.
+          </div>
+          <div class="project-entry-bottom">
+            <div class="project-entry-stack">
+              <span class="stack-tag">PWA</span>
+              <span class="stack-tag">Google Apps Script</span>
+              <span class="stack-tag">Vanilla JS</span>
+            </div>
+            <div class="project-entry-status">Design prototype</div>
+          </div>
+        </div>
+
+        <div class="project-entry">
+          <div class="project-entry-top">
+            <div class="project-entry-name">GH2 Contact Tracker</div>
+            <div class="project-entry-tag">Nonprofit Tooling</div>
+          </div>
+          <div class="project-entry-origin">Origin: nonprofit staff logging outreach in ways that lost data</div>
+          <div class="project-entry-desc">
+            Outreach logging web app built directly from operational feedback from GH2 nonprofit staff. Simple, fast, zero training required. Built to replace an informal process that was creating gaps in contact history — the kind of gap that costs organizations relationships.
+          </div>
+          <div class="project-entry-bottom">
+            <div class="project-entry-stack">
+              <span class="stack-tag">Google Apps Script</span>
+              <span class="stack-tag">Google Sheets</span>
+            </div>
+            <div class="project-entry-status">Delivered to org</div>
+          </div>
+        </div>
+
+        <div class="project-entry">
+          <div class="project-entry-top">
+            <div class="project-entry-name">Audio & Video Transcription Tools</div>
+            <div class="project-entry-tag">Workflow Automation</div>
+          </div>
+          <div class="project-entry-origin">Origin: manual video logging was eating hours that should not exist</div>
+          <div class="project-entry-desc">
+            Two connected tools built around a media workflow problem. First: an iPhone audio recorder to PWA transcription pipeline built in Google Apps Script — record, drop audio, get text. Second: a video silence detector that scans raw footage on a timeline, identifies dead space, and outputs timestamps — eliminating manual scrubbing for editors. Both built without prior knowledge of the relevant APIs, learning entirely by doing.
+          </div>
+          <div class="project-entry-bottom">
+            <div class="project-entry-stack">
+              <span class="stack-tag">Google Apps Script</span>
+              <span class="stack-tag">PWA</span>
+              <span class="stack-tag">Vanilla JS</span>
+            </div>
+            <div class="project-entry-status">Functional builds</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="resume-right-section">
+        <div class="resume-section-label">Background</div>
+        <div class="project-entry-desc" style="font-size:14px; line-height:1.85;">
+          22+ years working across print shops, branding agencies, and nonprofits. Built fluency in what works across print, digital, and UX over a long arc of real-world design practice. Transitioned into building when AI tools made it possible to take a problem from identification to working system without a team. The design background did not go away — it became the filter. Every technical decision gets evaluated against whether the person at the keyboard will understand it without help.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="assets/lukas green icon-02.png" alt="Lukas Green" class="footer-logo-img">
+  </div>
+  <p>© 2026 Lukas Green. All rights reserved.</p>
+</footer>
+
+<script>
+  function toggleNav() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>
