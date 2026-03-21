@@ -273,7 +273,7 @@
   <div class="footer-logo">
     <img src="assets/lukas green icon-02.png" alt="Lukas Green" class="footer-logo-img">
   </div>
-  <p>© 2026 Lukas Green. All rights reserved.</p>
+  <p>© 2026 Lukas Green</p>
 </footer>
 
 <script>
@@ -300,7 +300,7 @@
     });
   }, { passive: true });
 
-  // Hero node animation — origin node replaces the "." after "Lukas"
+  // Hero node animation - origin node replaces the "." after "Lukas"
   // Network fans out rightward to fill the right half of the hero
   (function () {
     const canvas = document.getElementById('heroCanvas');
@@ -311,7 +311,7 @@
     // All dx/dy are offsets from the origin node (where "." would sit).
     // Nodes spread rightward + vertically to cover the full right side.
     const nodes = [
-      { dx: 0,    dy: 0,    r: 6,  delay: 0   }, // 0 — origin (replaces ".")
+      { dx: 0,    dy: 0,    r: 6,  delay: 0   }, // 0 - origin (replaces ".")
       { dx: 130,  dy: -50,  r: 5,  delay: 120 }, // 1
       { dx: 90,   dy: 80,   r: 4,  delay: 100 }, // 2
       { dx: 55,   dy: -130, r: 3,  delay: 80  }, // 3
