@@ -35,7 +35,7 @@
 
   <div class="hero-content">
     <div class="hero-label">Hello, my name is</div>
-    <div class="hero-name">Lukas.</div>
+    <div class="hero-name">Lukas</div>
     <div class="hero-role">AI Design Technologist</div>
     <div class="hero-ctas">
       <a href="#contact" class="btn-primary">Got a project? →</a>
@@ -299,35 +299,55 @@
     });
   }, { passive: true });
 
-  // Hero node animation — radiates from the "." in "Lukas."
+  // Hero node animation — origin node replaces the "." after "Lukas"
+  // Network fans out rightward to fill the right half of the hero
   (function () {
     const canvas = document.getElementById('heroCanvas');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     const ACCENT = '#64FFDA';
 
-    // Node layout: offsets (px) from origin — the "." at end of "Lukas."
-    // Nodes radiate rightward and upward toward the photo area
+    // All dx/dy are offsets from the origin node (where "." would sit).
+    // Nodes spread rightward + vertically to cover the full right side.
     const nodes = [
-      { dx: 0,   dy: 0,    r: 5,  delay: 0   }, // 0 — origin (the ".")
-      { dx: 115, dy: -38,  r: 8,  delay: 160 }, // 1
-      { dx: 235, dy: -88,  r: 12, delay: 310 }, // 2
-      { dx: 195, dy: 52,   r: 6,  delay: 250 }, // 3
-      { dx: 335, dy: -18,  r: 5,  delay: 450 }, // 4
-      { dx: 155, dy: -148, r: 4,  delay: 185 }, // 5
-      { dx: 300, dy: -158, r: 9,  delay: 410 }, // 6
-      { dx: 375, dy: -78,  r: 6,  delay: 530 }, // 7
-      { dx: 58,  dy: -98,  r: 3,  delay: 90  }, // 8
-      { dx: 415, dy: 28,   r: 4,  delay: 590 }, // 9
+      { dx: 0,    dy: 0,    r: 6,  delay: 0   }, // 0 — origin (replaces ".")
+      { dx: 130,  dy: -50,  r: 5,  delay: 120 }, // 1
+      { dx: 90,   dy: 80,   r: 4,  delay: 100 }, // 2
+      { dx: 55,   dy: -130, r: 3,  delay: 80  }, // 3
+      { dx: 240,  dy: -110, r: 9,  delay: 230 }, // 4
+      { dx: 280,  dy: 30,   r: 6,  delay: 270 }, // 5
+      { dx: 200,  dy: 140,  r: 4,  delay: 220 }, // 6
+      { dx: 160,  dy: -210, r: 5,  delay: 200 }, // 7
+      { dx: 390,  dy: -170, r: 12, delay: 380 }, // 8
+      { dx: 420,  dy: -30,  r: 5,  delay: 400 }, // 9
+      { dx: 360,  dy: 100,  r: 7,  delay: 360 }, // 10
+      { dx: 310,  dy: -270, r: 4,  delay: 340 }, // 11
+      { dx: 530,  dy: -220, r: 6,  delay: 520 }, // 12
+      { dx: 560,  dy: -60,  r: 4,  delay: 540 }, // 13
+      { dx: 490,  dy: 90,   r: 5,  delay: 490 }, // 14
+      { dx: 480,  dy: -340, r: 3,  delay: 480 }, // 15
+      { dx: 650,  dy: -280, r: 8,  delay: 640 }, // 16
+      { dx: 680,  dy: -100, r: 4,  delay: 660 }, // 17
+      { dx: 610,  dy: 60,   r: 3,  delay: 610 }, // 18
     ];
 
     const edges = [
-      [0,1],[0,5],[0,8],
-      [1,2],[1,3],[1,5],
-      [2,6],[2,4],
-      [3,4],[3,7],
-      [4,7],[6,7],[6,4],
-      [7,9],[4,9],
+      [0,1],[0,2],[0,3],
+      [1,4],[1,5],[1,3],
+      [2,5],[2,6],
+      [3,7],[3,4],
+      [4,8],[4,7],[4,11],
+      [5,9],[5,10],[5,6],
+      [6,10],
+      [7,11],
+      [8,12],[8,11],[8,9],
+      [9,13],[9,10],
+      [10,14],
+      [11,15],[11,12],
+      [12,16],[12,15],
+      [13,17],[13,16],
+      [14,18],[14,17],
+      [16,17],[17,18],
     ];
 
     let W, H, ox, oy;
@@ -340,25 +360,25 @@
       if (nm && sec) {
         const sr = sec.getBoundingClientRect();
         const nr = nm.getBoundingClientRect();
-        ox = nr.right - sr.left;
-        oy = nr.bottom - sr.top - nr.height * 0.08;
+        // Sit the origin right at the end of "Lukas" at cap-height baseline
+        ox = nr.right - sr.left + 10;
+        oy = nr.bottom - sr.top - nr.height * 0.12;
       } else {
-        ox = W * 0.33;
-        oy = H * 0.52;
+        ox = W * 0.30;
+        oy = H * 0.50;
       }
     }
 
     function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
 
     let t0 = null;
-    const DRAW_END = 1500;
+    const DRAW_END = 1800;
 
     function animate(ts) {
       if (!t0) t0 = ts;
       const el = ts - t0;
       ctx.clearRect(0, 0, W, H);
 
-      // Edges
       edges.forEach(([ai, bi]) => {
         const na = nodes[ai], nb = nodes[bi];
         const start = Math.max(na.delay, nb.delay);
@@ -375,22 +395,21 @@
         ctx.stroke();
       });
 
-      // Nodes
       nodes.forEach((n, i) => {
         const p = easeOut(Math.min(1, Math.max(0, (el - n.delay) / 260)));
         if (p <= 0) return;
         const x = ox + n.dx, y = oy + n.dy;
         if (i === 0) {
           ctx.beginPath();
-          ctx.arc(x, y, n.r * 3, 0, Math.PI * 2);
+          ctx.arc(x, y, n.r * 3.5, 0, Math.PI * 2);
           ctx.fillStyle = ACCENT;
-          ctx.globalAlpha = 0.07 * p;
+          ctx.globalAlpha = 0.08 * p;
           ctx.fill();
         }
         ctx.beginPath();
         ctx.arc(x, y, n.r * p, 0, Math.PI * 2);
         ctx.fillStyle = ACCENT;
-        ctx.globalAlpha = 0.8 * p;
+        ctx.globalAlpha = 0.82 * p;
         ctx.fill();
       });
 
@@ -421,9 +440,9 @@
         if (i === 0) {
           const glow = (Math.sin(ts * 0.0018) + 1) / 2;
           ctx.beginPath();
-          ctx.arc(x, y, n.r * (2.2 + glow * 1.4), 0, Math.PI * 2);
+          ctx.arc(x, y, n.r * (2.5 + glow * 1.5), 0, Math.PI * 2);
           ctx.fillStyle = ACCENT;
-          ctx.globalAlpha = 0.04 + glow * 0.04;
+          ctx.globalAlpha = 0.04 + glow * 0.05;
           ctx.fill();
         }
         ctx.beginPath();

@@ -43,7 +43,7 @@ nav {
   flex-shrink: 0;
 }
 .nav-logo-img {
-  height: 36px;
+  height: 49px;
   width: auto;
   display: block;
 }
@@ -123,25 +123,15 @@ nav {
   align-items: center;
   gap: 14px;
 }
-.hero-label::before {
-  content: '';
-  display: inline-block;
-  width: 36px; height: 2px;
-  background: var(--accent);
-  flex-shrink: 0;
-}
 
-/* Name — dominant element with subtle gradient */
+/* Name — dominant element */
 .hero-name {
   font-size: 86px;
   font-weight: 900;
   line-height: 0.95;
   letter-spacing: -0.02em;
   margin-bottom: 18px;
-  background: linear-gradient(90deg, #ffffff 50%, #64FFDA 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--white);
 }
 
 /* Role / title */
@@ -498,7 +488,7 @@ footer {
   align-items: center;
 }
 .footer-logo-img {
-  height: 28px;
+  height: 38px;
   width: auto;
   display: block;
 }
