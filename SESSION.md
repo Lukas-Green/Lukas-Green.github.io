@@ -1,5 +1,5 @@
-# Portfolio Site — SESSION
-_Last updated: 2026-03-20 (Session 4)_
+# Portfolio Site - SESSION
+_Last updated: 2026-03-21 (Session 5)_
 
 ---
 
@@ -13,46 +13,60 @@ Contact: `lukasgreen3@pm.me` (Proton Mail)
 
 ---
 
-## Last Session — 2026-03-20 (Session 4)
+## Last Session - 2026-03-21 (Session 5)
 
-Full redesign based on reference landing page image. Changes made across multiple pushes:
+**Logo**
+- Nav + footer: replaced LG text with `assets/lukas green icon-02.png` (shows full name immediately)
+- Logo enlarged 35% (nav 36px to 49px, footer 28px to 38px)
 
-**Branding**
-- Logo changed from `LUX.` to `LG` (nav + footer)
-- Title updated from "AI Systems Designer" to "AI Design Technologist" site-wide
-- All em dashes removed from copy (style decision — none going forward)
+**Hero**
+- Period removed from "Lukas." — origin node now sits visually in its place at text baseline
+- Gradient removed from "Lukas" name — solid white
+- Decorative dash prefix removed from "Hello, my name is" label
 
-**Layout / Structure**
-- Hero: gradient name text (white → teal), decorative node SVG (top-right, 17% opacity), radial glow behind photo
-- Stats strip added between hero and "What I Do" as standalone full-width credentials bar
-- New "Specializing In" section (3 service cards) broken out from About
-- About section: 2-column grid with cartoon-lukas.jpeg on left, bio text right
-- Ticker removed
-- Contact form replaced with direct email CTA + GitHub/LinkedIn links
+**Node Animation**
+- Replaced static SVG with canvas-based animation
+- 19 nodes, 33 edges, fans out rightward from origin to fill right half of hero
+- Draw-in over 1.8s on page load, settles into pulsing steady state
+- Hidden on mobile
 
-**Content**
-- Bio rewritten to align with LinkedIn: 22+ years design, PSU advanced studies (current), mission-driven orgs, "Intentional design. Clean architecture. Smart automation."
-- LinkedIn CTA added to hero (replaces dead resume button; resume still pending)
-- LUCID added as 4th project card (2x2 grid)
-- RecallAI description rewritten — no fake ROI numbers, framed as clinic partnership in progress
-- Stats: 22+ Years Design, 6+ Projects Built, 100% Pain-Point Driven
+**Services Section**
+- Renamed: "What I Do / Specializing In" became "Services / What I Do"
+- Icons: emojis replaced with custom inline SVGs (neural net, cycle arrows, browser wireframe)
+- Descriptions: expanded for all three cards
 
-**CSS**
-- Body copy brightened: `--gray` from `#9ca3af` → `#b8c2cc`
-- Removed ticker styles
-- Added stats strip styles
-- Added about-grid 2-column layout + about-cartoon styles
+**Stats**
+- "6+ Projects Built" clarified to "6+ Tools Shipped"
+
+**Resume Page (resume.html)**
+- New page, full brand match (dark theme, teal, Inter)
+- Two-column layout: skills/education/approach left, all 7 projects right
+- Honest status labels throughout (no false shipping claims)
+- FreedEase: mission-driven civic framing only
+- SoloBill: single real-world test, known issues noted
+- GH2: marked "Delivered to org"
+- Print stylesheet for PDF export via browser
+- Resume added to main site nav
+
+**Footer**
+- Stacked layout: icon centered above copyright
+- Removed "All rights reserved"
+
+**Copy**
+- All em dashes removed across both files (13 instances)
+- Rule: no em dashes ever. Use periods, commas, or colons depending on context.
 
 ---
 
-## Pending — Next Session
+## Pending - Next Session
 
-1. **Node animation** — nodes should originate from the "." in "Lukas." and radiate outward on page load (concept: the period is the origin of the system)
-2. **About text alignment** — "About Me" heading and text should align to the top of the cartoon image
-3. **Favicon** — LG wordmark as favicon
-4. **Resume PDF** — upload to `assets/` and wire up LinkedIn button or add separate resume button
-5. **DNS** — confirm `www` CNAME is set in Namecheap → `Lukas-Green.github.io`, enforce HTTPS
-6. **LinkedIn update** — update handle from `/lukas-green-designer` if desired
+1. **About text alignment** — "About Me" heading and text should align to top of cartoon image
+2. **Favicon** — LG wordmark as favicon
+3. **Resume PDF** — upload finalized PDF to assets/ and wire up download button
+4. **DNS** — confirm `www` CNAME is set in Namecheap, enforce HTTPS
+5. **LinkedIn update** — update handle from `/lukas-green-designer` if desired
+6. **Growth orb visualization** — 3D interactive node graph of learning arc from chat data
+7. **Case study documentation** — living doc tracking all project work with session data
 
 ---
 
@@ -76,19 +90,25 @@ Full redesign based on reference landing page image. Changes made across multipl
 
 | File | Purpose |
 |---|---|
-| `index.html` | Full site — single HTML file |
-| `styles.css` | All styles — extracted CSS |
+| `index.html` | Full site, single HTML file |
+| `resume.html` | Resume page, on-brand, print-ready |
+| `styles.css` | All shared styles |
 | `assets/img/headshot.jpg` | B&W portrait (hero) |
 | `assets/img/cartoon-lukas.jpeg` | Cartoon portrait (about section) |
+| `assets/lukas green icon-02.png` | LG wordmark logo (nav + footer) |
 | `CNAME` | Contains: `lukasdgreen.com` |
 
 ---
 
 ## Projects on Site
 
-| Project | Tag | Stack |
-|---|---|---|
-| CanvassKit | CRM / Outreach | Google Apps Script, Sheets, HTML/Tailwind |
-| SoloBill | Invoicing / Finance | Google Apps Script, Docs, PDF Export |
-| RecallAI | AI / Healthcare | Python, FastAPI, AI Integration |
-| LUCID | File Intelligence / AI | Python, FastAPI, Ollama, SQLite |
+| Project | Tag | Stack | Status |
+|---|---|---|---|
+| CanvassKit | CRM / Outreach | Google Apps Script, Sheets, HTML/Tailwind | Functional build |
+| SoloBill | Invoicing / Finance | Google Apps Script, Docs, PDF Export | Tested, in refinement |
+| RecallAI | AI / Healthcare | Python, FastAPI, AI Integration | Unfinished, unvetted |
+| LUCID | File Intelligence / AI | Python, FastAPI, Ollama, SQLite | In active development |
+| FreedEase | Civic / UX | PWA, Google Apps Script, Vanilla JS | Design prototype |
+| GH2 Contact Tracker | Nonprofit Tooling | Google Apps Script, Sheets | Delivered to org |
+| Audio/Video Transcription | Workflow Automation | Google Apps Script, PWA, Vanilla JS | Functional builds |
+| BRIGS | LLM Systems / Context | Python, Ollama, Markdown | Architecture phase |
