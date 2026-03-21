@@ -37,11 +37,15 @@ nav {
 }
 
 .nav-logo {
-  font-size: 22px;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  color: var(--accent);
+  display: flex;
+  align-items: center;
   text-decoration: none;
+  flex-shrink: 0;
+}
+.nav-logo-img {
+  height: 36px;
+  width: auto;
+  display: block;
 }
 
 .nav-links { display: flex; gap: 40px; list-style: none; }
@@ -96,15 +100,13 @@ nav {
   z-index: 0;
 }
 
-/* Decorative node network graphic */
-.hero-nodes {
+/* Hero canvas — node animation */
+#heroCanvas {
   position: absolute;
-  top: 8%;
-  right: 2%;
-  width: 260px;
-  opacity: 0.17;
-  z-index: 1;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   pointer-events: none;
+  z-index: 1;
 }
 
 .hero-content { max-width: 520px; z-index: 2; }
@@ -492,10 +494,13 @@ footer {
   justify-content: space-between;
 }
 .footer-logo {
-  font-size: 18px;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  color: var(--accent);
+  display: flex;
+  align-items: center;
+}
+.footer-logo-img {
+  height: 28px;
+  width: auto;
+  display: block;
 }
 footer p { font-size: 13px; color: var(--gray-dim); }
 
@@ -538,7 +543,7 @@ footer p { font-size: 13px; color: var(--gray-dim); }
     text-align: center;
   }
   #home::before { display: none; }
-  .hero-nodes { display: none; }
+  #heroCanvas { display: none; }
   .hero-content { max-width: 100%; }
   .hero-label { justify-content: center; }
   .hero-ctas { justify-content: center; }
