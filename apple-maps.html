@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apple Maps Case Study | Lukas Green</title>
+  <meta name="description" content="UX case study: adding custom route building to Apple Maps to improve navigation for couriers and everyday drivers.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    (function() {
+      var saved = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', saved);
+    })();
+  </script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="assets/lukas green icon-02.png" alt="Lukas Green" class="nav-logo-img">
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html#home">Home</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#projects">Projects</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="resume.html">Resume</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <!-- Sun icon (shown in light mode) -->
+      <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+      <!-- Moon icon (shown in dark mode) -->
+      <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </button>
+    <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- CASE STUDY HERO -->
+<section class="cs-hero">
+  <a href="index.html#projects" class="cs-back">← Back to Projects</a>
+  <div class="cs-tag-pill">UX Research / Case Study</div>
+  <h1 class="cs-title">Navigation Deficiencies<br>in Apple Maps</h1>
+  <p class="cs-tagline">Adding custom route building to improve user navigation before and while driving.</p>
+  <div class="cs-meta-strip">
+    <div class="cs-meta-item">
+      <div class="cs-meta-label">Role</div>
+      <div class="cs-meta-val">Lead UX Researcher &amp; Designer</div>
+    </div>
+    <div class="cs-meta-item">
+      <div class="cs-meta-label">Methods</div>
+      <div class="cs-meta-val">User Interviews, Competitive Analysis, Heuristic Evaluation, Usability Testing</div>
+    </div>
+    <div class="cs-meta-item">
+      <div class="cs-meta-label">Tools</div>
+      <div class="cs-meta-val">Figma</div>
+    </div>
+    <div class="cs-meta-item">
+      <div class="cs-meta-label">Type</div>
+      <div class="cs-meta-val">UX Case Study</div>
+    </div>
+  </div>
+</section>
+
+<!-- HERO IMAGE — Figma prototype showing designed solution -->
+<div class="cs-full-bleed">
+  <img src="assets/img/apple-maps/am-hifi-figma-scenario1.png" alt="Apple Maps redesign: multi-stop route planning prototype with Add a Stop">
+</div>
+
+<!-- OVERVIEW -->
+<section class="cs-body" style="padding-top:0;padding-bottom:0;">
+<div class="cs-content">
+  <div class="cs-section">
+    <div class="cs-section-label">Overview</div>
+    <h2 class="cs-section-title">The Problem with Apple Maps</h2>
+    <p>Apple Maps launched in 2012 as a Google Maps competitor and fell short in significant ways. As a former courier and daily iPhone user, I depended on Maps for work and experienced its routing failures firsthand. Near-wrecks and lost wages from poor route control were not edge cases. They were regular occurrences.</p>
+    <p>Two specific failures drove this project: the inability to create multi-stop routes, and the severely limited "Add a Stop" feature. Every other major mapping application had solved this. Apple hadn't.</p>
+  </div>
+</div>
+
+<!-- PROBLEM SCREENSHOTS -->
+<div class="cs-img-row cs-img-row--3">
+  <figure class="cs-figure">
+    <img src="assets/img/apple-maps/am-problem-no-add-stop.jpg" alt="Apple Maps: no custom add a stop">
+    <figcaption>No custom stop input</figcaption>
+  </figure>
+  <figure class="cs-figure">
+    <img src="assets/img/apple-maps/am-problem-route-planning.jpg" alt="Apple Maps: route planning limitations">
+    <figcaption>Route planning limitations</figcaption>
+  </figure>
+  <figure class="cs-figure">
+    <img src="assets/img/apple-maps/am-problem-zooming.jpg" alt="Apple Maps: zooming issue">
+    <figcaption>Zoom and context loss</figcaption>
+  </figure>
+</div>
+
+<hr class="cs-divider">
+
+<!-- RESEARCH -->
+<div class="cs-content">
+  <div class="cs-section">
+    <div class="cs-section-label">Research</div>
+    <h2 class="cs-section-title">Validating the Problem</h2>
+    <p>Before designing anything, I reviewed hundreds of App Store user reviews and found consistent, specific complaints about route control, especially from delivery workers.</p>
+    <div class="cs-quote">
+      "The 'Add a Stop' feature is basically useless. It greatly limits the type of locations you can add... If I'm needing to stop at multiple places, it would be nice to add all the locations I want and be shown the most efficient circuit." (App Store reviewer)
+    </div>
+  </div>
+</div>
+
+<!-- APP STORE REVIEWS -->
+<div class="cs-img-row cs-img-row--4">
+  <figure class="cs-figure">
+    <img src="assets/img/apple-maps/am-review-1.jpg" alt="App Store review">
+  </figure>
+  <figure class="cs-figure">
+    <img src="assets/img/apple-maps/am-review-2.jpg" alt="App Store review">
+  </figure>
+  <figure class="cs-figure">
+    <img src="assets/img/apple-maps/am-review-3.jpg" alt="App Store review">
+  </figure>
+  <figure class="cs-figure">
+    <img src="assets/img/apple-maps/am-review-4.jpg" alt="App Store review">
+  </figure>
+</div>
+<p class="cs-caption">App Store reviews: consistent, specific complaints about route control from delivery workers and everyday drivers</p>
+
+<hr class="cs-divider">
+
+<!-- COMPETITIVE ANALYSIS -->
+<div class="cs-content">
+  <div class="cs-section">
+    <div class="cs-section-label">Competitive Analysis</div>
+    <h2 class="cs-section-title">Apple Was the Outlier</h2>
+    <p>I conducted a competitive analysis across Google Maps, MapQuest, Here Maps, and Waze. All three offered custom route building with multiple user-defined stops. Apple was the only major navigation app that had not solved this.</p>
+  </div>
+</div>
+
+<div class="cs-img-row cs-img-row--3">
+  <figure class="cs-figure">
+    <img src="assets/img/apple-maps/am-competitor-1.png" alt="Waze: navigation app">
+    <figcaption>Waze: flexible route planning</figcaption>
+  </figure>
+  <figure class="cs-figure">
+    <img src="assets/img/apple-maps/am-competitor-4.png" alt="HERE Maps: Add stop feature">
+    <figcaption>HERE Maps: "Add stop +" clearly available</figcaption>
+  </figure>
+  <figure class="cs-figure">
+    <img src="assets/img/apple-maps/am-competitor-here.jpg" alt="HERE Maps navigation view">
+    <figcaption>HERE Maps: multi-stop navigation in action</figcaption>
+  </figure>
+</div>
+
+<hr class="cs-divider">
+
+<!-- PROBLEM DEFINITION -->
+<div class="cs-content">
+  <div class="cs-section">
+    <div class="cs-section-label">Problem Definition</div>
+    <h2 class="cs-section-title">Finding the Right Question</h2>
+    <p>A heuristic evaluation surfaced additional issues but I kept scope tight. The core problem was clear:</p>
+    <div class="cs-quote">
+      How might we allow users to plan their directions more efficiently before going on a trip and while driving?
+    </div>
+    <p>I interviewed 5 Apple Maps users to validate this framing. Key findings:</p>
+    <ul class="cs-findings">
+      <li>100% wanted the ability to add a custom stop not curated by Apple</li>
+      <li>100% were frustrated by the inability to build dynamic multi-stop routes</li>
+      <li>"It just feels like I'm only being fed marketing stuff rather than it's actually about my route planning." (interviewee)</li>
+      <li>"There is no way to add a stop, unless you just cancel the route and redo it again." (interviewee)</li>
+    </ul>
+  </div>
+</div>
+
+<hr class="cs-divider">
+
+<!-- DESIGN PROCESS -->
+<div class="cs-content">
+  <div class="cs-section">
+    <div class="cs-section-label">Design</div>
+    <h2 class="cs-section-title">From Sketches to Prototype</h2>
+    <p>I built two prototype flows: one for planning a trip before driving, one for adding a custom stop while driving. This kept the two problems isolated and testable independently.</p>
+    <p>Early sketches revealed a scope problem. I was trying to redesign the entire routing experience when the fix was surgical. Apple's add-a-stop feature already existed. It just lacked customization. The solution was extending what was already there, not replacing it.</p>
+  </div>
+</div>
+
+<!-- STORY MAP -->
+<div class="cs-full-bleed">
+  <img src="assets/img/apple-maps/am-story-map.jpg" alt="User story map: multi-stop route planning flows">
+</div>
+<p class="cs-caption">Story map: two user flows, planning before a trip vs. adding a stop while driving</p>
+
+<!-- SKETCHES -->
+<div class="cs-img-row cs-img-row--2">
+  <figure class="cs-figure">
+    <img src="assets/img/apple-maps/am-sketch-6.jpg" alt="Lo-fi wireframe sheet: pre-trip multi-stop flow">
+    <figcaption>Lo-fi wireframes: pre-trip multi-stop route planning flow</figcaption>
+  </figure>
+  <figure class="cs-figure">
+    <img src="assets/img/apple-maps/am-sketch-7.jpg" alt="Lo-fi wireframe sheet: add a stop while driving flow">
+    <figcaption>Lo-fi wireframes: add a custom stop while driving</figcaption>
+  </figure>
+</div>
+
+<hr class="cs-divider">
+
+<!-- HI-FI -->
+<div class="cs-content">
+  <div class="cs-section">
+    <div class="cs-section-label">Usability Testing</div>
+    <h2 class="cs-section-title">Testing and Iteration</h2>
+    <p>Lo-fi usability tests with 5 participants revealed one consistent issue: the call-to-action buttons were inconsistent with Apple's existing UI patterns, creating confusion about what would happen when tapped.</p>
+    <ul class="cs-findings">
+      <li>100% of users flagged the CTA placement and icon choices as unintuitive</li>
+      <li>100% understood the scenarios and felt the solution addressed the core problem</li>
+      <li>80% completed all tasks without issue</li>
+      <li>"I think it's good. It feels better than Google in that there isn't a bog in menu options." (tester)</li>
+    </ul>
+    <p>Hi-fidelity addressed the CTA issues and brought the UI into full alignment with Apple's design language.</p>
+  </div>
+</div>
+
+<!-- HI-FI PROTOTYPE — Figma phone mockup -->
+<div class="cs-full-bleed">
+  <img src="assets/img/apple-maps/am-hifi-figma-scenario1.png" alt="Hi-fidelity Figma prototype: Scenario 1, multi-stop pre-trip route planning">
+</div>
+<p class="cs-caption">Hi-fidelity prototype, Scenario 1: pre-trip multi-stop route with custom Add a Stop</p>
+
+<!-- HI-FI MAPS — route result screens -->
+<div class="cs-img-row cs-img-row--3" style="margin-top:16px;">
+  <figure class="cs-figure">
+    <img src="assets/img/apple-maps/am-hifi-artboard-2.png" alt="3-stop route: Mike's Home, Starbucks, Safeway">
+    <figcaption>Scenario 1 result: 3-stop optimized route</figcaption>
+  </figure>
+  <figure class="cs-figure">
+    <img src="assets/img/apple-maps/am-hifi-artboard-3.png" alt="3-stop route alternate order">
+    <figcaption>Stop reordering: user controls the sequence</figcaption>
+  </figure>
+  <figure class="cs-figure">
+    <img src="assets/img/apple-maps/am-hifi-2stop.jpg" alt="2-stop route while driving">
+    <figcaption>Scenario 2: adding a custom stop mid-drive</figcaption>
+  </figure>
+</div>
+
+<hr class="cs-divider">
+
+<!-- LEARNINGS -->
+<div class="cs-content">
+  <div class="cs-section" style="padding-bottom:80px;">
+    <div class="cs-section-label">Learnings</div>
+    <h2 class="cs-section-title">What I Took Away</h2>
+    <p>The most important lesson: the visual fix was micro, not macro. I nearly wasted time redesigning a feature Apple had already solved. The real problem was a CTA change and a customization option added behind it. Staying at the right zoom level is a skill that takes practice to build.</p>
+    <p>Not every UX methodology adds value to every project. Doing a process to check a box is not research. The constraint of a focused scope forced better decisions, not fewer.</p>
+    <p>As of this writing, Apple has shipped custom route building in Maps. The fact that they eventually solved the same problem validates the direction of this work.</p>
+  </div>
+</div>
+
+</section>
+
+<!-- PAGE NAV -->
+<div class="cs-page-nav">
+  <a href="index.html#projects" class="cs-page-nav-btn cs-page-nav-back">← All Projects</a>
+  <a href="cleandrive.html" class="cs-page-nav-btn cs-page-nav-next">Next: CleanDrive →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="assets/lukas green icon-02.png" alt="Lukas Green" class="footer-logo-img">
+  </div>
+  <p>© 2026 Lukas Green</p>
+</footer>
+
+<script>
+  function toggleTheme() {
+    var html = document.documentElement;
+    var current = html.getAttribute('data-theme');
+    var next = current === 'light' ? 'dark' : 'light';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  }
+  function toggleNav() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+  document.querySelectorAll('.nav-links a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+</script>
+
+</body>
+</html>

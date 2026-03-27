@@ -1,5 +1,5 @@
 # Portfolio Site - SESSION
-_Last updated: 2026-03-21 (Session 5)_
+_Last updated: 2026-03-27 (Session 8)_
 
 ---
 
@@ -13,60 +13,34 @@ Contact: `lukasgreen3@pm.me` (Proton Mail)
 
 ---
 
-## Last Session - 2026-03-21 (Session 5)
+## Last Session - 2026-03-27 (Session 8)
 
-**Logo**
-- Nav + footer: replaced LG text with `assets/lukas green icon-02.png` (shows full name immediately)
-- Logo enlarged 35% (nav 36px to 49px, footer 28px to 38px)
+**Layout architecture + copy + polish**
 
-**Hero**
-- Period removed from "Lukas." — origin node now sits visually in its place at text baseline
-- Gradient removed from "Lukas" name — solid white
-- Decorative dash prefix removed from "Hello, my name is" label
-
-**Node Animation**
-- Replaced static SVG with canvas-based animation
-- 19 nodes, 33 edges, fans out rightward from origin to fill right half of hero
-- Draw-in over 1.8s on page load, settles into pulsing steady state
-- Hidden on mobile
-
-**Services Section**
-- Renamed: "What I Do / Specializing In" became "Services / What I Do"
-- Icons: emojis replaced with custom inline SVGs (neural net, cycle arrows, browser wireframe)
-- Descriptions: expanded for all three cards
-
-**Stats**
-- "6+ Projects Built" clarified to "6+ Tools Shipped"
-
-**Resume Page (resume.html)**
-- New page, full brand match (dark theme, teal, Inter)
-- Two-column layout: skills/education/approach left, all 7 projects right
-- Honest status labels throughout (no false shipping claims)
-- FreedEase: mission-driven civic framing only
-- SoloBill: single real-world test, known issues noted
-- GH2: marked "Delivered to org"
-- Print stylesheet for PDF export via browser
-- Resume added to main site nav
-
-**Footer**
-- Stacked layout: icon centered above copyright
-- Removed "All rights reserved"
-
-**Copy**
-- All em dashes removed across both files (13 instances)
-- Rule: no em dashes ever. Use periods, commas, or colons depending on context.
+- Case study layout rebuilt: `.cs-hero` full-width, `.cs-hero-inner` centered. Body sections restructured into `cs-section-wrap` blocks with alternating backgrounds. `.cs-content` now `margin: 0 auto`. `.cs-breakout` for pull quotes.
+- CanvassKit copy rewritten with real origin: contracting role at nonprofit, recorded coordinator describing 3-step reporting chain, transcript drove the product design
+- SoloBill copy rewritten with real origin: journeyman plumber friend new to private contracting, dual need — his billing records + real estate paper trail for inspection inquiries
+- Em dashes removed from all 6 HTML files — year ranges to en dashes, sentences restructured, quote attributions use parentheses, captions use colons
+- Widow fix in career timeline (`and&nbsp;UX.`)
+- Project cards fully clickable via `::after` overlay on `.project-card-link`
+- Card outlines improved: top bar 3px → 4px, full card border color-coded at 20% opacity per category, hover border uses category color
+- RecallAI (`#FF8C6B` coral) and LUCID (`#A78BFA` purple) given distinct colors, split from shared `ai` category
+- UX case study cards (Apple Maps, CleanDrive) hidden in `index.html` pending image replacement
 
 ---
 
 ## Pending - Next Session
 
-1. **About text alignment** — "About Me" heading and text should align to top of cartoon image
-2. **Favicon** — LG wordmark as favicon
-3. **Resume PDF** — upload finalized PDF to assets/ and wire up download button
-4. **DNS** — confirm `www` CNAME is set in Namecheap, enforce HTTPS
-5. **LinkedIn update** — update handle from `/lukas-green-designer` if desired
-6. **Growth orb visualization** — 3D interactive node graph of learning arc from chat data
-7. **Case study documentation** — living doc tracking all project work with session data
+1. **UX case study image replacement** — Apple Maps and CleanDrive hidden until done; uncomment cards when ready
+2. **SoloBill card origin line** — still reads "contractor overpaying for 10% of a platform's features," should reflect the plumber friend story
+3. **MediaEngine** — consider adding to portfolio when further along; mention in CanvassKit origin story for now
+4. **Motion layer** — `IntersectionObserver` scroll animations: section fade-ins, staggered card reveals, stat counters
+5. **Remaining project detail pages** — GH2, FreedEase, Transcription (content ready), RecallAI, LUCID, BRIGS
+6. **Case study structure upgrade** — align to UXFolio 7-section framework (add Impact + Learnings)
+7. **About text alignment** — heading and text should align to top of cartoon image
+8. **Favicon** — LG wordmark
+9. **Resume PDF** — upload to `assets/` and wire download button
+10. **DNS** — confirm `www` CNAME in Namecheap, enforce HTTPS
 
 ---
 

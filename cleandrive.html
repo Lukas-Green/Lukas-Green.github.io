@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CleanDrive Case Study | Lukas Green</title>
+  <meta name="description" content="UX case study: reimagining the information architecture of CleanDrive to help users better understand and manage their Google Drive storage.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    (function() {
+      var saved = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', saved);
+    })();
+  </script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="assets/lukas green icon-02.png" alt="Lukas Green" class="nav-logo-img">
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html#home">Home</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#projects">Projects</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="resume.html">Resume</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+      <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </button>
+    <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- CASE STUDY HERO -->
+<section class="cs-hero">
+  <a href="index.html#projects" class="cs-back">← Back to Projects</a>
+  <div class="cs-tag-pill">UX Research / Case Study</div>
+  <h1 class="cs-title">Improving Information<br>Architecture in CleanDrive</h1>
+  <p class="cs-tagline">Reimagining the IA to help users better understand their Google Drive storage allocation. Now called Filerev.</p>
+  <div class="cs-meta-strip">
+    <div class="cs-meta-item">
+      <div class="cs-meta-label">Role</div>
+      <div class="cs-meta-val">Lead UX Researcher &amp; Designer</div>
+    </div>
+    <div class="cs-meta-item">
+      <div class="cs-meta-label">Methods</div>
+      <div class="cs-meta-val">User Interviews, Competitive Analysis, SWOT, Heuristic Evaluation, Usability Testing</div>
+    </div>
+    <div class="cs-meta-item">
+      <div class="cs-meta-label">Tools</div>
+      <div class="cs-meta-val">Figma</div>
+    </div>
+    <div class="cs-meta-item">
+      <div class="cs-meta-label">Type</div>
+      <div class="cs-meta-val">Client UX Sprint, 6 weeks</div>
+    </div>
+  </div>
+</section>
+
+<!-- HERO IMAGE — hi-fi result -->
+<div class="cs-full-bleed">
+  <img src="assets/img/cleandrive/cd-hifi-overview.png" alt="CleanDrive hi-fidelity redesign: Drive Overview">
+</div>
+
+<!-- OVERVIEW -->
+<section class="cs-body" style="padding-top:0;padding-bottom:0;">
+<div class="cs-content">
+  <div class="cs-section">
+    <div class="cs-section-label">Overview</div>
+    <h2 class="cs-section-title">A Real Client, A Real Sprint</h2>
+    <p>CleanDrive (now Filerev) was built in 2021 to help Google Drive users understand and manage their storage. Built by an engineer, it lacked a UX perspective. Users found it cumbersome despite a genuinely strong feature set.</p>
+    <p>The founder wanted to reduce friction across the product. I led a full 6-week sprint: user research, IA redesign, wireframing, usability testing, and a founder presentation. The time constraint meant choosing methodologies deliberately. No padding, no box-checking.</p>
+  </div>
+</div>
+
+<!-- EXISTING UI SCREENSHOTS -->
+<div class="cs-img-row cs-img-row--2">
+  <figure class="cs-figure">
+    <img src="assets/img/cleandrive/cd-existing-ui-1.png" alt="CleanDrive existing UI: Drive overview">
+    <figcaption>Existing UI: Drive overview required excessive scrolling to reach file managers</figcaption>
+  </figure>
+  <figure class="cs-figure">
+    <img src="assets/img/cleandrive/cd-existing-ui-2.png" alt="CleanDrive existing UI: file management">
+    <figcaption>Existing UI: file management tools buried below the fold</figcaption>
+  </figure>
+</div>
+
+<hr class="cs-divider">
+
+<!-- RESEARCH -->
+<div class="cs-content">
+  <div class="cs-section">
+    <div class="cs-section-label">Research</div>
+    <h2 class="cs-section-title">Understanding the Problem Space</h2>
+    <p>App Store reviews were thin on UI-specific complaints, so I relied on the founder's direct user feedback alongside my own product audit. Two areas stood out immediately: long scrolling to reach individual file managers, and a bulk delete tool that made users uncertain whether their original files would survive deletion.</p>
+    <p>A competitive analysis against CleanMyMac, Cloud Duplicate Finder, and Gemini showed CleanDrive matched or exceeded competitors on features but fell behind on visual clarity and structural layout.</p>
+  </div>
+</div>
+
+<!-- COMPETITIVE ANALYSIS FULL BLEED -->
+<div class="cs-full-bleed cs-full-bleed--natural">
+  <img src="assets/img/cleandrive/cd-competitive-analysis.png" alt="Competitive analysis: CleanDrive vs competitors">
+</div>
+<p class="cs-caption">Competitive analysis: CleanDrive matched competitors on features but fell behind on layout clarity</p>
+
+<hr class="cs-divider">
+
+<!-- HEURISTIC EVALUATION -->
+<div class="cs-content">
+  <div class="cs-section">
+    <div class="cs-section-label">Problem Definition</div>
+    <h2 class="cs-section-title">Framing the Design Question</h2>
+    <p>A heuristic evaluation confirmed the structural issues. Access to file managers required excessive scrolling. CTAs lacked hierarchy. The duplicate file manager's toolset was opaque. Contrast between file types was insufficient for quick scanning.</p>
+    <div class="cs-quote">
+      How might we allow users to better understand their Google Drive's storage allocation, so they can seamlessly organize it?
+    </div>
+  </div>
+</div>
+
+<!-- HEURISTIC EVAL SCREENSHOTS -->
+<div class="cs-img-row cs-img-row--3">
+  <figure class="cs-figure">
+    <img src="assets/img/cleandrive/cd-heuristic-1.png" alt="Heuristic evaluation: finding 1">
+    <figcaption>Heuristic finding: navigation depth</figcaption>
+  </figure>
+  <figure class="cs-figure">
+    <img src="assets/img/cleandrive/cd-heuristic-2.png" alt="Heuristic evaluation: finding 2">
+    <figcaption>Heuristic finding: CTA hierarchy</figcaption>
+  </figure>
+  <figure class="cs-figure">
+    <img src="assets/img/cleandrive/cd-heuristic-3.png" alt="Heuristic evaluation: finding 3">
+    <figcaption>Heuristic finding: destructive action clarity</figcaption>
+  </figure>
+</div>
+
+<div class="cs-content">
+  <div class="cs-section">
+    <p>5 user interviews validated the problem. Key findings:</p>
+    <ul class="cs-findings">
+      <li>100% found their experience lacked the file management tools they wanted</li>
+      <li>80% found Google Drive lacking clear tools for duplicate file management</li>
+      <li>Only 40% felt good about what Google Drive offered for file management overall</li>
+      <li>"I wish it was organized by photos, documents, shared drives all in one menu." (interviewee)</li>
+    </ul>
+  </div>
+</div>
+
+<hr class="cs-divider">
+
+<!-- STORY MAP -->
+<div class="cs-content">
+  <div class="cs-section">
+    <div class="cs-section-label">Design</div>
+    <h2 class="cs-section-title">Redesigning the Structure</h2>
+    <p>The primary fix was a left navigation panel to replace the long-scroll layout. This gave users a persistent map of the product and cut the number of steps to reach any section. Visual influence came primarily from CleanMyMac and Gemini. Both demonstrated that a clean, simple layout could carry a powerful toolset without overwhelming the user.</p>
+    <p>A story map kept scope under control throughout the sprint. Under deadline pressure it became the north star that prevented scope drift.</p>
+  </div>
+</div>
+
+<!-- STORY MAP FULL BLEED -->
+<div class="cs-full-bleed cs-full-bleed--natural">
+  <img src="assets/img/cleandrive/cd-story-map.png" alt="Story map: user flow and scope definition">
+</div>
+<p class="cs-caption">Story map: kept sprint scope defined and prevented feature drift under deadline pressure</p>
+
+<hr class="cs-divider">
+
+<!-- LO-FI -->
+<div class="cs-content">
+  <div class="cs-section">
+    <div class="cs-section-label">Wireframes</div>
+    <h2 class="cs-section-title">Lo-Fidelity Exploration</h2>
+    <p>The duplicate files manager got a full layout rethink: clearer file pair comparison, better action hierarchy, and explicit labeling on destructive actions to eliminate the "will this delete my original?" confusion the founder had flagged.</p>
+  </div>
+</div>
+
+<div class="cs-img-row cs-img-row--2">
+  <figure class="cs-figure">
+    <img src="assets/img/cleandrive/cd-lofi-overview.png" alt="Lo-fi: Drive Overview with left nav">
+    <figcaption>Lo-fi: Drive Overview with persistent left navigation panel</figcaption>
+  </figure>
+  <figure class="cs-figure">
+    <img src="assets/img/cleandrive/cd-lofi-duplicates.png" alt="Lo-fi: Duplicate Files manager redesign">
+    <figcaption>Lo-fi: Duplicate Files manager with clearer action hierarchy</figcaption>
+  </figure>
+</div>
+
+<hr class="cs-divider">
+
+<!-- USABILITY TESTING -->
+<div class="cs-content">
+  <div class="cs-section">
+    <div class="cs-section-label">Usability Testing</div>
+    <h2 class="cs-section-title">Validation</h2>
+    <p>5 participants tested the lo-fi prototype. None had used CleanDrive before, which limited direct before/after comparison. Despite that, results were strong across the board:</p>
+    <ul class="cs-findings">
+      <li>100% found the redesign clear and purposeful, with tools displaying strong intent</li>
+      <li>80% found CTAs clear, with minor hierarchy adjustments flagged for revision</li>
+      <li>100% felt the redesign solved the problem and would improve the product</li>
+      <li>"I enjoyed going through this prototype. I would really use this application. I love how this feels like a software item." (tester)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- HI-FI -->
+<div class="cs-img-row cs-img-row--2">
+  <figure class="cs-figure">
+    <img src="assets/img/cleandrive/cd-hifi-overview.png" alt="Hi-fi: Drive Overview">
+    <figcaption>Hi-fi: Drive Overview with left navigation and storage visualization</figcaption>
+  </figure>
+  <figure class="cs-figure">
+    <img src="assets/img/cleandrive/cd-hifi-duplicates.png" alt="Hi-fi: Duplicate Files manager">
+    <figcaption>Hi-fi: Duplicate Files manager with explicit destructive action labeling</figcaption>
+  </figure>
+</div>
+
+<hr class="cs-divider">
+
+<!-- OUTCOME + LEARNINGS -->
+<div class="cs-content">
+  <div class="cs-section">
+    <div class="cs-section-label">Outcome</div>
+    <h2 class="cs-section-title">The Founder Conversation</h2>
+    <p>I presented findings to the founder over Zoom. He appreciated the research but pushed back on the scope of visual change. His concern: users had built habits around the current layout, and a full redesign during active operations carried real business risk.</p>
+    <p>We compromised. The hi-fi was completed as a record and a potential future pitch. CleanDrive didn't ship the redesign at the time. It has since rebranded as Filerev with structural changes that reflect the direction of this work.</p>
+  </div>
+</div>
+
+<!-- FILEREV NOW -->
+<div class="cs-img-row cs-img-row--2">
+  <figure class="cs-figure">
+    <img src="assets/img/cleandrive/cd-filerev-1.jpg" alt="Filerev: current product">
+    <figcaption>Filerev today: structural changes reflect the direction of this work</figcaption>
+  </figure>
+  <figure class="cs-figure">
+    <img src="assets/img/cleandrive/cd-filerev-2.jpg" alt="Filerev: current product">
+    <figcaption>Left navigation and clearer IA now present in the live product</figcaption>
+  </figure>
+</div>
+
+<div class="cs-content">
+  <div class="cs-section" style="padding-bottom:80px;">
+    <div class="cs-section-label">Learnings</div>
+    <h2 class="cs-section-title">What I Took Away</h2>
+    <p>Real clients add pressure that classroom projects don't. The sprint format forced me to prioritize methodologies that actually moved the research forward. The story map became essential late in the project when I lost track of scope under deadline stress. Having that north star written down saved the timeline.</p>
+    <p>The most important lesson: a technically sound redesign can still be the wrong delivery at the wrong time. Reading the business situation is part of the UX job, not separate from it.</p>
+  </div>
+</div>
+
+</section>
+
+<!-- PAGE NAV -->
+<div class="cs-page-nav">
+  <a href="apple-maps.html" class="cs-page-nav-btn cs-page-nav-back">← Apple Maps</a>
+  <a href="index.html#projects" class="cs-page-nav-btn cs-page-nav-next">All Projects →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="assets/lukas green icon-02.png" alt="Lukas Green" class="footer-logo-img">
+  </div>
+  <p>© 2026 Lukas Green</p>
+</footer>
+
+<script>
+  function toggleTheme() {
+    var html = document.documentElement;
+    var current = html.getAttribute('data-theme');
+    var next = current === 'light' ? 'dark' : 'light';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  }
+  function toggleNav() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+  document.querySelectorAll('.nav-links a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+</script>
+
+</body>
+</html>

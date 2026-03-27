@@ -153,7 +153,44 @@
     </p>
   </div>
   </div>
+
+  <div class="career-timeline">
+    <div class="career-step">
+      <div class="career-years">2000–2020</div>
+      <div class="career-label">Graphic Design</div>
+      <div class="career-desc">Print shops, branding agencies, nonprofits. Two decades developing an eye for what works across print, digital, and&nbsp;UX.</div>
+    </div>
+    <div class="career-step">
+      <div class="career-years">2020–2023</div>
+      <div class="career-label">The Pivot</div>
+      <div class="career-desc">Portland State. Design collides with systems thinking. AI tools arrive, and the realization: I could build, not just design.</div>
+    </div>
+    <div class="career-step active">
+      <div class="career-years">2023–Present</div>
+      <div class="career-label">AI Design Technologist</div>
+      <div class="career-desc">Automation tools, internal platforms, AI-augmented workflows. Every project starts with a specific friction point.</div>
+    </div>
+  </div>
+
 </section>
+
+<!-- STACK STRIP -->
+<div class="stack-strip">
+  <div class="stack-strip-inner">
+    <div class="stack-strip-label">Built With</div>
+    <div class="stack-strip-items">
+      <span class="stack-strip-item">Python</span>
+      <span class="stack-strip-item">FastAPI</span>
+      <span class="stack-strip-item">SQLite</span>
+      <span class="stack-strip-item">Ollama</span>
+      <span class="stack-strip-item">Google Apps Script</span>
+      <span class="stack-strip-item">Vanilla JS</span>
+      <span class="stack-strip-item">Figma</span>
+      <span class="stack-strip-item">HTML / CSS</span>
+      <span class="stack-strip-item">GitHub</span>
+    </div>
+  </div>
+</div>
 
 <!-- PROJECTS -->
 <section id="projects">
@@ -161,7 +198,7 @@
   <div class="section-title">Projects</div>
   <div class="projects-grid">
 
-    <div class="project-card">
+    <div class="project-card" data-cat="automation">
       <div class="project-tag">CRM / Outreach</div>
       <div class="project-name">CanvassKit</div>
       <div class="project-origin">Origin: outreach team drowning in spreadsheets</div>
@@ -175,9 +212,10 @@
         <span class="stack-tag">Google Sheets</span>
         <span class="stack-tag">HTML / Tailwind</span>
       </div>
+      <a href="canvasskit.html" class="project-card-link">View Project →</a>
     </div>
 
-    <div class="project-card">
+    <div class="project-card" data-cat="automation">
       <div class="project-tag">Invoicing / Finance</div>
       <div class="project-name">SoloBill</div>
       <div class="project-origin">Origin: contractor overpaying for 10% of a platform's features</div>
@@ -191,9 +229,10 @@
         <span class="stack-tag">Google Docs</span>
         <span class="stack-tag">PDF Export</span>
       </div>
+      <a href="solobill.html" class="project-card-link">View Project →</a>
     </div>
 
-    <div class="project-card">
+    <div class="project-card" data-cat="ai-voice">
       <div class="project-tag">AI / Healthcare</div>
       <div class="project-name">RecallAI</div>
       <div class="project-origin">Origin: no-shows are a solved problem that most clinics still haven't solved</div>
@@ -208,7 +247,7 @@
       </div>
     </div>
 
-    <div class="project-card">
+    <div class="project-card" data-cat="ai-file">
       <div class="project-tag">File Intelligence / AI</div>
       <div class="project-name">LUCID</div>
       <div class="project-origin">Origin: no good way to know what's actually on your machine</div>
@@ -225,6 +264,42 @@
       </div>
     </div>
 
+    <!-- UX case studies hidden until image assets are updated
+    <div class="project-card" data-cat="ux">
+      <div class="project-tag">UX Research / Case Study</div>
+      <div class="project-name">Apple Maps</div>
+      <div class="project-origin">Origin: courier driver losing money to broken routing</div>
+      <div class="project-desc">
+        Full UX research case study on navigation deficiencies in Apple Maps. Competitive analysis,
+        user interviews, heuristic evaluation, and lo/hi-fidelity prototypes solving custom multi-stop
+        route building and in-navigation add-a-stop.
+      </div>
+      <div class="project-stack">
+        <span class="stack-tag">UX Research</span>
+        <span class="stack-tag">Figma</span>
+        <span class="stack-tag">Usability Testing</span>
+      </div>
+      <a href="apple-maps.html" class="project-card-link">View Case Study →</a>
+    </div>
+
+    <div class="project-card" data-cat="ux">
+      <div class="project-tag">UX Research / Case Study</div>
+      <div class="project-name">CleanDrive</div>
+      <div class="project-origin">Origin: engineer-built product with real users and no UX layer</div>
+      <div class="project-desc">
+        6-week client sprint redesigning the information architecture of CleanDrive (now Filerev),
+        a Google Drive storage management tool. Research, IA redesign, wireframes, usability testing,
+        and a live founder presentation.
+      </div>
+      <div class="project-stack">
+        <span class="stack-tag">UX Research</span>
+        <span class="stack-tag">Figma</span>
+        <span class="stack-tag">IA Design</span>
+      </div>
+      <a href="cleandrive.html" class="project-card-link">View Case Study →</a>
+    </div>
+    -->
+
   </div>
 </section>
 
@@ -234,7 +309,37 @@
   <div class="contact-cta">
     <div class="section-title">Got a project?</div>
     <p>Open to consulting engagements, partnerships, and conversations about AI and systems design.</p>
+    <form class="contact-form" id="contactForm" novalidate>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="cf-name">Name</label>
+          <input type="text" id="cf-name" name="name" placeholder="Your name" required>
+        </div>
+        <div class="form-group">
+          <label for="cf-email">Email</label>
+          <input type="email" id="cf-email" name="email" placeholder="your@email.com" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="cf-scope">What's the scope?</label>
+        <select id="cf-scope" name="scope">
+          <option value="" disabled selected>Select a category</option>
+          <option value="AI Consulting">AI Consulting</option>
+          <option value="Systems Automation">Systems Automation</option>
+          <option value="UX / Design">UX / Design</option>
+          <option value="Something else">Something else</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="cf-message">Message</label>
+        <textarea id="cf-message" name="message" rows="4" placeholder="Tell me about your project..." required></textarea>
+      </div>
+      <button type="submit" class="btn-primary">Send Message →</button>
+    </form>
+
+    <div class="contact-divider">or reach me directly</div>
     <a href="mailto:lukasgreen3@pm.me" class="contact-email">lukasgreen3@pm.me</a>
+
     <div class="contact-socials">
       <a href="https://github.com/Lukas-Green" target="_blank" rel="noopener" class="contact-link">
         <div class="contact-link-icon">
@@ -464,6 +569,19 @@
 
     window.addEventListener('resize', setup);
   })();
+
+  // Contact form → mailto
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name    = this.elements['name'].value.trim();
+    const email   = this.elements['email'].value.trim();
+    const scope   = this.elements['scope'].value || 'Not specified';
+    const message = this.elements['message'].value.trim();
+    if (!name || !email || !message) return;
+    const subject = encodeURIComponent('Project Inquiry: ' + scope);
+    const body    = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\nScope: ' + scope + '\n\n' + message);
+    window.location.href = 'mailto:lukasgreen3@pm.me?subject=' + subject + '&body=' + body;
+  });
 </script>
 
 </body>

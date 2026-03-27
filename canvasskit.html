@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CanvassKit | Lukas Green</title>
+  <meta name="description" content="CanvassKit — a lightweight field contact tracker built for community outreach teams running on Google Workspace.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .demo-frame-wrap {
+      padding: 0 80px;
+      margin: 56px 0;
+    }
+    .demo-frame-chrome {
+      background: #1e1e26;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+    }
+    .demo-frame-bar {
+      background: #2a2a35;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .demo-frame-dots {
+      display: flex;
+      gap: 6px;
+    }
+    .demo-frame-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+    }
+    .demo-frame-dot:nth-child(1) { background: #ff5f57; }
+    .demo-frame-dot:nth-child(2) { background: #febc2e; }
+    .demo-frame-dot:nth-child(3) { background: #28c840; }
+    .demo-frame-url {
+      flex: 1;
+      background: #111116;
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-size: 12px;
+      color: var(--gray-dim);
+      font-family: 'Inter', monospace;
+    }
+    .demo-frame-open {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: opacity .2s;
+    }
+    .demo-frame-open:hover { opacity: 0.75; }
+    .demo-frame-iframe {
+      width: 100%;
+      height: 680px;
+      border: none;
+      display: block;
+      background: #f9fafb;
+    }
+    @media (max-width: 768px) {
+      .demo-frame-wrap { padding: 0 24px; margin: 40px 0; }
+      .demo-frame-iframe { height: 520px; }
+    }
+    @media (max-width: 480px) {
+      .demo-frame-wrap { padding: 0 16px; }
+      .demo-frame-iframe { height: 420px; }
+    }
+  </style>
+  <script>
+    (function() {
+      var saved = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', saved);
+    })();
+  </script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="assets/lukas green icon-02.png" alt="Lukas Green" class="nav-logo-img">
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html#home">Home</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#projects">Projects</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="resume.html">Resume</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+      <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </button>
+    <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="cs-hero">
+  <div class="cs-hero-inner">
+    <a href="index.html#projects" class="cs-back">← Back to Projects</a>
+    <div class="cs-tag-pill">CRM / Outreach</div>
+    <h1 class="cs-title">CanvassKit</h1>
+    <p class="cs-tagline">A field contact tracker built after watching a nonprofit coordinator manually relay her entire team's daily outreach through three separate steps. Runs inside Google Workspace.</p>
+    <div class="cs-meta-strip">
+      <div class="cs-meta-item">
+        <div class="cs-meta-label">Role</div>
+        <div class="cs-meta-val">Designer &amp; Builder</div>
+      </div>
+      <div class="cs-meta-item">
+        <div class="cs-meta-label">Stack</div>
+        <div class="cs-meta-val">Google Apps Script, Tailwind CSS, Vanilla JS</div>
+      </div>
+      <div class="cs-meta-item">
+        <div class="cs-meta-label">Deployed to</div>
+        <div class="cs-meta-val">Going Home 2, community safety initiative</div>
+      </div>
+      <div class="cs-meta-item">
+        <div class="cs-meta-label">Status</div>
+        <div class="cs-meta-val">Production-ready, active use</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE DEMO -->
+<div class="demo-frame-wrap">
+  <div class="demo-frame-chrome">
+    <div class="demo-frame-bar">
+      <div class="demo-frame-dots">
+        <div class="demo-frame-dot"></div>
+        <div class="demo-frame-dot"></div>
+        <div class="demo-frame-dot"></div>
+      </div>
+      <div class="demo-frame-url">canvasskit · demo mode · data stored locally</div>
+      <a href="demo/canvasskit-demo.html" target="_blank" class="demo-frame-open">Open full screen ↗</a>
+    </div>
+    <iframe
+      src="demo/canvasskit-demo.html"
+      class="demo-frame-iframe"
+      title="CanvassKit live demo"
+      loading="lazy"
+    ></iframe>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="cs-body">
+
+  <section class="cs-section-wrap">
+    <div class="cs-content">
+      <div class="cs-section-label">The Pain</div>
+      <h2 class="cs-section-title">Three steps to store one day's data</h2>
+      <p>While contracting with the nonprofit as media lead, I sat down with one of the senior staff members and asked her to walk me through her day. I recorded her describing her process. Her outreach workers would text her their contact logs at the end of each shift. She would compile those texts into a note on her phone. Then she would transfer that note into a file on her computer to store it. Three separate steps, every single day, to capture data that should have taken one.</p>
+      <p>The room for error at each handoff was significant. Texts got missed. Phone notes had no structure. File transfers introduced inconsistencies. And when it came time to report back to her supervisors, she was reconstructing the week from a pile of freeform notes rather than pulling from a clean record.</p>
+    </div>
+  </section>
+
+  <section class="cs-section-wrap cs-section-wrap--alt">
+    <div class="cs-content">
+      <div class="cs-section-label">The Constraint</div>
+      <h2 class="cs-section-title">No budget, no IT, no onboarding</h2>
+      <p>The organization runs on Google Workspace. There was no budget for a SaaS CRM, no IT support for a custom deployment, and no tolerance for a tool that required more than five minutes to learn. Any solution had to live inside tools the team already had open.</p>
+      <p>The constraint shaped every decision: Google Apps Script as the backend, Google Sheets as the database, and a web app UI that required zero installation. The field staff needed to open a link and start logging.</p>
+    </div>
+  </section>
+
+  <section class="cs-section-wrap">
+    <div class="cs-content">
+      <div class="cs-section-label">What I Built</div>
+      <h2 class="cs-section-title">Two contact types. One dashboard. Full export.</h2>
+      <p>After recording that conversation, I pulled the transcript and used it to map the exact shape of the problem: two types of field interactions (detailed engagements and quick touches), a supervisor view with running totals, and a date-range export for reporting. The product was designed from her words, not from assumptions.</p>
+      <p>CanvassKit separates contacts into two categories that match real field behavior. A Hard Contact is a detailed engagement: name, staff member, location, and notes. A Quick Contact is a single-click log for time-constrained interactions where detail isn't possible.</p>
+      <p>The dashboard shows live stats: total contacts, hard contacts, and active team members. The contacts table displays the last ten interactions with delete and detail view. Export pulls any date range to CSV or JSON in one click.</p>
+    </div>
+    <div class="cs-breakout">
+      <div class="cs-quote">The goal was zero training time. If someone needs a walkthrough, it isn't done yet.</div>
+    </div>
+  </section>
+
+  <section class="cs-section-wrap cs-section-wrap--alt">
+    <div class="cs-content">
+      <div class="cs-section-label">How It Works</div>
+      <h2 class="cs-section-title">GAS backend, flat Sheet, dual deployment mode</h2>
+      <p>The backend is Google Apps Script serving a web app. A single Sheet tab stores all contacts as flat rows: id, type, name, staff, location, notes, date, user, and role. doPost handles create and delete. doGet handles the UI and list endpoint. Authentication is a shared secret key passed with each request.</p>
+      <p>The demo embedded above runs entirely in localStorage with no server. It's a feature, not a workaround. Field staff can use the demo mode when offline, and contacts can be exported and manually merged later.</p>
+      <ul class="cs-findings">
+        <li>Timestamp-based IDs avoid collision without a server-generated UUID</li>
+        <li>User name and role persist in localStorage across sessions</li>
+        <li>Export filters by date range before downloading, so grant reporting pulls exactly the right period</li>
+        <li>AOS animations on the stat cards add momentum without adding weight</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="cs-section-wrap">
+    <div class="cs-content">
+      <div class="cs-section-label">Status</div>
+      <h2 class="cs-section-title">Deployed. In active use.</h2>
+      <p>CanvassKit is production-ready and in active use by the Going Home 2 outreach team. The core loop, log a contact, view the table, export for reporting, is complete and stable.</p>
+      <p>Planned additions: search and filter in the contacts table, a soft contact detail form, and batch delete for supervisors managing data hygiene.</p>
+    </div>
+  </section>
+
+</div>
+
+<!-- PAGE NAV -->
+<div class="cs-page-nav">
+  <a href="index.html#projects" class="cs-page-nav-btn">← All Projects</a>
+  <a href="solobill.html" class="cs-page-nav-btn">SoloBill →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="assets/lukas green icon-02.png" alt="Lukas Green" class="footer-logo-img">
+  </div>
+  <p>© 2026 Lukas Green</p>
+</footer>
+
+<script>
+  function toggleNav() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+
+  function toggleTheme() {
+    const html = document.documentElement;
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  }
+</script>
+
+</body>
+</html>
