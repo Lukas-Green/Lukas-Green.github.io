@@ -59,6 +59,13 @@ nav {
 .nav-links a:hover,
 .nav-links a.active { color: var(--white); }
 
+.nav-cta {
+  padding: 9px 20px;
+  font-size: 13px;
+  margin-left: 16px;
+  white-space: nowrap;
+}
+
 .nav-toggle {
   display: none;
   flex-direction: column;
@@ -525,6 +532,7 @@ footer p { font-size: 13px; color: var(--gray-dim); }
   .nav-links.open { display: flex; }
   .nav-links a { padding: 14px 0; font-size: 16px; width: 100%; text-align: center; }
   .nav-toggle { display: flex; }
+  .nav-cta { display: none; }
 
   #home {
     flex-direction: column-reverse;

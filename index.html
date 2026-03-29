@@ -24,6 +24,7 @@
     <li><a href="#contact">Contact</a></li>
     <li><a href="resume.html">Resume</a></li>
   </ul>
+  <a href="https://calendly.com/lukasgreen-ai-design" target="_blank" rel="noopener" class="btn-primary nav-cta">Book a Call →</a>
   <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
     <span></span><span></span><span></span>
   </div>
@@ -39,7 +40,7 @@
     <div class="hero-name">Lukas</div>
     <div class="hero-role">AI Design Technologist</div>
     <div class="hero-ctas">
-      <a href="#contact" class="btn-primary">Got a project? →</a>
+      <a href="https://calendly.com/lukasgreen-ai-design" target="_blank" rel="noopener" class="btn-primary">Book a Strategy Call →</a>
       <a href="https://www.linkedin.com/in/lukas-green-designer/" target="_blank" rel="noopener" class="btn-secondary">LinkedIn ↗</a>
     </div>
   </div>
@@ -309,6 +310,7 @@
   <div class="contact-cta">
     <div class="section-title">Got a project?</div>
     <p>Open to consulting engagements, partnerships, and conversations about AI and systems design.</p>
+    <p>Not sure if we're a fit? <a href="https://calendly.com/lukasgreen-ai-design" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;font-weight:600;">Start with a free 30-minute call →</a> No pitch, just diagnosis.</p>
     <form class="contact-form" id="contactForm" novalidate>
       <div class="form-row">
         <div class="form-group">
@@ -338,7 +340,7 @@
     </form>
 
     <div class="contact-divider">or reach me directly</div>
-    <a href="mailto:lukasgreen3@pm.me" class="contact-email">lukasgreen3@pm.me</a>
+    <a href="mailto:lukas@lukasdgreen.com" class="contact-email">lukas@lukasdgreen.com</a>
 
     <div class="contact-socials">
       <a href="https://github.com/Lukas-Green" target="_blank" rel="noopener" class="contact-link">
@@ -570,17 +572,35 @@
     window.addEventListener('resize', setup);
   })();
 
-  // Contact form → mailto
+  // Contact form → Formspree
   document.getElementById('contactForm').addEventListener('submit', function(e) {
     e.preventDefault();
+    const btn     = this.querySelector('button[type="submit"]');
     const name    = this.elements['name'].value.trim();
     const email   = this.elements['email'].value.trim();
     const scope   = this.elements['scope'].value || 'Not specified';
     const message = this.elements['message'].value.trim();
     if (!name || !email || !message) return;
-    const subject = encodeURIComponent('Project Inquiry: ' + scope);
-    const body    = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\nScope: ' + scope + '\n\n' + message);
-    window.location.href = 'mailto:lukasgreen3@pm.me?subject=' + subject + '&body=' + body;
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+    fetch('https://formspree.io/f/mkopjjab', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, scope, message })
+    })
+    .then(r => {
+      if (r.ok) {
+        btn.textContent = 'Sent ✓';
+        this.reset();
+      } else {
+        btn.textContent = 'Error — try again';
+        btn.disabled = false;
+      }
+    })
+    .catch(() => {
+      btn.textContent = 'Error — try again';
+      btn.disabled = false;
+    });
   });
 </script>
 
