@@ -1,0 +1,31 @@
+{
+  "name": "PPS Relief Guide",
+  "short_name": "PPS Relief",
+  "description": "Oregon PPS Relief Legal Guide — Navigate the 10-step process for Measure 11 Post-Prison Supervision relief.",
+  "start_url": "/pps-relief/",
+  "scope": "/pps-relief/",
+  "display": "standalone",
+  "background_color": "#0f1119",
+  "theme_color": "#0f1119",
+  "orientation": "portrait",
+  "categories": ["education", "utilities"],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

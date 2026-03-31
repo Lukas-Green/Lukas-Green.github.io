@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#0f1119"/>
+  <!-- Shield -->
+  <path d="M256 72 L400 140 L400 260 C400 360 256 440 256 440 C256 440 112 360 112 260 L112 140 Z" fill="none" stroke="#7C9AFF" stroke-width="12" opacity="0.3"/>
+  <path d="M256 96 L380 156 L380 252 C380 340 256 412 256 412 C256 412 132 340 132 252 L132 156 Z" fill="none" stroke="#7C9AFF" stroke-width="8" opacity="0.5"/>
+  <!-- Scale of justice -->
+  <line x1="256" y1="160" x2="256" y2="320" stroke="#7C9AFF" stroke-width="8" stroke-linecap="round"/>
+  <line x1="192" y1="200" x2="320" y2="200" stroke="#7C9AFF" stroke-width="8" stroke-linecap="round"/>
+  <!-- Left pan -->
+  <path d="M172 240 L192 200 L212 240" stroke="#A78BFA" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M172 240 C172 256 212 256 212 240" stroke="#A78BFA" stroke-width="6" fill="none"/>
+  <!-- Right pan -->
+  <path d="M300 240 L320 200 L340 240" stroke="#A78BFA" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M300 240 C300 256 340 256 340 240" stroke="#A78BFA" stroke-width="6" fill="none"/>
+  <!-- Base -->
+  <line x1="224" y1="320" x2="288" y2="320" stroke="#7C9AFF" stroke-width="8" stroke-linecap="round"/>
+  <!-- Checkmark -->
+  <circle cx="256" cy="370" r="28" fill="#34D399" opacity="0.15"/>
+  <polyline points="242,370 252,380 272,360" fill="none" stroke="#34D399" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
