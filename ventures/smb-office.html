@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OnboardFlow AI — SMB Office SaaS | Lukas Green</title>
+  <meta name="description" content="OnboardFlow AI — HR onboarding automation for SMBs. Visual workflow builder, document tracking, compliance management.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    .demo-frame-wrap { padding: 0 80px; margin: 56px 0; }
+    .demo-frame-chrome { background: #1e1e26; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: 0 24px 64px rgba(0,0,0,0.5); }
+    .demo-frame-bar { background: #2a2a35; padding: 10px 16px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); }
+    .demo-frame-dots { display: flex; gap: 6px; }
+    .demo-frame-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .demo-frame-dot:nth-child(1) { background: #ff5f57; }
+    .demo-frame-dot:nth-child(2) { background: #febc2e; }
+    .demo-frame-dot:nth-child(3) { background: #28c840; }
+    .demo-frame-url { flex: 1; background: #111116; border-radius: 6px; padding: 5px 12px; font-size: 12px; color: var(--gray-dim); font-family: 'Inter', monospace; }
+    .demo-frame-open { font-size: 12px; font-weight: 600; color: var(--accent); text-decoration: none; white-space: nowrap; transition: opacity .2s; }
+    .demo-frame-open:hover { opacity: 0.75; }
+    .demo-frame-iframe { width: 100%; height: 680px; border: none; display: block; background: #FAF5FF; }
+    @media (max-width: 768px) { .demo-frame-wrap { padding: 0 24px; margin: 40px 0; } .demo-frame-iframe { height: 520px; } }
+    @media (max-width: 480px) { .demo-frame-wrap { padding: 0 16px; } .demo-frame-iframe { height: 420px; } }
+  </style>
+  <script>
+    (function() { var saved = localStorage.getItem('theme') || 'dark'; document.documentElement.setAttribute('data-theme', saved); })();
+  </script>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo"><img src="../assets/lukas green icon-02.png" alt="Lukas Green" class="nav-logo-img"></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="../index.html#home">Home</a></li>
+    <li><a href="../index.html#about">About</a></li>
+    <li><a href="../index.html#projects">Projects</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+    <li><a href="../resume.html">Resume</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+    <div class="nav-toggle" id="navToggle" onclick="toggleNav()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<section class="cs-hero">
+  <div class="cs-hero-inner">
+    <a href="../saas-ventures.html" class="cs-back">&larr; Back to SaaS Ventures</a>
+    <div class="cs-tag-pill">SMB / Automation</div>
+    <h1 class="cs-title">OnboardFlow AI</h1>
+    <p class="cs-tagline">HR onboarding automation that cuts time-to-productivity by 50%. Visual workflow builder, document tracking, and compliance management for companies that are still onboarding with spreadsheets and email chains.</p>
+    <div class="cs-meta-strip">
+      <div class="cs-meta-item"><div class="cs-meta-label">Target</div><div class="cs-meta-val">SMBs with 10-200 employees</div></div>
+      <div class="cs-meta-item"><div class="cs-meta-label">Market</div><div class="cs-meta-val">$19.6B BPA Market (2026)</div></div>
+      <div class="cs-meta-item"><div class="cs-meta-label">Key Pain</div><div class="cs-meta-val">50+ forms per hire, zero visibility</div></div>
+      <div class="cs-meta-item"><div class="cs-meta-label">Status</div><div class="cs-meta-val">Prototype &amp; Market Validation</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="demo-frame-wrap">
+  <div class="demo-frame-chrome">
+    <div class="demo-frame-bar">
+      <div class="demo-frame-dots"><div class="demo-frame-dot"></div><div class="demo-frame-dot"></div><div class="demo-frame-dot"></div></div>
+      <div class="demo-frame-url">onboardflow-ai · demo mode · build and preview workflows</div>
+      <a href="../demo/smb-demo.html" target="_blank" class="demo-frame-open">Open full screen &#8599;</a>
+    </div>
+    <iframe src="../demo/smb-demo.html" class="demo-frame-iframe" title="OnboardFlow AI demo" loading="lazy"></iframe>
+  </div>
+</div>
+
+<div class="cs-body">
+
+  <section class="cs-section-wrap">
+    <div class="cs-content">
+      <div class="cs-section-label">The Market</div>
+      <h2 class="cs-section-title">$19.6 billion in business process automation</h2>
+      <div class="market-stat-row">
+        <div class="market-stat"><div class="market-stat-val">$19.6B</div><div class="market-stat-label">BPA Market (2026)</div></div>
+        <div class="market-stat"><div class="market-stat-val">50%</div><div class="market-stat-label">Time-to-Productivity Cut</div></div>
+        <div class="market-stat"><div class="market-stat-val">103%</div><div class="market-stat-label">Retention Improvement</div></div>
+        <div class="market-stat"><div class="market-stat-val">57%</div><div class="market-stat-label">HR Time on Admin</div></div>
+      </div>
+      <p>HR is the fastest-growing segment of business process automation. Companies with mature onboarding programs are 103% more likely to improve employee retention and see a 50% reduction in time-to-productivity. Yet HR departments still spend 57% of their time on administrative tasks — payroll processing, leave management, compliance documentation — that could be automated.</p>
+    </div>
+  </section>
+
+  <section class="cs-section-wrap cs-section-wrap--alt">
+    <div class="cs-content">
+      <div class="cs-section-label">The Pain</div>
+      <h2 class="cs-section-title">A single new hire generates 50+ documents</h2>
+      <p>Every new hire triggers a cascade of paperwork: employment agreements, tax documents, benefits enrollment, equipment requests, policy acknowledgments, compliance training. Most companies manage this with a combination of email, shared drives, and hope.</p>
+      <ul class="cs-findings">
+        <li><strong>Document Chaos:</strong> W-4, I-9, NDA, direct deposit, benefits enrollment, emergency contact, handbook acknowledgment, equipment agreement — tracked across email, shared drives, and physical folders.</li>
+        <li><strong>No Visibility:</strong> Managers can't see where a new hire is in the process. HR can't tell which documents are missing until someone asks.</li>
+        <li><strong>Inconsistency:</strong> Every manager onboards differently. Some hires get a thorough first week, others get a laptop and a "good luck."</li>
+        <li><strong>Compliance Risk:</strong> Missing I-9 forms, late benefits enrollment, incomplete safety training — each one is a liability.</li>
+        <li><strong>IT Provisioning:</strong> Account creation, software licenses, hardware setup — often the last thing done and the first thing needed.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="cs-section-wrap">
+    <div class="cs-content">
+      <div class="cs-section-label">The Solution</div>
+      <h2 class="cs-section-title">One workflow. Every hire. Full visibility.</h2>
+      <p>OnboardFlow AI replaces the spreadsheet-and-email onboarding with a visual workflow builder that ensures every step happens, every document is collected, and every stakeholder knows their role.</p>
+      <ul class="cs-findings">
+        <li><strong>Template-Driven Workflows:</strong> Pre-built templates for standard employees, contractors, and executives — customizable per company, per role, per department.</li>
+        <li><strong>Phase-Based Steps:</strong> Organized by Pre-Start, Day One, First Week, First Month. Each step has an owner, a due date, and a status.</li>
+        <li><strong>Document Tracking:</strong> Checklist per hire with received/pending status, auto-reminders, and one-click compliance summary generation.</li>
+        <li><strong>Progress Visibility:</strong> Every hire has a progress bar. Managers see On Track / At Risk / Overdue at a glance.</li>
+      </ul>
+    </div>
+    <div class="cs-breakout">
+      <div class="cs-quote">The best onboarding process is the one that doesn't depend on any single person remembering what comes next.</div>
+    </div>
+  </section>
+
+  <section class="cs-section-wrap cs-section-wrap--alt">
+    <div class="cs-content">
+      <div class="cs-section-label">Architecture</div>
+      <h2 class="cs-section-title">LLM onboarding adapts to your company</h2>
+      <p>The AI asks: How many employees? What industry? What's your current onboarding process? What tools do you use? It generates a customized workflow template with steps specific to your industry, compliance requirements, and company culture.</p>
+      <ul class="cs-findings">
+        <li>Industry-specific templates: marketing agencies get different steps than law firms</li>
+        <li>Compliance-aware: auto-includes required forms and training based on jurisdiction</li>
+        <li>Integration-ready: connects to HRIS, payroll, and IT provisioning tools via API</li>
+        <li>Natural language workflow editing: describe a step and the AI adds it to the right phase</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="cs-section-wrap">
+    <div class="cs-content">
+      <div class="cs-section-label">Competitive Landscape</div>
+      <h2 class="cs-section-title">Gusto does payroll. BambooHR does records. Neither does onboarding well.</h2>
+      <ul class="cs-findings">
+        <li><strong>Enterprise:</strong> Workday, SAP SuccessFactors — comprehensive but $50K+ and 6+ month implementation</li>
+        <li><strong>Mid-Market:</strong> BambooHR, Gusto — good at their core function (records, payroll) but onboarding is an afterthought</li>
+        <li><strong>Workflow:</strong> monday.com, Zapier — generic workflow tools that require custom setup for every process</li>
+        <li><strong>The gap:</strong> Purpose-built onboarding with AI customization, industry templates, compliance tracking, and document management — at SMB pricing</li>
+      </ul>
+    </div>
+  </section>
+
+</div>
+
+<div class="cs-page-nav">
+  <a href="construction.html" class="cs-page-nav-btn">&larr; Construction</a>
+  <a href="../saas-ventures.html" class="cs-page-nav-btn">All Ventures &rarr;</a>
+</div>
+
+<footer>
+  <div class="footer-logo"><img src="../assets/lukas green icon-02.png" alt="Lukas Green" class="footer-logo-img"></div>
+  <p>&copy; 2026 Lukas Green</p>
+</footer>
+
+<script>
+  function toggleNav() { document.getElementById('navLinks').classList.toggle('open'); }
+  document.querySelectorAll('.nav-links a').forEach(link => { link.addEventListener('click', () => { document.getElementById('navLinks').classList.remove('open'); }); });
+  function toggleTheme() { const html = document.documentElement; const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'; html.setAttribute('data-theme', next); localStorage.setItem('theme', next); }
+</script>
+
+</body>
+</html>

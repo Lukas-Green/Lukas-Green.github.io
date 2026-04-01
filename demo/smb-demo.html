@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OnboardFlow AI — HR Onboarding Automation Demo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: { primary: '#7C3AED', 'primary-dk': '#6D28D9' } } } }
+  </script>
+  <style>
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    .tab-btn.active { border-bottom: 3px solid #7C3AED; color: #7C3AED; font-weight: 600; }
+    .phase-header { border-left: 3px solid #7C3AED; }
+    .step-card { transition: all .15s; }
+    .step-card:hover { background: #FAF5FF; }
+    .status-on-track { background: #D1FAE5; color: #065F46; }
+    .status-at-risk { background: #FEF3C7; color: #92400E; }
+    .status-overdue { background: #FEE2E2; color: #991B1B; }
+    .step-not-started { color: #9CA3AF; }
+    .step-in-progress { color: #F59E0B; }
+    .step-complete { color: #10B981; }
+    .progress-fill { transition: width .4s ease; }
+  </style>
+</head>
+<body class="bg-[#FAF5FF] min-h-screen">
+
+  <div class="bg-yellow-50 border-b border-yellow-200 text-yellow-800 text-sm text-center py-2 px-4">
+    Demo mode — build and preview onboarding workflows. Data stored locally.
+  </div>
+
+  <header class="bg-primary text-white shadow-lg">
+    <div class="max-w-6xl mx-auto px-4 py-5 flex justify-between items-center">
+      <div>
+        <h1 class="text-2xl font-bold tracking-tight">OnboardFlow AI</h1>
+        <p class="text-white/80 text-sm">HR Onboarding Automation</p>
+      </div>
+      <button onclick="resetAll()" class="text-xs bg-white/20 hover:bg-white/30 rounded px-3 py-1">Reset Demo</button>
+    </div>
+  </header>
+
+  <div class="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-30">
+    <div class="max-w-6xl mx-auto px-4 flex gap-0">
+      <button class="tab-btn active px-6 py-3 text-sm text-gray-500" data-tab="workflows">Workflows</button>
+      <button class="tab-btn px-6 py-3 text-sm text-gray-500" data-tab="hires">New Hires</button>
+      <button class="tab-btn px-6 py-3 text-sm text-gray-500" data-tab="docs">Documents</button>
+    </div>
+  </div>
+
+  <!-- WORKFLOWS TAB -->
+  <div id="tab-workflows" class="tab-content max-w-6xl mx-auto px-4 py-8">
+    <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+      <div class="flex items-center gap-3">
+        <label class="text-sm font-medium text-gray-700">Template:</label>
+        <select id="workflowSelect" class="px-3 py-2 border border-gray-300 rounded-lg text-sm" onchange="renderWorkflow()">
+          <option value="standard">Standard Employee Onboarding</option>
+          <option value="contractor">Contractor Setup</option>
+          <option value="executive">Executive Onboarding</option>
+        </select>
+      </div>
+      <div class="text-sm text-gray-600" id="stepSummary"></div>
+    </div>
+    <!-- Progress bar -->
+    <div class="bg-white rounded-xl shadow p-4 mb-6">
+      <div class="flex justify-between text-xs text-gray-500 mb-1">
+        <span>Progress</span><span id="progressPct">0%</span>
+      </div>
+      <div class="w-full bg-gray-200 rounded-full h-2.5">
+        <div class="bg-primary h-2.5 rounded-full progress-fill" id="progressBar" style="width:0%"></div>
+      </div>
+    </div>
+    <div id="workflowBody"></div>
+    <div class="mt-4">
+      <button onclick="openAddStep()" class="bg-primary hover:bg-primary-dk text-white font-semibold px-4 py-2 rounded-lg text-sm">+ Add Step</button>
+    </div>
+  </div>
+
+  <!-- NEW HIRES TAB -->
+  <div id="tab-hires" class="tab-content hidden max-w-6xl mx-auto px-4 py-8">
+    <div class="flex justify-end mb-4">
+      <button onclick="openHireModal()" class="bg-primary hover:bg-primary-dk text-white font-semibold px-4 py-2 rounded-lg text-sm">+ Add New Hire</button>
+    </div>
+    <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+      <table class="min-w-full text-sm">
+        <thead class="bg-gray-50">
+          <tr>
+            <th class="px-4 py-2.5 text-left text-xs font-semibold text-gray-500 uppercase">Name</th>
+            <th class="px-4 py-2.5 text-left text-xs font-semibold text-gray-500 uppercase">Role</th>
+            <th class="px-4 py-2.5 text-left text-xs font-semibold text-gray-500 uppercase">Start Date</th>
+            <th class="px-4 py-2.5 text-left text-xs font-semibold text-gray-500 uppercase">Workflow</th>
+            <th class="px-4 py-2.5 text-center text-xs font-semibold text-gray-500 uppercase">Progress</th>
+            <th class="px-4 py-2.5 text-center text-xs font-semibold text-gray-500 uppercase">Status</th>
+            <th class="px-4 py-2.5 text-center text-xs font-semibold text-gray-500 uppercase">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="hiresTable" class="divide-y divide-gray-200"></tbody>
+      </table>
+    </div>
+    <div id="hireDetail" class="hidden mt-6 bg-white rounded-xl shadow-lg p-6"></div>
+  </div>
+
+  <!-- DOCUMENTS TAB -->
+  <div id="tab-docs" class="tab-content hidden max-w-6xl mx-auto px-4 py-8">
+    <div class="bg-white rounded-xl shadow-lg p-6">
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+        <div class="flex items-center gap-3">
+          <label class="text-sm font-medium text-gray-700">Employee:</label>
+          <select id="docHireSelect" class="px-3 py-2 border border-gray-300 rounded-lg text-sm" onchange="renderDocs()"></select>
+        </div>
+        <div class="text-sm" id="docProgress"></div>
+      </div>
+      <div id="docBody"></div>
+      <div class="mt-4">
+        <button onclick="genSummary()" class="bg-primary hover:bg-primary-dk text-white font-semibold px-4 py-2 rounded-lg text-sm">Generate Summary</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Step Modal -->
+  <div id="stepModal" class="fixed inset-0 hidden items-center justify-center z-50">
+    <div class="absolute inset-0 bg-black/50" onclick="closeStepModal()"></div>
+    <div class="bg-white rounded-xl shadow-2xl p-6 w-full max-w-md relative z-10">
+      <h3 class="text-lg font-bold text-gray-800 mb-4">Add Step</h3>
+      <div class="space-y-3">
+        <div><label class="block text-xs font-medium text-gray-700 mb-1">Title</label><input type="text" id="stepTitle" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"></div>
+        <div><label class="block text-xs font-medium text-gray-700 mb-1">Description</label><input type="text" id="stepDesc" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"></div>
+        <div class="grid grid-cols-2 gap-3">
+          <div><label class="block text-xs font-medium text-gray-700 mb-1">Assigned To</label>
+            <select id="stepAssign" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"><option>HR</option><option>Manager</option><option>IT</option><option>Employee</option></select></div>
+          <div><label class="block text-xs font-medium text-gray-700 mb-1">Phase</label>
+            <select id="stepPhase" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"><option>Pre-Start</option><option>Day One</option><option>First Week</option><option>First Month</option></select></div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div><label class="block text-xs font-medium text-gray-700 mb-1">Due Timing</label>
+            <select id="stepDue" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"><option>Day -3</option><option>Day -1</option><option>Day 1</option><option>Day 3</option><option>Day 7</option><option>Day 14</option><option>Day 30</option></select></div>
+          <div class="flex items-end"><label class="flex items-center gap-2 text-sm"><input type="checkbox" id="stepReq" checked class="rounded"> Required</label></div>
+        </div>
+        <button onclick="addStep()" class="w-full bg-primary hover:bg-primary-dk text-white font-semibold py-2 rounded-lg text-sm">Add Step</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hire Modal -->
+  <div id="hireModal" class="fixed inset-0 hidden items-center justify-center z-50">
+    <div class="absolute inset-0 bg-black/50" onclick="closeHireModal()"></div>
+    <div class="bg-white rounded-xl shadow-2xl p-6 w-full max-w-md relative z-10">
+      <h3 class="text-lg font-bold text-gray-800 mb-4">Add New Hire</h3>
+      <div class="space-y-3">
+        <div><label class="block text-xs font-medium text-gray-700 mb-1">Full Name</label><input type="text" id="hireName" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"></div>
+        <div><label class="block text-xs font-medium text-gray-700 mb-1">Role / Title</label><input type="text" id="hireRole" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"></div>
+        <div><label class="block text-xs font-medium text-gray-700 mb-1">Start Date</label><input type="date" id="hireDate" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"></div>
+        <div><label class="block text-xs font-medium text-gray-700 mb-1">Workflow</label>
+          <select id="hireWorkflow" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">
+            <option value="standard">Standard Employee Onboarding</option>
+            <option value="contractor">Contractor Setup</option>
+            <option value="executive">Executive Onboarding</option>
+          </select>
+        </div>
+        <button onclick="addHire()" class="w-full bg-primary hover:bg-primary-dk text-white font-semibold py-2 rounded-lg text-sm">Add Hire</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary Modal -->
+  <div id="summaryModal" class="fixed inset-0 hidden items-center justify-center z-50">
+    <div class="absolute inset-0 bg-black/50" onclick="closeSummaryModal()"></div>
+    <div class="bg-white rounded-xl shadow-2xl p-6 w-full max-w-lg relative z-10 max-h-[80vh] overflow-y-auto">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-lg font-bold text-gray-800">Document Summary</h3>
+        <button onclick="closeSummaryModal()" class="text-gray-400 hover:text-gray-600 text-xl">&times;</button>
+      </div>
+      <div id="summaryContent"></div>
+    </div>
+  </div>
+
+  <script>
+    // ─── State ───
+    function load(k) { return JSON.parse(localStorage.getItem(k) || 'null'); }
+    function save(k, v) { localStorage.setItem(k, JSON.stringify(v)); }
+    function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+
+    const TEMPLATES = {
+      standard: [
+        { phase: 'Pre-Start', title: 'Send welcome email', desc: 'Include start date, location, and first-day schedule', assign: 'HR', due: 'Day -3', required: true, status: 'complete' },
+        { phase: 'Pre-Start', title: 'Prepare workstation', desc: 'Set up desk, chair, monitors, and supplies', assign: 'IT', due: 'Day -1', required: true, status: 'complete' },
+        { phase: 'Pre-Start', title: 'Create accounts', desc: 'Email, Slack, project management, VPN access', assign: 'IT', due: 'Day -1', required: true, status: 'in_progress' },
+        { phase: 'Day One', title: 'Office tour and introductions', desc: 'Walk through all departments, introduce to team', assign: 'Manager', due: 'Day 1', required: true, status: 'in_progress' },
+        { phase: 'Day One', title: 'Review employee handbook', desc: 'Go through policies, PTO, benefits overview', assign: 'HR', due: 'Day 1', required: true, status: 'not_started' },
+        { phase: 'Day One', title: 'Complete tax and payroll forms', desc: 'W-4, direct deposit, state tax withholding', assign: 'Employee', due: 'Day 1', required: true, status: 'not_started' },
+        { phase: 'First Week', title: 'Assign onboarding buddy', desc: 'Pair with experienced team member for first month', assign: 'Manager', due: 'Day 3', required: false, status: 'not_started' },
+        { phase: 'First Week', title: 'Complete compliance training', desc: 'Harassment prevention, data security, safety', assign: 'Employee', due: 'Day 7', required: true, status: 'not_started' },
+        { phase: 'First Week', title: 'Set up benefits enrollment', desc: 'Health, dental, vision, 401k enrollment', assign: 'HR', due: 'Day 7', required: true, status: 'not_started' },
+        { phase: 'First Month', title: '1:1 with manager (week 2)', desc: 'Check in on progress, questions, blockers', assign: 'Manager', due: 'Day 14', required: true, status: 'not_started' },
+        { phase: 'First Month', title: 'Complete role-specific training', desc: 'Tools, processes, and workflows for the role', assign: 'Employee', due: 'Day 30', required: true, status: 'not_started' },
+        { phase: 'First Month', title: '30-day review', desc: 'Formal check-in: goals, feedback, path forward', assign: 'Manager', due: 'Day 30', required: true, status: 'not_started' }
+      ],
+      contractor: [
+        { phase: 'Pre-Start', title: 'Send contractor agreement', desc: 'NDA, SOW, payment terms', assign: 'HR', due: 'Day -3', required: true, status: 'not_started' },
+        { phase: 'Pre-Start', title: 'Set up limited access accounts', desc: 'Email alias, project tools only', assign: 'IT', due: 'Day -1', required: true, status: 'not_started' },
+        { phase: 'Day One', title: 'Project kickoff meeting', desc: 'Review scope, deliverables, timeline', assign: 'Manager', due: 'Day 1', required: true, status: 'not_started' },
+        { phase: 'Day One', title: 'Collect W-9 and payment info', desc: 'Tax form and direct deposit or payment method', assign: 'Employee', due: 'Day 1', required: true, status: 'not_started' },
+        { phase: 'First Week', title: 'Access and tooling verification', desc: 'Confirm all systems and tools are working', assign: 'IT', due: 'Day 3', required: true, status: 'not_started' },
+        { phase: 'First Week', title: 'First deliverable check-in', desc: 'Review initial work, adjust scope if needed', assign: 'Manager', due: 'Day 7', required: false, status: 'not_started' }
+      ],
+      executive: [
+        { phase: 'Pre-Start', title: 'Executive welcome package', desc: 'Personalized letter from CEO, org chart, strategic docs', assign: 'HR', due: 'Day -3', required: true, status: 'not_started' },
+        { phase: 'Pre-Start', title: 'Premium workspace setup', desc: 'Private office, executive tech stack, parking', assign: 'IT', due: 'Day -1', required: true, status: 'not_started' },
+        { phase: 'Day One', title: 'CEO/founder lunch meeting', desc: 'Vision alignment, company culture deep-dive', assign: 'Manager', due: 'Day 1', required: true, status: 'not_started' },
+        { phase: 'Day One', title: 'Leadership team introductions', desc: 'Meet all department heads, review org structure', assign: 'HR', due: 'Day 1', required: true, status: 'not_started' },
+        { phase: 'First Week', title: 'Department deep-dives', desc: 'Spend time with each team to understand operations', assign: 'Employee', due: 'Day 7', required: true, status: 'not_started' },
+        { phase: 'First Week', title: 'Strategic planning session', desc: 'Review current initiatives, identify priorities', assign: 'Manager', due: 'Day 7', required: true, status: 'not_started' },
+        { phase: 'First Month', title: 'Board introduction', desc: 'Meet board members, review governance', assign: 'HR', due: 'Day 14', required: true, status: 'not_started' },
+        { phase: 'First Month', title: '30-day strategic assessment', desc: 'Present initial observations and 90-day plan', assign: 'Employee', due: 'Day 30', required: true, status: 'not_started' }
+      ]
+    };
+
+    const DOC_LIST = ['W-4', 'I-9', 'NDA', 'Direct Deposit Form', 'Benefits Enrollment', 'Emergency Contact', 'Employee Handbook Acknowledgment', 'Equipment Agreement'];
+
+    // ─── Init data ───
+    let workflows = load('smb_workflows') || JSON.parse(JSON.stringify(TEMPLATES));
+    save('smb_workflows', workflows);
+
+    let hires = load('smb_hires') || [
+      { id: 1, name: 'Sarah Martinez', role: 'Marketing Manager', date: '2026-04-07', workflow: 'standard', stepStatuses: {} },
+      { id: 2, name: 'Dev Patel', role: 'Frontend Developer', date: '2026-04-14', workflow: 'standard', stepStatuses: {} },
+      { id: 3, name: 'Amy Chen', role: 'Design Contractor', date: '2026-04-10', workflow: 'contractor', stepStatuses: {} }
+    ];
+    // Initialize step statuses for sample hires
+    hires.forEach(h => {
+      if (!Object.keys(h.stepStatuses).length) {
+        const wf = workflows[h.workflow] || [];
+        wf.forEach((s, i) => { h.stepStatuses[i] = i < 2 ? 'complete' : i < 3 ? 'in_progress' : 'not_started'; });
+      }
+    });
+    save('smb_hires', hires);
+
+    let docs = load('smb_documents') || {};
+    hires.forEach(h => {
+      if (!docs[h.id]) { docs[h.id] = DOC_LIST.map(d => ({ name: d, received: false, date: '', notes: '' })); }
+    });
+    // Mark some docs as received for sample data
+    if (docs[1]) { docs[1][0].received = true; docs[1][0].date = '2026-04-01'; docs[1][1].received = true; docs[1][1].date = '2026-04-01'; }
+    save('smb_documents', docs);
+
+    // ─── Tabs ───
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+        btn.classList.add('active');
+        document.getElementById('tab-' + btn.dataset.tab).classList.remove('hidden');
+        if (btn.dataset.tab === 'hires') renderHires();
+        if (btn.dataset.tab === 'docs') { populateDocSelect(); renderDocs(); }
+      });
+    });
+
+    // ─── Workflow Builder ───
+    function renderWorkflow() {
+      const key = document.getElementById('workflowSelect').value;
+      const steps = workflows[key] || [];
+      const phases = ['Pre-Start', 'Day One', 'First Week', 'First Month'];
+      const body = document.getElementById('workflowBody');
+
+      const completed = steps.filter(s => s.status === 'complete').length;
+      const inProgress = steps.filter(s => s.status === 'in_progress').length;
+      const pct = steps.length ? Math.round((completed / steps.length) * 100) : 0;
+
+      document.getElementById('progressPct').textContent = pct + '%';
+      document.getElementById('progressBar').style.width = pct + '%';
+      document.getElementById('stepSummary').textContent = `${steps.length} steps total · ${completed} complete · ${inProgress} in progress`;
+
+      body.innerHTML = phases.map(phase => {
+        const phaseSteps = steps.filter(s => s.phase === phase);
+        if (!phaseSteps.length) return '';
+        return `<div class="mb-6">
+          <div class="phase-header pl-3 mb-3"><h3 class="text-sm font-bold text-gray-700 uppercase tracking-wide">${phase}</h3></div>
+          <div class="space-y-2">${phaseSteps.map((s, _) => {
+            const idx = steps.indexOf(s);
+            const statusIcon = s.status === 'complete' ? '&#10003;' : s.status === 'in_progress' ? '&#9679;' : '&#9675;';
+            const statusCls = 'step-' + s.status.replace('_', '-');
+            return `<div class="step-card bg-white rounded-lg shadow-sm border border-gray-100 p-4 flex items-start gap-3">
+              <button onclick="cycleStatus('${key}',${idx})" class="text-lg mt-0.5 ${statusCls} flex-shrink-0" title="Click to change status">${statusIcon}</button>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2">
+                  <span class="font-medium text-gray-800 text-sm">${esc(s.title)}</span>
+                  ${s.required ? '<span class="text-red-400 text-xs">Required</span>' : ''}
+                </div>
+                <p class="text-xs text-gray-500 mt-0.5">${esc(s.desc)}</p>
+                <div class="flex gap-3 mt-1.5 text-xs text-gray-400">
+                  <span>Assigned: ${s.assign}</span><span>Due: ${s.due}</span>
+                </div>
+              </div>
+              <button onclick="removeStep('${key}',${idx})" class="text-gray-300 hover:text-red-500 flex-shrink-0">&times;</button>
+            </div>`;
+          }).join('')}</div>
+        </div>`;
+      }).join('');
+    }
+
+    window.cycleStatus = function(key, idx) {
+      const steps = workflows[key];
+      const order = ['not_started', 'in_progress', 'complete'];
+      const cur = order.indexOf(steps[idx].status);
+      steps[idx].status = order[(cur + 1) % 3];
+      save('smb_workflows', workflows);
+      renderWorkflow();
+    };
+
+    window.removeStep = function(key, idx) {
+      workflows[key].splice(idx, 1);
+      save('smb_workflows', workflows);
+      renderWorkflow();
+    };
+
+    window.openAddStep = function() { document.getElementById('stepModal').classList.remove('hidden'); document.getElementById('stepModal').classList.add('flex'); };
+    window.closeStepModal = function() { document.getElementById('stepModal').classList.add('hidden'); document.getElementById('stepModal').classList.remove('flex'); };
+
+    window.addStep = function() {
+      const title = document.getElementById('stepTitle').value.trim();
+      if (!title) return alert('Enter a step title.');
+      const key = document.getElementById('workflowSelect').value;
+      workflows[key].push({
+        phase: document.getElementById('stepPhase').value,
+        title,
+        desc: document.getElementById('stepDesc').value.trim(),
+        assign: document.getElementById('stepAssign').value,
+        due: document.getElementById('stepDue').value,
+        required: document.getElementById('stepReq').checked,
+        status: 'not_started'
+      });
+      save('smb_workflows', workflows);
+      document.getElementById('stepTitle').value = '';
+      document.getElementById('stepDesc').value = '';
+      closeStepModal();
+      renderWorkflow();
+    };
+
+    // ─── New Hires ───
+    function renderHires() {
+      const tb = document.getElementById('hiresTable');
+      if (!hires.length) { tb.innerHTML = '<tr><td colspan="7" class="text-center py-4 text-gray-400">No hires yet</td></tr>'; return; }
+      tb.innerHTML = hires.map(h => {
+        const wf = workflows[h.workflow] || [];
+        const total = wf.length;
+        const completed = Object.values(h.stepStatuses).filter(s => s === 'complete').length;
+        const pct = total ? Math.round((completed / total) * 100) : 0;
+        const startDate = new Date(h.date);
+        const now = new Date();
+        const hasOverdue = Object.entries(h.stepStatuses).some(([i, s]) => s !== 'complete' && wf[i] && wf[i].required);
+        let status = 'On Track', statusCls = 'status-on-track';
+        if (pct < 30 && startDate < now) { status = 'At Risk'; statusCls = 'status-at-risk'; }
+        if (pct < 10 && (now - startDate) > 7 * 86400000) { status = 'Overdue'; statusCls = 'status-overdue'; }
+        return `<tr class="hover:bg-gray-50 cursor-pointer" onclick="showHireDetail(${h.id})">
+          <td class="px-4 py-2.5 font-medium text-gray-900">${esc(h.name)}</td>
+          <td class="px-4 py-2.5 text-gray-600">${esc(h.role)}</td>
+          <td class="px-4 py-2.5 text-gray-600">${h.date}</td>
+          <td class="px-4 py-2.5 text-gray-600 capitalize">${h.workflow}</td>
+          <td class="px-4 py-2.5"><div class="flex items-center gap-2"><div class="w-24 bg-gray-200 rounded-full h-2"><div class="bg-primary h-2 rounded-full progress-fill" style="width:${pct}%"></div></div><span class="text-xs text-gray-500">${pct}%</span></div></td>
+          <td class="px-4 py-2.5 text-center"><span class="px-2 py-0.5 rounded-full text-xs font-semibold ${statusCls}">${status}</span></td>
+          <td class="px-4 py-2.5 text-center"><button onclick="event.stopPropagation(); removeHire(${h.id})" class="text-red-400 hover:text-red-600 text-xs">Remove</button></td>
+        </tr>`;
+      }).join('');
+    }
+
+    window.showHireDetail = function(id) {
+      const h = hires.find(x => x.id === id);
+      if (!h) return;
+      const wf = workflows[h.workflow] || [];
+      const el = document.getElementById('hireDetail');
+      el.classList.remove('hidden');
+      el.innerHTML = `<h3 class="text-lg font-bold text-gray-800 mb-4">${esc(h.name)} — ${esc(h.role)}</h3>
+        <div class="space-y-2">${wf.map((s, i) => {
+          const st = h.stepStatuses[i] || 'not_started';
+          const icon = st === 'complete' ? '&#10003;' : st === 'in_progress' ? '&#9679;' : '&#9675;';
+          const cls = 'step-' + st.replace('_', '-');
+          return `<div class="flex items-center gap-3 p-2 rounded hover:bg-gray-50">
+            <button onclick="cycleHireStep(${id},${i})" class="${cls} text-lg">${icon}</button>
+            <span class="text-sm text-gray-800">${esc(s.title)}</span>
+            <span class="text-xs text-gray-400 ml-auto">${s.assign} · ${s.due}</span>
+          </div>`;
+        }).join('')}</div>`;
+    };
+
+    window.cycleHireStep = function(hireId, stepIdx) {
+      const h = hires.find(x => x.id === hireId);
+      if (!h) return;
+      const order = ['not_started', 'in_progress', 'complete'];
+      const cur = order.indexOf(h.stepStatuses[stepIdx] || 'not_started');
+      h.stepStatuses[stepIdx] = order[(cur + 1) % 3];
+      save('smb_hires', hires);
+      showHireDetail(hireId);
+      renderHires();
+    };
+
+    window.openHireModal = function() { document.getElementById('hireModal').classList.remove('hidden'); document.getElementById('hireModal').classList.add('flex'); };
+    window.closeHireModal = function() { document.getElementById('hireModal').classList.add('hidden'); document.getElementById('hireModal').classList.remove('flex'); };
+
+    window.addHire = function() {
+      const name = document.getElementById('hireName').value.trim();
+      const role = document.getElementById('hireRole').value.trim();
+      const date = document.getElementById('hireDate').value;
+      const wf = document.getElementById('hireWorkflow').value;
+      if (!name || !role || !date) return alert('Fill in all fields.');
+      const id = Date.now();
+      const stepStatuses = {};
+      (workflows[wf] || []).forEach((_, i) => stepStatuses[i] = 'not_started');
+      hires.push({ id, name, role, date, workflow: wf, stepStatuses });
+      save('smb_hires', hires);
+      docs[id] = DOC_LIST.map(d => ({ name: d, received: false, date: '', notes: '' }));
+      save('smb_documents', docs);
+      document.getElementById('hireName').value = '';
+      document.getElementById('hireRole').value = '';
+      document.getElementById('hireDate').value = '';
+      closeHireModal();
+      renderHires();
+    };
+
+    window.removeHire = function(id) {
+      if (!confirm('Remove this hire?')) return;
+      hires = hires.filter(h => h.id !== id);
+      save('smb_hires', hires);
+      delete docs[id];
+      save('smb_documents', docs);
+      renderHires();
+      document.getElementById('hireDetail').classList.add('hidden');
+    };
+
+    // ─── Documents ───
+    function populateDocSelect() {
+      const sel = document.getElementById('docHireSelect');
+      sel.innerHTML = hires.map(h => `<option value="${h.id}">${esc(h.name)}</option>`).join('');
+    }
+
+    function renderDocs() {
+      const hireId = document.getElementById('docHireSelect').value;
+      const hireDocs = docs[hireId] || [];
+      const received = hireDocs.filter(d => d.received).length;
+      const total = hireDocs.length;
+      document.getElementById('docProgress').innerHTML = `<span class="font-semibold text-primary">${received}/${total}</span> documents received`;
+
+      const body = document.getElementById('docBody');
+      body.innerHTML = hireDocs.map((d, i) => `
+        <div class="flex items-center gap-4 py-3 border-b border-gray-100">
+          <input type="checkbox" ${d.received ? 'checked' : ''} onchange="toggleDoc('${hireId}',${i})" class="rounded text-primary w-4 h-4">
+          <div class="flex-1">
+            <div class="text-sm font-medium text-gray-800">${esc(d.name)}</div>
+          </div>
+          <input type="date" value="${d.date}" onchange="updateDocDate('${hireId}',${i},this.value)" class="text-xs border border-gray-200 rounded px-2 py-1 w-32">
+          <input type="text" value="${esc(d.notes)}" placeholder="Notes" onchange="updateDocNotes('${hireId}',${i},this.value)" class="text-xs border border-gray-200 rounded px-2 py-1 w-32">
+        </div>
+      `).join('');
+    }
+
+    window.toggleDoc = function(hireId, idx) {
+      docs[hireId][idx].received = !docs[hireId][idx].received;
+      if (docs[hireId][idx].received && !docs[hireId][idx].date) docs[hireId][idx].date = new Date().toISOString().split('T')[0];
+      save('smb_documents', docs);
+      renderDocs();
+    };
+    window.updateDocDate = function(hireId, idx, val) { docs[hireId][idx].date = val; save('smb_documents', docs); };
+    window.updateDocNotes = function(hireId, idx, val) { docs[hireId][idx].notes = val; save('smb_documents', docs); };
+
+    window.genSummary = function() {
+      const hireId = document.getElementById('docHireSelect').value;
+      const hire = hires.find(h => String(h.id) === String(hireId));
+      const hireDocs = docs[hireId] || [];
+      const el = document.getElementById('summaryContent');
+      el.innerHTML = `
+        <div class="border border-gray-200 rounded-lg p-4 text-sm">
+          <div class="text-center mb-4">
+            <div class="text-lg font-bold text-gray-800">Document Compliance Summary</div>
+            <div class="text-gray-500">${hire ? esc(hire.name) + ' — ' + esc(hire.role) : 'Unknown'}</div>
+            <div class="text-xs text-gray-400">Generated ${new Date().toLocaleDateString()}</div>
+          </div>
+          <table class="w-full text-sm">
+            <thead><tr class="border-b"><th class="text-left py-1 text-gray-600">Document</th><th class="text-center py-1 text-gray-600">Status</th><th class="text-left py-1 text-gray-600">Date</th></tr></thead>
+            <tbody>${hireDocs.map(d => `<tr class="border-b border-gray-100">
+              <td class="py-1.5">${esc(d.name)}</td>
+              <td class="py-1.5 text-center">${d.received ? '<span class="text-green-600 font-bold">&#10003;</span>' : '<span class="text-red-500 font-bold">&#10007;</span>'}</td>
+              <td class="py-1.5 text-gray-500">${d.date || '—'}</td>
+            </tr>`).join('')}</tbody>
+          </table>
+          <div class="mt-3 text-center font-semibold ${hireDocs.every(d=>d.received)?'text-green-600':'text-yellow-600'}">
+            ${hireDocs.filter(d=>d.received).length}/${hireDocs.length} documents complete
+          </div>
+        </div>`;
+      document.getElementById('summaryModal').classList.remove('hidden');
+      document.getElementById('summaryModal').classList.add('flex');
+    };
+    window.closeSummaryModal = function() { document.getElementById('summaryModal').classList.add('hidden'); document.getElementById('summaryModal').classList.remove('flex'); };
+
+    // ─── Reset ───
+    window.resetAll = function() {
+      if (!confirm('Reset all demo data?')) return;
+      localStorage.removeItem('smb_workflows');
+      localStorage.removeItem('smb_hires');
+      localStorage.removeItem('smb_documents');
+      location.reload();
+    };
+
+    // ─── Init ───
+    renderWorkflow();
+  </script>
+</body>
+</html>
