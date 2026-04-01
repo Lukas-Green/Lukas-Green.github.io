@@ -4,21 +4,25 @@
 
 ## 1. Executive Summary
 
-The social media management software market exceeds $20B globally, with 14-16% CAGR driven by AI content generation, short-form video, and social commerce. The market is saturated with 50+ tools that all claim to do everything, but meaningful differentiation exists in analytics depth (Sprout Social), visual planning (Later), agency workflows (Sendible, Planable), and budget accessibility (Buffer, Pallyy). The biggest consulting opportunities are in cross-platform content automation, brand voice AI training, and building analytics-to-strategy pipelines that connect social activity to business outcomes.
+The social media management software market is valued at $32-40B (2025), growing at 19-25% CAGR — significantly larger than older estimates suggested. Growth is driven by AI content generation, short-form video, social commerce ($2.6T projected by 2026), and enterprise adoption. The market is saturated with 50+ tools that all claim to do everything, but meaningful differentiation exists in analytics depth (Sprout Social), visual planning (Later), agency workflows (Sendible, Planable), and budget accessibility (Buffer, Pallyy). Notable market disruption: Hootsuite eliminated its free tier with 40%+ price increases, Loomly saw 996% price hikes for some users, and Crowdfire is shutting down entirely (May 2025). The biggest consulting opportunities are in cross-platform content automation, brand voice AI training, social commerce implementation, and building analytics-to-strategy pipelines that connect social activity to business outcomes.
 
 ## 2. Market Overview
 
-- **Market size**: $20B+ (2026 estimated), growing at 14-16% CAGR
+- **Market size**: $32-40B (2025), projected $36-40B+ by 2026, growing at 19-25% CAGR
+- **Social commerce**: $2.6 trillion projected by 2026 (TikTok Shop alone: $23.4B, up 48% YoY)
 - **Global social media users**: 4.9 billion (2026)
 - **SMBs using social**: 75%+ of small businesses maintain active social presence
 - **Average tools per team**: 3-5 social tools in simultaneous use
+- **AI adoption**: 59.5% of platforms now include AI ideation; 78.4% of marketers heavily edit AI output before publishing
 
 ### Key Trends (2025-2026)
 - **AI content generation**: Every platform has added AI writing/image tools, but output quality varies wildly. Custom fine-tuning on brand voice is the premium play.
 - **Short-form video dominance**: Reels, Shorts, and TikTok are the primary engagement drivers. Most management tools are still catching up on video workflows.
 - **Unified inbox evolution**: DMs, comments, mentions, and reviews converging into single interfaces. Quality varies significantly between platforms.
-- **Social commerce**: Shopping features on Instagram, TikTok, and Pinterest creating new revenue attribution challenges.
-- **Creator-brand collaboration tools**: Built-in influencer discovery and management features appearing in management platforms.
+- **Social commerce explosion**: Global social commerce projected at $2.6T by 2026. TikTok Shop conversion (4.7%) outpaces Instagram Shopping (2.1%) and Facebook Shops (1.8%). Most management tools haven't integrated shop features yet.
+- **TikTok as search engine**: Gen Z and younger millennials default to TikTok search over Google. SEO + SMO convergence creating new keyword-driven video strategies. No SMM tool optimizes for TikTok's search algorithm.
+- **Creator-brand collaboration tools**: Built-in influencer discovery and management features appearing in management platforms. Micro-influencers (10K-100K) gaining ground vs. mega-influencers.
+- **Pricing consolidation**: Hootsuite eliminated free tier (40%+ increases), Later removed free plan, Loomly eliminated mid-tier plans (996% increases reported). Migration consulting is a growing opportunity.
 
 ## 3. Competitive Landscape
 
@@ -58,7 +62,7 @@ The social media management software market exceeds $20B globally, with 14-16% C
 
 **SocialBee** — Content recycling engine. Evergreen content categories auto-repost at optimal intervals. Strength: set-and-forget scheduling for recurring content. Weakness: limited analytics, niche appeal.
 
-**Loomly** — Content calendar and approval workflow focused. Strength: best approval flow UX, content inspiration features. Weakness: limited publishing platforms compared to all-in-ones.
+**Loomly** — Content calendar and approval workflow focused. **Warning: dramatic 2025 pricing overhaul** — eliminated mid-tier plans, with some users reporting 996% price increases year-over-year. Significant user backlash. Strength: best approval flow UX, content inspiration features. Weakness: limited publishing platforms, pricing now uncompetitive for many segments.
 
 **Publer** — Budget-friendly with surprisingly capable auto-scheduling. Strength: AI content suggestions, competitive pricing. Weakness: smaller team, less reliable support.
 
@@ -68,7 +72,7 @@ The social media management software market exceeds $20B globally, with 14-16% C
 
 **Pallyy** — Ultra-budget visual planner. $29/mo for unlimited brands. Strength: cheapest option for multi-brand management. Weakness: minimal features beyond scheduling and grid preview.
 
-**Crowdfire** — Content curation focus. Auto-suggests content from RSS, topics, and competitors. Strength: helps teams with content discovery. Weakness: publishing features are basic.
+**Crowdfire** — **Shutting down May 15, 2025.** All user data permanently deleted June 30, 2025. Previously known for content curation and auto-suggested content from RSS feeds. Migration opportunity: existing Crowdfire users need alternatives immediately.
 
 **Iconosquare** — Deep Instagram and TikTok analytics with industry benchmarking. Strength: analytics depth rivals Sprout at a fraction of the price. Weakness: limited platform coverage beyond Instagram/TikTok/Facebook.
 
@@ -97,6 +101,9 @@ The social media management software market exceeds $20B globally, with 14-16% C
 - **Approval workflow automation**: Custom approval chains integrating Slack, email, and project management. Most built-in approval features are too rigid.
 - **Content calendar population**: AI that generates content calendar drafts based on brand goals, seasonal trends, and competitor activity.
 - **Hashtag and caption optimization**: Real-time suggestions based on performance data, not generic best practices.
+- **Social commerce integration**: TikTok Shop, Instagram Shops setup and product feed automation. $2.6T market that most brands are ignoring. Live shopping event orchestration is a high-value service.
+- **Platform migration consulting**: With Hootsuite, Later, and Loomly all raising prices aggressively (and Crowdfire shutting down), migration consulting is a growing revenue stream. Assess 15+ alternatives, manage data migration, retrain teams.
+- **Sentiment analysis and crisis detection**: No SMM tool offers real-time sentiment monitoring or automated crisis alerts. Custom workflows using AI to detect negative sentiment spikes and auto-escalate to the right team member.
 
 ## 6. Consulting Angles
 
@@ -106,6 +113,8 @@ The social media management software market exceeds $20B globally, with 14-16% C
 |---|---|---|---|
 | **Audit + Optimize** | Review tool stack, eliminate redundancy, build custom dashboards and workflows | $2K–$5K | 2-3 weeks |
 | **AI Content Pipeline** | Custom content generation system trained on brand voice, with workflow automation and QC | $5K–$15K | 4-6 weeks |
+| **Social Commerce Setup** | TikTok Shop / Instagram Shop strategy, product feed automation, live shopping training | $4K–$10K | 3-5 weeks |
+| **Platform Migration** | Evaluate alternatives, manage data/workflow migration, retrain team (driven by Hootsuite/Loomly pricing exodus) | $5K–$15K | 3-6 weeks |
 | **Full Systems Build** | End-to-end social ops architecture: tool selection, integration, automation, reporting, training | $15K–$40K | 8-12 weeks |
 
 ### Proposal Hooks
