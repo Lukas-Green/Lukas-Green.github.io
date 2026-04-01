@@ -1400,3 +1400,38 @@ html, body { max-width: 100%; overflow-x: hidden; }
   .saas-cta-block { padding: 40px 16px; }
   .saas-cta-block h2 { font-size: 26px; }
 }
+
+/* ── Research / Comparison Tables ────────────── */
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin: 24px 0;
+}
+.comparison-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.comparison-table th {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding: 12px 16px;
+  border-bottom: 2px solid var(--border);
+  text-align: left;
+  white-space: nowrap;
+}
+.comparison-table td {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--gray);
+  vertical-align: top;
+}
+.comparison-table tr:hover td {
+  background: rgba(100,255,218,0.03);
+}
+[data-theme="light"] .comparison-table th { color: var(--accent); }
+[data-theme="light"] .comparison-table td { border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .comparison-table tr:hover td { background: rgba(10,122,90,0.03); }
