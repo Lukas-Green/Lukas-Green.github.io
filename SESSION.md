@@ -6,14 +6,27 @@ _Last updated: 2026-03-27 (Session 8)_
 ## What This Is
 
 Personal portfolio + brand site for Lukas Green.
-Brand: **LG** — AI Design Technologist
+Brand: **LUXIK** (formerly LG) — AI Design Technology Studio
 Live repo: `Lukas-Green/Lukas-Green.github.io`
-Domain: `lukasdgreen.com`
-Contact: `lukasgreen3@pm.me` (Proton Mail)
+Current domain: `lukasdgreen.com`
+New domain: `luxik.co` (purchased 2026-04-03)
+Contact: `lukas@lukasdgreen.com` (migrating to `lukas@luxik.co` via Proton Mail)
+Entity: LUXIK LLC — Oregon, registered 2026-04-03
 
 ---
 
-## Last Session - 2026-03-27 (Session 8)
+## Last Session - 2026-04-03 (Session 9)
+
+**Brand evolution + LUXIK LLC formation**
+
+- Built `luxia-preview.html` — full redesign concept under LUXIA brand (lime #C4FF53 / violet #8B5CF6, Space Grotesk + Space Mono)
+- Extensive brand name research: LUXEL, LUXEN, LUXIK — verified LUXIK is unclaimed (no trademark, no company, no domain conflicts)
+- Built `luxik-preview.html` — LUXIK-branded redesign with interactive node animation (mouse-reactive), asymmetric hero layout, consultancy framing ("I find the friction. I build the fix."), cartoon avatar in about section
+- Registered LUXIK LLC in Oregon via state-filings.com ($506 total)
+- Purchased luxik.co domain via Wix
+- Registered agent + private business address set up via oregonregisteredagent.com ($84/yr) AND state-filings ($199/yr) — NEED TO CANCEL ONE
+
+### Previous Session - 2026-03-27 (Session 8)
 
 **Layout architecture + copy + polish**
 
@@ -31,16 +44,23 @@ Contact: `lukasgreen3@pm.me` (Proton Mail)
 
 ## Pending - Next Session
 
-1. **UX case study image replacement** — Apple Maps and CleanDrive hidden until done; uncomment cards when ready
-2. **SoloBill card origin line** — still reads "contractor overpaying for 10% of a platform's features," should reflect the plumber friend story
-3. **MediaEngine** — consider adding to portfolio when further along; mention in CanvassKit origin story for now
-4. **Motion layer** — `IntersectionObserver` scroll animations: section fade-ins, staggered card reveals, stat counters
-5. **Remaining project detail pages** — GH2, FreedEase, Transcription (content ready), RecallAI, LUCID, BRIGS
-6. **Case study structure upgrade** — align to UXFolio 7-section framework (add Impact + Learnings)
-7. **About text alignment** — heading and text should align to top of cartoon image
-8. **Favicon** — LG wordmark
-9. **Resume PDF** — upload to `assets/` and wire download button
-10. **DNS** — confirm `www` CNAME in Namecheap, enforce HTTPS
+### LUXIK Brand Priority
+1. **Cancel duplicate registered agent** — oregonregisteredagent.com OR state-filings; only need one
+2. **Complete CMRA form** — needs document with physical address (update car insurance or bank to temp address)
+3. **Set up Proton Mail** on luxik.co domain (lukas@luxik.co)
+4. **Open business bank account** — need EIN first (being handled by state-filings)
+5. **Iterate on luxik-preview.html** — compare all three versions (live site, LUXIA, LUXIK), refine chosen direction
+6. **Content strategy** — case studies as results stories, build logs, AI tooling perspective pieces for traffic
+
+### Existing Site Backlog
+7. **UX case study image replacement** — Apple Maps and CleanDrive hidden until done; uncomment cards when ready
+8. **SoloBill card origin line** — still reads "contractor overpaying for 10% of a platform's features," should reflect the plumber friend story
+9. **MediaEngine** — consider adding to portfolio when further along; mention in CanvassKit origin story for now
+10. **Remaining project detail pages** — GH2, FreedEase, Transcription (content ready), RecallAI, LUCID, BRIGS
+11. **Case study structure upgrade** — align to UXFolio 7-section framework (add Impact + Learnings)
+12. **Favicon** — LUXIK wordmark (replaces LG)
+13. **Resume PDF** — upload to `assets/` and wire download button
+14. **DNS** — luxik.co setup, confirm routing
 
 ---
 
