@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project HQ | LG</title>
+  <meta name="description" content="Project command center for Lukas Green">
+  <meta name="theme-color" content="#111116">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="hq-styles.css">
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <header class="hq-topbar">
+    <div class="hq-topbar__left">
+      <img src="assets/lukas green icon-02.png" alt="LG" class="hq-topbar__logo">
+      <span class="hq-topbar__title">Project HQ</span>
+    </div>
+    <div class="hq-topbar__right">
+      <button class="hq-topbar__btn" id="exportBtn" title="Download projects.json">Export JSON</button>
+      <button class="hq-topbar__btn hq-topbar__btn--accent hq-topbar__btn--hidden" id="installBtn">Install App</button>
+    </div>
+  </header>
+
+  <!-- Toolbar -->
+  <div class="hq-toolbar">
+    <div class="hq-toolbar__filters" id="filterBar">
+      <button class="hq-filter-chip hq-filter-chip--active" data-filter="all">All</button>
+      <button class="hq-filter-chip" data-filter="active">Active</button>
+      <button class="hq-filter-chip" data-filter="refinement">Refinement</button>
+      <button class="hq-filter-chip" data-filter="functional">Functional</button>
+      <button class="hq-filter-chip" data-filter="prototype">Prototype</button>
+      <button class="hq-filter-chip" data-filter="architecture">Architecture</button>
+      <button class="hq-filter-chip" data-filter="shipped">Shipped</button>
+      <button class="hq-filter-chip" data-filter="blocked">Blocked</button>
+    </div>
+    <div class="hq-toolbar__right">
+      <input type="text" class="hq-search" id="searchInput" placeholder="Search projects...">
+      <select class="hq-sort" id="sortSelect">
+        <option value="priority">Sort: Priority</option>
+        <option value="touched">Sort: Last Touched</option>
+        <option value="completion">Sort: Completion</option>
+        <option value="name">Sort: Name</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="hq-main" id="mainContent"></main>
+
+  <!-- Slide-out Panel -->
+  <div class="hq-panel-overlay" id="panelOverlay"></div>
+  <aside class="hq-panel" id="detailPanel">
+    <div class="hq-panel__header">
+      <h2 class="hq-panel__title" id="panelTitle"></h2>
+      <button class="hq-panel__close" id="panelClose">&times;</button>
+    </div>
+    <div class="hq-panel__body" id="panelBody"></div>
+    <div class="hq-panel__footer">
+      <button class="hq-panel__save" id="panelSave">Save Changes</button>
+      <button class="hq-panel__export" id="panelExport">Export JSON</button>
+    </div>
+  </aside>
+
+  <!-- What's Next FAB -->
+  <button class="hq-fab" id="fabBtn">
+    <span class="hq-fab__icon">&#9889;</span> What's Next?
+  </button>
+
+  <!-- Suggestion Modal -->
+  <div class="hq-suggestion-modal" id="suggestionModal">
+    <div class="hq-suggestion-modal__title">Suggested Next Actions</div>
+    <div id="suggestionList"></div>
+  </div>
+
+  <!-- Help Button -->
+  <button class="hq-help-btn" id="helpBtn" title="Show help">?</button>
+
+  <!-- Onboarding Overlay -->
+  <div class="hq-onboarding" id="onboarding">
+    <div class="hq-onboarding__card">
+      <div class="hq-onboarding__icon">&#9889;</div>
+      <h2 class="hq-onboarding__heading">Welcome to Project HQ</h2>
+      <p style="color: var(--gray); font-size: 0.85rem;">Your command center for all projects.</p>
+      <div class="hq-onboarding__steps">
+        <div class="hq-onboarding__step">
+          <span class="hq-onboarding__step-num">1</span>
+          <span class="hq-onboarding__step-text"><strong>Filter and search</strong> to find projects by status, name, or keyword</span>
+        </div>
+        <div class="hq-onboarding__step">
+          <span class="hq-onboarding__step-num">2</span>
+          <span class="hq-onboarding__step-text"><strong>Click any card</strong> to open the detail panel with tasks, notes, and links</span>
+        </div>
+        <div class="hq-onboarding__step">
+          <span class="hq-onboarding__step-num">3</span>
+          <span class="hq-onboarding__step-text"><strong>"What's Next?"</strong> suggests your top 3 priorities based on urgency and staleness</span>
+        </div>
+        <div class="hq-onboarding__step">
+          <span class="hq-onboarding__step-num">4</span>
+          <span class="hq-onboarding__step-text"><strong>Export JSON</strong> to save changes back to your repo</span>
+        </div>
+      </div>
+      <button class="hq-onboarding__dismiss" id="onboardingDismiss">Got it, let's go</button>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="hq-toast" id="toast"></div>
+
+<script>
+(function() {
+  'use strict';
+
+  /* =============================================
+     STATUS CONFIG
+     ============================================= */
+
+  const STATUS_CONFIG = {
+    blocked:      { label: 'Blocked',      color: '#ef4444',  order: 0 },
+    active:       { label: 'Active',       color: '#A78BFA',  order: 1 },
+    refinement:   { label: 'Refinement',   color: '#FFD166',  order: 2 },
+    prototype:    { label: 'Prototype',    color: '#FF8C6B',  order: 3 },
+    functional:   { label: 'Functional',   color: '#64B5FF',  order: 4 },
+    architecture: { label: 'Architecture', color: '#6b7280',  order: 5 },
+    shipped:      { label: 'Shipped',      color: '#64FFDA',  order: 6 }
+  };
+
+  const PRIORITY_CONFIG = {
+    high:   { color: '#ef4444', label: 'High' },
+    medium: { color: '#FFD166', label: 'Medium' },
+    low:    { color: '#64FFDA', label: 'Low' }
+  };
+
+  const STORAGE_KEY = 'hq-project-data';
+  const ONBOARD_KEY = 'hq-onboarded';
+
+  /* =============================================
+     DATA MANAGER
+     ============================================= */
+
+  let projectData = null;
+
+  async function loadData() {
+    // Try localStorage first
+    const cached = localStorage.getItem(STORAGE_KEY);
+    if (cached) {
+      try {
+        projectData = JSON.parse(cached);
+        return projectData;
+      } catch (e) { /* fall through */ }
+    }
+    // Fetch from projects.json
+    try {
+      const resp = await fetch('projects.json');
+      projectData = await resp.json();
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(projectData));
+    } catch (e) {
+      projectData = { version: 1, projects: [], siteTasks: [] };
+    }
+    return projectData;
+  }
+
+  function saveData() {
+    if (projectData) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(projectData));
+    }
+  }
+
+  function getProject(id) {
+    return projectData.projects.find(p => p.id === id);
+  }
+
+  function exportJSON() {
+    const blob = new Blob([JSON.stringify(projectData, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'projects.json';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('projects.json downloaded');
+  }
+
+  /* =============================================
+     FILTER & SORT STATE
+     ============================================= */
+
+  let currentFilter = 'all';
+  let currentSearch = '';
+  let currentSort = 'priority';
+
+  function getFilteredProjects() {
+    let list = projectData.projects.slice();
+
+    // Filter by status
+    if (currentFilter !== 'all') {
+      list = list.filter(p => p.status === currentFilter);
+    }
+
+    // Filter by search
+    if (currentSearch) {
+      const q = currentSearch.toLowerCase();
+      list = list.filter(p =>
+        p.name.toLowerCase().includes(q) ||
+        p.tagline.toLowerCase().includes(q) ||
+        (p.notes && p.notes.toLowerCase().includes(q)) ||
+        p.stack.some(s => s.toLowerCase().includes(q))
+      );
+    }
+
+    // Sort
+    list.sort((a, b) => {
+      if (currentSort === 'priority') {
+        const po = { high: 0, medium: 1, low: 2 };
+        const diff = po[a.priority] - po[b.priority];
+        if (diff !== 0) return diff;
+        return new Date(a.lastTouched) - new Date(b.lastTouched);
+      }
+      if (currentSort === 'touched') {
+        return new Date(b.lastTouched) - new Date(a.lastTouched);
+      }
+      if (currentSort === 'completion') {
+        return b.completion - a.completion;
+      }
+      if (currentSort === 'name') {
+        return a.name.localeCompare(b.name);
+      }
+      return 0;
+    });
+
+    return list;
+  }
+
+  /* =============================================
+     RENDERER
+     ============================================= */
+
+  const mainEl = document.getElementById('mainContent');
+
+  function daysAgo(dateStr) {
+    const d = new Date(dateStr);
+    const now = new Date();
+    const diff = Math.floor((now - d) / (1000 * 60 * 60 * 24));
+    if (diff === 0) return 'today';
+    if (diff === 1) return '1 day ago';
+    return diff + ' days ago';
+  }
+
+  function getNextTask(project) {
+    if (!project.tasks || project.tasks.length === 0) return null;
+    return project.tasks.find(t => !t.done) || null;
+  }
+
+  function renderCard(project) {
+    const sc = STATUS_CONFIG[project.status] || STATUS_CONFIG.active;
+    const pc = PRIORITY_CONFIG[project.priority] || PRIORITY_CONFIG.medium;
+    const next = getNextTask(project);
+    const stackHTML = project.stack.slice(0, 3).map(s =>
+      '<span class="hq-card__stack-tag">' + s + '</span>'
+    ).join('');
+
+    return '<div class="hq-card" data-id="' + project.id + '" style="--card-status-color:' + sc.color + '">' +
+      '<div class="hq-card__top">' +
+        '<span class="hq-card__status">' + sc.label + '</span>' +
+        '<span class="hq-card__priority" style="background:' + pc.color + '" title="' + pc.label + ' priority"></span>' +
+      '</div>' +
+      '<div class="hq-card__name">' + project.name + '</div>' +
+      '<div class="hq-card__tagline">' + project.tagline + '</div>' +
+      '<div class="hq-card__progress-wrap">' +
+        '<div class="hq-card__progress-bar">' +
+          '<div class="hq-card__progress-fill" style="width:' + project.completion + '%"></div>' +
+        '</div>' +
+        '<span class="hq-card__progress-pct">' + project.completion + '%</span>' +
+      '</div>' +
+      (next
+        ? '<div class="hq-card__next"><span class="hq-card__next-label">Next: </span>' + next.text + '</div>'
+        : '<div class="hq-card__next" style="color:var(--accent)">All tasks complete</div>') +
+      '<div class="hq-card__meta">' +
+        '<span class="hq-card__touched">' + daysAgo(project.lastTouched) + '</span>' +
+        '<div class="hq-card__stack">' + stackHTML + '</div>' +
+      '</div>' +
+    '</div>';
+  }
+
+  function render() {
+    const projects = getFilteredProjects();
+
+    if (projects.length === 0) {
+      mainEl.innerHTML = '<div class="hq-empty"><div class="hq-empty__icon">&#128269;</div><div class="hq-empty__text">No projects match your filters</div></div>';
+      return;
+    }
+
+    if (currentFilter !== 'all' || currentSearch) {
+      // Flat grid when filtering
+      mainEl.innerHTML = '<div class="hq-grid">' + projects.map(renderCard).join('') + '</div>';
+    } else {
+      // Grouped by status
+      const groups = {};
+      projects.forEach(p => {
+        if (!groups[p.status]) groups[p.status] = [];
+        groups[p.status].push(p);
+      });
+
+      const statusOrder = Object.keys(STATUS_CONFIG).sort((a, b) => STATUS_CONFIG[a].order - STATUS_CONFIG[b].order);
+      let html = '';
+
+      statusOrder.forEach(status => {
+        if (!groups[status] || groups[status].length === 0) return;
+        const sc = STATUS_CONFIG[status];
+        html += '<div class="hq-status-group">' +
+          '<div class="hq-status-group__header">' +
+            '<span class="hq-status-group__dot" style="background:' + sc.color + '"></span>' +
+            '<span class="hq-status-group__label">' + sc.label + '</span>' +
+            '<span class="hq-status-group__count">' + groups[status].length + '</span>' +
+          '</div>' +
+          '<div class="hq-grid">' + groups[status].map(renderCard).join('') + '</div>' +
+        '</div>';
+      });
+
+      mainEl.innerHTML = html;
+    }
+
+    // Attach card click handlers
+    mainEl.querySelectorAll('.hq-card').forEach(card => {
+      card.addEventListener('click', () => openPanel(card.dataset.id));
+    });
+  }
+
+  /* =============================================
+     DETAIL PANEL
+     ============================================= */
+
+  let currentPanelId = null;
+
+  function openPanel(projectId) {
+    const project = getProject(projectId);
+    if (!project) return;
+
+    currentPanelId = projectId;
+    const sc = STATUS_CONFIG[project.status] || STATUS_CONFIG.active;
+
+    document.getElementById('panelTitle').textContent = project.name;
+
+    // Build panel body
+    let html = '';
+
+    // Controls
+    html += '<div class="hq-panel__controls">';
+    html += '<select class="hq-panel__select" id="panelStatus">';
+    Object.keys(STATUS_CONFIG).forEach(s => {
+      html += '<option value="' + s + '"' + (s === project.status ? ' selected' : '') + '>' + STATUS_CONFIG[s].label + '</option>';
+    });
+    html += '</select>';
+    html += '<select class="hq-panel__select" id="panelPriority">';
+    Object.keys(PRIORITY_CONFIG).forEach(p => {
+      html += '<option value="' + p + '"' + (p === project.priority ? ' selected' : '') + '>' + PRIORITY_CONFIG[p].label + '</option>';
+    });
+    html += '</select>';
+    html += '</div>';
+
+    // Progress
+    html += '<div class="hq-panel__section">';
+    html += '<div class="hq-panel__section-title">Progress</div>';
+    html += '<div class="hq-panel__progress-row">';
+    html += '<input type="range" class="hq-panel__range" id="panelRange" min="0" max="100" value="' + project.completion + '">';
+    html += '<span class="hq-panel__range-value" id="panelRangeVal">' + project.completion + '%</span>';
+    html += '</div></div>';
+
+    // Tasks
+    html += '<div class="hq-panel__section">';
+    html += '<div class="hq-panel__section-title">Tasks</div>';
+    html += '<ul class="hq-task-list" id="panelTasks">';
+    if (project.tasks) {
+      project.tasks.forEach((t, i) => {
+        html += '<li class="hq-task">';
+        html += '<input type="checkbox" class="hq-task__check" data-idx="' + i + '"' + (t.done ? ' checked' : '') + '>';
+        html += '<span class="hq-task__text' + (t.done ? ' hq-task__text--done' : '') + '">' + t.text + '</span>';
+        html += '</li>';
+      });
+    }
+    html += '</ul>';
+    html += '<div class="hq-add-task">';
+    html += '<input type="text" class="hq-add-task__input" id="newTaskInput" placeholder="Add a task...">';
+    html += '<button class="hq-add-task__btn" id="addTaskBtn">Add</button>';
+    html += '</div></div>';
+
+    // Notes
+    html += '<div class="hq-panel__section">';
+    html += '<div class="hq-panel__section-title">Notes</div>';
+    html += '<textarea class="hq-panel__notes" id="panelNotes">' + (project.notes || '') + '</textarea>';
+    html += '</div>';
+
+    // Related projects
+    if (project.relatedProjects && project.relatedProjects.length > 0) {
+      html += '<div class="hq-panel__section">';
+      html += '<div class="hq-panel__section-title">Related Projects</div>';
+      html += '<div class="hq-panel__related">';
+      project.relatedProjects.forEach(rid => {
+        const rp = getProject(rid);
+        const name = rp ? rp.name : rid;
+        html += '<button class="hq-panel__related-chip" data-id="' + rid + '">' + name + '</button>';
+      });
+      html += '</div></div>';
+    }
+
+    // Links
+    if (project.detailPage || project.demoPage) {
+      html += '<div class="hq-panel__section">';
+      html += '<div class="hq-panel__section-title">Links</div>';
+      html += '<div class="hq-panel__links">';
+      if (project.detailPage) {
+        html += '<a href="' + project.detailPage + '" class="hq-panel__link" target="_blank">Detail Page</a>';
+      }
+      if (project.demoPage) {
+        html += '<a href="' + project.demoPage + '" class="hq-panel__link" target="_blank">Demo</a>';
+      }
+      html += '</div></div>';
+    }
+
+    document.getElementById('panelBody').innerHTML = html;
+
+    // Wire up range slider
+    const range = document.getElementById('panelRange');
+    const rangeVal = document.getElementById('panelRangeVal');
+    range.addEventListener('input', () => {
+      rangeVal.textContent = range.value + '%';
+    });
+
+    // Wire up task checkboxes
+    document.querySelectorAll('#panelTasks .hq-task__check').forEach(cb => {
+      cb.addEventListener('change', () => {
+        const text = cb.nextElementSibling;
+        if (cb.checked) {
+          text.classList.add('hq-task__text--done');
+        } else {
+          text.classList.remove('hq-task__text--done');
+        }
+      });
+    });
+
+    // Wire up add task
+    document.getElementById('addTaskBtn').addEventListener('click', addTask);
+    document.getElementById('newTaskInput').addEventListener('keydown', e => {
+      if (e.key === 'Enter') addTask();
+    });
+
+    // Wire up related project chips
+    document.querySelectorAll('.hq-panel__related-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        openPanel(chip.dataset.id);
+      });
+    });
+
+    // Open panel
+    document.getElementById('panelOverlay').classList.add('hq-panel-overlay--open');
+    document.getElementById('detailPanel').classList.add('hq-panel--open');
+
+    // Close suggestion modal if open
+    closeSuggestions();
+  }
+
+  function addTask() {
+    const input = document.getElementById('newTaskInput');
+    const text = input.value.trim();
+    if (!text || !currentPanelId) return;
+
+    const project = getProject(currentPanelId);
+    if (!project.tasks) project.tasks = [];
+
+    const newId = project.id + '-' + Date.now();
+    project.tasks.push({ id: newId, text: text, done: false });
+
+    input.value = '';
+
+    // Re-render task list in panel
+    const taskList = document.getElementById('panelTasks');
+    const idx = project.tasks.length - 1;
+    const li = document.createElement('li');
+    li.className = 'hq-task';
+    li.innerHTML = '<input type="checkbox" class="hq-task__check" data-idx="' + idx + '">' +
+      '<span class="hq-task__text">' + text + '</span>';
+    li.querySelector('.hq-task__check').addEventListener('change', function() {
+      const span = this.nextElementSibling;
+      if (this.checked) {
+        span.classList.add('hq-task__text--done');
+      } else {
+        span.classList.remove('hq-task__text--done');
+      }
+    });
+    taskList.appendChild(li);
+  }
+
+  function closePanel() {
+    document.getElementById('panelOverlay').classList.remove('hq-panel-overlay--open');
+    document.getElementById('detailPanel').classList.remove('hq-panel--open');
+    currentPanelId = null;
+  }
+
+  function savePanelChanges() {
+    if (!currentPanelId) return;
+
+    const project = getProject(currentPanelId);
+    if (!project) return;
+
+    // Read panel state
+    project.status = document.getElementById('panelStatus').value;
+    project.priority = document.getElementById('panelPriority').value;
+    project.completion = parseInt(document.getElementById('panelRange').value, 10);
+    project.notes = document.getElementById('panelNotes').value;
+
+    // Read task states
+    document.querySelectorAll('#panelTasks .hq-task__check').forEach(cb => {
+      const idx = parseInt(cb.dataset.idx, 10);
+      if (project.tasks[idx]) {
+        project.tasks[idx].done = cb.checked;
+      }
+    });
+
+    // Update lastTouched
+    project.lastTouched = new Date().toISOString().split('T')[0];
+    projectData.lastUpdated = new Date().toISOString().split('T')[0];
+
+    saveData();
+    render();
+    showToast('Changes saved');
+  }
+
+  /* =============================================
+     SUGGESTIONS ("What's Next?")
+     ============================================= */
+
+  let suggestionsOpen = false;
+
+  function getSuggestions() {
+    const now = new Date();
+    return projectData.projects
+      .filter(p => p.status !== 'shipped' && p.status !== 'blocked')
+      .map(p => {
+        const daysSince = Math.floor((now - new Date(p.lastTouched)) / (1000 * 60 * 60 * 24));
+        const priorityScore = p.priority === 'high' ? 3 : p.priority === 'medium' ? 2 : 1;
+        const staleScore = Math.min(daysSince / 7, 4); // Max 4 weeks staleness bonus
+        const score = priorityScore * 2 + staleScore;
+        const next = getNextTask(p);
+        let reason = '';
+        if (p.priority === 'high' && daysSince > 5) reason = 'High priority, not touched in ' + daysSince + ' days';
+        else if (p.priority === 'high') reason = 'High priority';
+        else if (daysSince > 14) reason = 'Not touched in ' + daysSince + ' days';
+        else if (daysSince > 7) reason = p.priority.charAt(0).toUpperCase() + p.priority.slice(1) + ' priority, ' + daysSince + ' days stale';
+        else reason = p.priority.charAt(0).toUpperCase() + p.priority.slice(1) + ' priority, ' + p.completion + '% complete';
+        return { project: p, score, next, reason };
+      })
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 3);
+  }
+
+  function toggleSuggestions() {
+    const modal = document.getElementById('suggestionModal');
+    if (suggestionsOpen) {
+      closeSuggestions();
+      return;
+    }
+
+    const suggestions = getSuggestions();
+    const list = document.getElementById('suggestionList');
+
+    if (suggestions.length === 0) {
+      list.innerHTML = '<div style="color:var(--gray-dim); font-size:0.8rem; padding:8px 0;">All caught up!</div>';
+    } else {
+      list.innerHTML = suggestions.map(s =>
+        '<div class="hq-suggestion-item" data-id="' + s.project.id + '">' +
+          '<div class="hq-suggestion-item__name">' + s.project.name + '</div>' +
+          (s.next ? '<div class="hq-suggestion-item__task">Next: ' + s.next.text + '</div>' : '') +
+          '<div class="hq-suggestion-item__reason">' + s.reason + '</div>' +
+        '</div>'
+      ).join('');
+
+      list.querySelectorAll('.hq-suggestion-item').forEach(item => {
+        item.addEventListener('click', () => {
+          closeSuggestions();
+          openPanel(item.dataset.id);
+        });
+      });
+    }
+
+    modal.classList.add('hq-suggestion-modal--open');
+    suggestionsOpen = true;
+  }
+
+  function closeSuggestions() {
+    document.getElementById('suggestionModal').classList.remove('hq-suggestion-modal--open');
+    suggestionsOpen = false;
+  }
+
+  /* =============================================
+     ONBOARDING
+     ============================================= */
+
+  function showOnboarding() {
+    document.getElementById('onboarding').classList.add('hq-onboarding--open');
+  }
+
+  function dismissOnboarding() {
+    document.getElementById('onboarding').classList.remove('hq-onboarding--open');
+    localStorage.setItem(ONBOARD_KEY, '1');
+  }
+
+  /* =============================================
+     TOAST
+     ============================================= */
+
+  let toastTimer = null;
+  function showToast(msg) {
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.classList.add('hq-toast--show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove('hq-toast--show'), 2500);
+  }
+
+  /* =============================================
+     PWA INSTALL
+     ============================================= */
+
+  let deferredPrompt = null;
+
+  window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault();
+    deferredPrompt = e;
+    document.getElementById('installBtn').classList.remove('hq-topbar__btn--hidden');
+  });
+
+  document.getElementById('installBtn').addEventListener('click', async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    const result = await deferredPrompt.userChoice;
+    if (result.outcome === 'accepted') {
+      showToast('App installed!');
+    }
+    deferredPrompt = null;
+    document.getElementById('installBtn').classList.add('hq-topbar__btn--hidden');
+  });
+
+  /* =============================================
+     EVENT WIRING
+     ============================================= */
+
+  // Filters
+  document.getElementById('filterBar').addEventListener('click', e => {
+    const chip = e.target.closest('.hq-filter-chip');
+    if (!chip) return;
+    document.querySelectorAll('.hq-filter-chip').forEach(c => c.classList.remove('hq-filter-chip--active'));
+    chip.classList.add('hq-filter-chip--active');
+    currentFilter = chip.dataset.filter;
+    render();
+  });
+
+  // Search
+  document.getElementById('searchInput').addEventListener('input', e => {
+    currentSearch = e.target.value;
+    render();
+  });
+
+  // Sort
+  document.getElementById('sortSelect').addEventListener('change', e => {
+    currentSort = e.target.value;
+    render();
+  });
+
+  // Panel close
+  document.getElementById('panelClose').addEventListener('click', closePanel);
+  document.getElementById('panelOverlay').addEventListener('click', closePanel);
+
+  // Panel save
+  document.getElementById('panelSave').addEventListener('click', savePanelChanges);
+  document.getElementById('panelExport').addEventListener('click', exportJSON);
+
+  // Export button
+  document.getElementById('exportBtn').addEventListener('click', exportJSON);
+
+  // FAB
+  document.getElementById('fabBtn').addEventListener('click', toggleSuggestions);
+
+  // Close suggestions on click outside
+  document.addEventListener('click', e => {
+    if (suggestionsOpen &&
+        !e.target.closest('#suggestionModal') &&
+        !e.target.closest('#fabBtn')) {
+      closeSuggestions();
+    }
+  });
+
+  // Help
+  document.getElementById('helpBtn').addEventListener('click', showOnboarding);
+  document.getElementById('onboardingDismiss').addEventListener('click', dismissOnboarding);
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      if (suggestionsOpen) closeSuggestions();
+      else if (currentPanelId) closePanel();
+      else if (document.getElementById('onboarding').classList.contains('hq-onboarding--open')) dismissOnboarding();
+    }
+  });
+
+  /* =============================================
+     INIT
+     ============================================= */
+
+  async function init() {
+    await loadData();
+    render();
+
+    // Show onboarding on first visit
+    if (!localStorage.getItem(ONBOARD_KEY)) {
+      showOnboarding();
+    }
+
+    // Register service worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js').catch(() => {});
+    }
+  }
+
+  init();
+
+})();
+</script>
+
+</body>
+</html>
