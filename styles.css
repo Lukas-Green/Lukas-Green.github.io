@@ -1225,3 +1225,213 @@ html, body { max-width: 100%; overflow-x: hidden; }
 @media (max-width: 390px) {
   .stack-strip { padding: 20px 16px; }
 }
+
+/* ── SAAS VENTURES ──────────────────────────────── */
+
+.ventures-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  padding: 0 80px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.venture-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 36px 32px;
+  transition: border-color .2s, transform .2s;
+  position: relative;
+  text-decoration: none;
+  display: block;
+  color: inherit;
+}
+.venture-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+}
+
+.venture-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(100,255,218,0.06);
+  border: 1px solid rgba(100,255,218,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  color: var(--accent);
+}
+.venture-card-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--accent);
+  fill: none;
+  stroke-width: 1.5;
+}
+
+.venture-card-name {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--white);
+}
+
+.venture-market-badge {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.venture-market-badge span {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 4px;
+  background: rgba(100,255,218,0.08);
+  border: 1px solid rgba(100,255,218,0.22);
+  color: var(--accent);
+}
+
+.venture-card-desc {
+  font-size: 14px;
+  color: var(--gray);
+  line-height: 1.75;
+  margin-bottom: 20px;
+}
+
+.venture-card-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: opacity .2s;
+}
+.venture-card-link:hover { opacity: 0.75; }
+
+.venture-card--coming-soon {
+  opacity: 0.5;
+  pointer-events: none;
+}
+.venture-card--coming-soon .venture-card-link {
+  color: var(--gray-dim);
+}
+
+/* SaaS CTA block */
+.saas-cta-block {
+  text-align: center;
+  padding: 64px 80px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.saas-cta-block h2 {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+.saas-cta-block p {
+  font-size: 16px;
+  color: var(--gray);
+  margin-bottom: 28px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Market stat row (for vertical pages) */
+.market-stat-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin: 24px 0;
+}
+.market-stat {
+  flex: 1;
+  min-width: 140px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+}
+.market-stat-val {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.market-stat-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gray-dim);
+}
+
+/* SaaS card accent */
+.project-card[data-cat="saas"] { --card-accent: #64FFDA; --card-border: rgba(100,255,218,0.2); }
+
+/* ── Light theme — Ventures ───────────────────── */
+[data-theme="light"] .venture-card { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .venture-card:hover { border-color: var(--accent); }
+[data-theme="light"] .venture-card-icon { background: rgba(10,122,90,0.06); border-color: rgba(10,122,90,0.15); }
+[data-theme="light"] .venture-card-icon svg { stroke: var(--accent); }
+[data-theme="light"] .venture-market-badge span { background: rgba(10,122,90,0.06); border-color: rgba(10,122,90,0.18); color: var(--accent); }
+[data-theme="light"] .market-stat { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .market-stat-val { color: var(--accent); }
+
+/* ── Responsive — Ventures ────────────────────── */
+@media (max-width: 768px) {
+  .ventures-grid { grid-template-columns: 1fr; padding: 0 24px; }
+  .saas-cta-block { padding: 48px 24px; }
+  .market-stat-row { gap: 16px; }
+  .market-stat { min-width: 100px; padding: 16px; }
+  .market-stat-val { font-size: 22px; }
+}
+@media (max-width: 390px) {
+  .ventures-grid { padding: 0 16px; gap: 20px; }
+  .venture-card { padding: 28px 24px; }
+  .saas-cta-block { padding: 40px 16px; }
+  .saas-cta-block h2 { font-size: 26px; }
+}
+
+/* ── Research / Comparison Tables ────────────── */
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin: 24px 0;
+}
+.comparison-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.comparison-table th {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding: 12px 16px;
+  border-bottom: 2px solid var(--border);
+  text-align: left;
+  white-space: nowrap;
+}
+.comparison-table td {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--gray);
+  vertical-align: top;
+}
+.comparison-table tr:hover td {
+  background: rgba(100,255,218,0.03);
+}
+[data-theme="light"] .comparison-table th { color: var(--accent); }
+[data-theme="light"] .comparison-table td { border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .comparison-table tr:hover td { background: rgba(10,122,90,0.03); }

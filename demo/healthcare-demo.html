@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClaimFlow AI — Patient Intake & Scheduling Demo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: { primary: '#2563EB', 'primary-dk': '#1d4ed8' } } } }
+  </script>
+  <style>
+    .tab-btn.active { border-bottom: 3px solid #2563EB; color: #2563EB; font-weight: 600; }
+    .bar-chart-bar { transition: height .4s ease; border-radius: 6px 6px 0 0; }
+    .priority-urgent { background: #FEE2E2; color: #991B1B; }
+    .priority-routine { background: #DBEAFE; color: #1E40AF; }
+    .priority-followup { background: #D1FAE5; color: #065F46; }
+    .cal-slot { min-height: 36px; cursor: pointer; transition: background .15s; border-bottom: 1px solid #E5E7EB; }
+    .cal-slot:hover { background: #EFF6FF; }
+    .cal-slot.booked-urgent { background: #FEE2E2; border-left: 3px solid #DC2626; }
+    .cal-slot.booked-routine { background: #DBEAFE; border-left: 3px solid #2563EB; }
+    .cal-slot.booked-followup { background: #D1FAE5; border-left: 3px solid #059669; }
+  </style>
+</head>
+<body class="bg-[#EFF6FF]">
+
+  <!-- Demo Banner -->
+  <div class="bg-yellow-50 border-b border-yellow-200 text-yellow-800 text-sm text-center py-2 px-4">
+    Demo mode — data stored locally in your browser. No PHI is collected.
+  </div>
+
+  <!-- Header -->
+  <header class="bg-primary text-white shadow-lg">
+    <div class="max-w-6xl mx-auto px-4 py-5 flex justify-between items-center">
+      <div>
+        <h1 class="text-2xl font-bold tracking-tight">ClaimFlow AI</h1>
+        <p class="text-white/80 text-sm">Patient Intake &amp; Smart Scheduling</p>
+      </div>
+      <div class="text-right text-sm text-white/70">
+        <div id="dateDisplay"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Tabs -->
+  <div class="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-30">
+    <div class="max-w-6xl mx-auto px-4 flex gap-0">
+      <button class="tab-btn active px-6 py-3 text-sm text-gray-500 border-b-3 border-transparent" data-tab="intake">Intake</button>
+      <button class="tab-btn px-6 py-3 text-sm text-gray-500 border-b-3 border-transparent" data-tab="schedule">Schedule</button>
+      <button class="tab-btn px-6 py-3 text-sm text-gray-500 border-b-3 border-transparent" data-tab="dashboard">Dashboard</button>
+    </div>
+  </div>
+
+  <!-- INTAKE TAB -->
+  <div id="tab-intake" class="tab-content max-w-6xl mx-auto px-4 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <!-- Form -->
+      <div class="bg-white rounded-xl shadow-lg p-6">
+        <h2 class="text-lg font-bold text-gray-800 mb-4">New Patient Intake</h2>
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+            <input type="text" id="ptName" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm" placeholder="Patient full name">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Date of Birth</label>
+            <input type="date" id="ptDob" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Insurance Provider</label>
+            <select id="ptInsurance" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">
+              <option value="">Select insurance</option>
+              <option>Aetna</option><option>Blue Cross</option><option>Cigna</option>
+              <option>United</option><option>Medicare</option><option>Medicaid</option><option>Self-Pay</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Reason for Visit</label>
+            <textarea id="ptReason" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm" placeholder="Describe reason for visit"></textarea>
+          </div>
+          <button id="preScreenBtn" class="w-full bg-primary hover:bg-primary-dk text-white font-semibold py-2.5 rounded-lg text-sm transition">
+            AI Pre-Screen &amp; Add to Queue
+          </button>
+        </div>
+      </div>
+      <!-- Queue -->
+      <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+        <div class="px-6 py-4 border-b border-gray-200">
+          <h2 class="text-lg font-bold text-gray-800">Intake Queue</h2>
+          <p class="text-xs text-gray-500 mt-1" id="queueCount">0 patients waiting</p>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-gray-200 text-sm">
+            <thead class="bg-gray-50">
+              <tr>
+                <th class="px-4 py-2.5 text-left text-xs font-semibold text-gray-500 uppercase">Name</th>
+                <th class="px-4 py-2.5 text-left text-xs font-semibold text-gray-500 uppercase">Insurance</th>
+                <th class="px-4 py-2.5 text-left text-xs font-semibold text-gray-500 uppercase">Priority</th>
+                <th class="px-4 py-2.5 text-left text-xs font-semibold text-gray-500 uppercase">Time</th>
+                <th class="px-4 py-2.5 text-left text-xs font-semibold text-gray-500 uppercase">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="queueTable" class="divide-y divide-gray-200"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCHEDULE TAB -->
+  <div id="tab-schedule" class="tab-content hidden max-w-6xl mx-auto px-4 py-8">
+    <div class="bg-white rounded-xl shadow-lg p-6">
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+        <div class="flex items-center gap-4">
+          <label class="text-sm font-medium text-gray-700">Provider:</label>
+          <select id="providerSelect" class="px-3 py-2 border border-gray-300 rounded-lg text-sm">
+            <option>Dr. Sarah Chen</option>
+            <option>Dr. James Miller</option>
+            <option>Dr. Aisha Patel</option>
+          </select>
+        </div>
+        <div class="text-sm text-gray-600">
+          Today's availability: <span id="availPct" class="font-bold text-primary">100%</span>
+        </div>
+      </div>
+      <div id="weekLabel" class="text-sm font-semibold text-gray-500 mb-3"></div>
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse text-sm" id="calendarTable">
+          <thead>
+            <tr id="calHeaderRow" class="bg-gray-50"></tr>
+          </thead>
+          <tbody id="calBody"></tbody>
+        </table>
+      </div>
+      <div class="flex gap-4 mt-4 text-xs text-gray-500">
+        <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-blue-200 border-l-2 border-blue-600 inline-block"></span> New Patient</span>
+        <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-green-200 border-l-2 border-green-600 inline-block"></span> Follow-up</span>
+        <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-red-200 border-l-2 border-red-600 inline-block"></span> Urgent</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD TAB -->
+  <div id="tab-dashboard" class="tab-content hidden max-w-6xl mx-auto px-4 py-8">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div class="bg-white rounded-xl shadow p-5 text-center">
+        <div class="text-3xl font-bold text-primary" id="statPatients">0</div>
+        <div class="text-xs text-gray-500 mt-1 uppercase tracking-wide font-semibold">Total Patients</div>
+      </div>
+      <div class="bg-white rounded-xl shadow p-5 text-center">
+        <div class="text-3xl font-bold text-primary" id="statAppts">0</div>
+        <div class="text-xs text-gray-500 mt-1 uppercase tracking-wide font-semibold">Appointments</div>
+      </div>
+      <div class="bg-white rounded-xl shadow p-5 text-center">
+        <div class="text-3xl font-bold text-primary" id="statWait">12 min</div>
+        <div class="text-xs text-gray-500 mt-1 uppercase tracking-wide font-semibold">Avg Wait Time</div>
+      </div>
+      <div class="bg-white rounded-xl shadow p-5 text-center">
+        <div class="text-3xl font-bold text-primary" id="statRevenue">$0</div>
+        <div class="text-xs text-gray-500 mt-1 uppercase tracking-wide font-semibold">Revenue Est.</div>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <!-- Bar Chart -->
+      <div class="bg-white rounded-xl shadow-lg p-6">
+        <h3 class="text-sm font-bold text-gray-700 mb-4 uppercase tracking-wide">Appointments by Day</h3>
+        <div class="flex items-end justify-around gap-3" style="height:180px;" id="barChart">
+          <div class="flex flex-col items-center flex-1"><div class="bar-chart-bar bg-primary/80 w-full" id="barMon" style="height:0"></div><span class="text-xs text-gray-500 mt-2">Mon</span></div>
+          <div class="flex flex-col items-center flex-1"><div class="bar-chart-bar bg-primary/80 w-full" id="barTue" style="height:0"></div><span class="text-xs text-gray-500 mt-2">Tue</span></div>
+          <div class="flex flex-col items-center flex-1"><div class="bar-chart-bar bg-primary/80 w-full" id="barWed" style="height:0"></div><span class="text-xs text-gray-500 mt-2">Wed</span></div>
+          <div class="flex flex-col items-center flex-1"><div class="bar-chart-bar bg-primary/80 w-full" id="barThu" style="height:0"></div><span class="text-xs text-gray-500 mt-2">Thu</span></div>
+          <div class="flex flex-col items-center flex-1"><div class="bar-chart-bar bg-primary/80 w-full" id="barFri" style="height:0"></div><span class="text-xs text-gray-500 mt-2">Fri</span></div>
+        </div>
+      </div>
+      <!-- Activity Feed -->
+      <div class="bg-white rounded-xl shadow-lg p-6">
+        <h3 class="text-sm font-bold text-gray-700 mb-4 uppercase tracking-wide">Recent Activity</h3>
+        <div id="activityFeed" class="space-y-3 text-sm text-gray-600">
+          <p class="text-gray-400">No activity yet.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Booking Modal -->
+  <div id="bookModal" class="fixed inset-0 hidden items-center justify-center z-50">
+    <div class="absolute inset-0 bg-black/50" onclick="closeBookModal()"></div>
+    <div class="bg-white rounded-xl shadow-2xl p-6 w-full max-w-sm relative z-10">
+      <h3 class="text-lg font-bold text-gray-800 mb-1">Book Appointment</h3>
+      <p class="text-sm text-gray-500 mb-4" id="bookSlotInfo"></p>
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700 mb-1">Select Patient</label>
+        <select id="bookPatientSelect" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"></select>
+      </div>
+      <div class="flex gap-3">
+        <button onclick="confirmBooking()" class="flex-1 bg-primary hover:bg-primary-dk text-white font-semibold py-2 rounded-lg text-sm">Book</button>
+        <button onclick="closeBookModal()" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2 rounded-lg text-sm">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ─── State ───
+    const KEYS = { patients: 'healthcare_patients', appts: 'healthcare_appointments', activity: 'healthcare_activity' };
+    function load(k) { return JSON.parse(localStorage.getItem(k) || '[]'); }
+    function save(k, v) { localStorage.setItem(k, JSON.stringify(v)); }
+
+    let patients = load(KEYS.patients);
+    let appointments = load(KEYS.appts);
+    let activity = load(KEYS.activity);
+    let pendingSlot = null;
+
+    // ─── Tabs ───
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+        btn.classList.add('active');
+        document.getElementById('tab-' + btn.dataset.tab).classList.remove('hidden');
+        if (btn.dataset.tab === 'schedule') renderCalendar();
+        if (btn.dataset.tab === 'dashboard') renderDashboard();
+      });
+    });
+
+    // ─── Date ───
+    const today = new Date();
+    document.getElementById('dateDisplay').textContent = today.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+    // ─── Triage ───
+    function triagePriority(reason) {
+      const r = (reason || '').toLowerCase();
+      if (/chest pain|emergency|severe|acute|trauma|breathing|stroke/.test(r)) return 'Urgent';
+      if (/follow.?up|check.?up|routine|annual|wellness|physical/.test(r)) return 'Follow-up';
+      return 'Routine';
+    }
+
+    // ─── Intake ───
+    document.getElementById('preScreenBtn').addEventListener('click', () => {
+      const name = document.getElementById('ptName').value.trim();
+      const dob = document.getElementById('ptDob').value;
+      const insurance = document.getElementById('ptInsurance').value;
+      const reason = document.getElementById('ptReason').value.trim();
+      if (!name || !insurance) return alert('Please enter patient name and select insurance.');
+
+      const priority = triagePriority(reason);
+      const patient = { id: Date.now(), name, dob, insurance, reason, priority, time: new Date().toISOString(), scheduled: false };
+      patients.unshift(patient);
+      save(KEYS.patients, patients);
+      logActivity('Patient added: ' + name + ' (' + priority + ')');
+
+      document.getElementById('ptName').value = '';
+      document.getElementById('ptDob').value = '';
+      document.getElementById('ptInsurance').value = '';
+      document.getElementById('ptReason').value = '';
+      renderQueue();
+    });
+
+    function renderQueue() {
+      const tb = document.getElementById('queueTable');
+      const unscheduled = patients.filter(p => !p.scheduled);
+      document.getElementById('queueCount').textContent = unscheduled.length + ' patient' + (unscheduled.length !== 1 ? 's' : '') + ' waiting';
+      if (!unscheduled.length) {
+        tb.innerHTML = '<tr><td colspan="5" class="text-center py-4 text-gray-400">No patients in queue</td></tr>';
+        return;
+      }
+      tb.innerHTML = unscheduled.map(p => `
+        <tr class="hover:bg-gray-50">
+          <td class="px-4 py-2.5 font-medium text-gray-900">${esc(p.name)}</td>
+          <td class="px-4 py-2.5 text-gray-600">${esc(p.insurance)}</td>
+          <td class="px-4 py-2.5"><span class="px-2 py-0.5 rounded-full text-xs font-semibold priority-${p.priority.toLowerCase()}">${p.priority}</span></td>
+          <td class="px-4 py-2.5 text-gray-500">${new Date(p.time).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}</td>
+          <td class="px-4 py-2.5">
+            <button onclick="viewPatient(${p.id})" class="text-primary hover:text-primary-dk mr-2 text-xs font-medium">View</button>
+            <button onclick="deletePatient(${p.id})" class="text-red-500 hover:text-red-700 text-xs font-medium">Delete</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    window.viewPatient = function(id) {
+      const p = patients.find(x => x.id === id);
+      if (!p) return;
+      alert(`Patient: ${p.name}\nDOB: ${p.dob || 'N/A'}\nInsurance: ${p.insurance}\nPriority: ${p.priority}\nReason: ${p.reason || 'N/A'}`);
+    };
+    window.deletePatient = function(id) {
+      if (!confirm('Remove this patient?')) return;
+      patients = patients.filter(p => p.id !== id);
+      save(KEYS.patients, patients);
+      renderQueue();
+    };
+
+    // ─── Calendar ───
+    function getWeekDates() {
+      const d = new Date(today);
+      const day = d.getDay();
+      const mon = new Date(d);
+      mon.setDate(d.getDate() - (day === 0 ? 6 : day - 1));
+      const dates = [];
+      for (let i = 0; i < 5; i++) {
+        const dd = new Date(mon);
+        dd.setDate(mon.getDate() + i);
+        dates.push(dd);
+      }
+      return dates;
+    }
+
+    const hours = [];
+    for (let h = 8; h <= 16; h++) hours.push(h);
+
+    function renderCalendar() {
+      const dates = getWeekDates();
+      const provider = document.getElementById('providerSelect').value;
+      document.getElementById('weekLabel').textContent = 'Week of ' + dates[0].toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ' – ' + dates[4].toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+      const hr = document.getElementById('calHeaderRow');
+      hr.innerHTML = '<th class="px-2 py-2 text-xs text-gray-500 w-16">Time</th>' +
+        dates.map(d => `<th class="px-2 py-2 text-xs text-gray-500 text-center">${d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})}</th>`).join('');
+
+      const body = document.getElementById('calBody');
+      body.innerHTML = '';
+
+      let totalSlots = 0, bookedSlots = 0;
+
+      hours.forEach(h => {
+        const tr = document.createElement('tr');
+        const timeLabel = (h > 12 ? h - 12 : h) + ':00 ' + (h >= 12 ? 'PM' : 'AM');
+        tr.innerHTML = `<td class="px-2 py-1 text-xs text-gray-400 font-mono border-r border-gray-100 w-16">${timeLabel}</td>`;
+
+        dates.forEach((d, di) => {
+          totalSlots++;
+          const dateStr = d.toISOString().split('T')[0];
+          const appt = appointments.find(a => a.date === dateStr && a.hour === h && a.provider === provider);
+          const td = document.createElement('td');
+          td.className = 'cal-slot px-2 py-1 text-xs text-center';
+
+          if (appt) {
+            bookedSlots++;
+            const cls = appt.priority === 'Urgent' ? 'booked-urgent' : appt.priority === 'Follow-up' ? 'booked-followup' : 'booked-routine';
+            td.classList.add(cls);
+            td.textContent = appt.patientName;
+            td.title = `${appt.patientName} (${appt.priority})`;
+          } else {
+            td.addEventListener('click', () => openBookModal(dateStr, h, provider, d, timeLabel));
+          }
+          tr.appendChild(td);
+        });
+        body.appendChild(tr);
+      });
+
+      const todayStr = today.toISOString().split('T')[0];
+      const todayTotal = hours.length;
+      const todayBooked = appointments.filter(a => a.date === todayStr && a.provider === provider).length;
+      const pct = Math.round(((todayTotal - todayBooked) / todayTotal) * 100);
+      document.getElementById('availPct').textContent = pct + '%';
+    }
+
+    function openBookModal(dateStr, hour, provider, dateObj, timeLabel) {
+      const unscheduled = patients.filter(p => !p.scheduled);
+      if (!unscheduled.length) return alert('No patients in the intake queue. Add patients first.');
+
+      pendingSlot = { date: dateStr, hour, provider };
+      document.getElementById('bookSlotInfo').textContent = dateObj.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' }) + ' at ' + timeLabel + ' with ' + provider;
+
+      const sel = document.getElementById('bookPatientSelect');
+      sel.innerHTML = unscheduled.map(p => `<option value="${p.id}">${esc(p.name)} (${p.priority})</option>`).join('');
+
+      document.getElementById('bookModal').classList.remove('hidden');
+      document.getElementById('bookModal').classList.add('flex');
+    }
+
+    window.closeBookModal = function() {
+      document.getElementById('bookModal').classList.add('hidden');
+      document.getElementById('bookModal').classList.remove('flex');
+      pendingSlot = null;
+    };
+
+    window.confirmBooking = function() {
+      if (!pendingSlot) return;
+      const patientId = parseInt(document.getElementById('bookPatientSelect').value);
+      const patient = patients.find(p => p.id === patientId);
+      if (!patient) return;
+
+      const existing = appointments.find(a => a.date === pendingSlot.date && a.hour === pendingSlot.hour && a.provider === pendingSlot.provider);
+      if (existing) { alert('Conflict: This slot is already booked for ' + existing.patientName); return; }
+
+      appointments.push({ ...pendingSlot, patientId, patientName: patient.name, priority: patient.priority, bookedAt: new Date().toISOString() });
+      save(KEYS.appts, appointments);
+
+      patient.scheduled = true;
+      save(KEYS.patients, patients);
+
+      logActivity('Booked: ' + patient.name + ' on ' + pendingSlot.date + ' with ' + pendingSlot.provider);
+      closeBookModal();
+      renderCalendar();
+      renderQueue();
+    };
+
+    // ─── Dashboard ───
+    function renderDashboard() {
+      document.getElementById('statPatients').textContent = patients.length;
+      document.getElementById('statAppts').textContent = appointments.length;
+
+      const waitMin = patients.length > 0 ? Math.max(8, Math.round(12 + Math.random() * 10)) : 0;
+      document.getElementById('statWait').textContent = waitMin + ' min';
+
+      let revenue = 0;
+      appointments.forEach(a => {
+        if (a.priority === 'Urgent') revenue += 300;
+        else if (a.priority === 'Follow-up') revenue += 100;
+        else revenue += 150;
+      });
+      document.getElementById('statRevenue').textContent = '$' + revenue.toLocaleString();
+
+      // Bar chart
+      const dates = getWeekDates();
+      const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
+      const counts = dates.map(d => {
+        const ds = d.toISOString().split('T')[0];
+        return appointments.filter(a => a.date === ds).length;
+      });
+      const maxCount = Math.max(...counts, 1);
+      days.forEach((day, i) => {
+        const bar = document.getElementById('bar' + day);
+        bar.style.height = Math.round((counts[i] / maxCount) * 150) + 'px';
+      });
+
+      // Activity feed
+      const feed = document.getElementById('activityFeed');
+      const recent = activity.slice(0, 5);
+      if (!recent.length) { feed.innerHTML = '<p class="text-gray-400">No activity yet.</p>'; return; }
+      feed.innerHTML = recent.map(a => `
+        <div class="flex items-start gap-2 pb-2 border-b border-gray-100 last:border-0">
+          <div class="w-2 h-2 rounded-full bg-primary mt-1.5 flex-shrink-0"></div>
+          <div>
+            <div class="text-gray-700">${esc(a.text)}</div>
+            <div class="text-xs text-gray-400">${new Date(a.time).toLocaleString([], {month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // ─── Helpers ───
+    function logActivity(text) {
+      activity.unshift({ text, time: new Date().toISOString() });
+      if (activity.length > 50) activity = activity.slice(0, 50);
+      save(KEYS.activity, activity);
+    }
+
+    function esc(s) {
+      const d = document.createElement('div');
+      d.textContent = s || '';
+      return d.innerHTML;
+    }
+
+    // ─── Init ───
+    document.getElementById('providerSelect').addEventListener('change', renderCalendar);
+    renderQueue();
+    renderCalendar();
+    renderDashboard();
+  </script>
+</body>
+</html>
