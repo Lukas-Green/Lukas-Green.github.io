@@ -1,29 +1,39 @@
 # Portfolio Site - SESSION
-_Last updated: 2026-03-27 (Session 8)_
+_Last updated: 2026-04-05 (Session 10)_
 
 ---
 
 ## What This Is
 
 Personal portfolio + brand site for Lukas Green.
-Brand: **LUXIK** (formerly LG) — AI Design Technology Studio
+Brand: **LUXIGA** (formerly LUXIK, LG) — AI Design Technology Studio
 Live repo: `Lukas-Green/Lukas-Green.github.io`
 Current domain: `lukasdgreen.com`
-New domain: `luxik.co` (purchased 2026-04-03)
-Contact: `lukas@lukasdgreen.com` (migrating to `lukas@luxik.co` via Proton Mail)
-Entity: LUXIK LLC — Oregon, registered 2026-04-03
+New domains: `luxiga.co` + `luxigallc.com` (also have `luxik.co` from prior name)
+Contact: `lukas@lukasdgreen.com`
+Entity: LUXIGA LLC — Oregon (amended from LUXIK LLC, registered 2026-04-03)
 
 ---
 
-## Last Session - 2026-04-03 (Session 9)
+## Last Session - 2026-04-05 (Session 10)
 
-**Brand evolution + LUXIK LLC formation**
+**LUXIK → LUXIGA rename**
+
+- Created `luxiga-preview.html` from `luxik-preview.html` with all brand references updated to LUXIGA
+- Updated SESSION.md, BUILD-LOG.md, memory with new name
+- Confirmed domains owned: `luxiga.co`, `luxigallc.com`, `luxik.co`
+- No site buildout this session — name update only
+
+### Previous Session - 2026-04-03 (Session 9)
+
+**Brand evolution + LLC formation**
 
 - Built `luxia-preview.html` — full redesign concept under LUXIA brand (lime #C4FF53 / violet #8B5CF6, Space Grotesk + Space Mono)
 - Extensive brand name research: LUXEL, LUXEN, LUXIK — verified LUXIK is unclaimed (no trademark, no company, no domain conflicts)
 - Built `luxik-preview.html` — LUXIK-branded redesign with interactive node animation (mouse-reactive), asymmetric hero layout, consultancy framing ("I find the friction. I build the fix."), cartoon avatar in about section
 - Registered LUXIK LLC in Oregon via state-filings.com ($506 total)
 - Purchased luxik.co domain via Wix
+- **Name changed to LUXIGA** — built `luxiga-preview.html` (renamed from luxik-preview), updated all brand references
 - Registered agent + private business address set up via oregonregisteredagent.com ($84/yr) AND state-filings ($199/yr) — NEED TO CANCEL ONE
 
 ### Previous Session - 2026-03-27 (Session 8)
@@ -44,12 +54,13 @@ Entity: LUXIK LLC — Oregon, registered 2026-04-03
 
 ## Pending - Next Session
 
-### LUXIK Brand Priority
+### LUXIGA Brand Priority
 1. **Cancel duplicate registered agent** — oregonregisteredagent.com OR state-filings; only need one
 2. **Complete CMRA form** — needs document with physical address (update car insurance or bank to temp address)
-3. **Set up Proton Mail** on luxik.co domain (lukas@luxik.co)
-4. **Open business bank account** — need EIN first (being handled by state-filings)
-5. **Iterate on luxik-preview.html** — compare all three versions (live site, LUXIA, LUXIK), refine chosen direction
+3. **Amend LLC name** — LUXIK LLC → LUXIGA LLC with Oregon Secretary of State
+4. **Set up Proton Mail** on luxiga.co domain (lukas@luxiga.co)
+6. **Open business bank account** — need EIN first (being handled by state-filings)
+7. **Iterate on luxiga-preview.html** — refine chosen direction, build out further
 6. **Content strategy** — case studies as results stories, build logs, AI tooling perspective pieces for traffic
 
 ### Existing Site Backlog
@@ -58,9 +69,9 @@ Entity: LUXIK LLC — Oregon, registered 2026-04-03
 9. **MediaEngine** — consider adding to portfolio when further along; mention in CanvassKit origin story for now
 10. **Remaining project detail pages** — GH2, FreedEase, Transcription (content ready), RecallAI, LUCID, BRIGS
 11. **Case study structure upgrade** — align to UXFolio 7-section framework (add Impact + Learnings)
-12. **Favicon** — LUXIK wordmark (replaces LG)
+12. **Favicon** — LUXIGA wordmark (replaces LG)
 13. **Resume PDF** — upload to `assets/` and wire download button
-14. **DNS** — luxik.co setup, confirm routing
+14. **DNS** — LUXIGA domain setup, confirm routing
 
 ---
 

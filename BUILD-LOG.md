@@ -2,6 +2,20 @@
 
 ---
 
+## Session 10 — 2026-04-04
+
+**Type:** Brand rename
+
+**Changes:**
+- LLC name changed from LUXIK to LUXIGA
+- Created `luxiga-preview.html` — updated all brand references (title, meta, nav, watermark, footer, JS comments) from LUXIK to LUXIGA
+- Updated `SESSION.md` — brand header, pending tasks, domain/email references all reflect LUXIGA
+- Added LLC amendment and new domain acquisition to pending tasks
+
+**Files changed:** `luxiga-preview.html` (new), `SESSION.md`, `BUILD-LOG.md`
+
+---
+
 ## Session 8 — 2026-03-27
 
 **Type:** Layout architecture + copy + polish
