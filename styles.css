@@ -248,39 +248,36 @@ section { padding: 100px 80px; }
 }
 
 /* ── STATS STRIP ─────────────────────────────── */
-.stats-strip {
-  background: var(--bg2);
+.signal-strip {
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
-  padding: 48px 80px;
+  padding: 24px 80px;
   display: flex;
   justify-content: center;
-}
-
-.stats-strip-item {
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  padding: 0 72px;
-  border-right: 1px solid var(--border);
+  gap: 28px;
+  flex-wrap: wrap;
 }
-.stats-strip-item:last-child { border-right: none; }
 
-.strip-num {
-  font-size: 52px;
-  font-weight: 800;
-  line-height: 1;
-  color: var(--white);
+.signal-phrase {
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--gray-dim);
 }
-.strip-num span { color: var(--accent); font-size: 34px; }
 
-.strip-label {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--gray);
-  margin-top: 10px;
+.signal-accent {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.signal-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.5;
+  flex-shrink: 0;
 }
 
 /* ── WHAT I DO ───────────────────────────────── */
@@ -557,9 +554,9 @@ footer p { font-size: 13px; color: var(--gray-dim); }
   section { padding: 72px 24px; }
   .section-title { font-size: 32px; margin-bottom: 36px; }
 
-  .stats-strip { padding: 36px 24px; }
-  .stats-strip-item { padding: 0 28px; }
-  .strip-num { font-size: 38px; }
+  .signal-strip { padding: 20px 24px; gap: 16px; }
+  .signal-phrase { font-size: 13px; }
+  .signal-dot { display: none; }
   .services-grid { grid-template-columns: 1fr; }
   .about-grid { grid-template-columns: 1fr; }
   .about-cartoon { max-width: 280px; margin: 0 auto; }
@@ -1084,48 +1081,6 @@ html, body { max-width: 100%; overflow-x: hidden; }
 }
 .career-step.active .career-desc { color: var(--gray); }
 
-/* ── STACK STRIP ─────────────────────────────── */
-.stack-strip {
-  background: var(--bg);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: 32px 80px;
-}
-.stack-strip-inner {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  flex-wrap: wrap;
-}
-.stack-strip-label {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--gray-dim);
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-.stack-strip-items {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-.stack-strip-item {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--gray);
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 6px 14px;
-  transition: border-color .2s, color .2s;
-}
-.stack-strip-item:hover {
-  border-color: rgba(100,255,218,0.35);
-  color: var(--white);
-}
-
 /* ── CONTACT FORM ─────────────────────────────── */
 .contact-cta > p { margin-bottom: 28px; }
 .contact-form {
@@ -1218,12 +1173,7 @@ html, body { max-width: 100%; overflow-x: hidden; }
 /* Responsive — new components */
 @media (max-width: 768px) {
   .career-timeline { grid-template-columns: 1fr; gap: 24px; }
-  .stack-strip { padding: 24px 24px; }
-  .stack-strip-inner { gap: 16px; }
   .form-row { grid-template-columns: 1fr; }
-}
-@media (max-width: 390px) {
-  .stack-strip { padding: 20px 16px; }
 }
 
 /* ── SAAS VENTURES ──────────────────────────────── */
