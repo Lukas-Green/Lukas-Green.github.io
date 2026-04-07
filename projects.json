@@ -1,0 +1,284 @@
+{
+  "version": 1,
+  "lastUpdated": "2026-04-04",
+  "projects": [
+    {
+      "id": "canvasskit",
+      "name": "CanvassKit",
+      "tagline": "CRM / Outreach",
+      "status": "functional",
+      "priority": "medium",
+      "category": "automation",
+      "stack": ["Google Apps Script", "Google Sheets", "HTML/Tailwind"],
+      "detailPage": "canvasskit.html",
+      "demoPage": "demo/canvasskit-demo.html",
+      "tasks": [
+        { "id": "ck-1", "text": "Consider mentioning MediaEngine in origin story", "done": false }
+      ],
+      "notes": "Functional build. Demo live on portfolio. Copy rewritten Session 8 with real origin story (nonprofit contracting role, coordinator's 3-step reporting chain).",
+      "relatedProjects": ["gh2-contact-tracker", "media-engine"],
+      "lastTouched": "2026-03-27",
+      "completion": 85
+    },
+    {
+      "id": "solobill",
+      "name": "SoloBill",
+      "tagline": "Invoicing / Finance",
+      "status": "refinement",
+      "priority": "high",
+      "category": "automation",
+      "stack": ["Google Apps Script", "Google Docs", "PDF Export"],
+      "detailPage": "solobill.html",
+      "demoPage": "demo/solobill-demo.html",
+      "tasks": [
+        { "id": "sb-1", "text": "Fix card origin line to reflect plumber friend story", "done": false },
+        { "id": "sb-2", "text": "Add export-to-PDF refinements", "done": false }
+      ],
+      "notes": "Tested, in refinement. Origin: journeyman plumber friend new to private contracting, dual need for billing records + real estate paper trail.",
+      "relatedProjects": ["canvasskit"],
+      "lastTouched": "2026-03-27",
+      "completion": 75
+    },
+    {
+      "id": "recallai",
+      "name": "RecallAI",
+      "tagline": "AI / Healthcare",
+      "status": "prototype",
+      "priority": "medium",
+      "category": "ai",
+      "stack": ["Python", "FastAPI", "AI Integration"],
+      "detailPage": null,
+      "demoPage": null,
+      "tasks": [
+        { "id": "ra-1", "text": "Build detail page for portfolio", "done": false },
+        { "id": "ra-2", "text": "Vet core functionality and partnerships", "done": false }
+      ],
+      "notes": "Unfinished, unvetted. Needs partnership validation before further development.",
+      "relatedProjects": ["claimflow-ai"],
+      "lastTouched": "2026-03-15",
+      "completion": 25
+    },
+    {
+      "id": "lucid",
+      "name": "LUCID",
+      "tagline": "File Intelligence / AI",
+      "status": "active",
+      "priority": "high",
+      "category": "ai",
+      "stack": ["Python", "FastAPI", "Ollama", "SQLite"],
+      "detailPage": null,
+      "demoPage": null,
+      "tasks": [
+        { "id": "lu-1", "text": "Build detail page for portfolio", "done": false },
+        { "id": "lu-2", "text": "Complete core file indexing pipeline", "done": false }
+      ],
+      "notes": "In active development. Local AI file intelligence system.",
+      "relatedProjects": ["brigs"],
+      "lastTouched": "2026-03-20",
+      "completion": 40
+    },
+    {
+      "id": "freedease",
+      "name": "FreedEase",
+      "tagline": "Civic / UX",
+      "status": "prototype",
+      "priority": "low",
+      "category": "civic",
+      "stack": ["PWA", "Google Apps Script", "Vanilla JS"],
+      "detailPage": null,
+      "demoPage": null,
+      "tasks": [
+        { "id": "fe-1", "text": "Build detail page for portfolio", "done": false },
+        { "id": "fe-2", "text": "Finalize design prototype", "done": false }
+      ],
+      "notes": "Design prototype stage. PWA for civic engagement.",
+      "relatedProjects": [],
+      "lastTouched": "2026-02-15",
+      "completion": 20
+    },
+    {
+      "id": "gh2-contact-tracker",
+      "name": "GH2 Contact Tracker",
+      "tagline": "Nonprofit Tooling",
+      "status": "shipped",
+      "priority": "low",
+      "category": "automation",
+      "stack": ["Google Apps Script", "Google Sheets"],
+      "detailPage": null,
+      "demoPage": null,
+      "tasks": [
+        { "id": "gh-1", "text": "Build detail page for portfolio", "done": false }
+      ],
+      "notes": "Delivered to org. Fully functional.",
+      "relatedProjects": ["canvasskit"],
+      "lastTouched": "2026-02-01",
+      "completion": 100
+    },
+    {
+      "id": "media-engine",
+      "name": "Media Engine",
+      "tagline": "Workflow Automation",
+      "status": "functional",
+      "priority": "medium",
+      "category": "automation",
+      "stack": ["Google Apps Script", "PWA", "Vanilla JS"],
+      "detailPage": null,
+      "demoPage": null,
+      "tasks": [
+        { "id": "me-1", "text": "Consider adding to portfolio when further along", "done": false }
+      ],
+      "notes": "iPhone recorder + PWA transcription pipeline. Functional builds.",
+      "relatedProjects": ["audio-video-transcription"],
+      "lastTouched": "2026-03-10",
+      "completion": 70
+    },
+    {
+      "id": "audio-video-transcription",
+      "name": "Audio/Video Transcription",
+      "tagline": "Workflow Automation",
+      "status": "functional",
+      "priority": "medium",
+      "category": "automation",
+      "stack": ["Google Apps Script", "PWA", "Vanilla JS"],
+      "detailPage": null,
+      "demoPage": null,
+      "tasks": [
+        { "id": "av-1", "text": "Build detail page for portfolio (content ready)", "done": false }
+      ],
+      "notes": "Functional builds. Content ready for portfolio detail page.",
+      "relatedProjects": ["media-engine"],
+      "lastTouched": "2026-03-10",
+      "completion": 80
+    },
+    {
+      "id": "brigs",
+      "name": "BRIGS",
+      "tagline": "LLM Systems / Context",
+      "status": "architecture",
+      "priority": "medium",
+      "category": "ai",
+      "stack": ["Python", "Ollama", "Markdown"],
+      "detailPage": null,
+      "demoPage": null,
+      "tasks": [
+        { "id": "br-1", "text": "Build detail page for portfolio", "done": false },
+        { "id": "br-2", "text": "Define core architecture and data flow", "done": false }
+      ],
+      "notes": "Architecture phase. LLM context management system.",
+      "relatedProjects": ["lucid"],
+      "lastTouched": "2026-03-05",
+      "completion": 10
+    },
+    {
+      "id": "claimflow-ai",
+      "name": "ClaimFlow AI",
+      "tagline": "Healthcare SaaS Venture",
+      "status": "prototype",
+      "priority": "medium",
+      "category": "ventures",
+      "stack": ["HTML/Tailwind", "Vanilla JS", "localStorage"],
+      "detailPage": "ventures/healthcare.html",
+      "demoPage": "demo/healthcare-demo.html",
+      "tasks": [
+        { "id": "cf-1", "text": "Validate with healthcare professionals", "done": false }
+      ],
+      "notes": "Patient intake and scheduling prototype. $37.68B market (16.9% CAGR). Demo fully functional.",
+      "relatedProjects": ["constructflow", "onboardflow-ai", "recallai"],
+      "lastTouched": "2026-03-31",
+      "completion": 50
+    },
+    {
+      "id": "constructflow",
+      "name": "ConstructFlow",
+      "tagline": "Construction SaaS Venture",
+      "status": "prototype",
+      "priority": "medium",
+      "category": "ventures",
+      "stack": ["HTML/Tailwind", "Vanilla JS", "localStorage"],
+      "detailPage": "ventures/construction.html",
+      "demoPage": "demo/construction-demo.html",
+      "tasks": [
+        { "id": "co-1", "text": "Validate with construction professionals", "done": false }
+      ],
+      "notes": "Change order tracking and budget management. $11.58B market (12.1% CAGR). Demo fully functional.",
+      "relatedProjects": ["claimflow-ai", "onboardflow-ai"],
+      "lastTouched": "2026-03-31",
+      "completion": 50
+    },
+    {
+      "id": "onboardflow-ai",
+      "name": "OnboardFlow AI",
+      "tagline": "SMB SaaS Venture",
+      "status": "prototype",
+      "priority": "medium",
+      "category": "ventures",
+      "stack": ["HTML/Tailwind", "Vanilla JS", "localStorage"],
+      "detailPage": "ventures/smb-office.html",
+      "demoPage": "demo/smb-demo.html",
+      "tasks": [
+        { "id": "ob-1", "text": "Validate with SMB office managers", "done": false }
+      ],
+      "notes": "HR onboarding workflow builder. $19.6B BPA market. Demo fully functional.",
+      "relatedProjects": ["claimflow-ai", "constructflow"],
+      "lastTouched": "2026-03-31",
+      "completion": 50
+    },
+    {
+      "id": "portfolio-site",
+      "name": "Portfolio Site",
+      "tagline": "Personal Brand / Showcase",
+      "status": "active",
+      "priority": "high",
+      "category": "brand",
+      "stack": ["HTML", "CSS", "Vanilla JS", "GitHub Pages"],
+      "detailPage": null,
+      "demoPage": null,
+      "tasks": [
+        { "id": "ps-1", "text": "UX case study image replacement (Apple Maps, CleanDrive)", "done": false },
+        { "id": "ps-2", "text": "SoloBill card origin line fix (plumber story)", "done": false },
+        { "id": "ps-3", "text": "Motion layer: IntersectionObserver scroll animations", "done": false },
+        { "id": "ps-4", "text": "Remaining detail pages: GH2, FreedEase, Transcription, RecallAI, LUCID, BRIGS", "done": false },
+        { "id": "ps-5", "text": "Case study structure upgrade (UXFolio 7-section framework)", "done": false },
+        { "id": "ps-6", "text": "About text alignment (align to top of cartoon image)", "done": false },
+        { "id": "ps-7", "text": "Favicon (LG wordmark)", "done": false },
+        { "id": "ps-8", "text": "Resume PDF upload and download button", "done": false },
+        { "id": "ps-9", "text": "DNS: confirm www CNAME, enforce HTTPS", "done": false }
+      ],
+      "notes": "Main brand site at lukasdgreen.com. Ongoing polish and content additions.",
+      "relatedProjects": [],
+      "lastTouched": "2026-03-27",
+      "completion": 70
+    },
+    {
+      "id": "instruction-site",
+      "name": "Instruction Site",
+      "tagline": "Accessible Technical Instructions",
+      "status": "architecture",
+      "priority": "low",
+      "category": "ventures",
+      "stack": [],
+      "detailPage": null,
+      "demoPage": null,
+      "tasks": [
+        { "id": "is-1", "text": "Research existing instruction aggregator sites", "done": false },
+        { "id": "is-2", "text": "Define MVP scope and target audience", "done": false }
+      ],
+      "notes": "Concept: QR codes on products link to a site with clear, accessible, customizable step-by-step instructions. Scrape/aggregate challenging instructions from across the internet. Users can customize the GUI for their accessibility needs. Could serve as both a consumer tool and a B2B service for manufacturers.",
+      "relatedProjects": [],
+      "lastTouched": "2026-04-04",
+      "completion": 5
+    }
+  ],
+  "siteTasks": [
+    { "id": "site-1", "text": "UX case study image replacement (Apple Maps, CleanDrive)", "done": false, "source": "SESSION.md" },
+    { "id": "site-2", "text": "SoloBill card origin line fix (plumber friend story)", "done": false, "source": "SESSION.md" },
+    { "id": "site-3", "text": "MediaEngine: consider adding to portfolio", "done": false, "source": "SESSION.md" },
+    { "id": "site-4", "text": "Motion layer: IntersectionObserver scroll animations", "done": false, "source": "SESSION.md" },
+    { "id": "site-5", "text": "Remaining project detail pages: GH2, FreedEase, Transcription, RecallAI, LUCID, BRIGS", "done": false, "source": "SESSION.md" },
+    { "id": "site-6", "text": "Case study structure upgrade (UXFolio 7-section)", "done": false, "source": "SESSION.md" },
+    { "id": "site-7", "text": "About text alignment (align to cartoon image top)", "done": false, "source": "SESSION.md" },
+    { "id": "site-8", "text": "Favicon (LG wordmark)", "done": false, "source": "SESSION.md" },
+    { "id": "site-9", "text": "Resume PDF upload and wire download button", "done": false, "source": "SESSION.md" },
+    { "id": "site-10", "text": "DNS: confirm www CNAME in Namecheap, enforce HTTPS", "done": false, "source": "SESSION.md" }
+  ]
+}
