@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="lg-grad" x1="0" y1="0" x2="0.8" y2="1">
+      <stop offset="0%" stop-color="#64FFDA"/>
+      <stop offset="100%" stop-color="#64FFDA" stop-opacity="0.6"/>
+    </linearGradient>
+    <linearGradient id="lg-bg" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#161620"/>
+      <stop offset="100%" stop-color="#111116"/>
+    </linearGradient>
+    <filter id="lg-glow">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="10"/>
+    </filter>
+    <filter id="lg-glow-sm">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4"/>
+    </filter>
+  </defs>
+
+  <!-- Base shape -->
+  <path d="M4 90C4 40.3 44.3 0 94 0h324c49.7 0 90 40.3 90 90v332c0 49.7-40.3 90-90 90H94c-49.7 0-90-40.3-90-90V90z" fill="url(#lg-bg)"/>
+  <path d="M4 90C4 40.3 44.3 0 94 0h324c49.7 0 90 40.3 90 90v332c0 49.7-40.3 90-90 90H94c-49.7 0-90-40.3-90-90V90z" fill="none" stroke="#222230" stroke-width="2"/>
+
+  <!-- Corner accents -->
+  <path d="M4 90L50 4" stroke="#64FFDA" stroke-width="1.5" stroke-opacity="0.2"/>
+  <path d="M508 422l-46 86" stroke="#64FFDA" stroke-width="1.5" stroke-opacity="0.2"/>
+
+  <!-- Glow behind monogram -->
+  <ellipse cx="256" cy="256" rx="110" ry="110" fill="#64FFDA" opacity="0.04" filter="url(#lg-glow)"/>
+
+  <!-- L — clean, geometric -->
+  <path d="M140 120 L140 380 L260 380" stroke="#64FFDA" stroke-width="32" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- G — open arc with a horizontal bar -->
+  <!-- Arc of G -->
+  <path d="M380 180 A100 100 0 1 0 380 340" fill="none" stroke="#64FFDA" stroke-width="28" stroke-linecap="round"/>
+
+  <!-- G horizontal bar -->
+  <path d="M310 260 L380 260" stroke="#64FFDA" stroke-width="28" stroke-linecap="round"/>
+
+  <!-- Subtle connection between L and G — shared baseline glow -->
+  <line x1="260" y1="380" x2="280" y2="380" stroke="#64FFDA" stroke-width="4" stroke-opacity="0.15"/>
+
+  <!-- Accent dot where L meets baseline -->
+  <circle cx="260" cy="380" r="6" fill="#64FFDA" opacity="0.4" filter="url(#lg-glow-sm)"/>
+
+  <!-- Family accent line -->
+  <line x1="80" y1="450" x2="432" y2="450" stroke="#64FFDA" stroke-width="2" stroke-opacity="0.3"/>
+</svg>

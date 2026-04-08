@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+  <defs>
+    <filter id="lgat-glow">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4"/>
+    </filter>
+  </defs>
+
+  <!-- Base -->
+  <rect width="180" height="180" fill="#111116"/>
+
+  <!-- Subtle glow -->
+  <ellipse cx="90" cy="90" rx="50" ry="50" fill="#64FFDA" opacity="0.04" filter="url(#lgat-glow)"/>
+
+  <!-- L -->
+  <path d="M40 36 L40 138 L90 138" stroke="#64FFDA" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- G arc -->
+  <path d="M145 62 A38 38 0 1 0 145 120" fill="none" stroke="#64FFDA" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- G bar -->
+  <path d="M115 90 L145 90" stroke="#64FFDA" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- Connection glow -->
+  <circle cx="90" cy="138" r="3" fill="#64FFDA" opacity="0.3"/>
+
+  <!-- Family accent line -->
+  <line x1="20" y1="162" x2="160" y2="162" stroke="#64FFDA" stroke-width="1.5" stroke-opacity="0.3"/>
+</svg>
