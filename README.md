@@ -1,30 +1,17 @@
 # lukasdgreen.com
 
-Personal site for Lukas Green — AI Systems Designer.
+Personal portfolio site for Lukas Green — AI Design Technologist / LUXIGA LLC.
 
 Hosted on GitHub Pages. Custom domain: `lukasdgreen.com`.
 
+> **LUXIGA business site** lives in a separate repo: [`Lukas-Green/luxiga.co`](https://github.com/Lukas-Green/luxiga.co) → `luxiga.co`
+
 ## Setup checklist
 
-- [ ] Create repo named `Lukas-Green.github.io` on GitHub
-- [ ] Push this folder to that repo
-- [ ] In repo Settings → Pages → set source to `main` branch, root `/`
-- [ ] Point `lukasdgreen.com` DNS to GitHub Pages (see below)
-- [ ] Register at [formspree.io](https://formspree.io) and replace `REPLACE_WITH_YOUR_FORMSPREE_ID` in `index.html`
-- [ ] Set up `lukas@lukasdgreen.com` via ImprovMX or Zoho Mail
-
-## DNS setup (via your domain registrar)
-
-Add these A records pointing to GitHub Pages:
-
-```
-185.199.108.153
-185.199.109.153
-185.199.110.153
-185.199.111.153
-```
-
-And a CNAME record:
-```
-www  →  Lukas-Green.github.io
-```
+- [x] Create repo named `Lukas-Green.github.io` on GitHub
+- [x] Push this folder to that repo
+- [x] In repo Settings → Pages → set source to `main` branch, root `/`
+- [x] Point `lukasdgreen.com` DNS to GitHub Pages
+- [x] Formspree contact form configured
+- [ ] Set up `lukas@luxiga.co` email (Proton Mail)
+- [ ] Decide: keep personal portfolio separate or redirect to `luxiga.co`

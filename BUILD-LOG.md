@@ -2,7 +2,34 @@
 
 ---
 
-## Session 10 — 2026-04-04
+## Session 12 — 2026-04-08
+
+**Type:** Audit fixes + favicon
+
+**Changes:**
+- Added custom LUXIGA product favicon (`favicon.svg`) and apple-touch-icon (`apple-touch-icon.svg`)
+- Fixed audit issues: LUCID references renamed to CRON, removed dead files, updated `.gitignore`
+- Fixed inaccurate stats, accessibility improvements
+
+**Files changed:** `favicon.svg` (new), `apple-touch-icon.svg` (new), `index.html`, `.gitignore`, `SESSION.md`, `BUILD-LOG.md`
+
+**Note:** The LUXIGA business site (`luxiga.co`) was built and shipped as a separate deploy repo (`Lukas-Green/luxiga.co`) during this period. See that repo for its build history.
+
+---
+
+## Session 11 — 2026-04-06
+
+**Type:** Stats + brand polish
+
+**Changes:**
+- Redesigned stats strip with corrected metrics
+- Updated LUXIGA preview with latest brand direction
+
+**Files changed:** `index.html`, `luxiga-preview.html`
+
+---
+
+## Session 10 — 2026-04-05
 
 **Type:** Brand rename
 

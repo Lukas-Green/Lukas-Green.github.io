@@ -1,5 +1,5 @@
 # Portfolio Site - SESSION
-_Last updated: 2026-04-05 (Session 10)_
+_Last updated: 2026-04-08 (Session 12)_
 
 ---
 
@@ -7,15 +7,31 @@ _Last updated: 2026-04-05 (Session 10)_
 
 Personal portfolio + brand site for Lukas Green.
 Brand: **LUXIGA** (formerly LUXIK, LG) — AI Design Technology Studio
-Live repo: `Lukas-Green/Lukas-Green.github.io`
-Current domain: `lukasdgreen.com`
-New domains: `luxiga.co` + `luxigallc.com` (also have `luxik.co` from prior name)
+Live repos:
+- `Lukas-Green/Lukas-Green.github.io` — personal portfolio at `lukasdgreen.com`
+- `Lukas-Green/luxiga.co` — LUXIGA business site at `luxiga.co` (separate deploy repo, shipped 2026-04-08)
+Domains: `luxiga.co` (business), `lukasdgreen.com` (personal), `luxigallc.com`, `luxik.co` (legacy)
 Contact: `lukas@lukasdgreen.com`
 Entity: LUXIGA LLC — Oregon (amended from LUXIK LLC, registered 2026-04-03)
 
 ---
 
-## Last Session - 2026-04-05 (Session 10)
+## Last Session - 2026-04-08 (Session 12)
+
+**Audit fixes + favicon for personal site**
+
+- Added custom LUXIGA product favicon and apple-touch-icon (SVG)
+- Fixed audit issues: LUCID renamed to CRON in stats/copy, removed dead files, updated `.gitignore`, fixed stats accuracy, accessibility improvements
+- **Note:** The LUXIGA business site (`luxiga.co`) was built and shipped in its own deploy repo. See `Lukas-Green/luxiga.co` repo SESSION.md for that build history.
+
+### Previous Session - 2026-04-06 (Session 11)
+
+**Stats redesign + LUXIGA preview updates**
+
+- Redesigned stats strip with corrected metrics
+- Updated LUXIGA preview HTML with latest brand direction
+
+### Previous Session - 2026-04-05 (Session 10)
 
 **LUXIK → LUXIGA rename**
 
@@ -54,28 +70,26 @@ Entity: LUXIGA LLC — Oregon (amended from LUXIK LLC, registered 2026-04-03)
 
 ## Pending - Next Session
 
-### LUXIGA Brand Priority
-1. **Cancel duplicate registered agent** — oregonregisteredagent.com OR state-filings; only need one
+### LUXIGA Brand Priority (some items completed)
+1. ~~**Cancel duplicate registered agent**~~ — still needs resolution
 2. **Complete CMRA form** — needs document with physical address (update car insurance or bank to temp address)
-3. **Amend LLC name** — LUXIK LLC → LUXIGA LLC with Oregon Secretary of State
+3. ~~**Amend LLC name**~~ — LUXIGA LLC confirmed in Oregon
 4. **Set up Proton Mail** on luxiga.co domain (lukas@luxiga.co)
-6. **Open business bank account** — need EIN first (being handled by state-filings)
-7. **Iterate on luxiga-preview.html** — refine chosen direction, build out further
-6. **Content strategy** — case studies as results stories, build logs, AI tooling perspective pieces for traffic
+5. **Open business bank account** — need EIN first (being handled by state-filings)
+6. ~~**Iterate on luxiga-preview.html**~~ — DONE: luxiga.co shipped as its own site
+7. **Content strategy** — case studies as results stories, build logs, AI tooling perspective pieces for traffic
 
-### Existing Site Backlog
-7. **UX case study image replacement** — Apple Maps and CleanDrive hidden until done; uncomment cards when ready
-8. **SoloBill card origin line** — still reads "contractor overpaying for 10% of a platform's features," should reflect the plumber friend story
-9. **MediaEngine** — consider adding to portfolio when further along; mention in CanvassKit origin story for now
-10. **Remaining project detail pages** — GH2, FreedEase, Transcription (content ready), RecallAI, LUCID, BRIGS
-11. **Case study structure upgrade** — align to UXFolio 7-section framework (add Impact + Learnings)
-12. **Favicon** — LUXIGA wordmark (replaces LG)
-13. **Resume PDF** — upload to `assets/` and wire download button
-14. **DNS** — LUXIGA domain setup, confirm routing
+### Personal Site (lukasdgreen.com) Backlog
+1. **Decide future of this repo** — lukasdgreen.com could redirect to luxiga.co, or remain as personal portfolio distinct from business site
+2. **UX case study image replacement** — Apple Maps and CleanDrive still hidden pending images
+3. **Remaining project detail pages** — GH2, FreedEase, Transcription (content ready), RecallAI, BRIGS
+4. **Case study structure upgrade** — align to UXFolio 7-section framework (add Impact + Learnings)
+5. **Resume PDF** — upload to `assets/` and wire download button
+6. **Clean up preview files** — `luxia-preview.html`, `luxik-preview.html`, `luxiga-preview.html` are design artifacts; archive or remove
 
 ---
 
-## Design Tokens
+## Design Tokens (personal site — lukasdgreen.com)
 
 | Token | Value |
 |---|---|
@@ -89,18 +103,27 @@ Entity: LUXIGA LLC — Oregon (amended from LUXIK LLC, registered 2026-04-03)
 | Border | `#2a2a35` |
 | Font | Inter (Google Fonts) |
 
+> **Note:** The LUXIGA business site uses different tokens. See `luxiga.co` repo for those.
+
 ---
 
 ## Key Files
 
 | File | Purpose |
 |---|---|
-| `index.html` | Full site, single HTML file |
+| `index.html` | Full personal portfolio, single HTML file |
 | `resume.html` | Resume page, on-brand, print-ready |
 | `styles.css` | All shared styles |
-| `assets/img/headshot.jpg` | B&W portrait (hero) |
+| `apple-maps.html` | Apple Maps UX case study |
+| `canvasskit.html` | CanvassKit case study detail page |
+| `solobill.html` | SoloBill case study detail page |
+| `cleandrive.html` | CleanDrive UX case study |
+| `digital-media.html` | Digital media research page |
+| `saas-ventures.html` | SaaS ventures showcase |
+| `luxiga-preview.html` | LUXIGA brand preview (design artifact) |
 | `assets/img/cartoon-lukas.jpeg` | Cartoon portrait (about section) |
-| `assets/lukas green icon-02.png` | LG wordmark logo (nav + footer) |
+| `favicon.svg` | LUXIGA product favicon |
+| `apple-touch-icon.svg` | Apple touch icon |
 | `CNAME` | Contains: `lukasdgreen.com` |
 
 ---
@@ -112,7 +135,6 @@ Entity: LUXIGA LLC — Oregon (amended from LUXIK LLC, registered 2026-04-03)
 | CanvassKit | CRM / Outreach | Google Apps Script, Sheets, HTML/Tailwind | Functional build |
 | SoloBill | Invoicing / Finance | Google Apps Script, Docs, PDF Export | Tested, in refinement |
 | RecallAI | AI / Healthcare | Python, FastAPI, AI Integration | Unfinished, unvetted |
-| LUCID | File Intelligence / AI | Python, FastAPI, Ollama, SQLite | In active development |
 | FreedEase | Civic / UX | PWA, Google Apps Script, Vanilla JS | Design prototype |
 | GH2 Contact Tracker | Nonprofit Tooling | Google Apps Script, Sheets | Delivered to org |
 | Audio/Video Transcription | Workflow Automation | Google Apps Script, PWA, Vanilla JS | Functional builds |
