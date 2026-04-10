@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Creating Better Neighbors — Building stronger blocks, one neighbor at a time</title>
+  <meta name="description" content="Creating Better Neighbors is a community-powered nonprofit strengthening neighborhoods through relationships, resources, and resident-led action." />
+  <meta name="theme-color" content="#0F3B42" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Creating Better Neighbors" />
+  <meta property="og:description" content="Building stronger blocks, one neighbor at a time." />
+  <meta property="og:type" content="website" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ============ ANNOUNCEMENT BAR ============ -->
+  <div class="announcement" role="region" aria-label="Announcement">
+    <div class="announcement__inner">
+      <span class="announcement__dot" aria-hidden="true"></span>
+      <p>Spring Match is live — every dollar doubled through May 31.</p>
+      <a href="#donate" class="announcement__link">Give now →</a>
+    </div>
+  </div>
+
+  <!-- ============ NAV ============ -->
+  <header class="site-header" id="siteHeader">
+    <div class="container nav">
+      <a href="#top" class="brand" aria-label="Creating Better Neighbors — home">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40" width="40" height="40" fill="none">
+            <circle cx="20" cy="20" r="19" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M13 24c0-3.5 3-6 7-6s7 2.5 7 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <circle cx="15.5" cy="15" r="2.2" fill="currentColor"/>
+            <circle cx="24.5" cy="15" r="2.2" fill="currentColor"/>
+          </svg>
+        </span>
+        <span class="brand__text">
+          <span class="brand__line1">Creating Better</span>
+          <span class="brand__line2">Neighbors</span>
+        </span>
+      </a>
+
+      <nav class="nav__links" id="navLinks" aria-label="Primary">
+        <a href="#mission">Mission</a>
+        <a href="#programs">Programs</a>
+        <a href="#impact">Impact</a>
+        <a href="#stories">Stories</a>
+        <a href="#involved">Get Involved</a>
+      </nav>
+
+      <div class="nav__cta">
+        <a href="#volunteer" class="btn btn--ghost">Volunteer</a>
+        <a href="#donate" class="btn btn--primary">Donate</a>
+      </div>
+
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="hero__bg" aria-hidden="true">
+        <div class="hero__grid"></div>
+        <div class="hero__glow"></div>
+      </div>
+
+      <div class="container hero__inner">
+        <div class="hero__copy">
+          <span class="eyebrow">
+            <span class="eyebrow__dot"></span>
+            A 501(c)(3) community nonprofit
+          </span>
+          <h1 class="hero__title">
+            Strong neighborhoods <em>start</em> next door.
+          </h1>
+          <p class="hero__lede">
+            We connect neighbors with the relationships, resources, and resident-led
+            programs that turn ordinary blocks into places where everyone can thrive.
+          </p>
+          <div class="hero__ctas">
+            <a href="#donate" class="btn btn--primary btn--lg">Donate — Match Doubled</a>
+            <a href="#mission" class="btn btn--link">See how it works →</a>
+          </div>
+
+          <dl class="hero__stats">
+            <div><dt data-count="14238">0</dt><dd>Neighbors served</dd></div>
+            <div><dt data-count="312">0</dt><dd>Block partners</dd></div>
+            <div><dt data-count="92">0</dt><dd>% directly to programs</dd></div>
+          </dl>
+        </div>
+
+        <div class="hero__art" aria-hidden="true">
+          <div class="hero__card hero__card--1">
+            <div class="hero__avatar" style="--c:#d97757"></div>
+            <div>
+              <strong>Maria &amp; James</strong>
+              <span>Block 42 • Host family</span>
+            </div>
+          </div>
+          <div class="hero__card hero__card--2">
+            <div class="hero__avatar" style="--c:#7fa99b"></div>
+            <div>
+              <strong>Porch Project</strong>
+              <span>Saturdays, 10am</span>
+            </div>
+          </div>
+          <div class="hero__card hero__card--3">
+            <div class="hero__avatar" style="--c:#e0b84a"></div>
+            <div>
+              <strong>+247 neighbors</strong>
+              <span>joined this month</span>
+            </div>
+          </div>
+          <svg class="hero__connect" viewBox="0 0 400 400" aria-hidden="true">
+            <path d="M80 120 Q 200 80 320 150" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 6" fill="none" opacity="0.35"/>
+            <path d="M100 280 Q 200 240 310 300" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 6" fill="none" opacity="0.35"/>
+            <path d="M160 100 Q 200 200 200 320" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 6" fill="none" opacity="0.35"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TRUST STRIP ============ -->
+    <section class="trust" aria-label="Recognized by">
+      <div class="container trust__inner">
+        <p class="trust__label">Funded and recognized by</p>
+        <ul class="trust__logos">
+          <li>GuideStar&nbsp;<span>Platinum</span></li>
+          <li>Candid&nbsp;<span>Verified</span></li>
+          <li>United&nbsp;Way</li>
+          <li>Community&nbsp;Foundation</li>
+          <li>Charity&nbsp;Navigator&nbsp;<span>4★</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ MISSION / PROBLEM ============ -->
+    <section class="section mission" id="mission">
+      <div class="container mission__inner">
+        <div class="mission__left">
+          <span class="eyebrow eyebrow--dark">The problem we're solving</span>
+          <h2 class="h2">Most people don't know the neighbors three doors down.</h2>
+          <p class="lede">
+            Isolation isn't just lonely — it's a public health crisis. It erodes
+            safety, stalls economic mobility, and leaves residents without the
+            informal support that makes neighborhoods work.
+          </p>
+          <p>
+            Creating Better Neighbors exists because thriving places aren't built
+            by programs alone. They're built by <strong>people who know each
+            other's names</strong>. We make that first introduction radically
+            easier — then we stay, and resource the work residents are already
+            doing on their own blocks.
+          </p>
+
+          <div class="pillars">
+            <div class="pillar">
+              <div class="pillar__num">01</div>
+              <h3>Relationships first</h3>
+              <p>We start with trust, not forms. No program works without it.</p>
+            </div>
+            <div class="pillar">
+              <div class="pillar__num">02</div>
+              <h3>Resident-led</h3>
+              <p>Neighbors design the programs on their own blocks. We resource the plan.</p>
+            </div>
+            <div class="pillar">
+              <div class="pillar__num">03</div>
+              <h3>Measured impact</h3>
+              <p>Every dollar is tracked to an outcome. Published quarterly. No exceptions.</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="mission__stat">
+          <div class="statcard">
+            <div class="statcard__big">1 in 3</div>
+            <p>American adults report feeling lonely "often or always."</p>
+            <cite>— U.S. Surgeon General, 2023</cite>
+          </div>
+          <div class="statcard statcard--alt">
+            <div class="statcard__big">$406B</div>
+            <p>Annual cost of social isolation to public health and productivity.</p>
+            <cite>— AARP / Stanford, 2022</cite>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============ PROGRAMS ============ -->
+    <section class="section programs" id="programs">
+      <div class="container">
+        <header class="section__head">
+          <span class="eyebrow eyebrow--dark">What we do</span>
+          <h2 class="h2">Four programs. One model. Built by neighbors, for neighbors.</h2>
+          <p class="lede">Each program is designed to remove a specific barrier to connection, then hand the keys back to residents.</p>
+        </header>
+
+        <div class="programs__grid">
+
+          <article class="program">
+            <div class="program__icon">
+              <svg viewBox="0 0 32 32" fill="none"><path d="M4 14 L16 4 L28 14 V28 H4 Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 28 V18 H20 V28" stroke="currentColor" stroke-width="1.8"/></svg>
+            </div>
+            <h3>The Porch Project</h3>
+            <p>Monthly block parties hosted by a neighbor, funded and staffed by us. Low lift for the host, high trust for the block.</p>
+            <ul class="program__meta">
+              <li><span>312</span> active blocks</li>
+              <li><span>$180</span> avg. host grant</li>
+            </ul>
+            <a href="#involved" class="link">Host your block →</a>
+          </article>
+
+          <article class="program">
+            <div class="program__icon">
+              <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="10" r="5" stroke="currentColor" stroke-width="1.8"/><path d="M6 28 C 6 21 10 18 16 18 S 26 21 26 28" stroke="currentColor" stroke-width="1.8"/></svg>
+            </div>
+            <h3>Neighbor Navigators</h3>
+            <p>Trained residents help their neighbors access housing, food, childcare, and benefits — in language, in person, no bureaucracy.</p>
+            <ul class="program__meta">
+              <li><span>84</span> navigators</li>
+              <li><span>6,200</span> assists / yr</li>
+            </ul>
+            <a href="#involved" class="link">Become a navigator →</a>
+          </article>
+
+          <article class="program">
+            <div class="program__icon">
+              <svg viewBox="0 0 32 32" fill="none"><rect x="4" y="8" width="24" height="18" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M4 14 H 28" stroke="currentColor" stroke-width="1.8"/><path d="M11 4 V 10 M21 4 V 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <h3>Block Grants</h3>
+            <p>Residents pitch a project — a community fridge, a repair day, a summer library — and we cut a check within 14 days. No 30-page applications.</p>
+            <ul class="program__meta">
+              <li><span>148</span> grants / yr</li>
+              <li><span>14 days</span> avg. approval</li>
+            </ul>
+            <a href="#involved" class="link">Apply for a grant →</a>
+          </article>
+
+          <article class="program">
+            <div class="program__icon">
+              <svg viewBox="0 0 32 32" fill="none"><path d="M16 4 L28 10 V22 L16 28 L4 22 V10 Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M16 4 V 28 M4 10 L28 22 M4 22 L28 10" stroke="currentColor" stroke-width="1.2" opacity="0.6"/></svg>
+            </div>
+            <h3>Civic Academy</h3>
+            <p>A 6-week program that turns engaged neighbors into community leaders — budget literacy, public speaking, organizing, and local policy.</p>
+            <ul class="program__meta">
+              <li><span>3</span> cohorts / yr</li>
+              <li><span>96%</span> completion</li>
+            </ul>
+            <a href="#involved" class="link">Join the next cohort →</a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ IMPACT ============ -->
+    <section class="section impact" id="impact">
+      <div class="container">
+        <header class="section__head">
+          <span class="eyebrow">Our impact</span>
+          <h2 class="h2 h2--light">The numbers we answer to.</h2>
+          <p class="lede lede--light">Transparency isn't a marketing line — it's how trust gets built. Updated every quarter.</p>
+        </header>
+
+        <div class="impact__grid">
+          <div class="impact__big">
+            <div class="impact__num" data-count="14238">0</div>
+            <div class="impact__label">Neighbors directly served since 2019</div>
+          </div>
+          <div class="impact__big">
+            <div class="impact__num" data-count="312">0</div>
+            <div class="impact__label">Active block partners across the city</div>
+          </div>
+          <div class="impact__big">
+            <div class="impact__num" data-count="1842">0</div>
+            <div class="impact__label">Events hosted by neighbors, for neighbors</div>
+          </div>
+          <div class="impact__big">
+            <div class="impact__num" data-count="92" data-suffix="%">0</div>
+            <div class="impact__label">Of every dollar goes directly to programs</div>
+          </div>
+        </div>
+
+        <div class="impact__breakdown">
+          <h3>Where every dollar goes</h3>
+          <div class="bar">
+            <div class="bar__seg" style="--w:68%; --c:var(--accent)"><span>68% Programs</span></div>
+            <div class="bar__seg" style="--w:24%; --c:var(--accent-2)"><span>24% Grants</span></div>
+            <div class="bar__seg" style="--w:5%;  --c:var(--gold)"><span>5% Admin</span></div>
+            <div class="bar__seg" style="--w:3%;  --c:rgba(255,255,255,.4)"><span>3% Fundraising</span></div>
+          </div>
+          <a href="#" class="link link--light">Read the 2024 annual report →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STORIES ============ -->
+    <section class="section stories" id="stories">
+      <div class="container">
+        <header class="section__head">
+          <span class="eyebrow eyebrow--dark">Stories from the block</span>
+          <h2 class="h2">Change, told by the people living it.</h2>
+        </header>
+
+        <div class="stories__grid">
+
+          <article class="story story--feature">
+            <div class="story__image" style="--bg:linear-gradient(135deg,#0F3B42,#1F6B63)">
+              <div class="story__tag">Host Family</div>
+            </div>
+            <div class="story__body">
+              <h3>"We knew three neighbors. Now we know thirty."</h3>
+              <p>
+                Maria and James hosted their first Porch Project last June. They
+                expected five people. Forty-two showed up. Today, Block 42 runs
+                its own monthly dinner — no grant required.
+              </p>
+              <footer>
+                <strong>Maria &amp; James Okafor</strong>
+                <span>Block 42, Eastside</span>
+              </footer>
+            </div>
+          </article>
+
+          <article class="story">
+            <div class="story__body">
+              <blockquote>
+                "I've lived here 22 years. CBN is the first organization that
+                asked me what I needed before telling me what they'd do."
+              </blockquote>
+              <footer>
+                <strong>Rosa Martinez</strong>
+                <span>Neighbor Navigator, Westgate</span>
+              </footer>
+            </div>
+          </article>
+
+          <article class="story">
+            <div class="story__body">
+              <blockquote>
+                "The Block Grant paid for our little free pantry. Fourteen days
+                from pitch to check. No other funder moves like that."
+              </blockquote>
+              <footer>
+                <strong>Daniel Kim</strong>
+                <span>Organizer, Maple &amp; 7th</span>
+              </footer>
+            </div>
+          </article>
+
+          <article class="story">
+            <div class="story__body">
+              <blockquote>
+                "My Civic Academy cohort went on to run for our neighborhood
+                board. Three of us won. That's not small."
+              </blockquote>
+              <footer>
+                <strong>Tasha Reynolds</strong>
+                <span>Civic Academy '23</span>
+              </footer>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ GET INVOLVED ============ -->
+    <section class="section involved" id="involved">
+      <div class="container">
+        <header class="section__head">
+          <span class="eyebrow eyebrow--dark">Get involved</span>
+          <h2 class="h2">Five minutes or five years — there's a way in.</h2>
+        </header>
+
+        <div class="involved__grid">
+          <a href="#donate" class="involved__card">
+            <div class="involved__time">5 min</div>
+            <h3>Give a gift</h3>
+            <p>Every dollar is doubled through May 31 and 92¢ goes straight to programs.</p>
+            <span class="link">Donate →</span>
+          </a>
+
+          <a href="#volunteer" id="volunteer" class="involved__card">
+            <div class="involved__time">2 hrs / month</div>
+            <h3>Volunteer</h3>
+            <p>Porch Projects, Navigator shifts, or backend help. We'll match you.</p>
+            <span class="link">Sign up →</span>
+          </a>
+
+          <a href="#" class="involved__card">
+            <div class="involved__time">Ongoing</div>
+            <h3>Host your block</h3>
+            <p>We fund and staff the first event. You bring the neighbors.</p>
+            <span class="link">Apply →</span>
+          </a>
+
+          <a href="#" class="involved__card">
+            <div class="involved__time">Anytime</div>
+            <h3>Partner with us</h3>
+            <p>Employers, schools, and faith communities — let's build something together.</p>
+            <span class="link">Start a conversation →</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ DONATE ============ -->
+    <section class="section donate" id="donate">
+      <div class="container donate__inner">
+        <div class="donate__copy">
+          <span class="eyebrow">Spring Match — ends May 31</span>
+          <h2 class="h2 h2--light">Your gift, doubled. Your block, changed.</h2>
+          <p class="lede lede--light">
+            A $50 gift funds a Porch Project host kit. $180 funds a full block
+            party. $500 funds a Block Grant pitch. Every dollar is tracked and
+            reported.
+          </p>
+          <ul class="donate__bullets">
+            <li><span aria-hidden="true">✓</span> 501(c)(3) — tax-deductible</li>
+            <li><span aria-hidden="true">✓</span> 92¢ of every dollar → programs</li>
+            <li><span aria-hidden="true">✓</span> Published quarterly impact reports</li>
+          </ul>
+        </div>
+
+        <form class="donate__form" id="donateForm" novalidate>
+          <fieldset class="donate__freq">
+            <legend class="sr-only">Gift frequency</legend>
+            <label><input type="radio" name="freq" value="once" checked /> <span>One-time</span></label>
+            <label><input type="radio" name="freq" value="monthly" /> <span>Monthly</span></label>
+          </fieldset>
+
+          <div class="donate__amounts" role="radiogroup" aria-label="Gift amount">
+            <button type="button" class="amt" data-amt="25">$25</button>
+            <button type="button" class="amt is-active" data-amt="50">$50</button>
+            <button type="button" class="amt" data-amt="180">$180</button>
+            <button type="button" class="amt" data-amt="500">$500</button>
+          </div>
+
+          <label class="donate__custom">
+            <span class="sr-only">Other amount</span>
+            <span class="donate__currency">$</span>
+            <input type="number" min="5" step="1" placeholder="Other amount" id="customAmt" />
+          </label>
+
+          <div class="donate__double" id="doubleNote">
+            <strong>Doubled</strong> by the Spring Match — your <span id="yourGift">$50</span> becomes <span id="doubled">$100</span>.
+          </div>
+
+          <button type="submit" class="btn btn--primary btn--lg btn--full">
+            Give <span id="giftBtnAmt">$50</span> →
+          </button>
+
+          <p class="donate__fineprint">
+            Secure checkout · You'll receive a tax receipt by email. Creating Better Neighbors is a registered 501(c)(3). EIN 00-0000000.
+          </p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ============ NEWSLETTER ============ -->
+    <section class="section newsletter">
+      <div class="container newsletter__inner">
+        <div>
+          <h2 class="h3">Stay close to the work.</h2>
+          <p>One email a month. Real stories, real numbers, no pleas.</p>
+        </div>
+        <form class="newsletter__form" id="newsForm" novalidate>
+          <label class="sr-only" for="email">Email address</label>
+          <input type="email" id="email" placeholder="you@email.com" required />
+          <button type="submit" class="btn btn--primary">Subscribe</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <div class="brand">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 40 40" width="36" height="36" fill="none">
+              <circle cx="20" cy="20" r="19" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M13 24c0-3.5 3-6 7-6s7 2.5 7 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <circle cx="15.5" cy="15" r="2.2" fill="currentColor"/>
+              <circle cx="24.5" cy="15" r="2.2" fill="currentColor"/>
+            </svg>
+          </span>
+          <span class="brand__text">
+            <span class="brand__line1">Creating Better</span>
+            <span class="brand__line2">Neighbors</span>
+          </span>
+        </div>
+        <p>Building stronger blocks, one neighbor at a time.</p>
+        <p class="footer__addr">
+          1842 Community Way<br />
+          Portland, OR 97214<br />
+          hello@creatingbetterneighbors.org
+        </p>
+      </div>
+
+      <div class="footer__cols">
+        <div>
+          <h4>Programs</h4>
+          <ul>
+            <li><a href="#programs">The Porch Project</a></li>
+            <li><a href="#programs">Neighbor Navigators</a></li>
+            <li><a href="#programs">Block Grants</a></li>
+            <li><a href="#programs">Civic Academy</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Get involved</h4>
+          <ul>
+            <li><a href="#donate">Donate</a></li>
+            <li><a href="#volunteer">Volunteer</a></li>
+            <li><a href="#">Host a block</a></li>
+            <li><a href="#">Partner with us</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>About</h4>
+          <ul>
+            <li><a href="#mission">Our mission</a></li>
+            <li><a href="#impact">Impact &amp; reports</a></li>
+            <li><a href="#stories">Stories</a></li>
+            <li><a href="#">Financials (990)</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer__bottom">
+      <p>© <span id="year">2025</span> Creating Better Neighbors. A registered 501(c)(3) nonprofit. EIN 00-0000000.</p>
+      <ul class="footer__legal">
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Financial transparency</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
