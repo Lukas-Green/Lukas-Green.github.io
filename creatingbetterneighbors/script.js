@@ -59,8 +59,10 @@
   const animateCounter = (el) => {
     const target = parseInt(el.dataset.count, 10) || 0;
     const suffix = el.dataset.suffix || '';
+    const prefix = el.dataset.prefix || '';
+    const render = (n) => prefix + formatNumber(n) + suffix;
     if (prefersReducedMotion) {
-      el.textContent = formatNumber(target) + suffix;
+      el.textContent = render(target);
       return;
     }
     const duration = 1500;
@@ -69,9 +71,9 @@
     const tick = (now) => {
       const progress = Math.min(1, (now - start) / duration);
       const value = Math.floor(easeOut(progress) * target);
-      el.textContent = formatNumber(value) + suffix;
+      el.textContent = render(value);
       if (progress < 1) requestAnimationFrame(tick);
-      else el.textContent = formatNumber(target) + suffix;
+      else el.textContent = render(target);
     };
     requestAnimationFrame(tick);
   };
