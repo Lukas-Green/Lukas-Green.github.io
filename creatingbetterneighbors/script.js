@@ -104,13 +104,21 @@
     const giftBtnAmt = document.getElementById('giftBtnAmt');
     const doubleNote = document.getElementById('doubleNote');
 
-    let currentAmount = 50;
+    let currentAmount = 300;
     let frequency = 'once';
+
+    const impactLabel = (amt) => {
+      if (amt >= 300) return Math.floor(amt / 300) + ' full program participant' + (amt >= 600 ? 's' : '');
+      if (amt >= 150) return 'half a program slot';
+      if (amt >= 75)  return 'art supplies for 3 participants';
+      if (amt > 0)    return 'direct program support';
+      return '';
+    };
 
     const renderAmount = () => {
       const label = '$' + formatNumber(currentAmount) + (frequency === 'monthly' ? '/mo' : '');
       if (yourGift)   yourGift.textContent = '$' + formatNumber(currentAmount);
-      if (doubled)    doubled.textContent  = '$' + formatNumber(currentAmount * 2);
+      if (doubled)    doubled.textContent  = impactLabel(currentAmount);
       if (giftBtnAmt) giftBtnAmt.textContent = label;
       if (doubleNote) {
         doubleNote.style.display = currentAmount > 0 ? '' : 'none';
