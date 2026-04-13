@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Partnership Intelligence | Lukas Green</title>
+  <meta name="description" content="Scored, searchable pipeline of 45+ companies across decentralized AI, healthcare tech, construction, and more. 10-dimension ranking system for business development.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    (function() {
+      var saved = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', saved);
+    })();
+  </script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="assets/lukas green icon-02.png" alt="Lukas Green" class="nav-logo-img">
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html#home">Home</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#projects">Projects</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="resume.html">Resume</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+      <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </button>
+    <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="cs-hero">
+  <div class="cs-hero-inner">
+    <a href="index.html#projects" class="cs-back">&larr; Back to Projects</a>
+    <div class="cs-tag-pill">Research / Business Development</div>
+    <h1 class="cs-title">Partnership Intelligence</h1>
+    <p class="cs-tagline">Scored, searchable pipeline of 45 companies and organizations where UX design, workflow automation, training, consulting, and documentation expertise creates real leverage. Each target evaluated on a 10-dimension rubric.</p>
+    <div class="cs-meta-strip">
+      <div class="cs-meta-item">
+        <div class="cs-meta-label">Categories</div>
+        <div class="cs-meta-val">7 Verticals</div>
+      </div>
+      <div class="cs-meta-item">
+        <div class="cs-meta-label">Companies</div>
+        <div class="cs-meta-val">45 Scored</div>
+      </div>
+      <div class="cs-meta-item">
+        <div class="cs-meta-label">Dimensions</div>
+        <div class="cs-meta-val">10 / 50 Points</div>
+      </div>
+      <div class="cs-meta-item">
+        <div class="cs-meta-label">Status</div>
+        <div class="cs-meta-val">Active Research</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METHODOLOGY -->
+<div class="cs-body">
+  <section class="cs-section-wrap">
+    <div class="cs-content">
+      <div class="cs-section-label">The Framework</div>
+      <h2 class="cs-section-title">10 dimensions, 50 points max</h2>
+      <p>Every company is scored 1&ndash;5 across ten categories: alignment with current work, company viability, revenue potential at $175/hr, UX/design gaps, documentation gaps, consulting entry path, training opportunity, non-tech blind spots, accessibility (how easy to get in the door), and long-term upside.</p>
+      <ul class="cs-findings">
+        <li><strong style="color:var(--accent);">Tier 1 (35&ndash;50)</strong> &mdash; Immediate revenue targets. High alignment, clear engagement path, strong budget.</li>
+        <li><strong style="color:#fbbf24;">Tier 2 (25&ndash;34)</strong> &mdash; Strong pipeline. Build relationships now, pursue when timing aligns.</li>
+        <li><strong style="color:var(--gray-dim);">Tier 3 (15&ndash;24)</strong> &mdash; Watch list. Monitor for changes in funding or accessibility.</li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+<!-- FILTERS -->
+<div class="pi-filters" id="piFilters">
+  <input type="text" class="pi-search" id="piSearch" placeholder="Search companies, tags, opportunities...">
+  <select class="pi-select" id="piCategory">
+    <option value="all">All Categories</option>
+    <option value="deai">DeAI Platforms</option>
+    <option value="compute">Compute Networks</option>
+    <option value="opensource">Open-Source AI</option>
+    <option value="nonprofit">Nonprofits &amp; Grants</option>
+    <option value="dao">Web3 DAOs</option>
+    <option value="healthcare">Healthcare &amp; Dental</option>
+    <option value="construction">Construction &amp; Field Service</option>
+    <option value="government">Government</option>
+  </select>
+  <button class="pi-sort-btn active" id="piSortScore" onclick="setSort('score')">Score &darr;</button>
+  <button class="pi-sort-btn" id="piSortAlpha" onclick="setSort('alpha')">A&ndash;Z</button>
+  <span class="pi-count" id="piCount">45 companies</span>
+</div>
+
+<!-- COMPANY GRID -->
+<div class="pi-grid" id="piGrid">
+  <!-- Cards rendered by JS -->
+</div>
+
+<!-- CTA -->
+<div class="saas-cta-block">
+  <h2>See an Opportunity?</h2>
+  <p>Whether you need UX consulting, documentation, training programs, or strategic guidance &mdash; let's talk about what these partnerships can look like.</p>
+  <a href="index.html#contact" class="btn-primary" style="display:inline-flex;">Book a Strategy Call</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="assets/lukas green icon-02.png" alt="Lukas Green" class="footer-logo-img">
+  </div>
+  <p>&copy; 2026 Lukas Green</p>
+</footer>
+
+<script>
+  function toggleNav() { document.getElementById('navLinks').classList.toggle('open'); }
+  document.querySelectorAll('.nav-links a').forEach(function(link) { link.addEventListener('click', function() { document.getElementById('navLinks').classList.remove('open'); }); });
+  function toggleTheme() { var html = document.documentElement; var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'; html.setAttribute('data-theme', next); localStorage.setItem('theme', next); }
+
+  /* ── COMPANY DATA ── */
+  var companies = [
+    {name:"OpenClaw",category:"opensource",catLabel:"Open-Source AI",url:"https://openclaw.ai",stage:"Growth",funding:"Community / Open-Source",scores:{al:4,vi:5,re:3,ux:5,doc:5,co:4,tr:5,bl:5,ac:5,up:4},total:45,opportunity:"250K+ GitHub stars with documented severe UX problems. Docker requirement, CLI-only onboarding, non-standard terminology, unclear security permissions.",tags:["UX","Docs","Training","Onboarding","Security"],blindSpots:"User onboarding, security UX, skill vetting, non-technical documentation, visual identity",engagement:"UX Audit + Onboarding Redesign",value:"$15K\u2013$30K"},
+    {name:"SBA AI Training Act",category:"government",catLabel:"Government",url:"https://www.commerce.senate.gov",stage:"Pre-launch (late 2026)",funding:"Federal appropriation",scores:{al:5,vi:5,re:5,ux:3,doc:4,co:4,tr:5,bl:3,ac:3,up:5},total:42,opportunity:"Federal grant program funding AI training for small businesses. 25% earmarked for rural/underserved. Direct match for every service offered.",tags:["Training","Consulting","Grants","Docs"],blindSpots:"Curriculum design, accessibility for non-technical SMB owners, rural outreach",engagement:"Grant Application as Training Provider",value:"$25K\u2013$100K+"},
+    {name:"0G Labs",category:"deai",catLabel:"DeAI Platforms",url:"https://0g.ai",stage:"Growth / Series A+",funding:"$350M+",scores:{al:4,vi:5,re:4,ux:4,doc:4,co:4,tr:4,bl:3,ac:3,up:5},total:40,opportunity:"Decentralized AI OS with new mainnet. Monthly feature releases outpace documentation. Developer onboarding and visual learning materials are critical gaps.",tags:["Docs","Onboarding","UX","Training"],blindSpots:"Developer experience on new mainnet, making decentralized training accessible",engagement:"Developer Onboarding Docs + UX Audit",value:"$20K\u2013$40K"},
+    {name:"Abridge",category:"healthcare",catLabel:"Healthcare & Dental",url:"https://www.abridge.com",stage:"Series E",funding:"$300M at $5.3B",scores:{al:4,vi:5,re:4,ux:3,doc:4,co:4,tr:5,bl:3,ac:3,up:4},total:39,opportunity:"Ambient AI clinical notes for 150+ health systems. Clinician training on AI outputs and EHR integration documentation are critical gaps.",tags:["Training","Docs","Consulting","Onboarding"],blindSpots:"Clinician onboarding, admin docs for IT teams, confidence score explanations",engagement:"Training Program + Clinician Onboarding Docs",value:"$20K\u2013$40K"},
+    {name:"ASI Alliance",category:"deai",catLabel:"DeAI Platforms",url:"https://asi.ai",stage:"Late Stage",funding:"$25M+ (SingularityNET); 159 employees",scores:{al:3,vi:4,re:3,ux:5,doc:5,co:3,tr:4,bl:4,ac:3,up:4},total:38,opportunity:"Merger of Fetch.ai + SingularityNET + Ocean Protocol. Three platforms with different UIs, scattered docs, user confusion. Consolidation = redesign opportunity.",tags:["UX","Docs","Onboarding","Strategy"],blindSpots:"Post-merger brand coherence, unified user journey, service discovery UX",engagement:"UX Audit + Unified Design System",value:"$15K\u2013$35K"},
+    {name:"Overjet",category:"healthcare",catLabel:"Healthcare & Dental",url:"https://www.overjet.com",stage:"Growth",funding:"Venture-backed",scores:{al:4,vi:4,re:4,ux:3,doc:4,co:4,tr:5,bl:3,ac:3,up:4},total:38,opportunity:"#1 dental AI (FDA-cleared). Practices implementing Overjet need training materials that translate clinical AI into daily routines.",tags:["Training","Docs","Onboarding"],blindSpots:"Staff training for non-technical dental teams, workflow integration guides",engagement:"Training Materials + Onboarding Flow Design",value:"$10K\u2013$25K"},
+    {name:"VideaAI",category:"healthcare",catLabel:"Healthcare & Dental",url:"https://www.videa.ai",stage:"Growth",funding:"Venture-backed",scores:{al:4,vi:4,re:3,ux:4,doc:4,co:4,tr:5,bl:3,ac:3,up:4},total:38,opportunity:"Voice-to-chart dental AI used by 8/10 largest DSOs. Clinicians resist voice workflow changes without clear training.",tags:["Training","Docs","Onboarding","UX"],blindSpots:"Voice workflow training, change management for clinical staff",engagement:"Training Program + Workflow Documentation",value:"$10K\u2013$20K"},
+    {name:"Aethir",category:"compute",catLabel:"Compute Networks",url:"https://www.aethir.com",stage:"Market Leader",funding:"$100M Ecosystem Fund | $147M ARR",scores:{al:3,vi:5,re:4,ux:4,doc:4,co:3,tr:4,bl:3,ac:3,up:4},total:37,opportunity:"Largest compute DePIN. 435K+ GPU containers in 93 countries. Rapid expansion means docs lag. Provider onboarding and metrics dashboard need work.",tags:["Docs","Onboarding","UX","Training"],blindSpots:"Cloud Host profitability education, trust in distributed network",engagement:"Provider Onboarding Docs + Dashboard UX Audit",value:"$15K\u2013$30K"},
+    {name:"Dentrix",category:"healthcare",catLabel:"Healthcare & Dental",url:"https://www.dentrix.com",stage:"Established",funding:"Henry Schein subsidiary (public)",scores:{al:4,vi:5,re:4,ux:3,doc:3,co:4,tr:5,bl:2,ac:3,up:4},total:37,opportunity:"Market leader \u2014 35K+ dental practices. Every AI feature release creates new training content needs. Recurring revenue potential.",tags:["Training","Docs","Consulting"],blindSpots:"Feature adoption among existing users, training content pipeline",engagement:"Training Content Development (ongoing)",value:"$10K\u2013$25K recurring"},
+    {name:"Hypertensor",category:"deai",catLabel:"DeAI Platforms",url:"https://hypertensor.org",stage:"Early / Seed",funding:"$1M+ presale",scores:{al:4,vi:2,re:2,ux:5,doc:5,co:3,tr:4,bl:4,ac:3,up:4},total:36,opportunity:"Pre-mainstream decentralized AI platform. Needs onboarding for validators, non-technical explainers, and community education materials.",tags:["UX","Docs","Training","Onboarding","Strategy"],blindSpots:"Market education, community materials, brand positioning",engagement:"Docs + Onboarding + Community Content",value:"$10K\u2013$20K"},
+    {name:"Arbitrum DAO",category:"dao",catLabel:"Web3 DAOs",url:"https://arbitrum.foundation/grants",stage:"Established DAO",funding:"$1M AI grant pool",scores:{al:3,vi:5,re:4,ux:3,doc:3,co:3,tr:3,bl:3,ac:5,up:4},total:36,opportunity:"$1M Trailblazer AI Grant Program. Public application. Portfolio of funded AI projects each needing UX/docs/onboarding.",tags:["Grants","UX","Docs","Consulting"],blindSpots:"Grantee projects lack UX; grant outcome documentation weak",engagement:"Grant Application or Services to Grantees",value:"$10K\u2013$50K"},
+    {name:"Mozilla Foundation",category:"nonprofit",catLabel:"Nonprofits & Grants",url:"https://www.mozillafoundation.org",stage:"Established",funding:"$50K\u2013$250K grants",scores:{al:4,vi:5,re:3,ux:3,doc:4,co:3,tr:4,bl:3,ac:4,up:3},total:36,opportunity:"Democracy x AI + Environmental Justice grants. Open-source projects funded by Mozilla notoriously lack user-friendly documentation.",tags:["Grants","Docs","Onboarding","Training"],blindSpots:"Documentation systems, onboarding tutorials, UX for open-source tools",engagement:"Apply as Grantee or Serve Funded Projects",value:"$10K\u2013$50K"},
+    {name:"PermitFlow",category:"construction",catLabel:"Construction & Field Service",url:"https://www.permitflow.io",stage:"Series B",funding:"$54M (Accel-led)",scores:{al:4,vi:4,re:3,ux:3,doc:4,co:3,tr:4,bl:3,ac:3,up:4},total:35,opportunity:"AI construction permitting. Government-interface workflows are complex. Firms need documentation and training on AI-assisted permitting.",tags:["Docs","Training","Consulting"],blindSpots:"User documentation for construction firms, regulatory workflow guides",engagement:"User Documentation + Training Materials",value:"$10K\u2013$20K"},
+    {name:"Jobber",category:"construction",catLabel:"Construction & Field Service",url:"https://www.jobber.com",stage:"Growth",funding:"$183.5M",scores:{al:4,vi:5,re:3,ux:3,doc:3,co:3,tr:4,bl:3,ac:3,up:4},total:35,opportunity:"Field service software for SMBs. Exact target demographic overlap with SoloBill/CanvassKit users. AI feature training needed.",tags:["Training","Docs","Consulting"],blindSpots:"Training for non-technical field service operators, AI feature onboarding",engagement:"Training Material Development",value:"$10K\u2013$20K"},
+    {name:"GSA Buy AI",category:"government",catLabel:"Government",url:"https://www.gsa.gov/technology/government-it-initiatives/artificial-intelligence/buy-ai",stage:"Active",funding:"Federal program",scores:{al:4,vi:5,re:4,ux:3,doc:3,co:3,tr:4,bl:2,ac:2,up:4},total:34,opportunity:"Federal AI adoption initiative. Agencies need UX consulting and training for AI tool deployment.",tags:["Consulting","Training","UX"],blindSpots:"Making government AI tools user-friendly for federal workers",engagement:"UX Consulting + Agency Training",value:"$15K\u2013$40K"},
+    {name:"Praxis",category:"healthcare",catLabel:"Healthcare & Dental",url:"https://www.praxis.com",stage:"Growth",funding:"Venture-backed",scores:{al:5,vi:3,re:3,ux:3,doc:4,co:3,tr:4,bl:3,ac:3,up:3},total:34,opportunity:"Practice management for solo/mid-size specialty clinics. Integrated AI for automation. Strong alignment with ClaimFlow AI concept.",tags:["Consulting","Docs","Training"],blindSpots:"Solo practitioner workflow optimization, AI strategy documentation",engagement:"Consulting + Documentation",value:"$10K\u2013$20K"},
+    {name:"Arini",category:"healthcare",catLabel:"Healthcare & Dental",url:"https://www.arini.ai",stage:"Growth",funding:"Venture-backed",scores:{al:4,vi:3,re:3,ux:3,doc:4,co:3,tr:4,bl:3,ac:3,up:3},total:33,opportunity:"AI receptionist for dental practices. 24/7 call answering. Staff need training on AI call handling workflows.",tags:["Training","Docs","Onboarding"],blindSpots:"Staff training on AI receptionist workflows, practice integration guides",engagement:"Staff Training + Workflow Docs",value:"$8K\u2013$15K"},
+    {name:"SingularityNET",category:"deai",catLabel:"DeAI Platforms",url:"https://singularitynet.io",stage:"Series B+",funding:"$25M; $1.25M R&D grants",scores:{al:3,vi:4,re:3,ux:4,doc:4,co:2,tr:3,bl:3,ac:3,up:3},total:32,opportunity:"AI marketplace needs intuitive service discovery UX. API docs need interactive guides.",tags:["UX","Docs"],blindSpots:"Making AI service discovery intuitive, reducing friction in monetization",engagement:"UX Audit + API Documentation",value:"$12K\u2013$25K"},
+    {name:"Pearl",category:"healthcare",catLabel:"Healthcare & Dental",url:"https://hellopearl.com",stage:"Growth",funding:"Venture-backed",scores:{al:4,vi:4,re:3,ux:3,doc:3,co:3,tr:4,bl:2,ac:3,up:3},total:32,opportunity:"FDA-cleared dental AI for 2D/3D. Recent Open Dental integration. Practices need implementation training.",tags:["Training","Docs"],blindSpots:"Implementation training for dental offices, integration documentation",engagement:"Training + Integration Docs",value:"$8K\u2013$15K"},
+    {name:"CareStack",category:"healthcare",catLabel:"Healthcare & Dental",url:"https://carestack.com",stage:"Growth",funding:"Venture-backed",scores:{al:4,vi:4,re:3,ux:3,doc:3,co:3,tr:4,bl:2,ac:3,up:3},total:32,opportunity:"Cloud dental PMS + Overjet Smart Platform partnership. DSOs need training for platform rollout.",tags:["Training","Docs","Onboarding"],blindSpots:"Smart platform training, workflow documentation for DSOs",engagement:"Training Development + Workflow Docs",value:"$8K\u2013$15K"},
+    {name:"GreenLite",category:"construction",catLabel:"Construction & Field Service",url:"https://www.greenlite.com",stage:"Series B",funding:"$91M+",scores:{al:3,vi:4,re:3,ux:3,doc:4,co:3,tr:3,bl:3,ac:3,up:3},total:32,opportunity:"AI-powered government permitting. Complex regulatory workflows need accessible documentation and training.",tags:["Docs","Training"],blindSpots:"Making regulatory compliance workflows accessible, training materials",engagement:"Training + Regulatory Workflow Docs",value:"$10K\u2013$20K"},
+    {name:"Trayd",category:"construction",catLabel:"Construction & Field Service",url:"https://www.trayd.co",stage:"Growth",funding:"Venture-backed",scores:{al:3,vi:3,re:3,ux:3,doc:4,co:3,tr:4,bl:3,ac:3,up:3},total:32,opportunity:"AI contractor payroll/compliance. Reduces 14-hour admin task to 30 min. Contractors need onboarding and training.",tags:["Training","Docs","Onboarding"],blindSpots:"Contractor onboarding, compliance workflow training",engagement:"Training + Onboarding Documentation",value:"$8K\u2013$15K"},
+    {name:"Bittensor",category:"deai",catLabel:"DeAI Platforms",url:"https://bittensor.com",stage:"Mature",funding:"$5B+ market cap",scores:{al:3,vi:5,re:3,ux:4,doc:3,co:2,tr:3,bl:2,ac:2,up:4},total:31,opportunity:"Market leader in decentralized ML. Complex subnet architecture has steep learning curve. Visual guides and user journey mapping needed.",tags:["UX","Docs"],blindSpots:"Onboarding complexity, educational content for validators/miners",engagement:"Visual Documentation + UX Audit",value:"$10K\u2013$20K"},
+    {name:"OpenAI Fund",category:"nonprofit",catLabel:"Nonprofits & Grants",url:"https://openai.com/index/people-first-ai-fund",stage:"Active",funding:"$50M fund",scores:{al:4,vi:5,re:4,ux:2,doc:3,co:3,tr:3,bl:2,ac:2,up:3},total:31,opportunity:"$50M fund for nonprofits. Grantees need help deploying AI tools \u2014 UX, documentation, training.",tags:["Grants","Consulting","Training"],blindSpots:"Grantee organizations need deployment support, staff training",engagement:"Serve Funded Nonprofits",value:"$15K\u2013$40K"},
+    {name:"Polygon Grants",category:"dao",catLabel:"Web3 DAOs",url:"https://polygon.technology/grow",stage:"Active DAO",funding:"35M POL for AI projects",scores:{al:2,vi:5,re:3,ux:3,doc:3,co:2,tr:3,bl:3,ac:4,up:3},total:31,opportunity:"120+ funded projects from Season 1. Portfolio companies need UX/documentation support. Public application.",tags:["Grants","UX","Docs"],blindSpots:"Grantee UX quality, project documentation standards",engagement:"Apply or Serve Portfolio Companies",value:"$10K\u2013$30K"},
+    {name:"Morpheus / Venice.ai",category:"deai",catLabel:"DeAI Platforms",url:"https://venice.ai",stage:"Growth",funding:"No external VC (founder-funded)",scores:{al:3,vi:3,re:2,ux:4,doc:4,co:2,tr:3,bl:3,ac:3,up:3},total:30,opportunity:"Privacy-first decentralized AI by Erik Voorhees. Node operation UX needs clarity. Tokenomics documentation needs visual explainers.",tags:["UX","Docs"],blindSpots:"Making decentralized + private concrete to non-crypto users",engagement:"UX Audit + Visual Documentation",value:"$8K\u2013$15K"},
+    {name:"Akash Network",category:"compute",catLabel:"Compute Networks",url:"https://akash.network",stage:"Established",funding:"Community-governed",scores:{al:3,vi:4,re:2,ux:4,doc:3,co:2,tr:3,bl:3,ac:3,up:3},total:30,opportunity:"Reverse-auction GPU marketplace. Innovative pricing model but needs better UI explanation for non-auction participants.",tags:["UX","Docs"],blindSpots:"Making reverse auction understandable, provider dashboard UX",engagement:"UX Audit + Pricing Documentation",value:"$8K\u2013$15K"},
+    {name:"DFINITY / ICP",category:"dao",catLabel:"Web3 DAOs",url:"https://dfinity.org/grants",stage:"Established",funding:"Grants up to $100K",scores:{al:2,vi:4,re:3,ux:3,doc:3,co:2,tr:3,bl:3,ac:4,up:3},total:30,opportunity:"DeAI developer grants on Internet Computer Protocol. Projects building on ICP need UX and documentation support.",tags:["Grants","Docs","UX"],blindSpots:"Developer onboarding for ICP ecosystem, project documentation",engagement:"Serve Grant Recipients",value:"$10K\u2013$25K"},
+    {name:"AWS Imagine Grants",category:"nonprofit",catLabel:"Nonprofits & Grants",url:"https://aws.amazon.com/blogs/publicsector/aws-imagine-grant-program",stage:"Active",funding:"$200K + $100K AWS credits per org",scores:{al:3,vi:5,re:4,ux:2,doc:3,co:3,tr:3,bl:2,ac:2,up:3},total:30,opportunity:"Nonprofits receiving Pathfinder AI awards need help translating technical infrastructure into user workflows.",tags:["Grants","Training","Consulting"],blindSpots:"Helping nonprofits design AI solutions frontline staff can use",engagement:"Training + Workflow Design for Grantees",value:"$10K\u2013$25K"},
+    {name:"Render Network",category:"compute",catLabel:"Compute Networks",url:"https://rendernetwork.com",stage:"Series C+",funding:"$100M at $1.5B valuation",scores:{al:2,vi:5,re:3,ux:3,doc:3,co:2,tr:3,bl:2,ac:2,up:4},total:29,opportunity:"Decentralized GPU network pivoting from 3D to AI compute. GPU marketplace needs better resource discovery UX.",tags:["UX","Docs"],blindSpots:"GPU availability transparency, matching compute requirements to capacity",engagement:"Marketplace UX + Resource Discovery",value:"$10K\u2013$20K"},
+    {name:"io.net",category:"compute",catLabel:"Compute Networks",url:"https://io.net",stage:"Series A",funding:"$30M at $1B valuation",scores:{al:2,vi:4,re:3,ux:3,doc:3,co:2,tr:3,bl:3,ac:3,up:3},total:29,opportunity:"30K+ GPU decentralized cloud. 70% cheaper than AWS. Price comparisons and technical setup docs need streamlining.",tags:["Docs","UX"],blindSpots:"Enterprise trust-building, proving reliability/uptime",engagement:"Documentation + Price Comparison Tools",value:"$8K\u2013$15K"},
+    {name:"Luma Health",category:"healthcare",catLabel:"Healthcare & Dental",url:"https://www.lumahealth.io",stage:"Growth",funding:"Venture-backed",scores:{al:3,vi:4,re:3,ux:2,doc:3,co:3,tr:4,bl:2,ac:2,up:3},total:29,opportunity:"AI patient scheduling for 750+ healthcare orgs, 500K+ providers. Large user base = scalable training materials.",tags:["Training","Docs"],blindSpots:"Training at scale across diverse healthcare organizations",engagement:"Training Materials + Provider Onboarding",value:"$10K\u2013$20K"},
+    {name:"ServiceTitan",category:"construction",catLabel:"Construction & Field Service",url:"https://www.servicetitan.com",stage:"Growth",funding:"$1.5B",scores:{al:3,vi:5,re:3,ux:2,doc:3,co:2,tr:4,bl:2,ac:2,up:3},total:29,opportunity:"$1.5B funded service management leader. Home services businesses need workflow automation consulting and training.",tags:["Training","Consulting"],blindSpots:"Workflow automation consulting for SMB service businesses",engagement:"Workflow Consulting + Training",value:"$10K\u2013$20K"},
+    {name:"Hyperbolic AI",category:"compute",catLabel:"Compute Networks",url:"https://www.hyperbolic.xyz",stage:"Growth",funding:"$20M total",scores:{al:2,vi:3,re:3,ux:3,doc:3,co:2,tr:3,bl:3,ac:3,up:3},total:28,opportunity:"75% cost reduction vs AWS. Serverless inference API. Developer tutorials and onboarding for inference providers needed.",tags:["Docs","Onboarding"],blindSpots:"Onboarding new inference providers, reliability proof vs cloud",engagement:"Developer Documentation + Tutorials",value:"$8K\u2013$15K"},
+    {name:"ChainGPT",category:"dao",catLabel:"Web3 DAOs",url:"https://www.chaingpt.org/web3-ai-grant",stage:"Growth",funding:"Internal VC fund",scores:{al:2,vi:3,re:3,ux:3,doc:3,co:2,tr:3,bl:3,ac:3,up:3},total:28,opportunity:"Web3 AI grants + internal VC. Early-stage portfolio projects need UX and product guidance.",tags:["Grants","UX","Consulting"],blindSpots:"Product guidance for early-stage AI x blockchain projects",engagement:"UX + Product Consulting for Portfolio",value:"$8K\u2013$15K"},
+    {name:"Housecall Pro",category:"construction",catLabel:"Construction & Field Service",url:"https://www.housecallpro.com",stage:"Growth",funding:"$175M",scores:{al:3,vi:4,re:3,ux:2,doc:3,co:2,tr:3,bl:2,ac:2,up:3},total:27,opportunity:"Software for home service pros. $175M funded. Accessible documentation for non-technical users needed.",tags:["Docs","Training"],blindSpots:"Training for solo/small team service providers",engagement:"Documentation + Training",value:"$8K\u2013$15K"},
+    {name:"Opusense AI",category:"construction",catLabel:"Construction & Field Service",url:"https://www.opusense.com",stage:"Early",funding:"Seed",scores:{al:3,vi:2,re:2,ux:3,doc:3,co:2,tr:3,bl:3,ac:3,up:2},total:26,opportunity:"Voice \u2192 AI \u2192 structured field reports for construction inspectors. Mobile-friendly training needed.",tags:["Training","Docs"],blindSpots:"Mobile documentation, voice workflow training for field teams",engagement:"Mobile Training + Documentation",value:"$8K\u2013$12K"},
+    {name:"Manicule",category:"opensource",catLabel:"Open-Source AI",url:"https://manicule.co",stage:"Seed / Profitable",funding:"YC-backed, $15K MRR",scores:{al:4,vi:2,re:3,ux:1,doc:1,co:1,tr:2,bl:3,ac:4,up:4},total:25,opportunity:"AI docs agency (competitor/partner). They do dev tools \u2014 you do vertical SaaS. Revenue share or white-label partnership.",tags:["Strategy","Consulting"],blindSpots:"Vertical SaaS documentation market, healthcare/construction expertise",engagement:"Partnership (not client)",value:"Revenue share"},
+    {name:"LF AI & Data",category:"nonprofit",catLabel:"Nonprofits & Grants",url:"https://lfaidata.foundation",stage:"Established",funding:"Linux Foundation",scores:{al:3,vi:4,re:2,ux:2,doc:3,co:2,tr:2,bl:2,ac:3,up:2},total:25,opportunity:"Linux Foundation AI arm. Open-source AI projects need accessible documentation and developer guides.",tags:["Docs"],blindSpots:"Making technical AI projects accessible to broader audience",engagement:"Community Contribution + Documentation",value:"$8K\u2013$15K"},
+    {name:"TARS AI",category:"deai",catLabel:"DeAI Platforms",url:"https://tars.ai",stage:"Early",funding:"~$18M market cap",scores:{al:2,vi:2,re:2,ux:3,doc:3,co:2,tr:2,bl:3,ac:3,up:2},total:24,opportunity:"Solana-based modular AI Web3 infrastructure. Small but early \u2014 UX still forming.",tags:["UX"],blindSpots:"Product direction, early UX decisions",engagement:"UX Consulting",value:"$5K\u2013$10K"},
+    {name:"Fluence Network",category:"compute",catLabel:"Compute Networks",url:"https://fluence.network",stage:"Established",funding:"$11M total",scores:{al:2,vi:3,re:2,ux:3,doc:3,co:2,tr:2,bl:2,ac:3,up:2},total:24,opportunity:"85% cost savings vs cloud. Good docs already but client onboarding could use more use-case examples.",tags:["Docs"],blindSpots:"Use-case documentation for traditional cloud users",engagement:"Use-Case Documentation",value:"$5K\u2013$10K"},
+    {name:"Partnership on AI",category:"nonprofit",catLabel:"Nonprofits & Grants",url:"https://partnershiponai.org",stage:"Established",funding:"Industry consortium",scores:{al:2,vi:4,re:2,ux:3,doc:3,co:2,tr:2,bl:2,ac:2,up:2},total:24,opportunity:"100+ partner consortium. Cross-stakeholder tools need UX but access is gated.",tags:["UX"],blindSpots:"Bridging technical and non-technical stakeholder perspectives",engagement:"UX Consulting",value:"$8K\u2013$15K"},
+    {name:"Gitcoin",category:"dao",catLabel:"Web3 DAOs",url:"https://gitcoin.co",stage:"Established",funding:"Community grants",scores:{al:2,vi:3,re:2,ux:2,doc:2,co:2,tr:2,bl:2,ac:4,up:2},total:23,opportunity:"Grants funding mechanism. Good for visibility and small project funding. Community grants + hackathon prizes.",tags:["Grants"],blindSpots:"Grant project documentation and presentation",engagement:"Community Grants",value:"$3K\u2013$8K"},
+    {name:"CAIS",category:"nonprofit",catLabel:"Nonprofits & Grants",url:"https://safe.ai",stage:"Established",funding:"Fellowship programs",scores:{al:2,vi:4,re:2,ux:2,doc:3,co:1,tr:2,bl:2,ac:2,up:2},total:22,opportunity:"AI safety research. Needs educational content but narrow academic audience.",tags:["Docs"],blindSpots:"Translating safety research into accessible educational content",engagement:"Educational Content",value:"$5K\u2013$10K"},
+    {name:"AI Now Institute",category:"nonprofit",catLabel:"Nonprofits & Grants",url:"https://ainowinstitute.org",stage:"Established",funding:"Foundation-funded",scores:{al:2,vi:3,re:2,ux:2,doc:3,co:1,tr:2,bl:3,ac:2,up:2},total:22,opportunity:"Policy research on AI social implications. Accessible communication tools needed but hard to contract.",tags:["Docs","Strategy"],blindSpots:"Interactive policy communication tools, impact tracking",engagement:"Communication Design",value:"$5K\u2013$10K"}
+  ];
+
+  /* ── STATE ── */
+  var currentSort = 'score';
+  var dimLabels = {al:'Align',vi:'Viable',re:'Rev',ux:'UX',doc:'Docs',co:'Consult',tr:'Train',bl:'Blind',ac:'Access',up:'Upside'};
+
+  /* ── RENDER ── */
+  function tierClass(total) { return total >= 35 ? '' : total >= 25 ? 'tier2' : 'tier3'; }
+  function catBadgeClass(cat) {
+    var map = {deai:'deai',compute:'compute',opensource:'opensource',nonprofit:'nonprofit',dao:'dao',healthcare:'healthcare',construction:'construction',government:'government'};
+    return 'pi-cat-badge--' + (map[cat] || 'deai');
+  }
+
+  function renderCards() {
+    var query = document.getElementById('piSearch').value.toLowerCase();
+    var catFilter = document.getElementById('piCategory').value;
+    var grid = document.getElementById('piGrid');
+
+    var filtered = companies.filter(function(c) {
+      if (catFilter !== 'all' && c.category !== catFilter) return false;
+      if (query) {
+        var searchable = (c.name + ' ' + c.opportunity + ' ' + c.tags.join(' ') + ' ' + c.catLabel + ' ' + c.blindSpots + ' ' + c.engagement).toLowerCase();
+        if (searchable.indexOf(query) === -1) return false;
+      }
+      return true;
+    });
+
+    if (currentSort === 'score') {
+      filtered.sort(function(a, b) { return b.total - a.total; });
+    } else {
+      filtered.sort(function(a, b) { return a.name.localeCompare(b.name); });
+    }
+
+    document.getElementById('piCount').textContent = filtered.length + ' compan' + (filtered.length === 1 ? 'y' : 'ies');
+
+    if (filtered.length === 0) {
+      grid.innerHTML = '<div class="pi-no-results">No companies match your search.</div>';
+      return;
+    }
+
+    var html = '';
+    for (var i = 0; i < filtered.length; i++) {
+      var c = filtered[i];
+      var tc = tierClass(c.total);
+      var pct = Math.round((c.total / 50) * 100);
+
+      // Build tags
+      var tagsHtml = '';
+      for (var t = 0; t < c.tags.length; t++) {
+        tagsHtml += '<span class="pi-tag">' + c.tags[t] + '</span>';
+      }
+
+      // Build score breakdown
+      var bdHtml = '';
+      var keys = ['al','vi','re','ux','doc','co','tr','bl','ac','up'];
+      for (var k = 0; k < keys.length; k++) {
+        var key = keys[k];
+        var val = c.scores[key];
+        bdHtml += '<div class="pi-bd-item"><span class="pi-bd-label">' + dimLabels[key] + '</span><div class="pi-bd-bar"><div class="pi-bd-fill" style="width:' + (val * 20) + '%"></div></div><span class="pi-bd-num">' + val + '</span></div>';
+      }
+
+      html += '<div class="pi-card" onclick="toggleCard(this)">'
+        + '<div class="pi-card-header"><span class="pi-card-name">' + c.name + '</span><span class="pi-card-score ' + tc + '">' + c.total + '/50</span></div>'
+        + '<span class="pi-cat-badge ' + catBadgeClass(c.category) + '">' + c.catLabel + '</span>'
+        + '<div class="pi-score-bar"><div class="pi-score-fill ' + tc + '" style="width:' + pct + '%"></div></div>'
+        + '<p class="pi-card-opp">' + c.opportunity + '</p>'
+        + '<div class="pi-tags">' + tagsHtml + '</div>'
+        + '<div class="pi-detail"><div class="pi-detail-inner">'
+        + '<div class="pi-detail-row"><span class="pi-detail-label">Stage</span><span class="pi-detail-val">' + c.stage + '</span></div>'
+        + '<div class="pi-detail-row"><span class="pi-detail-label">Funding</span><span class="pi-detail-val">' + c.funding + '</span></div>'
+        + '<div class="pi-detail-row"><span class="pi-detail-label">Blind Spots</span><span class="pi-detail-val">' + c.blindSpots + '</span></div>'
+        + '<div class="pi-detail-row"><span class="pi-detail-label">Engagement</span><span class="pi-detail-val">' + c.engagement + '</span></div>'
+        + '<div class="pi-detail-row"><span class="pi-detail-label">Est. Value</span><span class="pi-detail-val">' + c.value + '</span></div>'
+        + '<div class="pi-detail-row"><span class="pi-detail-label">Website</span><span class="pi-detail-val"><a href="' + c.url + '" target="_blank" rel="noopener">' + c.url + '</a></span></div>'
+        + '<div class="pi-breakdown">' + bdHtml + '</div>'
+        + '</div></div>'
+        + '</div>';
+    }
+    grid.innerHTML = html;
+  }
+
+  function toggleCard(el) { el.classList.toggle('expanded'); }
+
+  function setSort(mode) {
+    currentSort = mode;
+    document.getElementById('piSortScore').classList.toggle('active', mode === 'score');
+    document.getElementById('piSortAlpha').classList.toggle('active', mode === 'alpha');
+    renderCards();
+  }
+
+  /* ── EVENT LISTENERS ── */
+  document.getElementById('piSearch').addEventListener('input', renderCards);
+  document.getElementById('piCategory').addEventListener('change', renderCards);
+
+  /* ── INIT ── */
+  renderCards();
+</script>
+
+</body>
+</html>
