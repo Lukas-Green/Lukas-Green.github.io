@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Nick — A design system + two redesigns.</title>
+<meta name="description" content="A design system, an Upskilled Consulting redesign, and a nickmccarty.me redesign — built as a surprise for Nick McCarty.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="system.css">
+
+<style>
+body { background: var(--paper-warm); }
+
+.wrap {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: var(--s-9) var(--s-6);
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.gift-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-3) var(--s-4);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  align-self: flex-start;
+  margin-bottom: var(--s-6);
+  background: color-mix(in srgb, var(--paper-warm) 60%, var(--paper-cool));
+}
+.gift-tag .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+.hero-h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 7vw, 5.25rem);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  font-variation-settings: "opsz" 144, "SOFT" 30, "wght" 500;
+  margin-bottom: var(--s-5);
+  max-width: 15ch;
+}
+.hero-h1 .accent { color: var(--accent); font-style: italic; font-variation-settings: "opsz" 144, "SOFT" 100, "wght" 500; }
+
+.hero-lead {
+  font-size: clamp(1.1rem, 1.4vw, 1.25rem);
+  color: var(--ink-dim);
+  max-width: 56ch;
+  margin-bottom: var(--s-8);
+}
+
+/* The three pieces */
+.pieces {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-4);
+  margin-bottom: var(--s-8);
+  border-top: 1px solid var(--rule);
+  padding-top: var(--s-6);
+}
+
+.piece {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding: var(--s-5);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease), background var(--dur) var(--ease);
+  background: var(--paper);
+  min-height: 280px;
+}
+.piece:hover { border-color: var(--ink); transform: translateY(-2px); }
+
+.piece .idx {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.piece h2 {
+  font-size: 1.625rem;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  font-variation-settings: "opsz" 72, "wght" 500;
+  margin-top: var(--s-2);
+}
+.piece p {
+  font-size: 14px;
+  color: var(--ink-dim);
+  flex: 1;
+}
+.piece .go {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink);
+  margin-top: var(--s-3);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+.piece .go::after { content: "→"; transition: transform var(--dur) var(--ease); }
+.piece:hover .go { color: var(--accent); }
+.piece:hover .go::after { transform: translateX(3px); }
+
+.piece.featured {
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-color: var(--accent);
+}
+.piece.featured .idx { color: var(--paper-warm); opacity: 0.75; }
+.piece.featured p { color: color-mix(in srgb, var(--paper-warm) 85%, transparent); }
+.piece.featured .go { color: var(--paper-warm); }
+.piece.featured:hover { border-color: var(--ink); background: var(--accent-deep); transform: translateY(-2px); }
+
+/* The note */
+.the-note {
+  margin-top: auto;
+  padding-top: var(--s-7);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: var(--s-5);
+  align-items: start;
+}
+.the-note .tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding-top: 4px;
+}
+.the-note p {
+  font-family: var(--font-display);
+  font-size: clamp(1.125rem, 1.5vw, 1.375rem);
+  line-height: 1.45;
+  color: var(--ink);
+  max-width: 60ch;
+  font-variation-settings: "opsz" 48, "wght" 400;
+  font-style: italic;
+}
+.the-note p + p {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-style: normal;
+  color: var(--ink-dim);
+  margin-top: var(--s-4);
+  line-height: 1.65;
+}
+.the-note .sig {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-faint);
+  margin-top: var(--s-4);
+}
+.the-note .sig strong { color: var(--ink); font-weight: 500; }
+
+/* Meta strip */
+.meta-strip {
+  margin-top: var(--s-7);
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+}
+.meta-strip strong { color: var(--ink); font-weight: 500; }
+
+@media (max-width: 720px) {
+  .pieces { grid-template-columns: 1fr; }
+  .the-note { grid-template-columns: 1fr; }
+  .wrap { padding: var(--s-7) var(--s-5); }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <span class="gift-tag">
+    <span class="dot"></span>
+    For Nick · From Lukas · 2026
+  </span>
+
+  <h1 class="hero-h1">
+    A design system, and a little glow‑<span class="accent">up</span> for your two sites.
+  </h1>
+
+  <p class="hero-lead">
+    Three pieces: a shared design system called <em>Editorial Quant</em>, a redesign of
+    <strong style="color:var(--ink);font-weight:500;">Upskilled Consulting</strong>, and a redesign
+    of <strong style="color:var(--ink);font-weight:500;">nickmccarty.me</strong>. Same DNA across
+    both brands, one variable swap between them, zero gradients, one accent. Your existing logos are
+    untouched — this is the house built around them.
+  </p>
+
+  <!-- The three pieces -->
+  <div class="pieces">
+    <a class="piece featured" href="design-system.html">
+      <span class="idx">01 · The system</span>
+      <h2>Design system.</h2>
+      <p>Principles, tokens, type, color, spacing, components, motion, voice, and a copy‑paste implementation block. The gift box.</p>
+      <span class="go">Open the system</span>
+    </a>
+
+    <a class="piece" href="upskilled.html">
+      <span class="idx">02 · Warm paper</span>
+      <h2>Upskilled Consulting.</h2>
+      <p>Consulting‑led home. Hero, services, method, selected work, open course platform, about, contact. The one to lead with on LinkedIn.</p>
+      <span class="go">Open the preview</span>
+    </a>
+
+    <a class="piece" href="nickmccarty.html">
+      <span class="idx">03 · Cool paper</span>
+      <h2>nickmccarty.me</h2>
+      <p>Editorial home for a senior practitioner — thinking, work, speaking, a short bio. Funnels engagement to Upskilled.</p>
+      <span class="go">Open the preview</span>
+    </a>
+  </div>
+
+  <!-- The note -->
+  <div class="the-note">
+    <span class="tag">The note</span>
+    <div>
+      <p>
+        Nick — your work deserves a house that reads like it. I pulled the gradients,
+        pulled the two sites into one voice, and put the numbers in mono where they belong.
+        Upskilled leads, the personal site supports. Everything is one CSS file of tokens
+        away from any dev you want to hand it to.
+      </p>
+      <p>
+        Use what you like, ignore what you don't, break what you want to. The design system
+        is yours. The voice is yours. I just set the table.
+      </p>
+      <span class="sig"><strong>— Lukas</strong></span>
+    </div>
+  </div>
+
+  <div class="meta-strip">
+    <span><strong>Built on</strong> · Fraunces · Inter · JetBrains Mono</span>
+    <span><strong>Ships as</strong> · 4 files · ~60KB · no build step</span>
+    <span><strong>Version</strong> · v1.0 · 2026</span>
+  </div>
+
+</div>
+
+</body>
+</html>
