@@ -117,11 +117,101 @@ main { max-width: 1040px; margin: 0 auto; padding: 0 var(--s-6); position: relat
 }
 .principle p { color: var(--ink-dim); font-size: 14px; }
 
+/* Swatches */
+.swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s-3);
+  margin-bottom: var(--s-6);
+}
+.swatch {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--paper);
+}
+.swatch .chip {
+  height: 120px;
+  border-bottom: 1px solid var(--rule);
+}
+.swatch .meta {
+  padding: var(--s-3);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.swatch .name { font-size: 13px; font-weight: 500; color: var(--ink); }
+.swatch .hex {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-dim);
+}
+.swatch .use {
+  font-size: 11px;
+  color: var(--ink-faint);
+  margin-top: 4px;
+  line-height: 1.4;
+}
+.contrast-note {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-dim);
+  padding: var(--s-4);
+  border-left: 2px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  margin-top: var(--s-4);
+}
+
+/* Type specimen */
+.specimen {
+  border-top: 1px solid var(--rule);
+  padding: var(--s-5) 0;
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: var(--s-5);
+  align-items: baseline;
+}
+.specimen .spec-meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.specimen .spec-meta strong {
+  display: block;
+  color: var(--ink);
+  font-weight: 500;
+  font-family: var(--font-body);
+  font-size: 13px;
+  text-transform: none;
+  letter-spacing: 0;
+  margin-bottom: 2px;
+}
+.spec-xl { font-family: var(--font-display); font-size: 4rem; line-height: 1.02; letter-spacing: -0.03em; font-variation-settings: "opsz" 144, "wght" 500; }
+.spec-l  { font-family: var(--font-display); font-size: 2.5rem; line-height: 1.08; letter-spacing: -0.015em; font-variation-settings: "opsz" 96, "wght" 500; }
+.spec-m  { font-family: var(--font-display); font-size: 1.5rem; line-height: 1.2; letter-spacing: -0.005em; font-variation-settings: "opsz" 48, "wght" 500; }
+.spec-body-l { font-family: var(--font-body); font-size: 1.125rem; line-height: 1.6; color: var(--ink); }
+.spec-body { font-family: var(--font-body); font-size: 1rem; line-height: 1.65; color: var(--ink); }
+.spec-mono { font-family: var(--font-mono); font-size: 1rem; font-variant-numeric: tabular-nums; color: var(--ink); }
+.spec-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
 @media (max-width: 720px) {
   .toc { grid-template-columns: repeat(2, 1fr); }
   .sect-title { grid-template-columns: 1fr; gap: var(--s-2); }
   .sect-body { margin-left: 0; }
   .principles { grid-template-columns: 1fr; }
+  .swatch-grid { grid-template-columns: repeat(2, 1fr); }
+  .specimen { grid-template-columns: 1fr; gap: var(--s-3); }
+  .spec-xl { font-size: 2.5rem; }
+  .spec-l { font-size: 1.75rem; }
 }
 </style>
 </head>
@@ -219,6 +309,176 @@ main { max-width: 1040px; margin: 0 auto; padding: 0 var(--s-6); position: relat
           <h3>Two brands, one DNA.</h3>
           <p>Upskilled on warm paper; Nick on cool paper. Everything else — type, scale, accent, components — identical.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 COLOR -->
+  <section id="color" class="sect">
+    <div class="sect-title">
+      <span class="idx">02</span>
+      <div>
+        <h2>Color.</h2>
+        <p>Two papers, four inks, one accent. That's the entire palette. Avoid introducing a second hue — restraint is the point.</p>
+      </div>
+    </div>
+
+    <div class="sect-body">
+      <h3 style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:var(--s-4);">Canvas</h3>
+      <div class="swatch-grid">
+        <div class="swatch">
+          <div class="chip" style="background:#F2ECE0;"></div>
+          <div class="meta">
+            <span class="name">Paper · warm</span>
+            <span class="hex">#F2ECE0</span>
+            <span class="use">Upskilled Consulting canvas. Institutional.</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background:#FAFAF6;"></div>
+          <div class="meta">
+            <span class="name">Paper · cool</span>
+            <span class="hex">#FAFAF6</span>
+            <span class="use">nickmccarty.me canvas. Quieter.</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background:#D9D3C7;"></div>
+          <div class="meta">
+            <span class="name">Rule</span>
+            <span class="hex">#D9D3C7</span>
+            <span class="use">Hairlines, card borders.</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background:#E4DFD3;"></div>
+          <div class="meta">
+            <span class="name">Rule · soft</span>
+            <span class="hex">#E4DFD3</span>
+            <span class="use">Hover states, subtle fills.</span>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:var(--s-4);">Ink &amp; accent</h3>
+      <div class="swatch-grid">
+        <div class="swatch">
+          <div class="chip" style="background:#12110F;"></div>
+          <div class="meta">
+            <span class="name">Ink</span>
+            <span class="hex">#12110F</span>
+            <span class="use">Body copy, headlines.</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background:#5A564E;"></div>
+          <div class="meta">
+            <span class="name">Ink · dim</span>
+            <span class="hex">#5A564E</span>
+            <span class="use">Secondary text, captions.</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background:#8A857A;"></div>
+          <div class="meta">
+            <span class="name">Ink · faint</span>
+            <span class="hex">#8A857A</span>
+            <span class="use">Timestamps, meta. Non‑essential only.</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background:#0E4F4C;"></div>
+          <div class="meta">
+            <span class="name">Accent</span>
+            <span class="hex">#0E4F4C</span>
+            <span class="use">Ink‑teal. Interaction &amp; one hero moment.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="contrast-note">
+        <strong style="color:var(--ink);">Contrast rules.</strong>
+        Ink on either paper clears 14:1 (AAA). Ink‑dim on warm paper is 5.2:1 (AA body).
+        Ink‑faint is 3.1:1 — large text or non‑essential meta only, never body copy.
+        Accent on either paper is 8.9:1 — safe for links, buttons, and running numerics.
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 TYPE -->
+  <section id="type" class="sect">
+    <div class="sect-title">
+      <span class="idx">03</span>
+      <div>
+        <h2>Typography.</h2>
+        <p>Three typefaces, three jobs. Fraunces carries authority, Inter carries clarity, JetBrains Mono carries the numbers. Never mix display and body within the same line.</p>
+      </div>
+    </div>
+
+    <div class="sect-body">
+      <div class="specimen">
+        <div class="spec-meta">
+          <strong>Display · XL</strong>
+          Fraunces 500 · opsz 144<br>
+          72 / 1.02 · −3% tracking
+        </div>
+        <div class="spec-xl">Geospatial AI, built to <em style="color:var(--accent);font-variation-settings:'opsz' 144,'SOFT' 100;">ship</em>.</div>
+      </div>
+      <div class="specimen">
+        <div class="spec-meta">
+          <strong>Display · L</strong>
+          Fraunces 500 · opsz 96<br>
+          40 / 1.08 · −1.5%
+        </div>
+        <div class="spec-l">Increasing capacity.</div>
+      </div>
+      <div class="specimen">
+        <div class="spec-meta">
+          <strong>Display · M</strong>
+          Fraunces 500 · opsz 48<br>
+          24 / 1.2 · −0.5%
+        </div>
+        <div class="spec-m">Object Detection on Drone Orthomosaics with Meta's SAM</div>
+      </div>
+      <div class="specimen">
+        <div class="spec-meta">
+          <strong>Body · L</strong>
+          Inter 400<br>
+          18 / 1.6
+        </div>
+        <div class="spec-body-l">
+          Upskilled Consulting designs, fine‑tunes, and deploys computer vision and ML
+          systems for enterprises and startups — with a research bench in interpretability
+          and remote sensing.
+        </div>
+      </div>
+      <div class="specimen">
+        <div class="spec-meta">
+          <strong>Body</strong>
+          Inter 400<br>
+          16 / 1.65
+        </div>
+        <div class="spec-body">
+          Before the first model, we agree on what "working" looks like — and what it's worth.
+          A short, honest cycle that proves or kills the approach. We share what we find,
+          including when we're wrong.
+        </div>
+      </div>
+      <div class="specimen">
+        <div class="spec-meta">
+          <strong>Mono</strong>
+          JetBrains Mono 500<br>
+          tabular‑nums
+        </div>
+        <div class="spec-mono">200+ students · &gt;95% satisfaction · 10+ years · 50+ hrs free</div>
+      </div>
+      <div class="specimen">
+        <div class="spec-meta">
+          <strong>Label</strong>
+          Inter 600<br>
+          11 / +12% tracking · caps
+        </div>
+        <div class="spec-label">What we bring · Selected work · Free learning</div>
       </div>
     </div>
   </section>
