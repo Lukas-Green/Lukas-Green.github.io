@@ -212,7 +212,54 @@ main { max-width: 1040px; margin: 0 auto; padding: 0 var(--s-6); position: relat
   .specimen { grid-template-columns: 1fr; gap: var(--s-3); }
   .spec-xl { font-size: 2.5rem; }
   .spec-l { font-size: 1.75rem; }
+/* Spacing visual */
+.space-row {
+  display: grid;
+  grid-template-columns: 100px 1fr 120px;
+  gap: var(--s-4);
+  align-items: center;
+  padding: var(--s-3) 0;
+  border-top: 1px solid var(--rule);
 }
+.space-row:last-child { border-bottom: 1px solid var(--rule); }
+.space-row .token { font-family: var(--font-mono); font-size: 12px; color: var(--ink); }
+.space-row .val { font-family: var(--font-mono); font-size: 11px; color: var(--ink-faint); text-align: right; }
+.space-row .bar { height: 16px; background: var(--accent); border-radius: 2px; }
+
+/* Component demo frame */
+.demo {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  margin: var(--s-4) 0 var(--s-7);
+  overflow: hidden;
+  background: var(--paper);
+}
+.demo-label {
+  padding: var(--s-3) var(--s-4);
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: var(--rule-soft);
+}
+.demo-body { padding: var(--s-5); }
+
+/* Button demo row */
+.btn-row { display: flex; gap: var(--s-3); flex-wrap: wrap; align-items: center; }
+
+/* Metric demo */
+.metric-demo {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-5);
+}
+
+/* Service row demo needs container */
+.demo .service-row:first-child { border-top: 0; padding-top: 0; }
+.demo .list-row:first-child { border-top: 0; }
+
 </style>
 </head>
 <body>
@@ -480,6 +527,142 @@ main { max-width: 1040px; margin: 0 auto; padding: 0 var(--s-6); position: relat
         </div>
         <div class="spec-label">What we bring · Selected work · Free learning</div>
       </div>
+    </div>
+  </section>
+
+  <!-- 04 SPACING -->
+  <section id="spacing" class="sect">
+    <div class="sect-title">
+      <span class="idx">04</span>
+      <div>
+        <h2>Spacing &amp; grid.</h2>
+        <p>Eight‑point scale. Every gap, padding, and margin comes from this set — no in‑between values. Section padding is generous on purpose.</p>
+      </div>
+    </div>
+
+    <div class="sect-body">
+      <div class="space-row"><span class="token">--s-1</span><span class="bar" style="width:4px;"></span><span class="val">4px</span></div>
+      <div class="space-row"><span class="token">--s-2</span><span class="bar" style="width:8px;"></span><span class="val">8px</span></div>
+      <div class="space-row"><span class="token">--s-3</span><span class="bar" style="width:12px;"></span><span class="val">12px</span></div>
+      <div class="space-row"><span class="token">--s-4</span><span class="bar" style="width:16px;"></span><span class="val">16px</span></div>
+      <div class="space-row"><span class="token">--s-5</span><span class="bar" style="width:24px;"></span><span class="val">24px</span></div>
+      <div class="space-row"><span class="token">--s-6</span><span class="bar" style="width:32px;"></span><span class="val">32px</span></div>
+      <div class="space-row"><span class="token">--s-7</span><span class="bar" style="width:48px;"></span><span class="val">48px</span></div>
+      <div class="space-row"><span class="token">--s-8</span><span class="bar" style="width:64px;"></span><span class="val">64px</span></div>
+      <div class="space-row"><span class="token">--s-9</span><span class="bar" style="width:96px;"></span><span class="val">96px</span></div>
+      <div class="space-row"><span class="token">--s-10</span><span class="bar" style="width:128px;"></span><span class="val">128px</span></div>
+
+      <div class="contrast-note" style="margin-top:var(--s-6);">
+        <strong style="color:var(--ink);">Container widths.</strong>
+        Default <code style="font-family:var(--font-mono);">1160px</code> for marketing pages;
+        <code style="font-family:var(--font-mono);">920px</code> for editorial (personal site);
+        <code style="font-family:var(--font-mono);">820px</code> for long‑form prose. Never exceed.
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 COMPONENTS -->
+  <section id="components" class="sect">
+    <div class="sect-title">
+      <span class="idx">05</span>
+      <div>
+        <h2>Components.</h2>
+        <p>Live, not renders. Every example below is the actual component you'll ship — hover it, click it, inspect it.</p>
+      </div>
+    </div>
+
+    <div class="sect-body">
+
+      <h3 style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:var(--s-3);">Buttons</h3>
+      <div class="demo">
+        <div class="demo-label">.btn-primary · .btn-ghost</div>
+        <div class="demo-body">
+          <div class="btn-row">
+            <a class="btn btn-primary" href="#">Book a call <span class="arrow">→</span></a>
+            <a class="btn btn-ghost" href="#">See selected work</a>
+            <a class="link" href="#" style="font-family:var(--font-mono);font-size:13px;">Inline link</a>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:var(--s-3);margin-top:var(--s-6);">Service row</h3>
+      <div class="demo">
+        <div class="demo-label">.service-row — numbered, with engagement meta</div>
+        <div class="demo-body">
+          <article class="service-row">
+            <div class="idx">01</div>
+            <div>
+              <div class="title">Computer vision &amp; remote sensing</div>
+              <p class="body"><strong>Aerial and drone data turned into production decisions.</strong> Fine‑tuned object detection, photogrammetry pipelines, 3D reconstruction.</p>
+            </div>
+            <div class="meta">8–24 wk engagement</div>
+          </article>
+        </div>
+      </div>
+
+      <h3 style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:var(--s-3);margin-top:var(--s-6);">List row</h3>
+      <div class="demo">
+        <div class="demo-label">.list-row — editorial index, with date + tag</div>
+        <div class="demo-body">
+          <a class="list-row" href="#">
+            <span class="date">2025</span>
+            <span>
+              <span class="list-title">Object Detection on Drone Orthomosaics with Meta's SAM</span>
+              <span class="list-sub">Foundation models on geospatial imagery · SciPy 2025 proceedings.</span>
+            </span>
+            <span class="tag">Publication</span>
+          </a>
+          <a class="list-row" href="#">
+            <span class="date">2025</span>
+            <span>
+              <span class="list-title">Mechanistic Interpretability for Vision Models</span>
+              <span class="list-sub">Circuit extraction and activation patching on object detectors.</span>
+            </span>
+            <span class="tag">Research</span>
+          </a>
+        </div>
+      </div>
+
+      <h3 style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:var(--s-3);margin-top:var(--s-6);">Metric block</h3>
+      <div class="demo">
+        <div class="demo-label">.metric — mono value, dimmed label. Accent on the value only.</div>
+        <div class="demo-body">
+          <div class="metric-demo">
+            <div class="metric">
+              <span class="value">200+</span>
+              <span class="label-txt">Students trained</span>
+            </div>
+            <div class="metric">
+              <span class="value">&gt;95%</span>
+              <span class="label-txt">Satisfaction rate</span>
+            </div>
+            <div class="metric">
+              <span class="value">10+</span>
+              <span class="label-txt">Years experience</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:var(--s-3);margin-top:var(--s-6);">Pull quote</h3>
+      <div class="demo">
+        <div class="demo-label">.pullquote — italic display, accent rule.</div>
+        <div class="demo-body">
+          <blockquote class="pullquote">
+            Transforming complex problems into practical data products through expertise in
+            geospatial AI and interpretable vision models.
+          </blockquote>
+        </div>
+      </div>
+
+      <h3 style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:var(--s-3);margin-top:var(--s-6);">Eyebrow / label</h3>
+      <div class="demo">
+        <div class="demo-label">.label — small‑caps section marker with accent hair.</div>
+        <div class="demo-body">
+          <span class="label">What we bring</span>
+        </div>
+      </div>
+
     </div>
   </section>
 
