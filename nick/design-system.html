@@ -226,6 +226,110 @@ main { max-width: 1040px; margin: 0 auto; padding: 0 var(--s-6); position: relat
 .space-row .val { font-family: var(--font-mono); font-size: 11px; color: var(--ink-faint); text-align: right; }
 .space-row .bar { height: 16px; background: var(--accent); border-radius: 2px; }
 
+/* Code block */
+.code-block {
+  background: #12110F;
+  color: #E8E4DA;
+  border-radius: var(--radius-md);
+  padding: var(--s-5);
+  margin: var(--s-4) 0;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  position: relative;
+}
+.code-block code {
+  font-family: var(--font-mono);
+  color: inherit;
+  background: none;
+  white-space: pre;
+}
+.code-block .c-comment { color: #8A857A; }
+.code-block .c-prop    { color: #F2ECE0; }
+.code-block .c-val     { color: #7FD3CE; }
+.code-block .c-str     { color: #C9B88F; }
+.code-block .c-sel     { color: #F2ECE0; font-weight: 500; }
+.code-copy-btn {
+  position: absolute;
+  top: var(--s-3);
+  right: var(--s-3);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+  background: color-mix(in srgb, #F2ECE0 8%, transparent);
+  border: 1px solid color-mix(in srgb, #F2ECE0 15%, transparent);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.code-copy-btn:hover { color: #F2ECE0; border-color: #F2ECE0; }
+
+/* Closing cards */
+.closing-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--s-5);
+  margin-top: var(--s-5);
+}
+.closing-card {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  padding: var(--s-5);
+  background: var(--paper);
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+.closing-card:hover { border-color: var(--ink); transform: translateY(-2px); }
+.closing-card .tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.closing-card h3 {
+  font-size: 1.375rem;
+  font-variation-settings: "opsz" 72, "wght" 500;
+  letter-spacing: -0.01em;
+}
+.closing-card p { font-size: 14px; color: var(--ink-dim); }
+.closing-card .go {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink);
+  margin-top: auto;
+}
+.closing-card:hover .go { color: var(--accent); }
+
+.doc-foot {
+  padding: var(--s-9) 0 var(--s-7);
+  border-top: 1px solid var(--rule);
+  margin-top: var(--s-8);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-faint);
+  position: relative;
+  z-index: 2;
+}
+.doc-foot strong { color: var(--ink); font-weight: 500; }
+
+@media (max-width: 720px) {
+  .motion-grid { grid-template-columns: 1fr; }
+  .voice-grid { grid-template-columns: 1fr; }
+  .closing-grid { grid-template-columns: 1fr; }
+}
+
 /* Motion demos */
 .motion-grid {
   display: grid;
@@ -834,9 +938,110 @@ main { max-width: 1040px; margin: 0 auto; padding: 0 var(--s-6); position: relat
     </div>
   </section>
 
+  <!-- 08 IMPLEMENTATION -->
+  <section id="implementation" class="sect">
+    <div class="sect-title">
+      <span class="idx">08</span>
+      <div>
+        <h2>Implementation.</h2>
+        <p>Everything any dev needs to ship the system in thirty seconds. Copy the font link, copy the token block, start building.</p>
+      </div>
+    </div>
+
+    <div class="sect-body">
+
+      <h3 style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:var(--s-3);">1 · Google Fonts</h3>
+      <p style="color:var(--ink-dim);max-width:60ch;margin-bottom:var(--s-3);">Drop into <code style="font-family:var(--font-mono);">&lt;head&gt;</code>. Variable Fraunces for opticals; Inter and JetBrains Mono at the weights we actually use.</p>
+      <div class="code-block"><button class="code-copy-btn" data-copy="fonts">Copy</button><code id="code-fonts"><span class="c-sel">&lt;link</span> <span class="c-prop">rel</span>=<span class="c-str">"preconnect"</span> <span class="c-prop">href</span>=<span class="c-str">"https://fonts.googleapis.com"</span><span class="c-sel">&gt;</span>
+<span class="c-sel">&lt;link</span> <span class="c-prop">rel</span>=<span class="c-str">"preconnect"</span> <span class="c-prop">href</span>=<span class="c-str">"https://fonts.gstatic.com"</span> <span class="c-prop">crossorigin</span><span class="c-sel">&gt;</span>
+<span class="c-sel">&lt;link</span> <span class="c-prop">href</span>=<span class="c-str">"https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"</span> <span class="c-prop">rel</span>=<span class="c-str">"stylesheet"</span><span class="c-sel">&gt;</span></code></div>
+
+      <h3 style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-dim);margin:var(--s-6) 0 var(--s-3);">2 · Design tokens</h3>
+      <p style="color:var(--ink-dim);max-width:60ch;margin-bottom:var(--s-3);">Drop into your root stylesheet. Swap <code style="font-family:var(--font-mono);">--paper</code> per brand — nothing else forks.</p>
+      <div class="code-block"><button class="code-copy-btn" data-copy="tokens">Copy</button><code id="code-tokens"><span class="c-sel">:root</span> {
+  <span class="c-comment">/* Canvas — override --paper per brand */</span>
+  <span class="c-prop">--paper-warm</span>:   <span class="c-val">#F2ECE0</span>;   <span class="c-comment">/* Upskilled */</span>
+  <span class="c-prop">--paper-cool</span>:   <span class="c-val">#FAFAF6</span>;   <span class="c-comment">/* Nick personal */</span>
+  <span class="c-prop">--paper</span>:        <span class="c-val">var(--paper-warm)</span>;
+
+  <span class="c-comment">/* Ink */</span>
+  <span class="c-prop">--ink</span>:          <span class="c-val">#12110F</span>;
+  <span class="c-prop">--ink-dim</span>:      <span class="c-val">#5A564E</span>;
+  <span class="c-prop">--ink-faint</span>:    <span class="c-val">#8A857A</span>;
+  <span class="c-prop">--rule</span>:         <span class="c-val">#D9D3C7</span>;
+
+  <span class="c-comment">/* Accent */</span>
+  <span class="c-prop">--accent</span>:       <span class="c-val">#0E4F4C</span>;
+  <span class="c-prop">--accent-ink</span>:   <span class="c-val">#F2ECE0</span>;
+
+  <span class="c-comment">/* Type */</span>
+  <span class="c-prop">--font-display</span>: <span class="c-str">'Fraunces'</span>, Georgia, serif;
+  <span class="c-prop">--font-body</span>:    <span class="c-str">'Inter'</span>, -apple-system, sans-serif;
+  <span class="c-prop">--font-mono</span>:    <span class="c-str">'JetBrains Mono'</span>, ui-monospace, monospace;
+
+  <span class="c-comment">/* Scale (8pt) · motion */</span>
+  <span class="c-prop">--s-1</span>: <span class="c-val">4px</span>; <span class="c-prop">--s-2</span>: <span class="c-val">8px</span>; <span class="c-prop">--s-3</span>: <span class="c-val">12px</span>; <span class="c-prop">--s-4</span>: <span class="c-val">16px</span>;
+  <span class="c-prop">--s-5</span>: <span class="c-val">24px</span>; <span class="c-prop">--s-6</span>: <span class="c-val">32px</span>; <span class="c-prop">--s-7</span>: <span class="c-val">48px</span>; <span class="c-prop">--s-8</span>: <span class="c-val">64px</span>;
+  <span class="c-prop">--s-9</span>: <span class="c-val">96px</span>; <span class="c-prop">--s-10</span>: <span class="c-val">128px</span>;
+  <span class="c-prop">--ease</span>: <span class="c-val">cubic-bezier(.2,.6,.2,1)</span>;
+  <span class="c-prop">--dur</span>:  <span class="c-val">200ms</span>;
+}</code></div>
+
+      <h3 style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-dim);margin:var(--s-6) 0 var(--s-3);">3 · Per‑brand override</h3>
+      <p style="color:var(--ink-dim);max-width:60ch;margin-bottom:var(--s-3);">One rule at the body level per brand. That's the entire brand fork.</p>
+      <div class="code-block"><button class="code-copy-btn" data-copy="override">Copy</button><code id="code-override"><span class="c-comment">/* Upskilled Consulting */</span>
+<span class="c-sel">body.brand-upskilled</span> { <span class="c-prop">--paper</span>: <span class="c-val">var(--paper-warm)</span>; }
+
+<span class="c-comment">/* nickmccarty.me */</span>
+<span class="c-sel">body.brand-nick</span> { <span class="c-prop">--paper</span>: <span class="c-val">var(--paper-cool)</span>; }</code></div>
+
+      <div class="contrast-note" style="margin-top:var(--s-6);">
+        <strong style="color:var(--ink);">The full stylesheet.</strong>
+        <a class="link" href="system.css">system.css</a> ships the reset, nav, buttons,
+        list rows, service rows, metrics, pull quotes, footer, responsive breakpoints, and
+        reduced‑motion handling. ~15KB. Link it and the rest of the system is yours.
+      </div>
+
+    </div>
+  </section>
+
+  <!-- See the system in use -->
+  <section class="sect">
+    <div class="sect-title">
+      <span class="idx">✦</span>
+      <div>
+        <h2>See it in use.</h2>
+        <p>The two brands running on the same tokens. One file changed between them — <code style="font-family:var(--font-mono);">--paper</code>.</p>
+      </div>
+    </div>
+
+    <div class="sect-body">
+      <div class="closing-grid">
+        <a class="closing-card" href="upskilled.html">
+          <span class="tag">Warm paper · consulting</span>
+          <h3>Upskilled Consulting</h3>
+          <p>Hero, services, method, selected work, open course platform, about, contact. The full consulting site.</p>
+          <span class="go">Open preview →</span>
+        </a>
+        <a class="closing-card" href="nickmccarty.html">
+          <span class="tag">Cool paper · personal</span>
+          <h3>nickmccarty.me</h3>
+          <p>Editorial home for a senior practitioner. Thinking, selected work, speaking, bio. Funnels engagement to Upskilled.</p>
+          <span class="go">Open preview →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="doc-foot">
+    <span><strong>Nick McCarty Design System</strong> · v1.0 · 2026</span>
+    <span>Built on paper, serif, mono, and one accent.</span>
+  </footer>
+
 </main>
 
 <script>
+  // Mobile nav toggle
   const t = document.getElementById('navToggle');
   const l = document.getElementById('navLinks');
   if (t && l) {
@@ -845,6 +1050,19 @@ main { max-width: 1040px; margin: 0 auto; padding: 0 var(--s-6); position: relat
       t.setAttribute('aria-expanded', open);
     });
   }
+
+  // Copy code blocks
+  document.querySelectorAll('.code-copy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = document.getElementById('code-' + btn.dataset.copy);
+      if (!target) return;
+      navigator.clipboard.writeText(target.textContent).then(() => {
+        const original = btn.textContent;
+        btn.textContent = 'Copied';
+        setTimeout(() => { btn.textContent = original; }, 1400);
+      });
+    });
+  });
 </script>
 
 </body>
