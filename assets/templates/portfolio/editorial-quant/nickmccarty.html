@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nick McCarty — Notes from a working data scientist.</title>
+<meta name="description" content="Personal site of Nick McCarty — data scientist working on geospatial AI, computer vision, and interpretability.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="system.css">
+
+<style>
+/* Personal site — cool paper canvas */
+body { background: var(--paper-cool); }
+
+main { max-width: 920px; margin: 0 auto; padding: 0 var(--s-6); position: relative; z-index: 2; }
+
+/* Hero */
+.hero {
+  padding: var(--s-10) 0 var(--s-9);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--s-7);
+  align-items: start;
+}
+.hero-photo {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--rule-soft);
+  border: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--ink-dim);
+  flex-shrink: 0;
+}
+.hero h1 {
+  font-size: clamp(2.25rem, 5.5vw, 4rem);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  margin-bottom: var(--s-5);
+  font-variation-settings: "opsz" 144, "SOFT" 30, "wght" 500;
+}
+.hero h1 .accent { color: var(--accent); font-style: italic; font-variation-settings: "opsz" 144, "SOFT" 100, "wght" 500; }
+.hero .lead {
+  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+  max-width: 56ch;
+  color: var(--ink-dim);
+}
+.hero .meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-4) var(--s-6);
+  margin-top: var(--s-6);
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--rule);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+.hero .meta-row span strong { color: var(--ink); font-weight: 500; }
+
+/* Section header (smaller, editorial) */
+.sect-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--s-5);
+  padding-bottom: var(--s-4);
+  border-bottom: 1px solid var(--rule);
+}
+.sect-head h2 {
+  font-size: clamp(1.5rem, 2.5vw, 1.875rem);
+  font-variation-settings: "opsz" 48, "wght" 500;
+  letter-spacing: -0.01em;
+}
+.sect-head .meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+section { padding: var(--s-8) 0; }
+
+/* Now / thinking */
+.notes { display: flex; flex-direction: column; }
+
+/* Bio */
+.bio {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-4);
+  max-width: 60ch;
+}
+.bio p { color: var(--ink); }
+.bio p + p { color: var(--ink-dim); }
+
+/* Talks */
+.talks {
+  display: flex;
+  flex-direction: column;
+}
+.talk-row {
+  display: grid;
+  grid-template-columns: 100px 1fr auto;
+  gap: var(--s-5);
+  padding: var(--s-4) 0;
+  border-top: 1px solid var(--rule);
+  align-items: baseline;
+}
+.talk-row:last-child { border-bottom: 1px solid var(--rule); }
+.talk-row .when {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+.talk-row .what {
+  font-family: var(--font-display);
+  font-size: 1.075rem;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  font-variation-settings: "opsz" 48, "wght" 500;
+}
+.talk-row .what em {
+  display: block;
+  font-family: var(--font-body);
+  font-style: normal;
+  font-size: 13px;
+  color: var(--ink-dim);
+  margin-top: 2px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.talk-row .where {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+/* Upskilled funnel block */
+.funnel {
+  margin-top: var(--s-9);
+  padding: var(--s-7) var(--s-6);
+  border: 1px solid var(--ink);
+  border-radius: var(--radius-md);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--s-6);
+  align-items: center;
+  background: var(--paper);
+}
+.funnel h3 {
+  font-size: clamp(1.25rem, 2vw, 1.625rem);
+  letter-spacing: -0.01em;
+  margin-bottom: var(--s-2);
+  font-variation-settings: "opsz" 72, "wght" 500;
+}
+.funnel p { color: var(--ink-dim); font-size: 14px; max-width: 50ch; }
+.funnel .funnel-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--s-2);
+}
+.funnel .uc-mark {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Contact strip */
+.contact-strip {
+  margin: var(--s-9) 0 var(--s-7);
+  padding: var(--s-6) 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--s-4);
+}
+.contact-strip .where-am-i {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+.contact-strip .where-am-i strong { color: var(--ink); font-weight: 500; }
+.contact-strip .links {
+  display: flex;
+  gap: var(--s-5);
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+.contact-strip .links a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--dur) var(--ease), color var(--dur) var(--ease);
+  padding-bottom: 2px;
+}
+.contact-strip .links a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* Quiet footer */
+.foot {
+  padding: var(--s-7) 0 var(--s-9);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  position: relative;
+  z-index: 2;
+}
+
+/* Override sticky nav width to match narrower layout */
+.nav-inner { max-width: 920px; }
+
+/* Responsive */
+@media (max-width: 720px) {
+  .hero { grid-template-columns: 1fr; gap: var(--s-5); }
+  .hero-photo { width: 72px; height: 72px; font-size: 1.5rem; }
+  .funnel { grid-template-columns: 1fr; }
+  .funnel .funnel-cta { align-items: flex-start; }
+  .talk-row { grid-template-columns: 80px 1fr; }
+  .talk-row .where { grid-column: 2; padding-top: var(--s-1); }
+  .sect-head { flex-direction: column; align-items: flex-start; gap: var(--s-2); }
+}
+</style>
+</head>
+<body class="brand-cool">
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="#top" aria-label="Nick McCarty">
+      <span class="mark">[nm]</span>Nick McCarty
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#thinking">Thinking</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#talks">Talks</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a class="external" href="upskilled.html">Upskilled</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false" id="navToggle">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<main id="top">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-photo" aria-hidden="true">NM</div>
+    <div>
+      <span class="label">Notes from a working data scientist</span>
+      <h1 style="margin-top: var(--s-4);">
+        Hi, I'm <span class="accent">Nick</span>.<br>
+        I work on vision systems that have to be right.
+      </h1>
+      <p class="lead">
+        Geospatial AI, interpretable computer vision, and the engineering required to put both
+        in the hands of people who don't have time to debug a model. Currently focused on
+        foundation models for remote sensing and mechanistic interpretability.
+      </p>
+      <div class="meta-row">
+        <span><strong>Based</strong> · United States</span>
+        <span><strong>Practice</strong> · <a class="link" href="upskilled.html">Upskilled Consulting</a></span>
+        <span><strong>Speaking next</strong> · Geo Week 2026 · Denver · Feb 17</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- THINKING / NOW -->
+  <section id="thinking">
+    <div class="sect-head">
+      <h2>Recent thinking</h2>
+      <span class="meta">Updated · 2026·04</span>
+    </div>
+
+    <div class="notes">
+      <a class="list-row" href="#">
+        <span class="date">2026·04</span>
+        <span>
+          <span class="list-title">What "interpretable" actually means when the model is a vision foundation model.</span>
+          <span class="list-sub">A working note on circuit extraction, activation patching, and what we can honestly claim.</span>
+        </span>
+        <span class="tag">Note</span>
+      </a>
+      <a class="list-row" href="#">
+        <span class="date">2026·02</span>
+        <span>
+          <span class="list-title">Tiled inference is the boring part of geospatial ML — and the part that breaks first.</span>
+          <span class="list-sub">CRS reprojection, overlap, false‑positive deduplication, and why the UI matters more than the model.</span>
+        </span>
+        <span class="tag">Essay</span>
+      </a>
+      <a class="list-row" href="#">
+        <span class="date">2025·11</span>
+        <span>
+          <span class="list-title">Notes from teaching: the curriculum I'd build for a Fortune‑500 data team today.</span>
+          <span class="list-sub">What changed in two years, what didn't, and where most "AI training" actually fails.</span>
+        </span>
+        <span class="tag">Essay</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work">
+    <div class="sect-head">
+      <h2>Selected work</h2>
+      <span class="meta">2024 — present</span>
+    </div>
+
+    <a class="list-row" href="#">
+      <span class="date">2025</span>
+      <span>
+        <span class="list-title">Object Detection on Drone Orthomosaics with Meta's SAM</span>
+        <span class="list-sub">Foundation models on geospatial imagery for precision agriculture · SciPy 2025 proceedings.</span>
+      </span>
+      <span class="tag">Publication</span>
+    </a>
+    <a class="list-row" href="#">
+      <span class="date">2025</span>
+      <span>
+        <span class="list-title">Custom Object Detector UI</span>
+        <span class="list-sub">Faster R‑CNN + tiled inference + CRS reprojection wrapped in a polished interface for client orthomosaics.</span>
+      </span>
+      <span class="tag">Application</span>
+    </a>
+    <a class="list-row" href="#">
+      <span class="date">2025</span>
+      <span>
+        <span class="list-title">Mechanistic Interpretability for Vision Models</span>
+        <span class="list-sub">Circuit extraction and activation patching to understand how object detectors actually decide.</span>
+      </span>
+      <span class="tag">Research</span>
+    </a>
+    <a class="list-row" href="#">
+      <span class="date">2024</span>
+      <span>
+        <span class="list-title">Enterprise data‑science curriculum, Fortune 500</span>
+        <span class="list-sub">Built and delivered training for 200+ practitioners across multiple verticals.</span>
+      </span>
+      <span class="tag">Engagement</span>
+    </a>
+  </section>
+
+  <!-- TALKS -->
+  <section id="talks">
+    <div class="sect-head">
+      <h2>Speaking &amp; teaching</h2>
+      <span class="meta">Selected</span>
+    </div>
+
+    <div class="talks">
+      <div class="talk-row">
+        <span class="when">2026·02·17</span>
+        <span class="what">
+          Reimagining Mapping with AI &amp; Scalable Technologies
+          <em>Panel on the intersection of AI, geospatial technology, and scalable solutions.</em>
+        </span>
+        <span class="where">Geo Week · Denver</span>
+      </div>
+      <div class="talk-row">
+        <span class="when">2025·07</span>
+        <span class="what">
+          Object Detection on Drone Orthomosaics with Meta's SAM
+          <em>Conference talk on applying foundation models to geospatial imagery.</em>
+        </span>
+        <span class="where">SciPy 2025</span>
+      </div>
+      <div class="talk-row">
+        <span class="when">Ongoing</span>
+        <span class="what">
+          Open Course Platform · ML &amp; AI from foundations
+          <em>Free, self‑paced courses through Upskilled Consulting.</em>
+        </span>
+        <span class="where">Upskilled · Online</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="sect-head">
+      <h2>About</h2>
+      <span class="meta">In a paragraph</span>
+    </div>
+
+    <div class="bio">
+      <p>
+        I'm a data scientist working in applied machine learning, computer vision, and remote
+        sensing. My current obsession is interpretable vision models — understanding why
+        detectors decide the way they do, then using that understanding to build systems
+        that ship.
+      </p>
+      <p>
+        Most of my client work runs through <a class="link" href="upskilled.html">Upskilled Consulting</a>,
+        the practice I founded for engagements that genuinely need the research side and the
+        engineering side under one roof. I've trained data teams at Fortune 500 companies,
+        built production ML in precision agriculture, and contributed to the field through
+        published research and conference presentations.
+      </p>
+      <p>
+        I write here when I have something I'd want to read.
+      </p>
+    </div>
+
+    <!-- Funnel to Upskilled -->
+    <div class="funnel">
+      <div>
+        <span class="uc-mark">[uc] · Upskilled Consulting</span>
+        <h3 style="margin-top:var(--s-2);">For consulting work, talk to the practice.</h3>
+        <p>Project work, retainers, training engagements, and technical advisory — all run through Upskilled.</p>
+      </div>
+      <div class="funnel-cta">
+        <a class="btn btn-primary" href="upskilled.html">Visit Upskilled <span class="arrow">→</span></a>
+        <a class="link" href="mailto:get@upskilled.consulting" style="font-family:var(--font-mono);font-size:12px;">get@upskilled.consulting</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT STRIP -->
+  <div class="contact-strip">
+    <div class="where-am-i">
+      <strong>Personal correspondence</strong> — for everything that isn't engagements.
+    </div>
+    <div class="links">
+      <a href="https://www.linkedin.com/in/nicholasmccarty" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="#">GitHub ↗</a>
+      <a href="mailto:hello@nickmccarty.me">hello@nickmccarty.me</a>
+    </div>
+  </div>
+
+  <footer class="foot">
+    <span>© 2026 Nick McCarty</span>
+    <span>Built on the Nick McCarty Design System</span>
+  </footer>
+
+</main>
+
+<script>
+  const t = document.getElementById('navToggle');
+  const l = document.getElementById('navLinks');
+  if (t && l) {
+    t.addEventListener('click', () => {
+      const open = l.classList.toggle('mobile-open');
+      t.setAttribute('aria-expanded', open);
+    });
+  }
+</script>
+
+</body>
+</html>

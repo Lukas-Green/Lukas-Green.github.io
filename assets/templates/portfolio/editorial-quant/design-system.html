@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nick McCarty — Design System</title>
+<meta name="description" content="The design system shared by Upskilled Consulting and nickmccarty.me — Editorial Quant: paper, serif, mono, one accent.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="system.css">
+
+<style>
+/* Design-system doc — warm paper (Upskilled-leaning) */
+body { background: var(--paper-warm); }
+
+main { max-width: 1040px; margin: 0 auto; padding: 0 var(--s-6); position: relative; z-index: 2; }
+
+/* Doc header */
+.doc-head { padding: var(--s-10) 0 var(--s-8); }
+.doc-head h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  margin: var(--s-4) 0 var(--s-5);
+  font-variation-settings: "opsz" 144, "SOFT" 30, "wght" 500;
+}
+.doc-head h1 .accent { color: var(--accent); font-style: italic; font-variation-settings: "opsz" 144, "SOFT" 100, "wght" 500; }
+.doc-head .lead { font-size: clamp(1.1rem, 1.5vw, 1.3rem); max-width: 58ch; color: var(--ink-dim); }
+.doc-head .tag-row {
+  display: flex;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+  margin-top: var(--s-6);
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--rule);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+.doc-head .tag-row span strong { color: var(--ink); font-weight: 500; }
+
+/* TOC */
+.toc {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: var(--s-4) 0;
+  margin: var(--s-5) 0 var(--s-9);
+}
+.toc a {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-dim);
+  text-decoration: none;
+  padding: var(--s-2) 0;
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  transition: color var(--dur) var(--ease);
+}
+.toc a:hover { color: var(--accent); }
+.toc a .idx { color: var(--accent); font-size: 11px; }
+
+/* Section heading */
+.sect {
+  padding: var(--s-8) 0;
+  border-top: 1px solid var(--rule);
+}
+.sect-title {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: var(--s-5);
+  margin-bottom: var(--s-7);
+  align-items: baseline;
+}
+.sect-title .idx {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+}
+.sect-title h2 {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+  font-variation-settings: "opsz" 72, "wght" 500;
+}
+.sect-title p { color: var(--ink-dim); max-width: 56ch; margin-top: var(--s-3); }
+.sect-body { margin-left: calc(80px + var(--s-5)); }
+
+/* Principles */
+.principles {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--s-6);
+}
+.principle {
+  border-top: 1px solid var(--rule);
+  padding-top: var(--s-4);
+}
+.principle .n {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  margin-bottom: var(--s-2);
+}
+.principle h3 {
+  font-size: 1.25rem;
+  margin-bottom: var(--s-2);
+  font-variation-settings: "opsz" 48, "wght" 500;
+  letter-spacing: -0.005em;
+}
+.principle p { color: var(--ink-dim); font-size: 14px; }
+
+/* Swatches */
+.swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s-3);
+  margin-bottom: var(--s-6);
+}
+.swatch {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--paper);
+}
+.swatch .chip {
+  height: 120px;
+  border-bottom: 1px solid var(--rule);
+}
+.swatch .meta {
+  padding: var(--s-3);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.swatch .name { font-size: 13px; font-weight: 500; color: var(--ink); }
+.swatch .hex {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-dim);
+}
+.swatch .use {
+  font-size: 11px;
+  color: var(--ink-faint);
+  margin-top: 4px;
+  line-height: 1.4;
+}
+.contrast-note {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-dim);
+  padding: var(--s-4);
+  border-left: 2px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  margin-top: var(--s-4);
+}
+
+/* Type specimen */
+.specimen {
+  border-top: 1px solid var(--rule);
+  padding: var(--s-5) 0;
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: var(--s-5);
+  align-items: baseline;
+}
+.specimen .spec-meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.specimen .spec-meta strong {
+  display: block;
+  color: var(--ink);
+  font-weight: 500;
+  font-family: var(--font-body);
+  font-size: 13px;
+  text-transform: none;
+  letter-spacing: 0;
+  margin-bottom: 2px;
+}
+.spec-xl { font-family: var(--font-display); font-size: 4rem; line-height: 1.02; letter-spacing: -0.03em; font-variation-settings: "opsz" 144, "wght" 500; }
+.spec-l  { font-family: var(--font-display); font-size: 2.5rem; line-height: 1.08; letter-spacing: -0.015em; font-variation-settings: "opsz" 96, "wght" 500; }
+.spec-m  { font-family: var(--font-display); font-size: 1.5rem; line-height: 1.2; letter-spacing: -0.005em; font-variation-settings: "opsz" 48, "wght" 500; }
+.spec-body-l { font-family: var(--font-body); font-size: 1.125rem; line-height: 1.6; color: var(--ink); }
+.spec-body { font-family: var(--font-body); font-size: 1rem; line-height: 1.65; color: var(--ink); }
+.spec-mono { font-family: var(--font-mono); font-size: 1rem; font-variant-numeric: tabular-nums; color: var(--ink); }
+.spec-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
+@media (max-width: 720px) {
+  .toc { grid-template-columns: repeat(2, 1fr); }
+  .sect-title { grid-template-columns: 1fr; gap: var(--s-2); }
+  .sect-body { margin-left: 0; }
+  .principles { grid-template-columns: 1fr; }
+  .swatch-grid { grid-template-columns: repeat(2, 1fr); }
+  .specimen { grid-template-columns: 1fr; gap: var(--s-3); }
+  .spec-xl { font-size: 2.5rem; }
+  .spec-l { font-size: 1.75rem; }
+/* Spacing visual */
+.space-row {
+  display: grid;
+  grid-template-columns: 100px 1fr 120px;
+  gap: var(--s-4);
+  align-items: center;
+  padding: var(--s-3) 0;
+  border-top: 1px solid var(--rule);
+}
+.space-row:last-child { border-bottom: 1px solid var(--rule); }
+.space-row .token { font-family: var(--font-mono); font-size: 12px; color: var(--ink); }
+.space-row .val { font-family: var(--font-mono); font-size: 11px; color: var(--ink-faint); text-align: right; }
+.space-row .bar { height: 16px; background: var(--accent); border-radius: 2px; }
+
+/* Code block */
+.code-block {
+  background: #12110F;
+  color: #E8E4DA;
+  border-radius: var(--radius-md);
+  padding: var(--s-5);
+  margin: var(--s-4) 0;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  position: relative;
+}
+.code-block code {
+  font-family: var(--font-mono);
+  color: inherit;
+  background: none;
+  white-space: pre;
+}
+.code-block .c-comment { color: #8A857A; }
+.code-block .c-prop    { color: #F2ECE0; }
+.code-block .c-val     { color: #7FD3CE; }
+.code-block .c-str     { color: #C9B88F; }
+.code-block .c-sel     { color: #F2ECE0; font-weight: 500; }
+.code-copy-btn {
+  position: absolute;
+  top: var(--s-3);
+  right: var(--s-3);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+  background: color-mix(in srgb, #F2ECE0 8%, transparent);
+  border: 1px solid color-mix(in srgb, #F2ECE0 15%, transparent);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.code-copy-btn:hover { color: #F2ECE0; border-color: #F2ECE0; }
+
+/* Closing cards */
+.closing-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--s-5);
+  margin-top: var(--s-5);
+}
+.closing-card {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  padding: var(--s-5);
+  background: var(--paper);
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+.closing-card:hover { border-color: var(--ink); transform: translateY(-2px); }
+.closing-card .tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.closing-card h3 {
+  font-size: 1.375rem;
+  font-variation-settings: "opsz" 72, "wght" 500;
+  letter-spacing: -0.01em;
+}
+.closing-card p { font-size: 14px; color: var(--ink-dim); }
+.closing-card .go {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink);
+  margin-top: auto;
+}
+.closing-card:hover .go { color: var(--accent); }
+
+.doc-foot {
+  padding: var(--s-9) 0 var(--s-7);
+  border-top: 1px solid var(--rule);
+  margin-top: var(--s-8);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-faint);
+  position: relative;
+  z-index: 2;
+}
+.doc-foot strong { color: var(--ink); font-weight: 500; }
+
+@media (max-width: 720px) {
+  .motion-grid { grid-template-columns: 1fr; }
+  .voice-grid { grid-template-columns: 1fr; }
+  .closing-grid { grid-template-columns: 1fr; }
+}
+
+/* Motion demos */
+.motion-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-4);
+}
+.motion-card {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  padding: var(--s-5);
+  background: var(--paper);
+}
+.motion-card .name {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent);
+  margin-bottom: var(--s-2);
+}
+.motion-card h4 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: var(--s-2);
+  font-variation-settings: "opsz" 48, "wght" 500;
+}
+.motion-card p { font-size: 13px; color: var(--ink-dim); margin-bottom: var(--s-4); }
+.motion-preview {
+  height: 72px;
+  border: 1px dashed var(--rule);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-dim);
+  font-size: 13px;
+  cursor: default;
+  transition: background var(--dur) var(--ease), color var(--dur) var(--ease), transform var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.motion-preview.lift:hover { transform: translateY(-2px); border-color: var(--ink); color: var(--ink); }
+.motion-preview.tint:hover { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); border-style: solid; }
+.motion-preview.underline {
+  display: inline-flex;
+  height: auto;
+  padding: var(--s-2) 0;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink);
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 2px;
+  transition: background-size var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+.motion-preview.underline:hover { background-size: 100% 2px; color: var(--accent); }
+
+/* Voice do/don't */
+.voice-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-5);
+  margin-top: var(--s-4);
+}
+.voice-col h3 {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  margin-bottom: var(--s-4);
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+.voice-col.do h3::before   { content: "+"; color: var(--accent); font-family: var(--font-mono); font-size: 14px; }
+.voice-col.dont h3::before { content: "×"; color: var(--ink-faint); font-family: var(--font-mono); font-size: 14px; }
+.voice-item {
+  padding: var(--s-4) 0;
+  border-top: 1px solid var(--rule);
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  line-height: 1.4;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  font-variation-settings: "opsz" 48, "wght" 400;
+}
+.voice-col.dont .voice-item { color: var(--ink-faint); text-decoration: line-through; text-decoration-color: color-mix(in srgb, var(--ink-faint) 40%, transparent); }
+.voice-item:last-child { border-bottom: 1px solid var(--rule); }
+
+/* Component demo frame */
+.demo {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  margin: var(--s-4) 0 var(--s-7);
+  overflow: hidden;
+  background: var(--paper);
+}
+.demo-label {
+  padding: var(--s-3) var(--s-4);
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: var(--rule-soft);
+}
+.demo-body { padding: var(--s-5); }
+
+/* Button demo row */
+.btn-row { display: flex; gap: var(--s-3); flex-wrap: wrap; align-items: center; }
+
+/* Metric demo */
+.metric-demo {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-5);
+}
+
+/* Service row demo needs container */
+.demo .service-row:first-child { border-top: 0; padding-top: 0; }
+.demo .list-row:first-child { border-top: 0; }
+
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html" aria-label="Nick McCarty Design System">
+      <span class="mark">[ds]</span>Nick · Design System
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#principles">Principles</a></li>
+      <li><a href="#color">Color</a></li>
+      <li><a href="#type">Type</a></li>
+      <li><a href="#components">Components</a></li>
+      <li><a href="#voice">Voice</a></li>
+      <li><a class="external" href="upskilled.html">Upskilled</a></li>
+      <li><a class="external" href="nickmccarty.html">Personal</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false" id="navToggle">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<main id="top">
+
+  <!-- DOC HEADER -->
+  <header class="doc-head">
+    <span class="label">The Nick McCarty Design System · v1.0</span>
+    <h1>Editorial <span class="accent">Quant</span>.<br>A house style for a senior practice.</h1>
+    <p class="lead">
+      A shared visual language for Upskilled Consulting and nickmccarty.me. Paper canvas, serif
+      display, mono metrics, one confident accent, zero gradients. The same DNA across both
+      brands — one variable swap away from either temperature.
+    </p>
+    <div class="tag-row">
+      <span><strong>Applies to</strong> · upskilled.consulting · nickmccarty.me</span>
+      <span><strong>Scope</strong> · Tokens, type, components, voice</span>
+      <span><strong>Logos</strong> · Unchanged</span>
+    </div>
+  </header>
+
+  <!-- TOC -->
+  <nav class="toc" aria-label="Table of contents">
+    <a href="#principles"><span class="idx">01</span> Principles</a>
+    <a href="#color"><span class="idx">02</span> Color</a>
+    <a href="#type"><span class="idx">03</span> Type</a>
+    <a href="#spacing"><span class="idx">04</span> Spacing &amp; grid</a>
+    <a href="#components"><span class="idx">05</span> Components</a>
+    <a href="#motion"><span class="idx">06</span> Motion</a>
+    <a href="#voice"><span class="idx">07</span> Voice</a>
+    <a href="#implementation"><span class="idx">08</span> Implementation</a>
+  </nav>
+
+  <!-- 01 PRINCIPLES -->
+  <section id="principles" class="sect">
+    <div class="sect-title">
+      <span class="idx">01</span>
+      <div>
+        <h2>Principles.</h2>
+        <p>Five rules that hold whenever a decision is hard. If a proposal breaks one, rewrite the proposal.</p>
+      </div>
+    </div>
+
+    <div class="sect-body">
+      <div class="principles">
+        <div class="principle">
+          <div class="n">01</div>
+          <h3>No gradients.</h3>
+          <p>Flat color only. Depth comes from hairline rules, tabular alignment, and a 3% paper grain — never a color ramp.</p>
+        </div>
+        <div class="principle">
+          <div class="n">02</div>
+          <h3>One accent, used sparingly.</h3>
+          <p>Ink‑teal marks interaction, the one key metric, and a single hero moment per page. If it's decorative, remove it.</p>
+        </div>
+        <div class="principle">
+          <div class="n">03</div>
+          <h3>Type does the heavy lifting.</h3>
+          <p>Fraunces for authority, Inter for clarity, JetBrains Mono for numbers. Tabular figures on by default.</p>
+        </div>
+        <div class="principle">
+          <div class="n">04</div>
+          <h3>Structured whitespace.</h3>
+          <p>8‑pt scale, wide gutters, generous vertical rhythm. Expensive feels empty until you stop to read it.</p>
+        </div>
+        <div class="principle">
+          <div class="n">05</div>
+          <h3>Motion is quiet.</h3>
+          <p>200ms ease‑out, 1–2px translate on hover, underline draw on links. No parallax, no scroll‑jacking, no orbs.</p>
+        </div>
+        <div class="principle">
+          <div class="n">06</div>
+          <h3>Two brands, one DNA.</h3>
+          <p>Upskilled on warm paper; Nick on cool paper. Everything else — type, scale, accent, components — identical.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 COLOR -->
+  <section id="color" class="sect">
+    <div class="sect-title">
+      <span class="idx">02</span>
+      <div>
+        <h2>Color.</h2>
+        <p>Two papers, four inks, one accent. That's the entire palette. Avoid introducing a second hue — restraint is the point.</p>
+      </div>
+    </div>
+
+    <div class="sect-body">
+      <h3 style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:var(--s-4);">Canvas</h3>
+      <div class="swatch-grid">
+        <div class="swatch">
+          <div class="chip" style="background:#F2ECE0;"></div>
+          <div class="meta">
+            <span class="name">Paper · warm</span>
+            <span class="hex">#F2ECE0</span>
+            <span class="use">Upskilled Consulting canvas. Institutional.</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background:#FAFAF6;"></div>
+          <div class="meta">
+            <span class="name">Paper · cool</span>
+            <span class="hex">#FAFAF6</span>
+            <span class="use">nickmccarty.me canvas. Quieter.</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background:#D9D3C7;"></div>
+          <div class="meta">
+            <span class="name">Rule</span>
+            <span class="hex">#D9D3C7</span>
+            <span class="use">Hairlines, card borders.</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background:#E4DFD3;"></div>
+          <div class="meta">
+            <span class="name">Rule · soft</span>
+            <span class="hex">#E4DFD3</span>
+            <span class="use">Hover states, subtle fills.</span>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:var(--s-4);">Ink &amp; accent</h3>
+      <div class="swatch-grid">
+        <div class="swatch">
+          <div class="chip" style="background:#12110F;"></div>
+          <div class="meta">
+            <span class="name">Ink</span>
+            <span class="hex">#12110F</span>
+            <span class="use">Body copy, headlines.</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background:#5A564E;"></div>
+          <div class="meta">
+            <span class="name">Ink · dim</span>
+            <span class="hex">#5A564E</span>
+            <span class="use">Secondary text, captions.</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background:#8A857A;"></div>
+          <div class="meta">
+            <span class="name">Ink · faint</span>
+            <span class="hex">#8A857A</span>
+            <span class="use">Timestamps, meta. Non‑essential only.</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background:#0E4F4C;"></div>
+          <div class="meta">
+            <span class="name">Accent</span>
+            <span class="hex">#0E4F4C</span>
+            <span class="use">Ink‑teal. Interaction &amp; one hero moment.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="contrast-note">
+        <strong style="color:var(--ink);">Contrast rules.</strong>
+        Ink on either paper clears 14:1 (AAA). Ink‑dim on warm paper is 5.2:1 (AA body).
+        Ink‑faint is 3.1:1 — large text or non‑essential meta only, never body copy.
+        Accent on either paper is 8.9:1 — safe for links, buttons, and running numerics.
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 TYPE -->
+  <section id="type" class="sect">
+    <div class="sect-title">
+      <span class="idx">03</span>
+      <div>
+        <h2>Typography.</h2>
+        <p>Three typefaces, three jobs. Fraunces carries authority, Inter carries clarity, JetBrains Mono carries the numbers. Never mix display and body within the same line.</p>
+      </div>
+    </div>
+
+    <div class="sect-body">
+      <div class="specimen">
+        <div class="spec-meta">
+          <strong>Display · XL</strong>
+          Fraunces 500 · opsz 144<br>
+          72 / 1.02 · −3% tracking
+        </div>
+        <div class="spec-xl">Geospatial AI, built to <em style="color:var(--accent);font-variation-settings:'opsz' 144,'SOFT' 100;">ship</em>.</div>
+      </div>
+      <div class="specimen">
+        <div class="spec-meta">
+          <strong>Display · L</strong>
+          Fraunces 500 · opsz 96<br>
+          40 / 1.08 · −1.5%
+        </div>
+        <div class="spec-l">Increasing capacity.</div>
+      </div>
+      <div class="specimen">
+        <div class="spec-meta">
+          <strong>Display · M</strong>
+          Fraunces 500 · opsz 48<br>
+          24 / 1.2 · −0.5%
+        </div>
+        <div class="spec-m">Object Detection on Drone Orthomosaics with Meta's SAM</div>
+      </div>
+      <div class="specimen">
+        <div class="spec-meta">
+          <strong>Body · L</strong>
+          Inter 400<br>
+          18 / 1.6
+        </div>
+        <div class="spec-body-l">
+          Upskilled Consulting designs, fine‑tunes, and deploys computer vision and ML
+          systems for enterprises and startups — with a research bench in interpretability
+          and remote sensing.
+        </div>
+      </div>
+      <div class="specimen">
+        <div class="spec-meta">
+          <strong>Body</strong>
+          Inter 400<br>
+          16 / 1.65
+        </div>
+        <div class="spec-body">
+          Before the first model, we agree on what "working" looks like — and what it's worth.
+          A short, honest cycle that proves or kills the approach. We share what we find,
+          including when we're wrong.
+        </div>
+      </div>
+      <div class="specimen">
+        <div class="spec-meta">
+          <strong>Mono</strong>
+          JetBrains Mono 500<br>
+          tabular‑nums
+        </div>
+        <div class="spec-mono">200+ students · &gt;95% satisfaction · 10+ years · 50+ hrs free</div>
+      </div>
+      <div class="specimen">
+        <div class="spec-meta">
+          <strong>Label</strong>
+          Inter 600<br>
+          11 / +12% tracking · caps
+        </div>
+        <div class="spec-label">What we bring · Selected work · Free learning</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 SPACING -->
+  <section id="spacing" class="sect">
+    <div class="sect-title">
+      <span class="idx">04</span>
+      <div>
+        <h2>Spacing &amp; grid.</h2>
+        <p>Eight‑point scale. Every gap, padding, and margin comes from this set — no in‑between values. Section padding is generous on purpose.</p>
+      </div>
+    </div>
+
+    <div class="sect-body">
+      <div class="space-row"><span class="token">--s-1</span><span class="bar" style="width:4px;"></span><span class="val">4px</span></div>
+      <div class="space-row"><span class="token">--s-2</span><span class="bar" style="width:8px;"></span><span class="val">8px</span></div>
+      <div class="space-row"><span class="token">--s-3</span><span class="bar" style="width:12px;"></span><span class="val">12px</span></div>
+      <div class="space-row"><span class="token">--s-4</span><span class="bar" style="width:16px;"></span><span class="val">16px</span></div>
+      <div class="space-row"><span class="token">--s-5</span><span class="bar" style="width:24px;"></span><span class="val">24px</span></div>
+      <div class="space-row"><span class="token">--s-6</span><span class="bar" style="width:32px;"></span><span class="val">32px</span></div>
+      <div class="space-row"><span class="token">--s-7</span><span class="bar" style="width:48px;"></span><span class="val">48px</span></div>
+      <div class="space-row"><span class="token">--s-8</span><span class="bar" style="width:64px;"></span><span class="val">64px</span></div>
+      <div class="space-row"><span class="token">--s-9</span><span class="bar" style="width:96px;"></span><span class="val">96px</span></div>
+      <div class="space-row"><span class="token">--s-10</span><span class="bar" style="width:128px;"></span><span class="val">128px</span></div>
+
+      <div class="contrast-note" style="margin-top:var(--s-6);">
+        <strong style="color:var(--ink);">Container widths.</strong>
+        Default <code style="font-family:var(--font-mono);">1160px</code> for marketing pages;
+        <code style="font-family:var(--font-mono);">920px</code> for editorial (personal site);
+        <code style="font-family:var(--font-mono);">820px</code> for long‑form prose. Never exceed.
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 COMPONENTS -->
+  <section id="components" class="sect">
+    <div class="sect-title">
+      <span class="idx">05</span>
+      <div>
+        <h2>Components.</h2>
+        <p>Live, not renders. Every example below is the actual component you'll ship — hover it, click it, inspect it.</p>
+      </div>
+    </div>
+
+    <div class="sect-body">
+
+      <h3 style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:var(--s-3);">Buttons</h3>
+      <div class="demo">
+        <div class="demo-label">.btn-primary · .btn-ghost</div>
+        <div class="demo-body">
+          <div class="btn-row">
+            <a class="btn btn-primary" href="#">Book a call <span class="arrow">→</span></a>
+            <a class="btn btn-ghost" href="#">See selected work</a>
+            <a class="link" href="#" style="font-family:var(--font-mono);font-size:13px;">Inline link</a>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:var(--s-3);margin-top:var(--s-6);">Service row</h3>
+      <div class="demo">
+        <div class="demo-label">.service-row — numbered, with engagement meta</div>
+        <div class="demo-body">
+          <article class="service-row">
+            <div class="idx">01</div>
+            <div>
+              <div class="title">Computer vision &amp; remote sensing</div>
+              <p class="body"><strong>Aerial and drone data turned into production decisions.</strong> Fine‑tuned object detection, photogrammetry pipelines, 3D reconstruction.</p>
+            </div>
+            <div class="meta">8–24 wk engagement</div>
+          </article>
+        </div>
+      </div>
+
+      <h3 style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:var(--s-3);margin-top:var(--s-6);">List row</h3>
+      <div class="demo">
+        <div class="demo-label">.list-row — editorial index, with date + tag</div>
+        <div class="demo-body">
+          <a class="list-row" href="#">
+            <span class="date">2025</span>
+            <span>
+              <span class="list-title">Object Detection on Drone Orthomosaics with Meta's SAM</span>
+              <span class="list-sub">Foundation models on geospatial imagery · SciPy 2025 proceedings.</span>
+            </span>
+            <span class="tag">Publication</span>
+          </a>
+          <a class="list-row" href="#">
+            <span class="date">2025</span>
+            <span>
+              <span class="list-title">Mechanistic Interpretability for Vision Models</span>
+              <span class="list-sub">Circuit extraction and activation patching on object detectors.</span>
+            </span>
+            <span class="tag">Research</span>
+          </a>
+        </div>
+      </div>
+
+      <h3 style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:var(--s-3);margin-top:var(--s-6);">Metric block</h3>
+      <div class="demo">
+        <div class="demo-label">.metric — mono value, dimmed label. Accent on the value only.</div>
+        <div class="demo-body">
+          <div class="metric-demo">
+            <div class="metric">
+              <span class="value">200+</span>
+              <span class="label-txt">Students trained</span>
+            </div>
+            <div class="metric">
+              <span class="value">&gt;95%</span>
+              <span class="label-txt">Satisfaction rate</span>
+            </div>
+            <div class="metric">
+              <span class="value">10+</span>
+              <span class="label-txt">Years experience</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:var(--s-3);margin-top:var(--s-6);">Pull quote</h3>
+      <div class="demo">
+        <div class="demo-label">.pullquote — italic display, accent rule.</div>
+        <div class="demo-body">
+          <blockquote class="pullquote">
+            Transforming complex problems into practical data products through expertise in
+            geospatial AI and interpretable vision models.
+          </blockquote>
+        </div>
+      </div>
+
+      <h3 style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:var(--s-3);margin-top:var(--s-6);">Eyebrow / label</h3>
+      <div class="demo">
+        <div class="demo-label">.label — small‑caps section marker with accent hair.</div>
+        <div class="demo-body">
+          <span class="label">What we bring</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 06 MOTION -->
+  <section id="motion" class="sect">
+    <div class="sect-title">
+      <span class="idx">06</span>
+      <div>
+        <h2>Motion.</h2>
+        <p>Three named interactions. Everything else is still. Duration 200ms, ease <code style="font-family:var(--font-mono);font-size:.9em;">cubic-bezier(.2,.6,.2,1)</code>. No parallax, no scroll‑jacking, no hero animations.</p>
+      </div>
+    </div>
+
+    <div class="sect-body">
+      <div class="motion-grid">
+        <div class="motion-card">
+          <div class="name">01 · Lift</div>
+          <h4>Card hover.</h4>
+          <p>1–2px translate up, border darkens from rule to ink. Signals "clickable" without shadow.</p>
+          <div class="motion-preview lift">Hover me</div>
+        </div>
+        <div class="motion-card">
+          <div class="name">02 · Tint</div>
+          <h4>Primary button.</h4>
+          <p>Fill darkens one step; arrow translates 3px right. Confidence, not bounce.</p>
+          <div class="motion-preview tint">Hover me</div>
+        </div>
+        <div class="motion-card">
+          <div class="name">03 · Underline draw</div>
+          <h4>Inline link.</h4>
+          <p>Accent underline draws left‑to‑right under the word. Color shifts to accent.</p>
+          <div class="motion-preview underline">Hover me</div>
+        </div>
+      </div>
+
+      <div class="contrast-note" style="margin-top:var(--s-6);">
+        <strong style="color:var(--ink);">Reduced motion.</strong>
+        All transitions collapse to 0.01ms under <code style="font-family:var(--font-mono);">prefers-reduced-motion</code>.
+        Already wired into <code style="font-family:var(--font-mono);">system.css</code>. Do not override.
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 VOICE -->
+  <section id="voice" class="sect">
+    <div class="sect-title">
+      <span class="idx">07</span>
+      <div>
+        <h2>Voice.</h2>
+        <p>Write like Nick actually talks about his work: specific, direct, quietly confident, occasionally dry. The work is the proof — the copy doesn't have to oversell.</p>
+      </div>
+    </div>
+
+    <div class="sect-body">
+      <div class="voice-grid">
+        <div class="voice-col do">
+          <h3>Do</h3>
+          <div class="voice-item">Geospatial AI, built to ship.</div>
+          <div class="voice-item">A short, honest cycle that proves or kills the approach.</div>
+          <div class="voice-item">Data teams that don't need us next quarter.</div>
+          <div class="voice-item">Tiled inference is the boring part — and the part that breaks first.</div>
+          <div class="voice-item">We aim to be missed, not necessary.</div>
+        </div>
+        <div class="voice-col dont">
+          <h3>Don't</h3>
+          <div class="voice-item">Leveraging cutting‑edge AI to unlock synergies.</div>
+          <div class="voice-item">Let's build something amazing together!</div>
+          <div class="voice-item">Passionate about data. Obsessed with impact.</div>
+          <div class="voice-item">Revolutionizing how enterprises think about ML.</div>
+          <div class="voice-item">Your trusted partner in the AI journey.</div>
+        </div>
+      </div>
+
+      <div class="contrast-note" style="margin-top:var(--s-6);">
+        <strong style="color:var(--ink);">Three rules.</strong>
+        (1) Prefer a specific noun to an abstract one — "drone orthomosaic," not "geospatial data asset."
+        (2) State the outcome before the method.
+        (3) If a sentence could appear on any consulting site, rewrite it. The voice is the moat.
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 IMPLEMENTATION -->
+  <section id="implementation" class="sect">
+    <div class="sect-title">
+      <span class="idx">08</span>
+      <div>
+        <h2>Implementation.</h2>
+        <p>Everything any dev needs to ship the system in thirty seconds. Copy the font link, copy the token block, start building.</p>
+      </div>
+    </div>
+
+    <div class="sect-body">
+
+      <h3 style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:var(--s-3);">1 · Google Fonts</h3>
+      <p style="color:var(--ink-dim);max-width:60ch;margin-bottom:var(--s-3);">Drop into <code style="font-family:var(--font-mono);">&lt;head&gt;</code>. Variable Fraunces for opticals; Inter and JetBrains Mono at the weights we actually use.</p>
+      <div class="code-block"><button class="code-copy-btn" data-copy="fonts">Copy</button><code id="code-fonts"><span class="c-sel">&lt;link</span> <span class="c-prop">rel</span>=<span class="c-str">"preconnect"</span> <span class="c-prop">href</span>=<span class="c-str">"https://fonts.googleapis.com"</span><span class="c-sel">&gt;</span>
+<span class="c-sel">&lt;link</span> <span class="c-prop">rel</span>=<span class="c-str">"preconnect"</span> <span class="c-prop">href</span>=<span class="c-str">"https://fonts.gstatic.com"</span> <span class="c-prop">crossorigin</span><span class="c-sel">&gt;</span>
+<span class="c-sel">&lt;link</span> <span class="c-prop">href</span>=<span class="c-str">"https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"</span> <span class="c-prop">rel</span>=<span class="c-str">"stylesheet"</span><span class="c-sel">&gt;</span></code></div>
+
+      <h3 style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-dim);margin:var(--s-6) 0 var(--s-3);">2 · Design tokens</h3>
+      <p style="color:var(--ink-dim);max-width:60ch;margin-bottom:var(--s-3);">Drop into your root stylesheet. Swap <code style="font-family:var(--font-mono);">--paper</code> per brand — nothing else forks.</p>
+      <div class="code-block"><button class="code-copy-btn" data-copy="tokens">Copy</button><code id="code-tokens"><span class="c-sel">:root</span> {
+  <span class="c-comment">/* Canvas — override --paper per brand */</span>
+  <span class="c-prop">--paper-warm</span>:   <span class="c-val">#F2ECE0</span>;   <span class="c-comment">/* Upskilled */</span>
+  <span class="c-prop">--paper-cool</span>:   <span class="c-val">#FAFAF6</span>;   <span class="c-comment">/* Nick personal */</span>
+  <span class="c-prop">--paper</span>:        <span class="c-val">var(--paper-warm)</span>;
+
+  <span class="c-comment">/* Ink */</span>
+  <span class="c-prop">--ink</span>:          <span class="c-val">#12110F</span>;
+  <span class="c-prop">--ink-dim</span>:      <span class="c-val">#5A564E</span>;
+  <span class="c-prop">--ink-faint</span>:    <span class="c-val">#8A857A</span>;
+  <span class="c-prop">--rule</span>:         <span class="c-val">#D9D3C7</span>;
+
+  <span class="c-comment">/* Accent */</span>
+  <span class="c-prop">--accent</span>:       <span class="c-val">#0E4F4C</span>;
+  <span class="c-prop">--accent-ink</span>:   <span class="c-val">#F2ECE0</span>;
+
+  <span class="c-comment">/* Type */</span>
+  <span class="c-prop">--font-display</span>: <span class="c-str">'Fraunces'</span>, Georgia, serif;
+  <span class="c-prop">--font-body</span>:    <span class="c-str">'Inter'</span>, -apple-system, sans-serif;
+  <span class="c-prop">--font-mono</span>:    <span class="c-str">'JetBrains Mono'</span>, ui-monospace, monospace;
+
+  <span class="c-comment">/* Scale (8pt) · motion */</span>
+  <span class="c-prop">--s-1</span>: <span class="c-val">4px</span>; <span class="c-prop">--s-2</span>: <span class="c-val">8px</span>; <span class="c-prop">--s-3</span>: <span class="c-val">12px</span>; <span class="c-prop">--s-4</span>: <span class="c-val">16px</span>;
+  <span class="c-prop">--s-5</span>: <span class="c-val">24px</span>; <span class="c-prop">--s-6</span>: <span class="c-val">32px</span>; <span class="c-prop">--s-7</span>: <span class="c-val">48px</span>; <span class="c-prop">--s-8</span>: <span class="c-val">64px</span>;
+  <span class="c-prop">--s-9</span>: <span class="c-val">96px</span>; <span class="c-prop">--s-10</span>: <span class="c-val">128px</span>;
+  <span class="c-prop">--ease</span>: <span class="c-val">cubic-bezier(.2,.6,.2,1)</span>;
+  <span class="c-prop">--dur</span>:  <span class="c-val">200ms</span>;
+}</code></div>
+
+      <h3 style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-dim);margin:var(--s-6) 0 var(--s-3);">3 · Per‑brand override</h3>
+      <p style="color:var(--ink-dim);max-width:60ch;margin-bottom:var(--s-3);">One rule at the body level per brand. That's the entire brand fork.</p>
+      <div class="code-block"><button class="code-copy-btn" data-copy="override">Copy</button><code id="code-override"><span class="c-comment">/* Upskilled Consulting */</span>
+<span class="c-sel">body.brand-upskilled</span> { <span class="c-prop">--paper</span>: <span class="c-val">var(--paper-warm)</span>; }
+
+<span class="c-comment">/* nickmccarty.me */</span>
+<span class="c-sel">body.brand-nick</span> { <span class="c-prop">--paper</span>: <span class="c-val">var(--paper-cool)</span>; }</code></div>
+
+      <div class="contrast-note" style="margin-top:var(--s-6);">
+        <strong style="color:var(--ink);">The full stylesheet.</strong>
+        <a class="link" href="system.css">system.css</a> ships the reset, nav, buttons,
+        list rows, service rows, metrics, pull quotes, footer, responsive breakpoints, and
+        reduced‑motion handling. ~15KB. Link it and the rest of the system is yours.
+      </div>
+
+    </div>
+  </section>
+
+  <!-- See the system in use -->
+  <section class="sect">
+    <div class="sect-title">
+      <span class="idx">✦</span>
+      <div>
+        <h2>See it in use.</h2>
+        <p>The two brands running on the same tokens. One file changed between them — <code style="font-family:var(--font-mono);">--paper</code>.</p>
+      </div>
+    </div>
+
+    <div class="sect-body">
+      <div class="closing-grid">
+        <a class="closing-card" href="upskilled.html">
+          <span class="tag">Warm paper · consulting</span>
+          <h3>Upskilled Consulting</h3>
+          <p>Hero, services, method, selected work, open course platform, about, contact. The full consulting site.</p>
+          <span class="go">Open preview →</span>
+        </a>
+        <a class="closing-card" href="nickmccarty.html">
+          <span class="tag">Cool paper · personal</span>
+          <h3>nickmccarty.me</h3>
+          <p>Editorial home for a senior practitioner. Thinking, selected work, speaking, bio. Funnels engagement to Upskilled.</p>
+          <span class="go">Open preview →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="doc-foot">
+    <span><strong>Nick McCarty Design System</strong> · v1.0 · 2026</span>
+    <span>Built on paper, serif, mono, and one accent.</span>
+  </footer>
+
+</main>
+
+<script>
+  // Mobile nav toggle
+  const t = document.getElementById('navToggle');
+  const l = document.getElementById('navLinks');
+  if (t && l) {
+    t.addEventListener('click', () => {
+      const open = l.classList.toggle('mobile-open');
+      t.setAttribute('aria-expanded', open);
+    });
+  }
+
+  // Copy code blocks
+  document.querySelectorAll('.code-copy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = document.getElementById('code-' + btn.dataset.copy);
+      if (!target) return;
+      navigator.clipboard.writeText(target.textContent).then(() => {
+        const original = btn.textContent;
+        btn.textContent = 'Copied';
+        setTimeout(() => { btn.textContent = original; }, 1400);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
