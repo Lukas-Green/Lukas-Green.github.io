@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nick McCarty — Design System</title>
+<meta name="description" content="The design system shared by Upskilled Consulting and nickmccarty.me — Editorial Quant: paper, serif, mono, one accent.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="system.css">
+
+<style>
+/* Design-system doc — warm paper (Upskilled-leaning) */
+body { background: var(--paper-warm); }
+
+main { max-width: 1040px; margin: 0 auto; padding: 0 var(--s-6); position: relative; z-index: 2; }
+
+/* Doc header */
+.doc-head { padding: var(--s-10) 0 var(--s-8); }
+.doc-head h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  margin: var(--s-4) 0 var(--s-5);
+  font-variation-settings: "opsz" 144, "SOFT" 30, "wght" 500;
+}
+.doc-head h1 .accent { color: var(--accent); font-style: italic; font-variation-settings: "opsz" 144, "SOFT" 100, "wght" 500; }
+.doc-head .lead { font-size: clamp(1.1rem, 1.5vw, 1.3rem); max-width: 58ch; color: var(--ink-dim); }
+.doc-head .tag-row {
+  display: flex;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+  margin-top: var(--s-6);
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--rule);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+.doc-head .tag-row span strong { color: var(--ink); font-weight: 500; }
+
+/* TOC */
+.toc {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: var(--s-4) 0;
+  margin: var(--s-5) 0 var(--s-9);
+}
+.toc a {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-dim);
+  text-decoration: none;
+  padding: var(--s-2) 0;
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  transition: color var(--dur) var(--ease);
+}
+.toc a:hover { color: var(--accent); }
+.toc a .idx { color: var(--accent); font-size: 11px; }
+
+/* Section heading */
+.sect {
+  padding: var(--s-8) 0;
+  border-top: 1px solid var(--rule);
+}
+.sect-title {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: var(--s-5);
+  margin-bottom: var(--s-7);
+  align-items: baseline;
+}
+.sect-title .idx {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+}
+.sect-title h2 {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+  font-variation-settings: "opsz" 72, "wght" 500;
+}
+.sect-title p { color: var(--ink-dim); max-width: 56ch; margin-top: var(--s-3); }
+.sect-body { margin-left: calc(80px + var(--s-5)); }
+
+/* Principles */
+.principles {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--s-6);
+}
+.principle {
+  border-top: 1px solid var(--rule);
+  padding-top: var(--s-4);
+}
+.principle .n {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  margin-bottom: var(--s-2);
+}
+.principle h3 {
+  font-size: 1.25rem;
+  margin-bottom: var(--s-2);
+  font-variation-settings: "opsz" 48, "wght" 500;
+  letter-spacing: -0.005em;
+}
+.principle p { color: var(--ink-dim); font-size: 14px; }
+
+@media (max-width: 720px) {
+  .toc { grid-template-columns: repeat(2, 1fr); }
+  .sect-title { grid-template-columns: 1fr; gap: var(--s-2); }
+  .sect-body { margin-left: 0; }
+  .principles { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html" aria-label="Nick McCarty Design System">
+      <span class="mark">[ds]</span>Nick · Design System
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#principles">Principles</a></li>
+      <li><a href="#color">Color</a></li>
+      <li><a href="#type">Type</a></li>
+      <li><a href="#components">Components</a></li>
+      <li><a href="#voice">Voice</a></li>
+      <li><a class="external" href="upskilled.html">Upskilled</a></li>
+      <li><a class="external" href="nickmccarty.html">Personal</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false" id="navToggle">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<main id="top">
+
+  <!-- DOC HEADER -->
+  <header class="doc-head">
+    <span class="label">The Nick McCarty Design System · v1.0</span>
+    <h1>Editorial <span class="accent">Quant</span>.<br>A house style for a senior practice.</h1>
+    <p class="lead">
+      A shared visual language for Upskilled Consulting and nickmccarty.me. Paper canvas, serif
+      display, mono metrics, one confident accent, zero gradients. The same DNA across both
+      brands — one variable swap away from either temperature.
+    </p>
+    <div class="tag-row">
+      <span><strong>Applies to</strong> · upskilled.consulting · nickmccarty.me</span>
+      <span><strong>Scope</strong> · Tokens, type, components, voice</span>
+      <span><strong>Logos</strong> · Unchanged</span>
+    </div>
+  </header>
+
+  <!-- TOC -->
+  <nav class="toc" aria-label="Table of contents">
+    <a href="#principles"><span class="idx">01</span> Principles</a>
+    <a href="#color"><span class="idx">02</span> Color</a>
+    <a href="#type"><span class="idx">03</span> Type</a>
+    <a href="#spacing"><span class="idx">04</span> Spacing &amp; grid</a>
+    <a href="#components"><span class="idx">05</span> Components</a>
+    <a href="#motion"><span class="idx">06</span> Motion</a>
+    <a href="#voice"><span class="idx">07</span> Voice</a>
+    <a href="#implementation"><span class="idx">08</span> Implementation</a>
+  </nav>
+
+  <!-- 01 PRINCIPLES -->
+  <section id="principles" class="sect">
+    <div class="sect-title">
+      <span class="idx">01</span>
+      <div>
+        <h2>Principles.</h2>
+        <p>Five rules that hold whenever a decision is hard. If a proposal breaks one, rewrite the proposal.</p>
+      </div>
+    </div>
+
+    <div class="sect-body">
+      <div class="principles">
+        <div class="principle">
+          <div class="n">01</div>
+          <h3>No gradients.</h3>
+          <p>Flat color only. Depth comes from hairline rules, tabular alignment, and a 3% paper grain — never a color ramp.</p>
+        </div>
+        <div class="principle">
+          <div class="n">02</div>
+          <h3>One accent, used sparingly.</h3>
+          <p>Ink‑teal marks interaction, the one key metric, and a single hero moment per page. If it's decorative, remove it.</p>
+        </div>
+        <div class="principle">
+          <div class="n">03</div>
+          <h3>Type does the heavy lifting.</h3>
+          <p>Fraunces for authority, Inter for clarity, JetBrains Mono for numbers. Tabular figures on by default.</p>
+        </div>
+        <div class="principle">
+          <div class="n">04</div>
+          <h3>Structured whitespace.</h3>
+          <p>8‑pt scale, wide gutters, generous vertical rhythm. Expensive feels empty until you stop to read it.</p>
+        </div>
+        <div class="principle">
+          <div class="n">05</div>
+          <h3>Motion is quiet.</h3>
+          <p>200ms ease‑out, 1–2px translate on hover, underline draw on links. No parallax, no scroll‑jacking, no orbs.</p>
+        </div>
+        <div class="principle">
+          <div class="n">06</div>
+          <h3>Two brands, one DNA.</h3>
+          <p>Upskilled on warm paper; Nick on cool paper. Everything else — type, scale, accent, components — identical.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  const t = document.getElementById('navToggle');
+  const l = document.getElementById('navLinks');
+  if (t && l) {
+    t.addEventListener('click', () => {
+      const open = l.classList.toggle('mobile-open');
+      t.setAttribute('aria-expanded', open);
+    });
+  }
+</script>
+
+</body>
+</html>
