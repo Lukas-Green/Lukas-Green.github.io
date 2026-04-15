@@ -226,6 +226,95 @@ main { max-width: 1040px; margin: 0 auto; padding: 0 var(--s-6); position: relat
 .space-row .val { font-family: var(--font-mono); font-size: 11px; color: var(--ink-faint); text-align: right; }
 .space-row .bar { height: 16px; background: var(--accent); border-radius: 2px; }
 
+/* Motion demos */
+.motion-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-4);
+}
+.motion-card {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  padding: var(--s-5);
+  background: var(--paper);
+}
+.motion-card .name {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent);
+  margin-bottom: var(--s-2);
+}
+.motion-card h4 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: var(--s-2);
+  font-variation-settings: "opsz" 48, "wght" 500;
+}
+.motion-card p { font-size: 13px; color: var(--ink-dim); margin-bottom: var(--s-4); }
+.motion-preview {
+  height: 72px;
+  border: 1px dashed var(--rule);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-dim);
+  font-size: 13px;
+  cursor: default;
+  transition: background var(--dur) var(--ease), color var(--dur) var(--ease), transform var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.motion-preview.lift:hover { transform: translateY(-2px); border-color: var(--ink); color: var(--ink); }
+.motion-preview.tint:hover { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); border-style: solid; }
+.motion-preview.underline {
+  display: inline-flex;
+  height: auto;
+  padding: var(--s-2) 0;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink);
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 2px;
+  transition: background-size var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+.motion-preview.underline:hover { background-size: 100% 2px; color: var(--accent); }
+
+/* Voice do/don't */
+.voice-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-5);
+  margin-top: var(--s-4);
+}
+.voice-col h3 {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  margin-bottom: var(--s-4);
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+.voice-col.do h3::before   { content: "+"; color: var(--accent); font-family: var(--font-mono); font-size: 14px; }
+.voice-col.dont h3::before { content: "×"; color: var(--ink-faint); font-family: var(--font-mono); font-size: 14px; }
+.voice-item {
+  padding: var(--s-4) 0;
+  border-top: 1px solid var(--rule);
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  line-height: 1.4;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  font-variation-settings: "opsz" 48, "wght" 400;
+}
+.voice-col.dont .voice-item { color: var(--ink-faint); text-decoration: line-through; text-decoration-color: color-mix(in srgb, var(--ink-faint) 40%, transparent); }
+.voice-item:last-child { border-bottom: 1px solid var(--rule); }
+
 /* Component demo frame */
 .demo {
   border: 1px solid var(--rule);
@@ -663,6 +752,85 @@ main { max-width: 1040px; margin: 0 auto; padding: 0 var(--s-6); position: relat
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- 06 MOTION -->
+  <section id="motion" class="sect">
+    <div class="sect-title">
+      <span class="idx">06</span>
+      <div>
+        <h2>Motion.</h2>
+        <p>Three named interactions. Everything else is still. Duration 200ms, ease <code style="font-family:var(--font-mono);font-size:.9em;">cubic-bezier(.2,.6,.2,1)</code>. No parallax, no scroll‑jacking, no hero animations.</p>
+      </div>
+    </div>
+
+    <div class="sect-body">
+      <div class="motion-grid">
+        <div class="motion-card">
+          <div class="name">01 · Lift</div>
+          <h4>Card hover.</h4>
+          <p>1–2px translate up, border darkens from rule to ink. Signals "clickable" without shadow.</p>
+          <div class="motion-preview lift">Hover me</div>
+        </div>
+        <div class="motion-card">
+          <div class="name">02 · Tint</div>
+          <h4>Primary button.</h4>
+          <p>Fill darkens one step; arrow translates 3px right. Confidence, not bounce.</p>
+          <div class="motion-preview tint">Hover me</div>
+        </div>
+        <div class="motion-card">
+          <div class="name">03 · Underline draw</div>
+          <h4>Inline link.</h4>
+          <p>Accent underline draws left‑to‑right under the word. Color shifts to accent.</p>
+          <div class="motion-preview underline">Hover me</div>
+        </div>
+      </div>
+
+      <div class="contrast-note" style="margin-top:var(--s-6);">
+        <strong style="color:var(--ink);">Reduced motion.</strong>
+        All transitions collapse to 0.01ms under <code style="font-family:var(--font-mono);">prefers-reduced-motion</code>.
+        Already wired into <code style="font-family:var(--font-mono);">system.css</code>. Do not override.
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 VOICE -->
+  <section id="voice" class="sect">
+    <div class="sect-title">
+      <span class="idx">07</span>
+      <div>
+        <h2>Voice.</h2>
+        <p>Write like Nick actually talks about his work: specific, direct, quietly confident, occasionally dry. The work is the proof — the copy doesn't have to oversell.</p>
+      </div>
+    </div>
+
+    <div class="sect-body">
+      <div class="voice-grid">
+        <div class="voice-col do">
+          <h3>Do</h3>
+          <div class="voice-item">Geospatial AI, built to ship.</div>
+          <div class="voice-item">A short, honest cycle that proves or kills the approach.</div>
+          <div class="voice-item">Data teams that don't need us next quarter.</div>
+          <div class="voice-item">Tiled inference is the boring part — and the part that breaks first.</div>
+          <div class="voice-item">We aim to be missed, not necessary.</div>
+        </div>
+        <div class="voice-col dont">
+          <h3>Don't</h3>
+          <div class="voice-item">Leveraging cutting‑edge AI to unlock synergies.</div>
+          <div class="voice-item">Let's build something amazing together!</div>
+          <div class="voice-item">Passionate about data. Obsessed with impact.</div>
+          <div class="voice-item">Revolutionizing how enterprises think about ML.</div>
+          <div class="voice-item">Your trusted partner in the AI journey.</div>
+        </div>
+      </div>
+
+      <div class="contrast-note" style="margin-top:var(--s-6);">
+        <strong style="color:var(--ink);">Three rules.</strong>
+        (1) Prefer a specific noun to an abstract one — "drone orthomosaic," not "geospatial data asset."
+        (2) State the outcome before the method.
+        (3) If a sentence could appear on any consulting site, rewrite it. The voice is the moat.
+      </div>
     </div>
   </section>
 
