@@ -54,3 +54,23 @@ Preview copy lives at `/nick/` in this repo.
 Copy the five files into any project, link `system.css`, and you have the
 system. Swap `--paper` on `body` to flip the temperature. Replace content
 with your own.
+
+## Content to replace (for a new client)
+
+The template ships with Nick McCarty's content baked in. When reusing for
+a new client, replace the following:
+
+- [ ] **Brand name and tagline** in each HTML file's `<title>` and `<h1>`
+- [ ] **Email addresses**: `get@upskilled.consulting`, `hello@nickmccarty.me`
+- [ ] **LinkedIn URL**: `linkedin.com/in/nicholasmccarty`
+- [ ] **GitHub URL**: `github.com/nickmccarty`
+- [ ] **Bio/about text** in both `upskilled.html` and `nickmccarty.html`
+- [ ] **Work portfolio items** — project cards, descriptions, and links
+- [ ] **Course listings** in `upskilled.html` (courses section)
+- [ ] **Speaking engagements and dates** in `nickmccarty.html`
+- [ ] **"For Nick / From Lukas" gift tag** in `index.html` — replace or remove
+- [ ] **"The note" section** in `index.html` — personal message, replace or remove
+- [ ] **Header comment** in `system.css` ("Nick McCarty / Upskilled Consulting")
+- [ ] **Page-specific `<style>` blocks** — layout is reusable, but review content-specific sizing
+
+Brand swap: use `.brand-warm` on `<body>` for warm paper, `.brand-cool` for cool paper.

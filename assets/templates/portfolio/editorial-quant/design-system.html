@@ -212,6 +212,8 @@ main { max-width: 1040px; margin: 0 auto; padding: 0 var(--s-6); position: relat
   .specimen { grid-template-columns: 1fr; gap: var(--s-3); }
   .spec-xl { font-size: 2.5rem; }
   .spec-l { font-size: 1.75rem; }
+}
+
 /* Spacing visual */
 .space-row {
   display: grid;
@@ -990,10 +992,10 @@ main { max-width: 1040px; margin: 0 auto; padding: 0 var(--s-6); position: relat
       <h3 style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-dim);margin:var(--s-6) 0 var(--s-3);">3 · Per‑brand override</h3>
       <p style="color:var(--ink-dim);max-width:60ch;margin-bottom:var(--s-3);">One rule at the body level per brand. That's the entire brand fork.</p>
       <div class="code-block"><button class="code-copy-btn" data-copy="override">Copy</button><code id="code-override"><span class="c-comment">/* Upskilled Consulting */</span>
-<span class="c-sel">body.brand-upskilled</span> { <span class="c-prop">--paper</span>: <span class="c-val">var(--paper-warm)</span>; }
+<span class="c-sel">body.brand-warm</span> { <span class="c-prop">--paper</span>: <span class="c-val">var(--paper-warm)</span>; }
 
 <span class="c-comment">/* nickmccarty.me */</span>
-<span class="c-sel">body.brand-nick</span> { <span class="c-prop">--paper</span>: <span class="c-val">var(--paper-cool)</span>; }</code></div>
+<span class="c-sel">body.brand-cool</span> { <span class="c-prop">--paper</span>: <span class="c-val">var(--paper-cool)</span>; }</code></div>
 
       <div class="contrast-note" style="margin-top:var(--s-6);">
         <strong style="color:var(--ink);">The full stylesheet.</strong>
