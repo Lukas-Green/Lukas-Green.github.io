@@ -90,7 +90,9 @@
     .shift-badge {
       display: inline-block;
       padding: 3px 10px;
+      border: none;
       border-radius: 999px;
+      font-family: inherit;
       font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
@@ -347,7 +349,7 @@
       Courier<span class="app-logo-accent">Direct</span> <span style="font-weight:400;font-size:14px;opacity:0.7">Driver</span>
     </div>
     <div class="driver-info">
-      <span id="shift-toggle" class="shift-badge on-shift">On Shift</span>
+      <button id="shift-toggle" class="shift-badge on-shift" role="switch" aria-checked="true" type="button">On Shift</button>
       <div class="driver-avatar">LG</div>
     </div>
   </header>
@@ -357,7 +359,7 @@
     <!-- TODAY'S ORDERS -->
     <p class="section-label">Today's Orders — April 14, 2026</p>
 
-    <div class="order-card" data-expandable>
+    <div class="order-card" data-expandable tabindex="0" role="button" aria-expanded="false">
       <div class="order-header">
         <span class="order-id">#CDI-20260414-003</span>
         <span class="order-tier tier-rush">Rush</span>
@@ -365,11 +367,11 @@
       <span class="order-status status-enroute">En Route</span>
       <div class="order-row">
         <span class="order-row-label">From</span>
-        <span>Legacy Emanuel Medical Center, 2801 N Gantenbein Ave, Portland</span>
+        <span>Metro Medical Center, 2801 N Gantenbein Ave, Portland</span>
       </div>
       <div class="order-row">
         <span class="order-row-label">To</span>
-        <span>OHSU Main Campus, 3181 SW Sam Jackson Park Rd, Portland</span>
+        <span>University Health Campus, 3181 SW Sam Jackson Park Rd, Portland</span>
       </div>
       <p class="order-time">Pickup by 10:15 AM — Deliver by 11:00 AM</p>
       <div class="order-detail">
@@ -378,7 +380,7 @@
       </div>
     </div>
 
-    <div class="order-card" data-expandable>
+    <div class="order-card" data-expandable tabindex="0" role="button" aria-expanded="false">
       <div class="order-header">
         <span class="order-id">#CDI-20260414-007</span>
         <span class="order-tier tier-3hour">3 Hour</span>
@@ -386,7 +388,7 @@
       <span class="order-status status-pending">Pending Pickup</span>
       <div class="order-row">
         <span class="order-row-label">From</span>
-        <span>Schwabe Williamson, 1211 SW 5th Ave #1900, Portland</span>
+        <span>Pacific Legal Group, 1211 SW 5th Ave #1900, Portland</span>
       </div>
       <div class="order-row">
         <span class="order-row-label">To</span>
@@ -399,7 +401,7 @@
       </div>
     </div>
 
-    <div class="order-card" data-expandable>
+    <div class="order-card" data-expandable tabindex="0" role="button" aria-expanded="false">
       <div class="order-header">
         <span class="order-id">#CDI-20260414-012</span>
         <span class="order-tier tier-economy">Economy</span>
@@ -407,11 +409,11 @@
       <span class="order-status status-delivered">Delivered</span>
       <div class="order-row">
         <span class="order-row-label">From</span>
-        <span>Nike WHQ, 1 Bowerman Dr, Beaverton</span>
+        <span>Northwest Sports HQ, 1 Bowerman Dr, Beaverton</span>
       </div>
       <div class="order-row">
         <span class="order-row-label">To</span>
-        <span>Columbia Sportswear HQ, 14375 NW Science Park Dr, Portland</span>
+        <span>Cascade Outfitters HQ, 14375 NW Science Park Dr, Portland</span>
       </div>
       <p class="order-time">Delivered at 3:42 PM</p>
       <div class="order-detail">
@@ -494,9 +496,18 @@
       'use strict';
 
       // Card expand/collapse
+      function toggleCard(card) {
+        var expanded = card.classList.toggle('expanded');
+        card.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      }
+
       document.querySelectorAll('[data-expandable]').forEach(function (card) {
-        card.addEventListener('click', function () {
-          card.classList.toggle('expanded');
+        card.addEventListener('click', function () { toggleCard(card); });
+        card.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleCard(card);
+          }
         });
       });
 
@@ -508,6 +519,7 @@
           shiftBtn.classList.toggle('on-shift', !isOn);
           shiftBtn.classList.toggle('off-shift', isOn);
           shiftBtn.textContent = isOn ? 'Off Shift' : 'On Shift';
+          shiftBtn.setAttribute('aria-checked', !isOn ? 'true' : 'false');
         });
       }
     })();
