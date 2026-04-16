@@ -108,9 +108,9 @@
     let frequency = 'once';
 
     const impactLabel = (amt) => {
-      if (amt >= 300) return Math.floor(amt / 300) + ' full program participant' + (amt >= 600 ? 's' : '');
-      if (amt >= 150) return 'half a program slot';
-      if (amt >= 75)  return 'art supplies for 3 participants';
+      if (amt >= 300) return 'program supplies, facilitation, and participant support';
+      if (amt >= 150) return 'facilitator training and materials';
+      if (amt >= 75)  return 'art supplies for participants';
       if (amt > 0)    return 'direct program support';
       return '';
     };
@@ -161,14 +161,8 @@
       }
       const btn = donateForm.querySelector('button[type="submit"]');
       if (btn) {
-        const original = btn.innerHTML;
         btn.disabled = true;
-        btn.innerHTML = 'Thank you! Redirecting to secure checkout…';
-        setTimeout(() => {
-          btn.disabled = false;
-          btn.innerHTML = original;
-          renderAmount();
-        }, 2400);
+        btn.innerHTML = 'Thank you! To donate, visit <a href="https://creatingbetterneighbors.org" style="color:inherit;text-decoration:underline">creatingbetterneighbors.org</a> or email robin@creatingbetterneighbors.org';
       }
     });
 
@@ -187,14 +181,9 @@
       }
       const btn = newsForm.querySelector('button[type="submit"]');
       if (btn) {
-        const original = btn.textContent;
         btn.disabled = true;
-        btn.textContent = 'Subscribed ✓';
+        btn.textContent = 'Thank you! Email robin@creatingbetterneighbors.org to subscribe.';
         email.value = '';
-        setTimeout(() => {
-          btn.disabled = false;
-          btn.textContent = original;
-        }, 2400);
       }
     });
   }
