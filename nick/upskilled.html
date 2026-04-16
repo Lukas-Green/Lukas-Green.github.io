@@ -305,6 +305,165 @@ body {
   letter-spacing: 0.04em;
 }
 
+/* ── SECTIONS ─────────────────────────────── */
+section.sect {
+  padding: var(--s-9) 0;
+  position: relative;
+}
+.sect-divider {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  position: relative;
+}
+.sect-divider::after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 64px;
+  height: 1px;
+  background: var(--teal);
+  opacity: 0.5;
+}
+
+/* Section header */
+.sect-head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-7);
+  margin-bottom: var(--s-8);
+  align-items: end;
+}
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--teal);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: var(--s-3);
+  display: block;
+}
+.sect-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.06;
+  color: var(--text);
+}
+.sect-head .lead {
+  font-size: clamp(1rem, 1.2vw, 1.1rem);
+  color: var(--text-dim);
+  max-width: 48ch;
+  padding-bottom: var(--s-2);
+  line-height: 1.6;
+}
+
+/* ── SERVICE CARDS ─────────────────────────── */
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-4);
+}
+.service-card {
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: var(--s-6);
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+.service-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--teal);
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease);
+}
+.service-card:hover {
+  border-color: rgba(91, 234, 214, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(91, 234, 214, 0.06);
+}
+.service-card:hover::before { opacity: 1; }
+.service-card .idx {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--teal);
+  letter-spacing: 0.08em;
+}
+.service-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.375rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  line-height: 1.2;
+}
+.service-card p { font-size: 14px; color: var(--text-dim); flex: 1; line-height: 1.6; }
+.service-card p strong { color: var(--text); font-weight: 500; }
+.service-card .meta-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-faint);
+  margin-top: var(--s-2);
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--rule);
+}
+
+/* ── METHOD ────────────────────────────────── */
+.method-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s-4);
+  padding-top: var(--s-6);
+  border-top: 1px solid var(--rule);
+}
+.method-step {
+  padding: var(--s-5) 0;
+}
+.method-step .num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--teal);
+  letter-spacing: 0.08em;
+  margin-bottom: var(--s-3);
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+.method-step .num::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+.method-step h3 {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: var(--s-2);
+  letter-spacing: -0.005em;
+}
+.method-step p { font-size: 13px; color: var(--text-dim); line-height: 1.6; }
+
+/* ── RESPONSIVE (sections) ───────────────── */
+@media (max-width: 768px) {
+  .sect-head { grid-template-columns: 1fr; gap: var(--s-4); }
+  .service-grid { grid-template-columns: 1fr; }
+  .method-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 540px) {
+  .method-grid { grid-template-columns: 1fr; }
+}
+
 /* ── PLACEHOLDER for remaining sections ──── */
 /* Services, Work, Courses, About, Contact, Footer will be added in subsequent chunks */
 
@@ -398,6 +557,84 @@ body {
         <div class="stat">
           <span class="stat-val">50+</span>
           <span class="stat-label">Hours of free courses</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <hr class="sect-divider container">
+  <section id="services" class="sect">
+    <div class="container">
+      <div class="sect-head">
+        <div>
+          <span class="eyebrow">What we bring</span>
+          <h2>Three engagements, one operating principle: ship.</h2>
+        </div>
+        <p class="lead">
+          A small team of practitioners. We take work where the problem is genuinely hard
+          and the path to value is concrete — then we build until it runs without us.
+        </p>
+      </div>
+
+      <div class="service-grid">
+        <div class="service-card">
+          <span class="idx">01</span>
+          <h3>Computer Vision &amp; Remote Sensing</h3>
+          <p><strong>Aerial and drone data turned into production decisions.</strong> Fine-tuned object detection on drone orthomosaics, photogrammetry pipelines, 3D reconstruction, and Gaussian Splatting.</p>
+          <span class="meta-tag">8–24 wk engagement</span>
+        </div>
+        <div class="service-card">
+          <span class="idx">02</span>
+          <h3>Machine Learning &amp; Applied AI</h3>
+          <p><strong>Custom ML that solves the specific business problem in front of you.</strong> Fine-tuning vision foundation models, mechanistic interpretability research, and shipping ML-powered applications.</p>
+          <span class="meta-tag">Project or retainer</span>
+        </div>
+        <div class="service-card">
+          <span class="idx">03</span>
+          <h3>Training &amp; Technical Advisory</h3>
+          <p><strong>Data teams that don't need us next quarter.</strong> Enterprise data-science instruction, curriculum development, and quiet technical guidance for founders.</p>
+          <span class="meta-tag">Workshop · Retainer</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- METHOD -->
+  <hr class="sect-divider container">
+  <section id="method" class="sect">
+    <div class="container">
+      <div class="sect-head">
+        <div>
+          <span class="eyebrow">Method</span>
+          <h2>Four steps. No theatre.</h2>
+        </div>
+        <p class="lead">
+          We move at research pace when a problem is novel and engineering pace when it isn't.
+          Most ML projects die in the gap between the two.
+        </p>
+      </div>
+
+      <div class="method-grid">
+        <div class="method-step">
+          <div class="num">01 / Frame</div>
+          <h3>Define the metric that matters.</h3>
+          <p>Before the first model, we agree on what "working" looks like — and what it's worth.</p>
+        </div>
+        <div class="method-step">
+          <div class="num">02 / Prototype</div>
+          <h3>Fastest defensible result.</h3>
+          <p>A short, honest cycle that proves or kills the approach. We share what we find, including when we're wrong.</p>
+        </div>
+        <div class="method-step">
+          <div class="num">03 / Harden</div>
+          <h3>Production engineering.</h3>
+          <p>Eval, monitoring, CRS handling, tiled inference — the unglamorous parts that keep models alive.</p>
+        </div>
+        <div class="method-step">
+          <div class="num">04 / Hand off</div>
+          <h3>Your team owns it.</h3>
+          <p>Documentation, training, and a runway where you don't need us. We aim to be missed, not necessary.</p>
         </div>
       </div>
     </div>
