@@ -3,275 +3,337 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Upskilled Consulting — Geospatial AI, built to ship.</title>
+<title>Upskilled Consulting — Applied AI & Geospatial Intelligence</title>
 <meta name="description" content="Applied machine learning, computer vision, and geospatial AI for enterprises and startups. Research-grounded, production-ready.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="system.css">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
-/* Page-specific styles (Upskilled — warm paper) */
-body { background: var(--paper-warm); }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+img, svg, video { display: block; max-width: 100%; }
+button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+a { color: inherit; text-decoration: none; }
 
-/* Hero */
-.hero {
-  padding: var(--s-10) 0 var(--s-9);
-  position: relative;
+:root {
+  --bg:          #0A0A12;
+  --surface:     #111119;
+  --surface-2:   #18182A;
+  --teal:        #5BEAD6;
+  --teal-dim:    #3BBCAC;
+  --teal-deep:   #0E4F4C;
+  --glow:        rgba(91, 234, 214, 0.08);
+  --glow-strong: rgba(91, 234, 214, 0.15);
+  --text:        #E4E4EF;
+  --text-dim:    #8888A0;
+  --text-faint:  #5C5C72;
+  --rule:        #1E1E30;
+  --rule-glow:   rgba(91, 234, 214, 0.1);
+
+  --font-display: 'Syne', system-ui, sans-serif;
+  --font-body:    'Inter', -apple-system, sans-serif;
+  --font-mono:    'IBM Plex Mono', ui-monospace, monospace;
+
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px;
+  --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px; --s-10: 128px;
+
+  --ease: cubic-bezier(.2,.6,.2,1);
+  --dur: 200ms;
+  --container: 1160px;
 }
-.hero-grid {
-  display: grid;
-  grid-template-columns: 7fr 5fr;
-  gap: var(--s-8);
-  align-items: end;
+
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+::selection { background: var(--teal-deep); color: var(--teal); }
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--s-6);
+  position: relative;
+  z-index: 2;
+}
+
+/* ── NAV ─────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 50;
+  background: rgba(10, 10, 18, 0.85);
+  backdrop-filter: saturate(120%) blur(12px);
+  -webkit-backdrop-filter: saturate(120%) blur(12px);
+  border-bottom: 1px solid var(--rule);
+}
+.nav-inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: var(--s-4) var(--s-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-5);
+}
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  text-decoration: none;
+}
+.nav-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: var(--surface-2);
+  border: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--teal);
+  letter-spacing: 0.05em;
+  position: relative;
+  overflow: hidden;
+}
+.nav-logo::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 6px;
+  border: 1px solid var(--teal);
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease);
+}
+.nav-brand:hover .nav-logo::after { opacity: 0.5; }
+.nav-wordmark {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+.nav-links {
+  display: flex;
+  gap: var(--s-6);
+  list-style: none;
+  align-items: center;
+}
+.nav-links a {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-dim);
+  transition: color var(--dur) var(--ease);
+}
+.nav-links a:hover { color: var(--text); }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 13px;
+  padding: 10px 20px;
+  border-radius: 6px;
+  transition: all var(--dur) var(--ease);
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--teal);
+  color: var(--bg);
+}
+.btn-primary:hover {
+  background: var(--teal-dim);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 24px rgba(91, 234, 214, 0.2);
+}
+.btn-ghost {
+  border: 1px solid var(--rule);
+  color: var(--text);
+}
+.btn-ghost:hover {
+  border-color: var(--teal);
+  color: var(--teal);
+  transform: translateY(-1px);
+}
+.arrow {
+  font-family: var(--font-mono);
+  transition: transform var(--dur) var(--ease);
+}
+.btn:hover .arrow { transform: translateX(3px); }
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px;
+}
+.nav-toggle span {
+  width: 22px;
+  height: 1.5px;
+  background: var(--text);
+  display: block;
+  transition: transform var(--dur) var(--ease);
+}
+
+/* ── HERO ─────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: var(--s-10) 0 var(--s-8);
+}
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-canvas canvas { width: 100%; height: 100%; display: block; }
+
+/* Ambient glow orbs */
+.hero-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 1;
+}
+.hero-glow.a {
+  width: 600px;
+  height: 600px;
+  background: rgba(91, 234, 214, 0.07);
+  top: 15%;
+  left: 20%;
+  animation: glowDrift 12s ease-in-out infinite alternate;
+}
+.hero-glow.b {
+  width: 400px;
+  height: 400px;
+  background: rgba(91, 234, 214, 0.04);
+  bottom: 20%;
+  right: 15%;
+  animation: glowDrift 10s ease-in-out infinite alternate-reverse;
+}
+@keyframes glowDrift {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(30px, -20px); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--s-6);
+}
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--teal);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: var(--s-5);
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+.hero-eyebrow::before {
+  content: "";
+  width: 32px;
+  height: 1px;
+  background: var(--teal);
+  opacity: 0.5;
 }
 .hero h1 {
-  font-size: clamp(2.75rem, 7.5vw, 5.75rem);
-  line-height: .98;
-  letter-spacing: -0.035em;
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 7vw, 5.5rem);
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  max-width: 14ch;
   margin-bottom: var(--s-6);
-  font-variation-settings: "opsz" 144, "SOFT" 30, "wght" 500;
 }
-.hero h1 .accent { color: var(--accent); font-style: italic; font-variation-settings: "opsz" 144, "SOFT" 100, "wght" 500; }
-.hero-meta {
-  display: flex;
-  flex-direction: column;
-  gap: var(--s-5);
-  padding-bottom: var(--s-3);
+.hero h1 em {
+  font-style: normal;
+  color: var(--teal);
+  text-shadow: 0 0 40px rgba(91, 234, 214, 0.3);
 }
-.hero-meta .lead { max-width: 36ch; }
+.hero-sub {
+  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+  color: var(--text-dim);
+  max-width: 48ch;
+  margin-bottom: var(--s-7);
+  line-height: 1.6;
+}
 .hero-ctas {
   display: flex;
   gap: var(--s-3);
   flex-wrap: wrap;
-  margin-top: var(--s-2);
+  margin-bottom: var(--s-9);
 }
-.hero-cred {
+
+/* Stats bar at bottom of hero */
+.hero-stats {
   display: flex;
-  align-items: baseline;
-  gap: var(--s-4);
-  padding-top: var(--s-5);
-  border-top: 1px solid var(--rule);
-  margin-top: var(--s-5);
-}
-.hero-cred .num {
-  font-size: 1.25rem;
-  color: var(--accent);
-}
-.hero-cred .txt {
-  font-size: 13px;
-  color: var(--ink-dim);
-}
-
-/* Trust */
-.trust-strip {
-  padding: var(--s-7) 0;
-}
-
-/* Section header */
-.section-head {
-  display: grid;
-  grid-template-columns: 5fr 7fr;
   gap: var(--s-7);
-  margin-bottom: var(--s-8);
-  align-items: end;
-}
-.section-head h2 {
-  font-size: clamp(2.25rem, 4.2vw, 3.25rem);
-  letter-spacing: -0.025em;
-  line-height: 1.04;
-  font-variation-settings: "opsz" 96, "SOFT" 30, "wght" 500;
-}
-.section-head .lead { max-width: 50ch; padding-bottom: var(--s-2); }
-
-/* Method */
-.method {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--s-5);
-  border-top: 1px solid var(--rule);
-  padding-top: var(--s-7);
-}
-.method-step .step-num {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--accent);
-  letter-spacing: 0.06em;
-  margin-bottom: var(--s-3);
-}
-.method-step h3 {
-  font-size: 1.25rem;
-  margin-bottom: var(--s-3);
-  font-variation-settings: "opsz" 48, "wght" 500;
-}
-.method-step p { color: var(--ink-dim); font-size: 14px; }
-
-/* Work cards */
-.work-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--s-5);
-}
-.work-card {
-  border: 1px solid var(--rule);
-  padding: var(--s-6);
-  display: flex;
-  flex-direction: column;
-  gap: var(--s-3);
-  transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease);
-  text-decoration: none;
-  color: var(--ink);
-  position: relative;
-  background: var(--paper);
-}
-.work-card:hover { border-color: var(--ink); }
-.work-card .tag {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--accent);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-.work-card h3 {
-  font-size: 1.4rem;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-  margin-bottom: var(--s-2);
-  font-variation-settings: "opsz" 72, "SOFT" 40, "wght" 500;
-}
-.work-card p { color: var(--ink-dim); font-size: 14px; flex: 1; }
-.work-card .cta {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--ink);
-  margin-top: var(--s-3);
-  display: inline-flex;
-  align-items: center;
-  gap: var(--s-2);
-}
-.work-card:hover .cta { color: var(--accent); }
-.work-card .cta::after { content: "→"; transition: transform var(--dur) var(--ease); }
-.work-card:hover .cta::after { transform: translateX(3px); }
-
-/* Courses */
-.courses {
-  background: var(--accent);
-  color: var(--accent-ink);
-  margin: var(--s-9) 0;
-  padding: var(--s-9) 0;
-  border-radius: 0;
-  position: relative;
-  z-index: 2;
-}
-.courses .container { color: var(--accent-ink); }
-.courses .label { color: var(--paper-warm); opacity: 0.75; }
-.courses .label::before { background: var(--paper-warm); }
-.courses h2 {
-  color: var(--accent-ink);
-  font-size: clamp(2.25rem, 4.5vw, 3.5rem);
-  letter-spacing: -0.025em;
-  line-height: 1.04;
-  font-variation-settings: "opsz" 96, "SOFT" 30, "wght" 500;
-}
-.courses .lead { color: var(--paper-warm); opacity: 0.85; max-width: 56ch; }
-.courses-grid {
-  display: grid;
-  grid-template-columns: 7fr 5fr;
-  gap: var(--s-8);
-  align-items: start;
-  margin-top: var(--s-7);
-}
-.courses-stats {
-  display: flex;
-  flex-direction: column;
-  gap: var(--s-6);
-  border-left: 1px solid color-mix(in srgb, var(--paper-warm) 30%, transparent);
-  padding-left: var(--s-6);
-}
-.courses-stats .metric .value { color: var(--accent-ink); }
-.courses-stats .metric .label-txt { color: var(--paper-warm); opacity: 0.8; }
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--s-2);
-  margin-top: var(--s-5);
-}
-.chip {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  border: 1px solid color-mix(in srgb, var(--paper-warm) 35%, transparent);
-  padding: 6px 12px;
-  border-radius: 999px;
-  color: var(--paper-warm);
-}
-.btn-on-accent {
-  background: var(--paper-warm);
-  color: var(--accent);
-  margin-top: var(--s-5);
-}
-.btn-on-accent:hover { background: var(--ink); color: var(--paper-warm); transform: translateY(-1px); }
-
-/* About */
-.about-grid {
-  display: grid;
-  grid-template-columns: 5fr 7fr;
-  gap: var(--s-8);
-  align-items: start;
-}
-.about-quote { padding-top: var(--s-2); }
-.about-body p { margin-bottom: var(--s-4); color: var(--ink-dim); }
-.about-body p strong { color: var(--ink); font-weight: 500; }
-.about-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--s-6);
-  margin-top: var(--s-7);
   padding-top: var(--s-6);
   border-top: 1px solid var(--rule);
+  flex-wrap: wrap;
 }
-
-/* Contact */
-.contact {
-  text-align: center;
-  padding: var(--s-10) 0;
-  border-top: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
-  position: relative;
-  z-index: 2;
-}
-.contact h2 {
-  font-size: clamp(2.5rem, 5.5vw, 4rem);
-  letter-spacing: -0.03em;
-  margin: var(--s-4) 0 var(--s-5);
-  font-variation-settings: "opsz" 144, "SOFT" 50, "wght" 500;
-}
-.contact .lead { margin: 0 auto var(--s-6); }
-.contact .email-link {
+.stat { display: flex; flex-direction: column; gap: var(--s-1); }
+.stat-val {
   font-family: var(--font-mono);
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  color: var(--ink);
-  text-decoration: none;
-  border-bottom: 1px solid var(--accent);
-  padding-bottom: 4px;
-  transition: color var(--dur) var(--ease);
-  display: inline-block;
-  margin-top: var(--s-5);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--teal);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
 }
-.contact .email-link:hover { color: var(--accent); }
+.stat-label {
+  font-size: 12px;
+  color: var(--text-faint);
+  letter-spacing: 0.04em;
+}
 
-/* Responsive */
-@media (max-width: 900px) {
-  .hero-grid, .section-head, .courses-grid, .about-grid { grid-template-columns: 1fr; }
-  .method { grid-template-columns: repeat(2, 1fr); }
-  .work-grid { grid-template-columns: 1fr; }
-  .about-stats { grid-template-columns: 1fr; gap: var(--s-4); }
-  .courses-stats { border-left: 0; padding-left: 0; border-top: 1px solid color-mix(in srgb, var(--paper-warm) 30%, transparent); padding-top: var(--s-5); }
+/* ── PLACEHOLDER for remaining sections ──── */
+/* Services, Work, Courses, About, Contact, Footer will be added in subsequent chunks */
+
+/* ── RESPONSIVE ──────────────────────────── */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-links.mobile-open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    background: var(--bg);
+    padding: var(--s-5) var(--s-6);
+    border-bottom: 1px solid var(--rule);
+    gap: var(--s-4);
+  }
+  .nav-toggle { display: flex; }
+  .hero h1 { max-width: 100%; }
+  .hero-stats { gap: var(--s-5); }
 }
-@media (max-width: 540px) {
-  .method { grid-template-columns: 1fr; }
+@media (min-width: 769px) {
+  .nav-toggle { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+  html { scroll-behavior: auto; }
 }
 </style>
 </head>
@@ -279,15 +341,16 @@ body { background: var(--paper-warm); }
 
 <nav class="nav">
   <div class="nav-inner">
-    <a class="nav-brand" href="#top" aria-label="Upskilled Consulting">
-      <span class="mark">[uc]</span>Upskilled
+    <a class="nav-brand" href="#top">
+      <div class="nav-logo">UC</div>
+      <span class="nav-wordmark">Upskilled</span>
     </a>
     <ul class="nav-links" id="navLinks">
+      <li><a href="#services">Services</a></li>
       <li><a href="#work">Work</a></li>
-      <li><a href="#method">Method</a></li>
       <li><a href="#courses">Courses</a></li>
       <li><a href="#about">About</a></li>
-      <li><a class="btn btn-primary" href="mailto:get@upskilled.consulting">Book a call <span class="arrow">→</span></a></li>
+      <li><a class="btn btn-primary" href="#contact">Start a conversation <span class="arrow">→</span></a></li>
     </ul>
     <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false" id="navToggle">
       <span></span><span></span><span></span>
@@ -299,341 +362,124 @@ body { background: var(--paper-warm); }
 
   <!-- HERO -->
   <section class="hero">
-    <div class="container">
-      <span class="label">Specialized data science · Est. 2020</span>
-      <div class="hero-grid">
-        <h1>
-          Geospatial AI,<br>
-          built to <span class="accent">ship</span>.
-        </h1>
-        <div class="hero-meta">
-          <p class="lead">
-            Upskilled Consulting designs, fine‑tunes, and deploys computer vision and ML
-            systems for enterprises and startups — with a research bench in interpretability
-            and remote sensing.
-          </p>
-          <div class="hero-ctas">
-            <a class="btn btn-primary" href="mailto:get@upskilled.consulting">Start a conversation <span class="arrow">→</span></a>
-            <a class="btn btn-ghost" href="#work">See selected work</a>
-          </div>
-          <div class="hero-cred">
-            <span class="num">10+ yrs</span>
-            <span class="txt">applied research, production ML, and instruction at the Fortune‑500 level.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    <div class="hero-canvas" id="particleCanvas"></div>
+    <div class="hero-glow a"></div>
+    <div class="hero-glow b"></div>
 
-  <!-- TRUST / DOMAINS -->
-  <div class="container">
-    <div class="trust">
-      <span class="label">Domains</span>
-      <ul>
-        <li>Precision agriculture</li>
-        <li>Remote sensing</li>
-        <li>Drone &amp; aerial imagery</li>
-        <li>Vision foundation models</li>
-        <li>Enterprise data science</li>
-      </ul>
-    </div>
-  </div>
+    <div class="hero-content">
+      <span class="hero-eyebrow">Computer Vision · Machine Learning · Data Science</span>
 
-  <!-- SERVICES -->
-  <section id="services">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <span class="eyebrow">What we bring</span>
-          <h2>Three engagements, one operating principle: ship.</h2>
-        </div>
-        <p class="lead">
-          We are a small team of practitioners. We take work where the problem is genuinely hard
-          and the path to value is concrete — then we build until it runs without us.
-        </p>
-      </div>
+      <h1>Applied AI that <em>ships</em>.</h1>
 
-      <div class="services-list">
-        <article class="service-row">
-          <div class="idx">01</div>
-          <div>
-            <div class="title">Computer vision &amp; remote sensing</div>
-            <p class="body">
-              <strong>Aerial and drone data turned into production decisions.</strong>
-              Fine‑tuned object detection on drone orthomosaics, photogrammetry pipelines,
-              3D reconstruction from photos and video, and Gaussian Splatting where the resolution warrants it.
-            </p>
-          </div>
-          <div class="meta">8–24 wk engagement</div>
-        </article>
-
-        <article class="service-row">
-          <div class="idx">02</div>
-          <div>
-            <div class="title">Machine learning &amp; applied AI</div>
-            <p class="body">
-              <strong>Custom ML that solves the specific business problem in front of you.</strong>
-              Fine‑tuning vision foundation models, mechanistic interpretability research, and
-              shipping ML‑powered applications with the engineering to keep them honest.
-            </p>
-          </div>
-          <div class="meta">Project or retainer</div>
-        </article>
-
-        <article class="service-row">
-          <div class="idx">03</div>
-          <div>
-            <div class="title">Training &amp; technical advisory</div>
-            <p class="body">
-              <strong>Data teams that don't need us next quarter.</strong>
-              Enterprise data‑science instruction, curriculum development, and quiet
-              technical guidance for founders who need a senior brain on call.
-            </p>
-          </div>
-          <div class="meta">Workshop · Retainer</div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- METHOD -->
-  <section id="method">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <span class="eyebrow">Method</span>
-          <h2>Four steps. No theatre.</h2>
-        </div>
-        <p class="lead">
-          We move at research pace when a problem is novel and engineering pace when it isn't.
-          The difference matters: most ML projects die in the gap between the two.
-        </p>
-      </div>
-
-      <div class="method">
-        <div class="method-step">
-          <div class="step-num">01 / Frame</div>
-          <h3>Define the metric that matters.</h3>
-          <p>Before the first model, we agree on what "working" looks like — and what it's worth.</p>
-        </div>
-        <div class="method-step">
-          <div class="step-num">02 / Prototype</div>
-          <h3>Fastest defensible result.</h3>
-          <p>A short, honest cycle that proves or kills the approach. We share what we find, including when we're wrong.</p>
-        </div>
-        <div class="method-step">
-          <div class="step-num">03 / Harden</div>
-          <h3>Production engineering.</h3>
-          <p>Eval, monitoring, CRS handling, tiled inference, the unglamorous parts that keep models alive.</p>
-        </div>
-        <div class="method-step">
-          <div class="step-num">04 / Hand off</div>
-          <h3>Your team owns it.</h3>
-          <p>Documentation, training, and a runway where you don't need us. We aim to be missed, not necessary.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- WORK -->
-  <section id="work">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <span class="eyebrow">Selected work</span>
-          <h2>Research &amp; projects.</h2>
-        </div>
-        <p class="lead">
-          A representative slice of recent engagements and publications. Reach out for the rest —
-          much of the production work lives under client NDA.
-        </p>
-      </div>
-
-      <div class="work-grid">
-        <a class="work-card" href="#">
-          <span class="tag">Publication</span>
-          <h3>Object Detection on Drone Orthomosaics with Meta's SAM</h3>
-          <p>Applying foundation models to geospatial imagery for precision agriculture. Presented at SciPy 2025.</p>
-          <span class="cta">Read paper</span>
-        </a>
-
-        <a class="work-card" href="#">
-          <span class="tag">Speaking</span>
-          <h3>Reimagining Mapping with AI &amp; Scalable Technologies</h3>
-          <p>Panel at Geo Week 2026 in Denver on the intersection of AI, geospatial technology, and scalable solutions.</p>
-          <span class="cta">Session details</span>
-        </a>
-
-        <a class="work-card" href="#">
-          <span class="tag">Research</span>
-          <h3>Mechanistic Interpretability for Vision Models</h3>
-          <p>Circuit extraction and activation patching to understand how object detectors actually make decisions.</p>
-          <span class="cta">View research</span>
-        </a>
-
-        <a class="work-card" href="#">
-          <span class="tag">Application</span>
-          <h3>Custom Object Detector UI</h3>
-          <p>Faster R‑CNN wrapped in a polished interface — tiled inference, automatic CRS reprojection, and interactive false‑positive removal on drone orthomosaics too large for a single GPU.</p>
-          <span class="cta">Case study</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- COURSES -->
-  <section id="courses" class="courses">
-    <div class="container">
-      <span class="label">Free learning</span>
-      <div class="courses-grid">
-        <div>
-          <h2>Open Course Platform.</h2>
-          <p class="lead">
-            Dozens of hours of professionally‑crafted ML &amp; AI curriculum — completely free.
-            From foundational math to practical Python, built for people who actually want to
-            understand what's happening under the hood.
-          </p>
-          <div class="chips">
-            <span class="chip">Linear algebra</span>
-            <span class="chip">Calculus</span>
-            <span class="chip">Probability &amp; stats</span>
-            <span class="chip">Python for ML</span>
-            <span class="chip">Neural networks</span>
-            <span class="chip">Computer vision</span>
-          </div>
-          <a class="btn btn-on-accent" href="#">Explore free courses <span class="arrow">→</span></a>
-        </div>
-        <div class="courses-stats">
-          <div class="metric">
-            <span class="value">50+</span>
-            <span class="label-txt">Hours of content</span>
-          </div>
-          <div class="metric">
-            <span class="value">100%</span>
-            <span class="label-txt">Free, forever</span>
-          </div>
-          <div class="metric">
-            <span class="value">Zero</span>
-            <span class="label-txt">Prerequisites</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <span class="eyebrow">About</span>
-          <h2>Increasing capacity.</h2>
-        </div>
-      </div>
-
-      <div class="about-grid">
-        <div class="about-quote">
-          <blockquote class="pullquote">
-            Transforming complex problems into practical data products through expertise in
-            geospatial AI and interpretable vision models.
-          </blockquote>
-        </div>
-
-        <div class="about-body">
-          <p>
-            <strong>Upskilled Consulting</strong> specializes in applied machine learning,
-            computer vision, and remote sensing. We bring deep technical expertise and a track
-            record of delivering results for enterprises and startups alike.
-          </p>
-          <p>
-            Our work spans cutting‑edge research and production‑grade systems. We've trained
-            data scientists at Fortune 500 companies, delivered automation in precision‑agriculture
-            enterprises, and contributed to the field through published research and conference
-            presentations.
-          </p>
-          <p>
-            Founded and led by <strong>Nick McCarty</strong> — data scientist, ML practitioner, and
-            educator working at the intersection of geospatial AI and interpretable vision.
-          </p>
-
-          <div class="about-stats">
-            <div class="metric">
-              <span class="value">200+</span>
-              <span class="label-txt">Students trained</span>
-            </div>
-            <div class="metric">
-              <span class="value">&gt;95%</span>
-              <span class="label-txt">Satisfaction rate</span>
-            </div>
-            <div class="metric">
-              <span class="value">10+</span>
-              <span class="label-txt">Years experience</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact" class="contact">
-    <div class="container-narrow">
-      <span class="label">Get in touch</span>
-      <h2>Let's build something.</h2>
-      <p class="lead" style="margin-left:auto;margin-right:auto;">
-        Have a project in mind, or want to explore how applied AI fits into what you're building?
-        Tell us what you're working on — we read every note.
+      <p class="hero-sub">
+        Upskilled Consulting designs, fine-tunes, and deploys computer vision
+        and ML systems — with a research bench in geospatial AI and
+        interpretable vision models.
       </p>
-      <a class="email-link" href="mailto:get@upskilled.consulting">get@upskilled.consulting</a>
+
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#contact">Start a conversation <span class="arrow">→</span></a>
+        <a class="btn btn-ghost" href="#work">See selected work</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-val">10+</span>
+          <span class="stat-label">Years experience</span>
+        </div>
+        <div class="stat">
+          <span class="stat-val">200+</span>
+          <span class="stat-label">Students trained</span>
+        </div>
+        <div class="stat">
+          <span class="stat-val">&gt;95%</span>
+          <span class="stat-label">Satisfaction rate</span>
+        </div>
+        <div class="stat">
+          <span class="stat-val">50+</span>
+          <span class="stat-label">Hours of free courses</span>
+        </div>
+      </div>
     </div>
   </section>
 
 </main>
 
-<footer class="footer">
-  <div class="footer-inner">
-    <div>
-      <div class="footer-brand">Upskilled Consulting</div>
-      <p class="footer-note">
-        Computer Vision · Machine Learning · Data Science.
-        A practice led by Nick McCarty.
-      </p>
-    </div>
-    <div>
-      <h4>Sitemap</h4>
-      <ul>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#work">Work</a></li>
-        <li><a href="#courses">Courses</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4>Elsewhere</h4>
-      <ul>
-        <li><a href="https://www.linkedin.com/in/nicholasmccarty" target="_blank" rel="noopener">LinkedIn ↗</a></li>
-        <li><a href="nickmccarty.html">Nick's writing</a></li>
-        <li><a href="mailto:get@upskilled.consulting">get@upskilled.consulting</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-base">
-    <span>© 2026 Upskilled Consulting · All rights reserved</span>
-    <span>Built on the Nick McCarty Design System</span>
-  </div>
-</footer>
-
 <script>
-  // Mobile nav toggle
-  const t = document.getElementById('navToggle');
-  const l = document.getElementById('navLinks');
-  if (t && l) {
-    t.addEventListener('click', () => {
-      const open = l.classList.toggle('mobile-open');
-      t.setAttribute('aria-expanded', open);
+// Mobile nav
+const t = document.getElementById('navToggle');
+const l = document.getElementById('navLinks');
+if (t && l) {
+  t.addEventListener('click', () => {
+    const open = l.classList.toggle('mobile-open');
+    t.setAttribute('aria-expanded', open);
+  });
+}
+
+// Constellation particles — sparse, slow, ambient
+(function () {
+  const wrap = document.getElementById('particleCanvas');
+  if (!wrap) return;
+  const canvas = document.createElement('canvas');
+  wrap.appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+  let w, h, particles = [];
+  const COUNT = 60;
+  const CONNECT = 120;
+
+  function resize() {
+    w = canvas.width = wrap.offsetWidth;
+    h = canvas.height = wrap.offsetHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  for (let i = 0; i < COUNT; i++) {
+    particles.push({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.15,
+      vy: (Math.random() - 0.5) * 0.15,
+      r: Math.random() * 1.2 + 0.4,
+      a: Math.random() * 0.4 + 0.1
     });
   }
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0) p.x = w;
+      if (p.x > w) p.x = 0;
+      if (p.y < 0) p.y = h;
+      if (p.y > h) p.y = 0;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(91,234,214,' + p.a + ')';
+      ctx.fill();
+
+      for (let j = i + 1; j < particles.length; j++) {
+        const q = particles[j];
+        const dx = p.x - q.x;
+        const dy = p.y - q.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < CONNECT) {
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(q.x, q.y);
+          ctx.strokeStyle = 'rgba(91,234,214,' + (0.06 * (1 - dist / CONNECT)) + ')';
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
 </script>
 
 </body>
