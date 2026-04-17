@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CourierDirect Customer Portal — Design Concept</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brand: #0F2D57;
+      --brand-dark: #091C38;
+      --accent: #F5B800;
+      --accent-dark: #D49F00;
+      --text: #1A1A1A;
+      --text-light: #6B7280;
+      --bg: #F4F6F9;
+      --card: #FFFFFF;
+      --border: #E5E7EB;
+      --success: #059669;
+      --warning: #D97706;
+      --pending: #6366F1;
+      --danger: #DC2626;
+      --radius: 12px;
+      --shadow: 0 2px 8px rgba(15,45,87,0.10);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html, body {
+      margin: 0; padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.5 'Inter', system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .demo-banner {
+      background: #FEF3C7;
+      border-bottom: 1px solid #FDE68A;
+      color: #92400E;
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+      padding: 8px 16px;
+    }
+
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%);
+      color: #fff;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow);
+    }
+    .app-logo { font-weight: 700; font-size: 18px; letter-spacing: -0.02em; }
+    .app-logo-accent { color: var(--accent); }
+    .app-logo-suffix { font-weight: 400; font-size: 14px; opacity: 0.7; margin-left: 6px; }
+    .customer-info { display: flex; align-items: center; gap: 12px; font-size: 14px; }
+    .customer-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      background: rgba(245, 184, 0, 0.15);
+      color: var(--accent);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .customer-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px 16px;
+    }
+
+    /* New order CTA */
+    .new-order-cta {
+      background: var(--brand);
+      color: #fff;
+      padding: 20px;
+      border-radius: var(--radius);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+      box-shadow: var(--shadow);
+    }
+    .new-order-cta h2 {
+      margin: 0 0 4px;
+      font-size: 18px;
+      letter-spacing: -0.01em;
+    }
+    .new-order-cta p {
+      margin: 0;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+    .new-order-btn {
+      background: var(--accent);
+      color: var(--brand-dark);
+      padding: 12px 22px;
+      border: none;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .new-order-btn:hover { background: var(--accent-dark); }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-light);
+      margin: 24px 0 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .section-label a {
+      font-size: 12px;
+      color: var(--brand);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .section-label a:hover { color: var(--accent-dark); }
+
+    /* Overview cards */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 600px) {
+      .overview-grid { grid-template-columns: 1fr; }
+    }
+    .overview-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+    .overview-label {
+      font-size: 12px;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+    }
+    .overview-value {
+      display: block;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--brand);
+      margin-top: 4px;
+    }
+    .overview-sub {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-top: 4px;
+    }
+
+    /* Order cards */
+    .order-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 10px;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      transition: border-color 0.15s ease;
+    }
+    .order-card:hover { border-color: var(--accent); }
+    .order-card:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .order-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+    .order-id {
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--brand);
+    }
+    .order-tier {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .tier-rush { background: #FEE2E2; color: #991B1B; }
+    .tier-3hour { background: #FEF3C7; color: #92400E; }
+    .tier-economy { background: #DBEAFE; color: #1E40AF; }
+    .tier-truck { background: #E0E7FF; color: #3730A3; }
+
+    .order-status {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .status-pending { background: #EDE9FE; color: #5B21B6; }
+    .status-enroute { background: #FEF3C7; color: #92400E; }
+    .status-delivered { background: #D1FAE5; color: #065F46; }
+
+    .order-row {
+      display: flex;
+      gap: 8px;
+      font-size: 14px;
+      line-height: 1.4;
+      margin-bottom: 4px;
+    }
+    .order-row-label {
+      color: var(--text-light);
+      min-width: 56px;
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+      padding-top: 1px;
+    }
+    .order-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--text-light);
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+    }
+    .order-meta strong { color: var(--text); }
+
+    .order-detail {
+      display: none;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+      font-size: 14px;
+      color: var(--text-light);
+    }
+    .order-card.expanded .order-detail { display: block; }
+
+    /* Progress bar */
+    .progress-steps {
+      display: flex;
+      justify-content: space-between;
+      margin: 12px 0;
+      position: relative;
+    }
+    .progress-steps::before {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--border);
+      z-index: 0;
+    }
+    .progress-step {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      flex: 1;
+    }
+    .progress-dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--border);
+      color: var(--text-light);
+      margin: 0 auto 4px;
+      display: grid;
+      place-items: center;
+      font-size: 11px;
+      font-weight: 700;
+      border: 2px solid var(--bg);
+    }
+    .progress-step.done .progress-dot {
+      background: var(--success);
+      color: #fff;
+    }
+    .progress-step.active .progress-dot {
+      background: var(--accent);
+      color: var(--brand-dark);
+    }
+    .progress-label {
+      font-size: 10px;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+    }
+    .progress-step.done .progress-label,
+    .progress-step.active .progress-label { color: var(--text); }
+
+    /* Billing */
+    .billing-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+    .billing-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+    .billing-row:last-child {
+      border: none;
+      padding-top: 12px;
+      border-top: 2px solid var(--brand);
+      font-weight: 700;
+      font-size: 16px;
+    }
+    .billing-label { color: var(--text-light); }
+    .billing-value { color: var(--text); font-weight: 600; }
+    .billing-footer {
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--text-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .billing-footer a {
+      color: var(--brand);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    /* Quick actions */
+    .actions-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    @media (max-width: 600px) {
+      .actions-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .action-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 18px 10px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--brand);
+      text-decoration: none;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.15s ease, background 0.15s ease;
+      box-shadow: var(--shadow);
+    }
+    .action-btn:hover {
+      border-color: var(--accent);
+      background: #FFFBEB;
+    }
+    .action-icon {
+      width: 28px;
+      height: 28px;
+      color: var(--brand);
+    }
+    .action-icon svg { width: 100%; height: 100%; }
+
+    .app-footer {
+      text-align: center;
+      padding: 24px 16px;
+      font-size: 12px;
+      color: var(--text-light);
+    }
+    .app-footer a { color: var(--brand); }
+  </style>
+</head>
+<body>
+
+  <div class="demo-banner">
+    This is a design concept — not a live system.
+  </div>
+
+  <header class="app-header">
+    <div class="app-logo">
+      Courier<span class="app-logo-accent">Direct</span><span class="app-logo-suffix">Portal</span>
+    </div>
+    <div class="customer-info">
+      <span class="customer-badge">Bldg Partner</span>
+      <div class="customer-avatar" aria-hidden="true">PM</div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- NEW ORDER CTA -->
+    <div class="new-order-cta">
+      <div>
+        <h2>Need a pickup?</h2>
+        <p>Call (503) 691-7800 or schedule online — rush orders go out in 90 minutes.</p>
+      </div>
+      <a href="index.html#quote" class="new-order-btn">+ New Order</a>
+    </div>
+
+    <!-- OVERVIEW -->
+    <p class="section-label">This Month</p>
+
+    <div class="overview-grid">
+      <div class="overview-card">
+        <span class="overview-label">Deliveries</span>
+        <strong class="overview-value">18</strong>
+        <p class="overview-sub">+3 vs. last month</p>
+      </div>
+      <div class="overview-card">
+        <span class="overview-label">Avg. Pickup Time</span>
+        <strong class="overview-value">47 min</strong>
+        <p class="overview-sub">From call to dispatch</p>
+      </div>
+      <div class="overview-card">
+        <span class="overview-label">On-time Rate</span>
+        <strong class="overview-value">100%</strong>
+        <p class="overview-sub">Last 30 days</p>
+      </div>
+    </div>
+
+    <!-- ACTIVE ORDER WITH TRACKING -->
+    <p class="section-label">Active Order <a href="#">View all →</a></p>
+
+    <div class="order-card expanded" data-expandable tabindex="0" role="button" aria-expanded="true">
+      <div class="order-header">
+        <span class="order-id">#CDI-20260416-042</span>
+        <span class="order-tier tier-rush">Rush</span>
+      </div>
+      <span class="order-status status-enroute">Driver en route</span>
+      <div class="order-row">
+        <span class="order-row-label">From</span>
+        <span>Your office — 1000 SW Broadway, Portland</span>
+      </div>
+      <div class="order-row">
+        <span class="order-row-label">To</span>
+        <span>Pacific Legal Group, 1211 SW 5th Ave, Portland</span>
+      </div>
+
+      <div class="progress-steps">
+        <div class="progress-step done">
+          <div class="progress-dot">✓</div>
+          <div class="progress-label">Booked</div>
+        </div>
+        <div class="progress-step done">
+          <div class="progress-dot">✓</div>
+          <div class="progress-label">Picked up</div>
+        </div>
+        <div class="progress-step active">
+          <div class="progress-dot">•</div>
+          <div class="progress-label">En route</div>
+        </div>
+        <div class="progress-step">
+          <div class="progress-dot">4</div>
+          <div class="progress-label">Delivered</div>
+        </div>
+      </div>
+
+      <div class="order-meta">
+        <span>Driver: <strong>Marcus K.</strong></span>
+        <span>ETA: <strong>11:42 AM</strong></span>
+      </div>
+
+      <div class="order-detail">
+        <p><strong>Notes:</strong> Legal filing — 3 sealed envelopes. Signature required at clerk's office, Room 204.</p>
+        <p><strong>Driver contact:</strong> Call dispatch at (503) 691-7800 to relay a message.</p>
+      </div>
+    </div>
+
+    <!-- RECENT ORDERS -->
+    <p class="section-label">Recent Orders <a href="#">View all →</a></p>
+
+    <div class="order-card" data-expandable tabindex="0" role="button" aria-expanded="false">
+      <div class="order-header">
+        <span class="order-id">#CDI-20260415-088</span>
+        <span class="order-tier tier-3hour">3 Hour</span>
+      </div>
+      <span class="order-status status-delivered">Delivered</span>
+      <div class="order-row">
+        <span class="order-row-label">From</span>
+        <span>Your office — 1000 SW Broadway, Portland</span>
+      </div>
+      <div class="order-row">
+        <span class="order-row-label">To</span>
+        <span>Metro Medical Center, Portland</span>
+      </div>
+      <div class="order-meta">
+        <span>Delivered Apr 15 · 2:34 PM</span>
+        <span><strong>$42.50</strong></span>
+      </div>
+      <div class="order-detail">
+        <p><strong>POD:</strong> Signed by K. Nguyen at 2:34 PM.</p>
+        <p><strong>Notes:</strong> Contract package — dropped at reception.</p>
+      </div>
+    </div>
+
+    <div class="order-card" data-expandable tabindex="0" role="button" aria-expanded="false">
+      <div class="order-header">
+        <span class="order-id">#CDI-20260414-014</span>
+        <span class="order-tier tier-economy">Economy</span>
+      </div>
+      <span class="order-status status-delivered">Delivered</span>
+      <div class="order-row">
+        <span class="order-row-label">From</span>
+        <span>Warehouse — 8200 SE 82nd Ave, Portland</span>
+      </div>
+      <div class="order-row">
+        <span class="order-row-label">To</span>
+        <span>Cascade Outfitters HQ, Portland</span>
+      </div>
+      <div class="order-meta">
+        <span>Delivered Apr 14 · 4:58 PM</span>
+        <span><strong>$28.00</strong></span>
+      </div>
+      <div class="order-detail">
+        <p><strong>POD:</strong> Signed by front desk at 4:58 PM.</p>
+      </div>
+    </div>
+
+    <div class="order-card" data-expandable tabindex="0" role="button" aria-expanded="false">
+      <div class="order-header">
+        <span class="order-id">#CDI-20260412-201</span>
+        <span class="order-tier tier-rush">Rush</span>
+      </div>
+      <span class="order-status status-delivered">Delivered</span>
+      <div class="order-row">
+        <span class="order-row-label">From</span>
+        <span>Your office — 1000 SW Broadway, Portland</span>
+      </div>
+      <div class="order-row">
+        <span class="order-row-label">To</span>
+        <span>PDX Airport — Freight Terminal</span>
+      </div>
+      <div class="order-meta">
+        <span>Delivered Apr 12 · 10:03 AM</span>
+        <span><strong>$68.75</strong></span>
+      </div>
+      <div class="order-detail">
+        <p><strong>POD:</strong> TSA handoff confirmed at 10:03 AM.</p>
+        <p><strong>Notes:</strong> Known Shipper — TSA certified driver required.</p>
+      </div>
+    </div>
+
+    <!-- BILLING -->
+    <p class="section-label">Current Invoice <a href="#">Download PDF →</a></p>
+
+    <div class="billing-card">
+      <div class="billing-row">
+        <span class="billing-label">Period</span>
+        <span class="billing-value">April 1 – 15, 2026</span>
+      </div>
+      <div class="billing-row">
+        <span class="billing-label">Rush deliveries (6)</span>
+        <span class="billing-value">$412.50</span>
+      </div>
+      <div class="billing-row">
+        <span class="billing-label">3-Hour deliveries (8)</span>
+        <span class="billing-value">$340.00</span>
+      </div>
+      <div class="billing-row">
+        <span class="billing-label">Economy deliveries (4)</span>
+        <span class="billing-value">$112.00</span>
+      </div>
+      <div class="billing-row">
+        <span class="billing-label">Partner discount (-5%)</span>
+        <span class="billing-value" style="color:var(--success)">−$43.22</span>
+      </div>
+      <div class="billing-row">
+        <span>Total due May 1</span>
+        <span>$821.28</span>
+      </div>
+      <div class="billing-footer">
+        <span>Net 15 terms · ACH preferred</span>
+        <a href="#">Pay online →</a>
+      </div>
+    </div>
+
+    <!-- QUICK ACTIONS -->
+    <p class="section-label">Quick Actions</p>
+
+    <div class="actions-grid">
+      <a href="index.html#quote" class="action-btn">
+        <span class="action-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </span>
+        Schedule Pickup
+      </a>
+
+      <a href="tel:+15036917800" class="action-btn">
+        <span class="action-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </span>
+        Call Dispatch
+      </a>
+
+      <button class="action-btn" onclick="alert('Demo only — would open saved pickup addresses and recipient presets.')">
+        <span class="action-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </span>
+        Saved Addresses
+      </button>
+
+      <button class="action-btn" onclick="alert('Demo only — would open the full order history with filters and search.')">
+        <span class="action-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </span>
+        Order History
+      </button>
+
+      <button class="action-btn" onclick="alert('Demo only — would open billing settings, payment methods, and invoice history.')">
+        <span class="action-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        </span>
+        Billing
+      </button>
+
+      <button class="action-btn" onclick="alert('Demo only — would open account settings, team access, and notification preferences.')">
+        <span class="action-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </span>
+        Settings
+      </button>
+    </div>
+
+  </main>
+
+  <footer class="app-footer">
+    CourierDirect Customer Portal — Design concept by <a href="https://lukasdgreen.com">Lukas Green</a>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+
+      function toggleCard(card) {
+        var expanded = card.classList.toggle('expanded');
+        card.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      }
+
+      document.querySelectorAll('[data-expandable]').forEach(function (card) {
+        card.addEventListener('click', function () { toggleCard(card); });
+        card.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleCard(card);
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

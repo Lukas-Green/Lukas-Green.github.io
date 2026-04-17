@@ -1,5 +1,5 @@
 /* Courier Direct — script.js
-   Three functions only: nav toggle, scroll reveal, quote form validation.
+   Nav toggle, scroll reveal, quote form validation, rate estimator.
    No frameworks. No external deps. */
 
 (function () {
@@ -9,6 +9,7 @@
     initNavToggle();
     initScrollReveal();
     initQuoteForm();
+    initRateCalculator();
     setFooterYear();
   });
 
@@ -112,7 +113,70 @@
     });
   }
 
-  /* Footer year (trivial utility, not a fourth feature) */
+  /* 4. Rate estimator */
+  function initRateCalculator() {
+    var wrap = document.getElementById('calculator');
+    if (!wrap) return;
+
+    var tierBtns = wrap.querySelectorAll('[data-tier]');
+    var distBtns = wrap.querySelectorAll('[data-dist]');
+    var afterHours = document.getElementById('calc-afterhours');
+    var amountEl = document.getElementById('calc-amount');
+    var noteEl = document.getElementById('calc-note');
+
+    var state = {
+      tier: 'rush',
+      base: 35,
+      tierLabel: 'Rush pickup',
+      dist: 'short',
+      mult: 1,
+      distLabel: 'under 10 miles in metro'
+    };
+
+    function recalc() {
+      if (state.tier === 'truck') {
+        amountEl.textContent = 'Call us';
+        noteEl.textContent = 'Truck service is quoted live based on size, weight, and destination.';
+        return;
+      }
+      var total = state.base * state.mult;
+      if (afterHours && afterHours.checked) total += 15;
+      amountEl.textContent = '$' + Math.round(total);
+      noteEl.textContent = state.tierLabel + ', ' + state.distLabel +
+        (afterHours && afterHours.checked ? ' (after-hours surcharge applied)' : '') + '.';
+    }
+
+    function setActive(group, btn) {
+      group.forEach(function (b) { b.classList.remove('is-active'); });
+      btn.classList.add('is-active');
+    }
+
+    tierBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        setActive(tierBtns, btn);
+        state.tier = btn.dataset.tier;
+        state.base = parseFloat(btn.dataset.base) || 0;
+        state.tierLabel = (btn.textContent.trim().split('\n')[0] || btn.dataset.tier) + ' pickup';
+        recalc();
+      });
+    });
+
+    distBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        setActive(distBtns, btn);
+        state.dist = btn.dataset.dist;
+        state.mult = parseFloat(btn.dataset.mult) || 1;
+        state.distLabel = btn.textContent.trim().toLowerCase();
+        recalc();
+      });
+    });
+
+    if (afterHours) afterHours.addEventListener('change', recalc);
+
+    recalc();
+  }
+
+  /* Footer year (trivial utility) */
   function setFooterYear() {
     var year = document.getElementById('footer-year');
     if (year) year.textContent = new Date().getFullYear();

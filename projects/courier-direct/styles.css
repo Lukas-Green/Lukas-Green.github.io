@@ -1018,3 +1018,188 @@ button {
     scroll-behavior: auto;
   }
 }
+
+/* ==========================================================================
+   Rate estimator
+   ========================================================================== */
+.calculator {
+  padding: clamp(3.5rem, 7vw, 6rem) 0;
+  background: #F5F7FB;
+  border-top: 1px solid rgba(15, 45, 87, 0.06);
+}
+
+.calc-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 2.5rem;
+  margin-top: 2rem;
+  align-items: start;
+}
+@media (max-width: 840px) {
+  .calc-wrap { grid-template-columns: 1fr; }
+}
+
+.calc-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.calc-group {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+.calc-group legend {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6B7280;
+  margin-bottom: 0.75rem;
+  padding: 0;
+}
+
+.calc-options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+@media (max-width: 520px) {
+  .calc-options { grid-template-columns: 1fr 1fr; }
+}
+
+.calc-opt {
+  background: #fff;
+  border: 1px solid #E5E7EB;
+  border-radius: 10px;
+  padding: 0.85rem 0.5rem;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  color: #0F2D57;
+  cursor: pointer;
+  text-align: center;
+  line-height: 1.25;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+}
+.calc-opt span {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  color: #6B7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 2px;
+}
+.calc-opt:hover {
+  border-color: #F5B800;
+  background: #FFFBEB;
+}
+.calc-opt.is-active {
+  background: #0F2D57;
+  color: #fff;
+  border-color: #0F2D57;
+}
+.calc-opt.is-active span { color: rgba(255,255,255,0.7); }
+
+.calc-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1A1A1A;
+  cursor: pointer;
+  padding: 0.5rem 0.75rem;
+  background: #fff;
+  border: 1px solid #E5E7EB;
+  border-radius: 10px;
+  width: fit-content;
+}
+.calc-toggle input { margin: 0; }
+
+.calc-result {
+  background: #fff;
+  border: 1px solid #E5E7EB;
+  border-radius: 16px;
+  padding: 1.75rem;
+  box-shadow: 0 2px 8px rgba(15,45,87,0.06);
+  position: sticky;
+  top: 100px;
+}
+.calc-result-label {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6B7280;
+}
+.calc-result-amount {
+  margin: 0.25rem 0 0.5rem;
+  font-size: clamp(2.5rem, 5vw, 3.25rem);
+  font-weight: 700;
+  color: #0F2D57;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.calc-result-note {
+  margin: 0 0 1.25rem;
+  color: #6B7280;
+  font-size: 14px;
+}
+.calc-cta {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.calc-cta .btn {
+  flex: 1;
+  justify-content: center;
+  text-align: center;
+  min-width: 140px;
+}
+.calc-fineprint {
+  margin: 1rem 0 0;
+  font-size: 12px;
+  color: #9CA3AF;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   About page — community grid
+   ========================================================================== */
+.community-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0 1.25rem;
+}
+.community-card {
+  background: #fff;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(15,45,87,0.06);
+}
+.community-name {
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+  color: #0F2D57;
+  font-weight: 700;
+}
+.community-desc {
+  margin: 0;
+  color: #4B5563;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+/* About page hero doesn't need the big quote form — trim padding */
+.about-hero {
+  min-height: auto;
+  padding: clamp(5rem, 10vw, 8rem) 0 clamp(3rem, 6vw, 5rem);
+}
+
