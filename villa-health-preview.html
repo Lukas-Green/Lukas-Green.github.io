@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Villa Health — Integrative Care, Vancouver WA</title>
+<meta name="description" content="The Villa Health is an integrative practice in Vancouver, WA. Psychiatry, hormone therapy, weight management, aesthetic medicine, and whole-person care.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cream:#F7F1E6;
+  --cream-deep:#EFE7D6;
+  --paper:#FFFDF8;
+  --ink:#1F2D2A;
+  --ink-soft:#3C4A45;
+  --muted:#7A766E;
+  --line:#E5DCC9;
+  --sage:#6F8A6E;
+  --sage-deep:#4F6A52;
+  --clay:#C77D5C;
+  --clay-deep:#A85F40;
+  --gold:#C9A66B;
+  --shadow:0 1px 2px rgba(31,45,42,.04), 0 8px 32px rgba(31,45,42,.06);
+  --shadow-lg:0 24px 60px rgba(31,45,42,.10);
+  --serif:'Fraunces',Georgia,serif;
+  --sans:'Inter',system-ui,-apple-system,sans-serif;
+  --r-sm:6px; --r-md:14px; --r-lg:24px; --r-xl:36px;
+  --maxw:1240px;
+}
+html{scroll-behavior:smooth;font-size:16px;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{background:var(--cream);color:var(--ink);font-family:var(--sans);line-height:1.6;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.serif{font-family:var(--serif);font-weight:400;letter-spacing:-.01em}
+.eyebrow{font-family:var(--sans);font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--clay-deep)}
+.eyebrow-sage{color:var(--sage-deep)}
+
+/* ===================== NAV ===================== */
+.nav{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 2.5rem;transition:background .3s ease,backdrop-filter .3s ease,border-color .3s ease;border-bottom:1px solid transparent}
+.nav.scrolled{background:rgba(247,241,230,.85);backdrop-filter:saturate(180%) blur(14px);border-bottom-color:var(--line)}
+.nav-brand{display:flex;align-items:center;gap:.75rem;font-family:var(--serif);font-size:1.4rem;font-weight:500;letter-spacing:-.01em;color:var(--ink)}
+.nav-brand-mark{width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 35% 30%, #B5C8A6 0%, var(--sage) 60%, var(--sage-deep) 100%);position:relative;flex-shrink:0;box-shadow:inset 0 0 0 1px rgba(255,255,255,.25)}
+.nav-brand-mark::after{content:'';position:absolute;inset:6px;border-radius:50%;border:1px solid rgba(255,255,255,.35)}
+.nav-brand small{display:block;font-family:var(--sans);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-top:2px;font-weight:600}
+.nav-brand-text{display:flex;flex-direction:column;line-height:1}
+.nav-links{display:flex;gap:2.2rem;list-style:none;align-items:center}
+.nav-links a{font-size:.88rem;font-weight:500;color:var(--ink-soft);position:relative;padding:.4rem 0;transition:color .2s}
+.nav-links a::after{content:'';position:absolute;left:50%;bottom:0;width:0;height:1px;background:var(--clay);transition:width .25s ease,left .25s ease}
+.nav-links a:hover,.nav-links a.active{color:var(--ink)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%;left:0}
+.nav-cta{display:inline-flex;align-items:center;gap:.5rem;background:var(--ink);color:var(--cream);padding:.7rem 1.3rem;border-radius:999px;font-size:.85rem;font-weight:600;transition:background .2s,transform .15s}
+.nav-cta:hover{background:var(--sage-deep);transform:translateY(-1px)}
+.nav-cta .arr{transition:transform .2s}
+.nav-cta:hover .arr{transform:translateX(3px)}
+.nav-toggle{display:none;flex-direction:column;gap:5px;padding:6px}
+.nav-toggle span{width:22px;height:1.5px;background:var(--ink);transition:.2s}
+
+/* ===================== HERO ===================== */
+.hero{position:relative;min-height:100vh;padding:8rem 2.5rem 4rem;display:flex;align-items:center;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:
+  radial-gradient(60% 50% at 85% 25%, rgba(199,125,92,.16), transparent 60%),
+  radial-gradient(55% 45% at 10% 85%, rgba(111,138,110,.18), transparent 60%);
+  z-index:0;pointer-events:none}
+.hero-blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:.35;z-index:0;pointer-events:none}
+.hero-blob.a{width:520px;height:520px;background:#D9C7A8;top:-120px;right:-100px}
+.hero-blob.b{width:420px;height:420px;background:#B5C8A6;bottom:-150px;left:-80px}
+.hero-inner{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;width:100%;display:grid;grid-template-columns:1.15fr 1fr;gap:5rem;align-items:center}
+.hero-text .eyebrow{display:inline-flex;align-items:center;gap:.65rem;margin-bottom:1.6rem}
+.hero-text .eyebrow::before{content:'';width:28px;height:1px;background:var(--clay-deep)}
+.hero-h1{font-family:var(--serif);font-weight:300;font-size:clamp(2.8rem,6.2vw,5.4rem);line-height:1.02;letter-spacing:-.025em;color:var(--ink);margin-bottom:1.6rem;font-variation-settings:"opsz" 144}
+.hero-h1 em{font-style:italic;font-weight:400;color:var(--sage-deep)}
+.hero-h1 .underline{position:relative;display:inline-block}
+.hero-h1 .underline::after{content:'';position:absolute;left:0;right:0;bottom:.08em;height:.18em;background:rgba(199,125,92,.28);z-index:-1;border-radius:2px}
+.hero-lede{font-size:1.13rem;color:var(--ink-soft);max-width:520px;line-height:1.65;margin-bottom:2.2rem}
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;align-items:center;margin-bottom:2.8rem}
+.btn-primary{display:inline-flex;align-items:center;gap:.6rem;background:var(--ink);color:var(--cream);padding:.95rem 1.7rem;border-radius:999px;font-weight:600;font-size:.95rem;transition:background .25s,transform .15s,box-shadow .25s;box-shadow:0 6px 20px rgba(31,45,42,.18)}
+.btn-primary:hover{background:var(--sage-deep);transform:translateY(-2px);box-shadow:0 12px 28px rgba(79,106,82,.28)}
+.btn-secondary{display:inline-flex;align-items:center;gap:.6rem;color:var(--ink);padding:.9rem 1.5rem;border-radius:999px;font-weight:600;font-size:.95rem;border:1px solid var(--ink);transition:background .25s,color .25s}
+.btn-secondary:hover{background:var(--ink);color:var(--cream)}
+.btn-link{display:inline-flex;align-items:center;gap:.5rem;color:var(--ink);font-weight:600;font-size:.95rem;border-bottom:1px solid var(--ink);padding-bottom:2px;transition:color .2s,border-color .2s}
+.btn-link:hover{color:var(--clay-deep);border-color:var(--clay-deep)}
+.btn .arr{transition:transform .2s}
+.btn:hover .arr,.btn-primary:hover .arr,.btn-secondary:hover .arr,.btn-link:hover .arr{transform:translateX(3px)}
+.hero-trust{display:flex;gap:2.5rem;align-items:center;padding-top:1.8rem;border-top:1px solid var(--line)}
+.trust-item .num{font-family:var(--serif);font-size:1.85rem;font-weight:500;color:var(--ink);line-height:1;letter-spacing:-.02em;font-variation-settings:"opsz" 144}
+.trust-item .lab{font-size:.78rem;color:var(--muted);margin-top:.35rem;letter-spacing:.04em}
+
+/* Hero visual */
+.hero-visual{position:relative;height:560px}
+.hv-card{position:absolute;background:var(--paper);border-radius:var(--r-lg);box-shadow:var(--shadow-lg);overflow:hidden}
+.hv-card.main{inset:0;background:linear-gradient(135deg,#D5DCC9 0%,#B5C8A6 50%,#7B9B7E 100%);display:flex;align-items:flex-end;padding:2rem}
+.hv-card.main::before{content:'';position:absolute;inset:0;background:
+  radial-gradient(70% 60% at 70% 30%, rgba(255,255,255,.45), transparent 70%),
+  radial-gradient(60% 50% at 20% 80%, rgba(199,125,92,.35), transparent 70%);
+  mix-blend-mode:screen}
+.hv-leaf{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--serif);font-size:9rem;color:rgba(255,255,255,.55);font-style:italic;line-height:1;font-weight:300;font-variation-settings:"opsz" 144}
+.hv-card.main .label{position:relative;color:#fff;font-family:var(--serif);font-size:1.4rem;line-height:1.25;font-style:italic;font-weight:400;text-shadow:0 2px 12px rgba(0,0,0,.15);max-width:280px}
+.hv-meta{position:absolute;top:1.5rem;left:1.5rem;display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,253,248,.95);backdrop-filter:blur(8px);padding:.5rem .9rem;border-radius:999px;font-size:.75rem;font-weight:600;color:var(--ink);z-index:2}
+.hv-dot{width:7px;height:7px;border-radius:50%;background:var(--sage);position:relative}
+.hv-dot::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:1px solid var(--sage);opacity:.5;animation:pulse 2.4s ease-out infinite}
+@keyframes pulse{0%{transform:scale(1);opacity:.5}100%{transform:scale(1.8);opacity:0}}
+.hv-card.float{background:var(--paper);padding:1.4rem 1.5rem;width:240px;display:flex;flex-direction:column;gap:.6rem}
+.hv-card.float.a{top:62%;left:-2.5rem}
+.hv-card.float.b{top:8%;right:-2rem;width:220px}
+.hv-card.float .head{display:flex;align-items:center;gap:.7rem}
+.hv-card.float .av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#C77D5C,#A85F40);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:.8rem;font-family:var(--serif)}
+.hv-card.float .av.sage{background:linear-gradient(135deg,#9DB68F,#6F8A6E)}
+.hv-card.float .nm{font-weight:600;font-size:.88rem;color:var(--ink);line-height:1.2}
+.hv-card.float .ti{font-size:.72rem;color:var(--muted);margin-top:2px}
+.hv-card.float .qt{font-family:var(--serif);font-style:italic;font-size:.95rem;line-height:1.4;color:var(--ink-soft)}
+.hv-card.float .stars{color:var(--gold);font-size:.85rem;letter-spacing:1px}
+
+/* ===================== MARQUEE ===================== */
+.marquee{background:var(--ink);color:var(--cream);padding:1.4rem 0;overflow:hidden;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.marquee-track{display:flex;gap:3rem;animation:scroll 38s linear infinite;white-space:nowrap;width:max-content}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.marquee-item{font-family:var(--serif);font-size:1.4rem;font-style:italic;font-weight:300;display:inline-flex;align-items:center;gap:3rem;font-variation-settings:"opsz" 144}
+.marquee-item span{color:var(--cream)}
+.marquee-item .sep{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--clay)}
+
+/* ===================== SECTIONS ===================== */
+section{padding:7rem 2.5rem;max-width:var(--maxw);margin:0 auto;position:relative}
+.section-head{margin-bottom:4rem;max-width:780px}
+.section-head .eyebrow{display:inline-flex;align-items:center;gap:.65rem;margin-bottom:1.4rem}
+.section-head .eyebrow::before{content:'';width:24px;height:1px;background:currentColor;opacity:.6}
+.section-title{font-family:var(--serif);font-weight:300;font-size:clamp(2.2rem,4.5vw,3.6rem);line-height:1.05;letter-spacing:-.02em;color:var(--ink);margin-bottom:1.2rem;font-variation-settings:"opsz" 144}
+.section-title em{font-style:italic;color:var(--sage-deep);font-weight:400}
+.section-sub{font-size:1.05rem;color:var(--muted);max-width:620px;line-height:1.7}
+
+/* ===================== SERVICES (bento) ===================== */
+.services{padding-top:8rem}
+.services-grid{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:minmax(240px,auto);gap:1rem}
+.svc{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:2rem;display:flex;flex-direction:column;justify-content:space-between;transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;overflow:hidden}
+.svc:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--sage)}
+.svc-icon{width:46px;height:46px;border-radius:12px;background:var(--cream-deep);display:flex;align-items:center;justify-content:center;margin-bottom:1.4rem;color:var(--sage-deep);transition:background .25s,color .25s}
+.svc:hover .svc-icon{background:var(--sage-deep);color:var(--cream)}
+.svc-name{font-family:var(--serif);font-size:1.55rem;font-weight:400;line-height:1.15;letter-spacing:-.01em;color:var(--ink);margin-bottom:.7rem;font-variation-settings:"opsz" 144}
+.svc-desc{font-size:.94rem;color:var(--ink-soft);line-height:1.6;margin-bottom:1.4rem}
+.svc-list{list-style:none;display:flex;flex-wrap:wrap;gap:.4rem;margin-top:auto}
+.svc-list li{font-size:.78rem;color:var(--muted);background:var(--cream);padding:.35rem .75rem;border-radius:999px;border:1px solid var(--line)}
+.svc-link{display:inline-flex;align-items:center;gap:.4rem;font-size:.85rem;font-weight:600;color:var(--clay-deep);margin-top:1rem}
+.svc-link .arr{transition:transform .2s}
+.svc:hover .svc-link .arr{transform:translateX(3px)}
+
+.svc.feat{grid-column:span 3;background:linear-gradient(135deg,#5F7A60 0%,#4F6A52 100%);color:var(--cream);border-color:transparent;padding:2.4rem}
+.svc.feat .svc-name,.svc.feat .svc-desc{color:var(--cream)}
+.svc.feat .svc-icon{background:rgba(255,253,248,.15);color:var(--cream)}
+.svc.feat:hover .svc-icon{background:var(--cream);color:var(--sage-deep)}
+.svc.feat .svc-list li{background:rgba(255,253,248,.10);color:var(--cream);border-color:rgba(255,253,248,.18)}
+.svc.feat .svc-link{color:var(--cream)}
+.svc.feat::before{content:'';position:absolute;inset:0;background:radial-gradient(60% 50% at 80% 20%, rgba(255,255,255,.18), transparent 60%);pointer-events:none}
+.svc.wide{grid-column:span 3}
+.svc.std{grid-column:span 2}
+
+/* ===================== PHILOSOPHY ===================== */
+.philosophy{display:grid;grid-template-columns:1fr 1.1fr;gap:5rem;align-items:start}
+.phil-quote{position:sticky;top:7rem;font-family:var(--serif);font-weight:300;font-size:clamp(1.8rem,3vw,2.6rem);line-height:1.2;letter-spacing:-.015em;color:var(--ink);font-variation-settings:"opsz" 144}
+.phil-quote em{font-style:italic;color:var(--sage-deep);font-weight:400}
+.phil-quote::before{content:'\201C';font-size:5rem;color:var(--clay);line-height:.6;display:block;margin-bottom:.5rem;opacity:.6}
+.phil-body{display:flex;flex-direction:column;gap:1.4rem}
+.phil-body p{font-size:1.05rem;color:var(--ink-soft);line-height:1.75}
+.phil-body p:first-child::first-letter{font-family:var(--serif);font-size:3.4rem;float:left;line-height:.85;padding:.4rem .7rem .2rem 0;font-weight:400;color:var(--clay-deep);font-variation-settings:"opsz" 144}
+.phil-pillars{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-top:1rem}
+.pillar{padding:1.5rem;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md)}
+.pillar-num{font-family:var(--serif);font-size:.9rem;color:var(--clay-deep);font-style:italic;margin-bottom:.5rem}
+.pillar h4{font-family:var(--serif);font-size:1.15rem;font-weight:500;margin-bottom:.4rem;color:var(--ink)}
+.pillar p{font-size:.88rem;color:var(--muted);line-height:1.55}
+
+/* ===================== TEAM ===================== */
+.team{background:linear-gradient(180deg,var(--cream) 0%,var(--cream-deep) 100%);max-width:none;padding-left:0;padding-right:0}
+.team-inner{max-width:var(--maxw);margin:0 auto;padding:0 2.5rem}
+.team-controls{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:2rem;margin-bottom:3rem}
+.team-filter{display:flex;gap:.5rem;flex-wrap:wrap}
+.tf-btn{padding:.55rem 1.1rem;border-radius:999px;font-size:.82rem;font-weight:500;color:var(--ink-soft);background:transparent;border:1px solid var(--line);transition:all .2s}
+.tf-btn:hover{border-color:var(--ink);color:var(--ink)}
+.tf-btn.on{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.member{background:var(--paper);border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);transition:transform .35s ease,box-shadow .35s ease;display:flex;flex-direction:column}
+.member:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+.member-photo{aspect-ratio:4/5;position:relative;overflow:hidden}
+.member-photo svg{width:100%;height:100%;display:block}
+.member-photo .badge{position:absolute;top:1rem;left:1rem;background:rgba(255,253,248,.95);backdrop-filter:blur(8px);padding:.4rem .8rem;border-radius:999px;font-size:.7rem;font-weight:600;color:var(--ink);letter-spacing:.04em;text-transform:uppercase;z-index:2}
+.member-photo .accept{position:absolute;bottom:1rem;right:1rem;background:rgba(255,253,248,.95);backdrop-filter:blur(8px);padding:.35rem .8rem;border-radius:999px;font-size:.72rem;font-weight:600;color:var(--sage-deep);display:inline-flex;align-items:center;gap:.4rem;z-index:2}
+.member-photo .accept::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--sage)}
+.member-body{padding:1.6rem 1.7rem 1.8rem;display:flex;flex-direction:column;flex:1}
+.member-name{font-family:var(--serif);font-size:1.45rem;font-weight:500;color:var(--ink);line-height:1.15;letter-spacing:-.01em;font-variation-settings:"opsz" 144}
+.member-creds{font-size:.78rem;color:var(--muted);font-weight:600;letter-spacing:.06em;margin-top:.25rem;text-transform:uppercase}
+.member-role{font-size:.95rem;color:var(--clay-deep);font-style:italic;font-family:var(--serif);margin-top:.5rem}
+.member-bio{font-size:.92rem;color:var(--ink-soft);line-height:1.6;margin-top:1rem;flex:1}
+.member-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:1.1rem}
+.member-tags span{font-size:.7rem;color:var(--ink-soft);background:var(--cream-deep);padding:.3rem .65rem;border-radius:999px}
+.member-cta{display:flex;align-items:center;justify-content:space-between;margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid var(--line)}
+.member-book{font-size:.85rem;font-weight:600;color:var(--ink);display:inline-flex;align-items:center;gap:.4rem;transition:color .2s}
+.member-book:hover{color:var(--clay-deep)}
+.member-book .arr{transition:transform .2s}
+.member-book:hover .arr{transform:translateX(3px)}
+.member-meta{font-size:.75rem;color:var(--muted)}
+
+/* ===================== JOURNEY ===================== */
+.journey{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.journey-steps{display:flex;flex-direction:column;gap:0;position:relative}
+.journey-steps::before{content:'';position:absolute;left:23px;top:30px;bottom:30px;width:1px;background:linear-gradient(to bottom,var(--clay) 0%,var(--sage) 100%);opacity:.4}
+.step{display:flex;gap:1.6rem;padding:1.4rem 0;position:relative}
+.step-num{width:46px;height:46px;border-radius:50%;background:var(--paper);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--clay-deep);flex-shrink:0;position:relative;z-index:2;transition:all .25s}
+.step:hover .step-num{background:var(--clay);color:#fff;border-color:var(--clay);transform:scale(1.05)}
+.step-content h4{font-family:var(--serif);font-size:1.4rem;font-weight:500;color:var(--ink);margin-bottom:.4rem;letter-spacing:-.01em}
+.step-content p{font-size:.95rem;color:var(--ink-soft);line-height:1.65;max-width:420px}
+.step-content .meta{font-size:.78rem;color:var(--muted);margin-top:.5rem;font-weight:500}
+
+/* ===================== TESTIMONIALS ===================== */
+.testimonials{background:var(--ink);color:var(--cream);max-width:none;padding-left:0;padding-right:0;border-radius:0}
+.testimonials-inner{max-width:var(--maxw);margin:0 auto;padding:0 2.5rem}
+.testimonials .section-title{color:var(--cream)}
+.testimonials .section-title em{color:#D9C3A0}
+.testimonials .eyebrow{color:#D9C3A0}
+.testimonials .section-sub{color:rgba(247,241,230,.7)}
+.tst-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.tst{background:rgba(255,253,248,.04);border:1px solid rgba(247,241,230,.1);border-radius:var(--r-lg);padding:2rem;display:flex;flex-direction:column;gap:1.2rem;transition:background .25s,border-color .25s}
+.tst:hover{background:rgba(255,253,248,.06);border-color:rgba(247,241,230,.18)}
+.tst .stars{color:var(--gold);font-size:.95rem;letter-spacing:2px}
+.tst-quote{font-family:var(--serif);font-style:italic;font-weight:300;font-size:1.18rem;line-height:1.5;color:var(--cream);font-variation-settings:"opsz" 144;flex:1}
+.tst-meta{display:flex;align-items:center;gap:.8rem;padding-top:1rem;border-top:1px solid rgba(247,241,230,.1)}
+.tst-av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#C77D5C,#A85F40);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:.85rem;font-family:var(--serif);flex-shrink:0}
+.tst-av.b{background:linear-gradient(135deg,#9DB68F,#6F8A6E)}
+.tst-av.c{background:linear-gradient(135deg,#D9C3A0,#C9A66B)}
+.tst-name{font-weight:600;font-size:.92rem;color:var(--cream);line-height:1.2}
+.tst-detail{font-size:.78rem;color:rgba(247,241,230,.55);margin-top:2px}
+
+/* ===================== FAQ ===================== */
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.faq-item{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;transition:border-color .2s}
+.faq-item[open]{border-color:var(--sage)}
+.faq-item summary{padding:1.4rem 1.6rem;font-family:var(--serif);font-size:1.15rem;font-weight:500;color:var(--ink);cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:1rem;transition:color .2s}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary:hover{color:var(--clay-deep)}
+.faq-item summary::after{content:'+';font-family:var(--sans);font-size:1.6rem;font-weight:300;color:var(--clay-deep);transition:transform .25s;flex-shrink:0;line-height:1}
+.faq-item[open] summary::after{content:'\2013'}
+.faq-item .faq-body{padding:0 1.6rem 1.5rem;font-size:.95rem;color:var(--ink-soft);line-height:1.7;border-top:1px solid var(--line);padding-top:1.2rem}
+
+/* ===================== VISIT / CONTACT ===================== */
+.visit{background:linear-gradient(135deg,var(--sage-deep) 0%,#3F5A42 100%);color:var(--cream);max-width:none;padding-left:0;padding-right:0;position:relative;overflow:hidden}
+.visit::before{content:'';position:absolute;top:-200px;right:-150px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(199,125,92,.25),transparent 65%);filter:blur(40px);pointer-events:none}
+.visit::after{content:'';position:absolute;bottom:-150px;left:-100px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(217,195,160,.25),transparent 65%);filter:blur(40px);pointer-events:none}
+.visit-inner{max-width:var(--maxw);margin:0 auto;padding:0 2.5rem;position:relative;z-index:2;display:grid;grid-template-columns:1.1fr 1fr;gap:5rem;align-items:start}
+.visit .eyebrow{color:#D9C3A0}
+.visit .section-title{color:var(--cream);margin-bottom:1.5rem}
+.visit .section-title em{color:#D9C3A0}
+.visit-lede{font-size:1.05rem;color:rgba(247,241,230,.85);line-height:1.7;margin-bottom:2.5rem;max-width:480px}
+.visit-info{display:flex;flex-direction:column;gap:1.6rem;margin-bottom:2.5rem}
+.vi-item{display:flex;gap:1.2rem;align-items:flex-start}
+.vi-icon{width:40px;height:40px;border-radius:10px;background:rgba(255,253,248,.10);display:flex;align-items:center;justify-content:center;color:var(--cream);flex-shrink:0;border:1px solid rgba(247,241,230,.15)}
+.vi-label{font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(247,241,230,.6);margin-bottom:.3rem}
+.vi-content{font-size:1rem;color:var(--cream);line-height:1.55}
+.vi-content a:hover{color:#D9C3A0}
+.visit-ctas{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-cream{display:inline-flex;align-items:center;gap:.6rem;background:var(--cream);color:var(--ink);padding:.95rem 1.8rem;border-radius:999px;font-weight:600;font-size:.95rem;transition:transform .15s,box-shadow .25s}
+.btn-cream:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(0,0,0,.18)}
+.btn-outline-cream{display:inline-flex;align-items:center;gap:.6rem;color:var(--cream);padding:.9rem 1.6rem;border-radius:999px;font-weight:600;font-size:.95rem;border:1px solid rgba(247,241,230,.4);transition:background .2s,border-color .2s}
+.btn-outline-cream:hover{background:rgba(247,241,230,.1);border-color:var(--cream)}
+
+/* Contact card */
+.contact-card{background:var(--paper);color:var(--ink);border-radius:var(--r-lg);padding:2.4rem;box-shadow:var(--shadow-lg)}
+.contact-card h3{font-family:var(--serif);font-size:1.55rem;font-weight:500;letter-spacing:-.01em;margin-bottom:.5rem;color:var(--ink)}
+.contact-card .sub{font-size:.92rem;color:var(--muted);margin-bottom:1.8rem}
+.fg{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
+.fg label{font-size:.74rem;font-weight:600;color:var(--ink-soft);letter-spacing:.05em}
+.fg input,.fg select,.fg textarea{background:var(--cream);border:1px solid var(--line);border-radius:10px;padding:.8rem 1rem;color:var(--ink);font:inherit;font-size:.92rem;outline:none;transition:border-color .2s,background .2s;font-family:var(--sans)}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--sage);background:var(--paper)}
+.fg textarea{resize:vertical;min-height:96px}
+.fg-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.contact-card .btn-primary{width:100%;justify-content:center;margin-top:.8rem}
+.consent{font-size:.74rem;color:var(--muted);margin-top:.8rem;text-align:center;line-height:1.5}
+
+/* ===================== FOOTER ===================== */
+footer{background:var(--cream-deep);padding:5rem 2.5rem 2rem;border-top:1px solid var(--line)}
+.footer-inner{max-width:var(--maxw);margin:0 auto}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3.5rem;border-bottom:1px solid var(--line)}
+.footer-brand{display:flex;align-items:center;gap:.75rem;margin-bottom:1.2rem;font-family:var(--serif);font-size:1.4rem;color:var(--ink);font-weight:500}
+.footer-blurb{font-size:.92rem;color:var(--ink-soft);line-height:1.7;max-width:340px;margin-bottom:1.5rem}
+.footer-social{display:flex;gap:.6rem}
+.footer-social a{width:38px;height:38px;border-radius:50%;background:var(--paper);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--ink-soft);transition:all .2s}
+.footer-social a:hover{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.footer-col h5{font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.7rem}
+.footer-col a{font-size:.92rem;color:var(--ink-soft);transition:color .2s}
+.footer-col a:hover{color:var(--clay-deep)}
+.footer-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding-top:2rem;font-size:.82rem;color:var(--muted)}
+.footer-legal{display:flex;gap:1.5rem;flex-wrap:wrap}
+
+/* ===================== REVEAL ===================== */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width:1024px){
+  .hero-inner{grid-template-columns:1fr;gap:4rem}
+  .hero-visual{height:440px;max-width:520px;margin:0 auto;width:100%}
+  .services-grid{grid-template-columns:repeat(4,1fr)}
+  .svc.feat,.svc.wide{grid-column:span 4}
+  .svc.std{grid-column:span 2}
+  .philosophy{grid-template-columns:1fr;gap:2.5rem}
+  .phil-quote{position:static}
+  .team-grid{grid-template-columns:repeat(2,1fr)}
+  .journey{grid-template-columns:1fr;gap:3rem}
+  .visit-inner{grid-template-columns:1fr;gap:3rem}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:2.5rem}
+  .tst-grid{grid-template-columns:1fr 1fr}
+  .faq-grid{grid-template-columns:1fr}
+}
+@media (max-width:680px){
+  .nav{padding:1rem 1.3rem}
+  .nav-links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:var(--cream);padding:1.5rem;gap:1.2rem;border-bottom:1px solid var(--line);align-items:flex-start}
+  .nav-links.open{display:flex}
+  .nav-cta{display:none}
+  .nav-toggle{display:flex}
+  .hero{padding:7rem 1.3rem 3rem}
+  .hero-trust{gap:1.5rem;flex-wrap:wrap}
+  .trust-item .num{font-size:1.4rem}
+  .hero-visual{height:380px}
+  .hv-card.float.a{left:-1rem;width:200px}
+  .hv-card.float.b{right:-1rem;width:180px}
+  section{padding:5rem 1.3rem}
+  .services-grid{grid-template-columns:1fr;gap:.8rem}
+  .svc,.svc.feat,.svc.wide,.svc.std{grid-column:span 1}
+  .team-grid,.tst-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr;gap:2rem}
+  .marquee-item{font-size:1.1rem;gap:2rem}
+  .visit-inner,.footer-inner,.testimonials-inner,.team-inner{padding:0 1.3rem}
+  .contact-card{padding:1.8rem}
+  .fg-row{grid-template-columns:1fr}
+  .phil-body p:first-child::first-letter{font-size:2.6rem}
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important}
+  .marquee-track{animation:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav" id="nav">
+  <a href="#top" class="nav-brand" aria-label="The Villa Health">
+    <span class="nav-brand-mark" aria-hidden="true"></span>
+    <span class="nav-brand-text">
+      <span>The Villa Health</span>
+      <small>Vancouver, WA</small>
+    </span>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#approach">Approach</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#journey">New Patients</a></li>
+    <li><a href="#visit">Visit</a></li>
+  </ul>
+  <a href="#visit" class="nav-cta">Book a Visit <span class="arr">&rarr;</span></a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="hero-blob a"></div>
+  <div class="hero-blob b"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="eyebrow">Integrative Medicine &middot; Vancouver, WA</div>
+      <h1 class="hero-h1">Health begins<br>from <em>within</em>&mdash;<br>and is <span class="underline">cared for here</span>.</h1>
+      <p class="hero-lede">A small, integrative practice pairing modern psychiatric and primary care with hormone, weight, and aesthetic medicine. We listen first, prescribe carefully, and treat the whole person.</p>
+      <div class="hero-ctas">
+        <a href="#visit" class="btn-primary">Book a Consultation <span class="arr">&rarr;</span></a>
+        <a href="#team" class="btn-secondary">Meet the Team</a>
+      </div>
+      <div class="hero-trust">
+        <div class="trust-item"><div class="num">20+</div><div class="lab">Years in clinical care</div></div>
+        <div class="trust-item"><div class="num">6</div><div class="lab">Specialty focus areas</div></div>
+        <div class="trust-item"><div class="num">In-network</div><div class="lab">Major insurance plans</div></div>
+      </div>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <div class="hv-card main">
+        <div class="hv-meta"><span class="hv-dot"></span> Now welcoming new patients</div>
+        <div class="hv-leaf">v</div>
+        <div class="label">&ldquo;Care that meets you where you are&mdash;and walks with you forward.&rdquo;</div>
+      </div>
+      <div class="hv-card float a">
+        <div class="head">
+          <div class="av sage">DR</div>
+          <div>
+            <div class="nm">Dr. Daniel Roa</div>
+            <div class="ti">DNP, PMHNP-BC</div>
+          </div>
+        </div>
+        <div class="qt">&ldquo;The right plan is rarely the loudest one.&rdquo;</div>
+      </div>
+      <div class="hv-card float b">
+        <div class="head">
+          <div class="av">M.</div>
+          <div>
+            <div class="nm">Maya R.</div>
+            <div class="ti">Patient, 2 years</div>
+          </div>
+        </div>
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="qt">&ldquo;The first place I&rsquo;ve felt actually heard.&rdquo;</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <div class="marquee-item">
+      <span>Integrative</span><span class="sep"></span>
+      <span>Evidence-based</span><span class="sep"></span>
+      <span><em>Whole-person care</em></span><span class="sep"></span>
+      <span>Patient-led</span><span class="sep"></span>
+      <span>Compassionate</span><span class="sep"></span>
+      <span><em>Modern medicine</em></span><span class="sep"></span>
+    </div>
+    <div class="marquee-item">
+      <span>Integrative</span><span class="sep"></span>
+      <span>Evidence-based</span><span class="sep"></span>
+      <span><em>Whole-person care</em></span><span class="sep"></span>
+      <span>Patient-led</span><span class="sep"></span>
+      <span>Compassionate</span><span class="sep"></span>
+      <span><em>Modern medicine</em></span><span class="sep"></span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SERVICES ============ -->
+<section class="services reveal" id="services">
+  <div class="section-head">
+    <div class="eyebrow">What we treat</div>
+    <h2 class="section-title">Care that doesn&rsquo;t make you<br>choose between <em>thorough</em> and <em>kind</em>.</h2>
+    <p class="section-sub">Six focused practice areas, one coordinated team. Plans are built around your goals&mdash;not a script&mdash;and adjusted as you do.</p>
+  </div>
+  <div class="services-grid">
+
+    <article class="svc feat">
+      <div>
+        <div class="svc-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        </div>
+        <div class="svc-name">Psychiatric Care &amp; Therapy</div>
+        <p class="svc-desc">Thoughtful evaluation, careful medication management, and ongoing support for anxiety, depression, ADHD, trauma, and complex mood conditions. We work with you, not at you.</p>
+      </div>
+      <div>
+        <ul class="svc-list">
+          <li>Adults &amp; teens</li><li>Med management</li><li>Telehealth</li><li>Same-week intake</li>
+        </ul>
+        <a href="#team" class="svc-link">Meet the prescribers <span class="arr">&rarr;</span></a>
+      </div>
+    </article>
+
+    <article class="svc wide">
+      <div>
+        <div class="svc-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h3l3-9 4 18 3-9h5"/></svg>
+        </div>
+        <div class="svc-name">Hormone &amp; Wellness</div>
+        <p class="svc-desc">Bioidentical hormone therapy, thyroid optimization, and longevity protocols built on labs, not guesswork. Energy, mood, sleep, libido&mdash;treated as connected, not isolated.</p>
+      </div>
+      <ul class="svc-list">
+        <li>BHRT</li><li>Thyroid</li><li>Peptides</li><li>Lab-driven</li>
+      </ul>
+    </article>
+
+    <article class="svc std">
+      <div>
+        <div class="svc-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        </div>
+        <div class="svc-name">Weight Management</div>
+        <p class="svc-desc">GLP-1 medication programs (semaglutide, tirzepatide) paired with nutrition and labs. Medical, not gimmicky.</p>
+      </div>
+      <a href="#visit" class="svc-link">Eligibility <span class="arr">&rarr;</span></a>
+    </article>
+
+    <article class="svc std">
+      <div>
+        <div class="svc-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-7-10a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.65-7 10-7 10z" transform="translate(-2,0)"/></svg>
+        </div>
+        <div class="svc-name">Aesthetic Medicine</div>
+        <p class="svc-desc">Neuromodulators, fillers, microneedling, and skin health&mdash;subtle, considered, never overdone.</p>
+      </div>
+      <a href="#visit" class="svc-link">Consult <span class="arr">&rarr;</span></a>
+    </article>
+
+    <article class="svc std">
+      <div>
+        <div class="svc-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V7a3 3 0 0 1 6 0v4"/><rect x="5" y="11" width="14" height="10" rx="2"/></svg>
+        </div>
+        <div class="svc-name">Addiction &amp; Recovery</div>
+        <p class="svc-desc">Confidential MAT for opioid and alcohol use, integrated with mental-health support. No stigma, just structure.</p>
+      </div>
+      <a href="#visit" class="svc-link">Get help <span class="arr">&rarr;</span></a>
+    </article>
+
+    <article class="svc std">
+      <div>
+        <div class="svc-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        </div>
+        <div class="svc-name">Nutrition &amp; Supplements</div>
+        <p class="svc-desc">Labs, food, and targeted supplementation. We prescribe what you need&mdash;and unprescribe what you don&rsquo;t.</p>
+      </div>
+      <a href="#visit" class="svc-link">Learn more <span class="arr">&rarr;</span></a>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============ PHILOSOPHY ============ -->
+<section class="reveal" id="approach">
+  <div class="section-head">
+    <div class="eyebrow eyebrow-sage">Our Approach</div>
+  </div>
+  <div class="philosophy">
+    <div class="phil-quote">
+      We treat the <em>person</em>, not the appointment slot.
+    </div>
+    <div class="phil-body">
+      <p>The Villa was built around a simple frustration: most clinics measure success in throughput. We measure it in whether you actually feel better six months from now. That changes how we listen, how we prescribe, and how long we sit with you on a hard day.</p>
+      <p>Our care is integrative, not alternative. That means evidence-based medicine&mdash;labs, pharmacology, established protocols&mdash;applied with the time and attention it takes to actually understand what&rsquo;s going on. Mental health, hormones, metabolism, and lifestyle aren&rsquo;t separate departments here. They&rsquo;re one conversation.</p>
+      <div class="phil-pillars">
+        <div class="pillar">
+          <div class="pillar-num">i.</div>
+          <h4>Listen longer</h4>
+          <p>Initial visits are 60 minutes. Follow-ups don&rsquo;t end mid-sentence.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">ii.</div>
+          <h4>Prescribe carefully</h4>
+          <p>The right medication and dose, not the easiest one. Often the answer is fewer prescriptions, not more.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">iii.</div>
+          <h4>Coordinate, always</h4>
+          <p>Your psychiatry, hormones, and primary care talk to each other&mdash;because they&rsquo;re in the same room.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">iv.</div>
+          <h4>Respect your time</h4>
+          <p>Online intake, transparent pricing, and visits that start when they&rsquo;re scheduled.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TEAM ============ -->
+<section class="team reveal" id="team">
+  <div class="team-inner">
+    <div class="section-head">
+      <div class="eyebrow">The Team</div>
+      <h2 class="section-title">Clinicians who actually <em>practice</em><br>integrative care.</h2>
+      <p class="section-sub">A small, intentionally cross-trained team. Every patient is touched by more than one set of eyes&mdash;and every plan is built collaboratively.</p>
+    </div>
+
+    <div class="team-controls">
+      <div class="team-filter" role="tablist" aria-label="Filter team">
+        <button class="tf-btn on" data-filter="all">All</button>
+        <button class="tf-btn" data-filter="psych">Psychiatry</button>
+        <button class="tf-btn" data-filter="primary">Primary &amp; Hormones</button>
+        <button class="tf-btn" data-filter="aesthetic">Aesthetic</button>
+        <button class="tf-btn" data-filter="support">Care &amp; Support</button>
+      </div>
+      <a href="#visit" class="btn-link">Book with a clinician <span class="arr">&rarr;</span></a>
+    </div>
+
+    <div class="team-grid" id="teamGrid">
+
+      <article class="member" data-cat="psych primary">
+        <div class="member-photo">
+          <span class="badge">Founder</span>
+          <span class="accept">Accepting patients</span>
+          <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <defs>
+              <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%" stop-color="#9DB68F"/>
+                <stop offset="100%" stop-color="#4F6A52"/>
+              </linearGradient>
+              <radialGradient id="g1b" cx="0.6" cy="0.35" r="0.6">
+                <stop offset="0%" stop-color="#D9C3A0" stop-opacity="0.55"/>
+                <stop offset="100%" stop-color="#D9C3A0" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <rect width="400" height="500" fill="url(#g1)"/>
+            <rect width="400" height="500" fill="url(#g1b)"/>
+            <text x="200" y="270" text-anchor="middle" font-family="Fraunces, serif" font-size="120" font-style="italic" fill="rgba(255,253,248,0.85)" font-weight="400">DR</text>
+          </svg>
+        </div>
+        <div class="member-body">
+          <div class="member-name">Dr. Daniel Roa</div>
+          <div class="member-creds">DNP, PMHNP-BC, ANP-BC</div>
+          <div class="member-role">Founder &middot; Psychiatry &amp; Integrative Medicine</div>
+          <p class="member-bio">Doctorate in Psychiatric Mental Health Nursing from the University of Washington. 20+ years across psychiatry, primary care, and integrative medicine. Treats the chart and the person sitting in front of him.</p>
+          <div class="member-tags"><span>Anxiety &amp; Depression</span><span>ADHD</span><span>Hormones</span><span>MAT</span></div>
+          <div class="member-cta">
+            <a href="#visit" class="member-book">Book with Dr. Roa <span class="arr">&rarr;</span></a>
+            <span class="member-meta">Ages 12+</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="member" data-cat="psych">
+        <div class="member-photo">
+          <span class="accept">Accepting patients</span>
+          <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <defs>
+              <linearGradient id="g2" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%" stop-color="#E0B999"/>
+                <stop offset="100%" stop-color="#A85F40"/>
+              </linearGradient>
+              <radialGradient id="g2b" cx="0.4" cy="0.3" r="0.6">
+                <stop offset="0%" stop-color="#FFF5E0" stop-opacity="0.55"/>
+                <stop offset="100%" stop-color="#FFF5E0" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <rect width="400" height="500" fill="url(#g2)"/>
+            <rect width="400" height="500" fill="url(#g2b)"/>
+            <text x="200" y="270" text-anchor="middle" font-family="Fraunces, serif" font-size="120" font-style="italic" fill="rgba(255,253,248,0.85)" font-weight="400">EM</text>
+          </svg>
+        </div>
+        <div class="member-body">
+          <div class="member-name">Elena Marquez</div>
+          <div class="member-creds">PMHNP-BC, MSN</div>
+          <div class="member-role">Psychiatric Nurse Practitioner</div>
+          <p class="member-bio">Trauma-informed psychiatric care for adults and adolescents. Trained at OHSU. Particular interest in mood disorders, complex PTSD, and the careful art of de-prescribing.</p>
+          <div class="member-tags"><span>Trauma</span><span>Mood</span><span>Adolescents</span><span>Telehealth</span></div>
+          <div class="member-cta">
+            <a href="#visit" class="member-book">Book with Elena <span class="arr">&rarr;</span></a>
+            <span class="member-meta">Ages 14+</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="member" data-cat="primary">
+        <div class="member-photo">
+          <span class="accept">Accepting patients</span>
+          <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <defs>
+              <linearGradient id="g3" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%" stop-color="#D9C3A0"/>
+                <stop offset="100%" stop-color="#C9A66B"/>
+              </linearGradient>
+              <radialGradient id="g3b" cx="0.5" cy="0.35" r="0.6">
+                <stop offset="0%" stop-color="#FFF5E0" stop-opacity="0.55"/>
+                <stop offset="100%" stop-color="#FFF5E0" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <rect width="400" height="500" fill="url(#g3)"/>
+            <rect width="400" height="500" fill="url(#g3b)"/>
+            <text x="200" y="270" text-anchor="middle" font-family="Fraunces, serif" font-size="120" font-style="italic" fill="rgba(255,253,248,0.85)" font-weight="400">JT</text>
+          </svg>
+        </div>
+        <div class="member-body">
+          <div class="member-name">Jordan Tate</div>
+          <div class="member-creds">FNP-BC, IFMCP</div>
+          <div class="member-role">Hormone &amp; Functional Medicine</div>
+          <p class="member-bio">Functional-medicine certified Family NP. Leads the practice&rsquo;s hormone, thyroid, and metabolic programs. Believes labs are a starting point, not a verdict.</p>
+          <div class="member-tags"><span>BHRT</span><span>Thyroid</span><span>GLP-1</span><span>Longevity</span></div>
+          <div class="member-cta">
+            <a href="#visit" class="member-book">Book with Jordan <span class="arr">&rarr;</span></a>
+            <span class="member-meta">Adults</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="member" data-cat="aesthetic">
+        <div class="member-photo">
+          <span class="accept">Accepting patients</span>
+          <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <defs>
+              <linearGradient id="g4" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%" stop-color="#C2B5A1"/>
+                <stop offset="100%" stop-color="#7B7060"/>
+              </linearGradient>
+              <radialGradient id="g4b" cx="0.55" cy="0.3" r="0.6">
+                <stop offset="0%" stop-color="#FFF5E0" stop-opacity="0.55"/>
+                <stop offset="100%" stop-color="#FFF5E0" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <rect width="400" height="500" fill="url(#g4)"/>
+            <rect width="400" height="500" fill="url(#g4b)"/>
+            <text x="200" y="270" text-anchor="middle" font-family="Fraunces, serif" font-size="120" font-style="italic" fill="rgba(255,253,248,0.85)" font-weight="400">SK</text>
+          </svg>
+        </div>
+        <div class="member-body">
+          <div class="member-name">Sasha Kim</div>
+          <div class="member-creds">RN, BSN, CANS</div>
+          <div class="member-role">Aesthetic Nurse Specialist</div>
+          <p class="member-bio">Certified aesthetic nurse with a conservative hand. Specializes in natural-looking neuromodulator and filler work, plus medical-grade skin protocols.</p>
+          <div class="member-tags"><span>Botox/Dysport</span><span>Fillers</span><span>Microneedling</span><span>Skin health</span></div>
+          <div class="member-cta">
+            <a href="#visit" class="member-book">Book with Sasha <span class="arr">&rarr;</span></a>
+            <span class="member-meta">Adults 21+</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="member" data-cat="psych support">
+        <div class="member-photo">
+          <span class="accept">Accepting patients</span>
+          <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <defs>
+              <linearGradient id="g5" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%" stop-color="#8FA3A0"/>
+                <stop offset="100%" stop-color="#3F5A5F"/>
+              </linearGradient>
+              <radialGradient id="g5b" cx="0.45" cy="0.3" r="0.6">
+                <stop offset="0%" stop-color="#D9C3A0" stop-opacity="0.5"/>
+                <stop offset="100%" stop-color="#D9C3A0" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <rect width="400" height="500" fill="url(#g5)"/>
+            <rect width="400" height="500" fill="url(#g5b)"/>
+            <text x="200" y="270" text-anchor="middle" font-family="Fraunces, serif" font-size="120" font-style="italic" fill="rgba(255,253,248,0.85)" font-weight="400">MO</text>
+          </svg>
+        </div>
+        <div class="member-body">
+          <div class="member-name">Marisol Okafor</div>
+          <div class="member-creds">LCSW</div>
+          <div class="member-role">Therapy &amp; Counseling</div>
+          <p class="member-bio">Licensed clinical social worker offering individual therapy alongside our prescribers. EMDR-trained. Pairs with med management for genuinely integrated care.</p>
+          <div class="member-tags"><span>EMDR</span><span>Anxiety</span><span>Couples</span><span>Adults &amp; teens</span></div>
+          <div class="member-cta">
+            <a href="#visit" class="member-book">Book with Marisol <span class="arr">&rarr;</span></a>
+            <span class="member-meta">Ages 13+</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="member" data-cat="support">
+        <div class="member-photo">
+          <span class="badge">Patient Care Lead</span>
+          <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <defs>
+              <linearGradient id="g6" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%" stop-color="#E5C9B8"/>
+                <stop offset="100%" stop-color="#A85F40"/>
+              </linearGradient>
+              <radialGradient id="g6b" cx="0.5" cy="0.3" r="0.55">
+                <stop offset="0%" stop-color="#FFF5E0" stop-opacity="0.55"/>
+                <stop offset="100%" stop-color="#FFF5E0" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <rect width="400" height="500" fill="url(#g6)"/>
+            <rect width="400" height="500" fill="url(#g6b)"/>
+            <text x="200" y="270" text-anchor="middle" font-family="Fraunces, serif" font-size="120" font-style="italic" fill="rgba(255,253,248,0.85)" font-weight="400">AB</text>
+          </svg>
+        </div>
+        <div class="member-body">
+          <div class="member-name">Anya Bell</div>
+          <div class="member-creds">MA, Care Coordinator</div>
+          <div class="member-role">Patient Experience Lead</div>
+          <p class="member-bio">Your first call, your follow-up reminder, your insurance question. Anya makes the practice feel small in the best way&mdash;because she remembers you.</p>
+          <div class="member-tags"><span>Intake</span><span>Insurance</span><span>Scheduling</span></div>
+          <div class="member-cta">
+            <a href="mailto:hello@thevillahealth.com" class="member-book">Email Anya <span class="arr">&rarr;</span></a>
+            <span class="member-meta">M&ndash;F</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ JOURNEY ============ -->
+<section class="reveal" id="journey">
+  <div class="journey">
+    <div>
+      <div class="section-head" style="margin-bottom:1rem">
+        <div class="eyebrow eyebrow-sage">New patients</div>
+        <h2 class="section-title">A first visit that <em>actually</em> feels like one.</h2>
+        <p class="section-sub">No fluorescent waiting room, no clipboard maze. Here&rsquo;s exactly what to expect.</p>
+      </div>
+      <a href="#visit" class="btn-primary" style="margin-top:1rem">Start intake <span class="arr">&rarr;</span></a>
+    </div>
+    <div class="journey-steps">
+      <div class="step">
+        <div class="step-num">i</div>
+        <div class="step-content">
+          <h4>Reach out</h4>
+          <p>Tell us a little about what brings you in&mdash;via the form, a call, or our online intake. We&rsquo;ll respond within one business day.</p>
+          <div class="meta">~5 minutes</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">ii</div>
+        <div class="step-content">
+          <h4>Match &amp; schedule</h4>
+          <p>Our care lead matches you with the clinician best suited to your needs and confirms insurance and pricing up front.</p>
+          <div class="meta">Within 1&ndash;3 business days</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">iii</div>
+        <div class="step-content">
+          <h4>The 60-minute first visit</h4>
+          <p>Real time with your provider. History, goals, labs if needed, and a plan you actually understand before you leave.</p>
+          <div class="meta">In-person or telehealth</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">iv</div>
+        <div class="step-content">
+          <h4>Care that follows up</h4>
+          <p>Coordinated check-ins, message-anytime portal, and adjustments as life and labs evolve. You won&rsquo;t feel forgotten between visits.</p>
+          <div class="meta">Ongoing</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="testimonials reveal">
+  <div class="testimonials-inner">
+    <div class="section-head">
+      <div class="eyebrow">Patient stories</div>
+      <h2 class="section-title">What care that <em>listens</em><br>actually feels like.</h2>
+    </div>
+    <div class="tst-grid">
+      <article class="tst">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="tst-quote">&ldquo;I&rsquo;ve seen a lot of providers. Dr. Roa is the first one who treated me like a whole person instead of a list of symptoms.&rdquo;</p>
+        <div class="tst-meta">
+          <div class="tst-av">M.</div>
+          <div><div class="tst-name">Maya R.</div><div class="tst-detail">Patient since 2023</div></div>
+        </div>
+      </article>
+      <article class="tst">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="tst-quote">&ldquo;Hormones, mood, sleep&mdash;they finally treated all of it together. I have my energy back for the first time in years.&rdquo;</p>
+        <div class="tst-meta">
+          <div class="tst-av b">J.</div>
+          <div><div class="tst-name">Jaime L.</div><div class="tst-detail">BHRT &amp; psychiatry</div></div>
+        </div>
+      </article>
+      <article class="tst">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="tst-quote">&ldquo;The intake was easy, the visit was on time, and I left with a plan I trusted. That shouldn&rsquo;t feel rare, but it does.&rdquo;</p>
+        <div class="tst-meta">
+          <div class="tst-av c">S.</div>
+          <div><div class="tst-name">Sarah P.</div><div class="tst-detail">New patient, 2026</div></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="reveal" id="faq">
+  <div class="section-head">
+    <div class="eyebrow eyebrow-sage">Common questions</div>
+    <h2 class="section-title">A few things people<br>ask us first.</h2>
+  </div>
+  <div class="faq-grid">
+    <details class="faq-item" open>
+      <summary>Do you accept my insurance?</summary>
+      <div class="faq-body">We&rsquo;re in-network with most major Washington and Oregon plans, including Providence, Regence, Premera, Kaiser PPO, and several Medicare Advantage plans. We&rsquo;ll verify your benefits before your first visit so there are no surprises.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Are you accepting new patients?</summary>
+      <div class="faq-body">Yes&mdash;most of our clinicians have openings within 1&ndash;3 weeks. The clinician cards above show current availability. New psychiatric intakes are typically scheduled within 7&ndash;10 days.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Do you offer telehealth?</summary>
+      <div class="faq-body">Yes. Most of our psychiatry, hormone, and follow-up visits are available via secure video. Aesthetic, lab draws, and some intake visits are in-person at our Vancouver office.</div>
+    </details>
+    <details class="faq-item">
+      <summary>What ages do you treat?</summary>
+      <div class="faq-body">Most providers see patients ages 12 or 14 and up. Aesthetic services are 21+. See each clinician&rsquo;s card for specifics.</div>
+    </details>
+    <details class="faq-item">
+      <summary>How long is a first visit?</summary>
+      <div class="faq-body">Initial visits are 60 minutes. Follow-ups are typically 30&ndash;45 minutes. We don&rsquo;t double-book.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Do you prescribe controlled medications?</summary>
+      <div class="faq-body">When clinically appropriate, yes&mdash;including stimulants for ADHD and MAT for substance use. We follow Washington state guidelines and require an in-person evaluation for new controlled prescriptions.</div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ VISIT ============ -->
+<section class="visit reveal" id="visit">
+  <div class="visit-inner">
+    <div>
+      <div class="eyebrow">Visit us</div>
+      <h2 class="section-title">Come <em>in</em>&mdash;<br>we&rsquo;ve been waiting<br>for you.</h2>
+      <p class="visit-lede">Two ways to start: book a visit online, or send us a note and we&rsquo;ll match you with the right clinician within one business day.</p>
+
+      <div class="visit-info">
+        <div class="vi-item">
+          <div class="vi-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-7-10a7 7 0 0 1 14 0c0 5.65-7 10-7 10z"/><circle cx="12" cy="11" r="2.5"/></svg></div>
+          <div>
+            <div class="vi-label">Address</div>
+            <div class="vi-content">15211 NE 72nd Ave, Suite A<br>Vancouver, WA 98686</div>
+          </div>
+        </div>
+        <div class="vi-item">
+          <div class="vi-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div>
+            <div class="vi-label">Phone</div>
+            <div class="vi-content"><a href="tel:+13601234567">(360) 123-4567</a></div>
+          </div>
+        </div>
+        <div class="vi-item">
+          <div class="vi-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+          <div>
+            <div class="vi-label">Hours</div>
+            <div class="vi-content">Mon&ndash;Thu &middot; 8a&ndash;6p<br>Fri &middot; 8a&ndash;3p &middot; Sat by appointment</div>
+          </div>
+        </div>
+        <div class="vi-item">
+          <div class="vi-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div>
+          <div>
+            <div class="vi-label">Email</div>
+            <div class="vi-content"><a href="mailto:hello@thevillahealth.com">hello@thevillahealth.com</a></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="visit-ctas">
+        <a href="#" class="btn-cream">Book Online <span class="arr">&rarr;</span></a>
+        <a href="tel:+13601234567" class="btn-outline-cream">Call (360) 123-4567</a>
+      </div>
+    </div>
+
+    <form class="contact-card" id="contactForm" novalidate>
+      <h3>Send us a note</h3>
+      <p class="sub">We&rsquo;ll respond within one business day.</p>
+      <div class="fg-row">
+        <div class="fg"><label for="cf-name">Name</label><input id="cf-name" name="name" type="text" placeholder="Your name" required></div>
+        <div class="fg"><label for="cf-phone">Phone</label><input id="cf-phone" name="phone" type="tel" placeholder="(360) 555-0123"></div>
+      </div>
+      <div class="fg"><label for="cf-email">Email</label><input id="cf-email" name="email" type="email" placeholder="you@email.com" required></div>
+      <div class="fg">
+        <label for="cf-reason">What brings you in?</label>
+        <select id="cf-reason" name="reason">
+          <option value="" disabled selected>Choose one</option>
+          <option>Psychiatric care</option>
+          <option>Hormone &amp; wellness</option>
+          <option>Weight management</option>
+          <option>Aesthetic medicine</option>
+          <option>Addiction &amp; recovery</option>
+          <option>Therapy</option>
+          <option>Not sure yet</option>
+        </select>
+      </div>
+      <div class="fg"><label for="cf-msg">Anything else?</label><textarea id="cf-msg" name="message" rows="3" placeholder="Insurance, preferred clinician, schedule notes&hellip;"></textarea></div>
+      <button type="submit" class="btn-primary">Send Message <span class="arr">&rarr;</span></button>
+      <p class="consent">By sending this note you agree to our privacy practices. This form is not for medical emergencies&mdash;please call 911 or 988.</p>
+    </form>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <span class="nav-brand-mark" aria-hidden="true"></span>
+          The Villa Health
+        </div>
+        <p class="footer-blurb">An integrative practice in Vancouver, Washington. Modern medicine, delivered with the time and care it deserves.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" aria-label="Google reviews"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15 9 22 9 17 14 19 21 12 17 5 21 7 14 2 9 9 9 12 2"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Care</h5>
+        <ul>
+          <li><a href="#services">Psychiatry</a></li>
+          <li><a href="#services">Hormone therapy</a></li>
+          <li><a href="#services">Weight management</a></li>
+          <li><a href="#services">Aesthetic medicine</a></li>
+          <li><a href="#services">Addiction &amp; recovery</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Practice</h5>
+        <ul>
+          <li><a href="#approach">Our approach</a></li>
+          <li><a href="#team">The team</a></li>
+          <li><a href="#journey">New patients</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Visit</h5>
+        <ul>
+          <li>15211 NE 72nd Ave, Ste A</li>
+          <li>Vancouver, WA 98686</li>
+          <li><a href="tel:+13601234567">(360) 123-4567</a></li>
+          <li><a href="mailto:hello@thevillahealth.com">hello@thevillahealth.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-meta">
+      <div>&copy; 2026 The Villa Health PLLC. All rights reserved.</div>
+      <div class="footer-legal">
+        <a href="#">Privacy</a><a href="#">HIPAA Notice</a><a href="#">Accessibility</a><a href="#">Good Faith Estimate</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav scroll state
+const nav = document.getElementById('nav');
+const onScroll = () => {
+  nav.classList.toggle('scrolled', window.scrollY > 12);
+  // active section
+  const secs = document.querySelectorAll('section[id]');
+  let cur = '';
+  secs.forEach(s => { if (window.scrollY >= s.offsetTop - 140) cur = s.id; });
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
+  });
+};
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+// Mobile nav
+const navLinks = document.getElementById('navLinks');
+document.getElementById('navToggle').addEventListener('click', () => navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+// Reveal on scroll
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+}, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// Team filter
+const grid = document.getElementById('teamGrid');
+document.querySelectorAll('.tf-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tf-btn').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    const f = btn.dataset.filter;
+    grid.querySelectorAll('.member').forEach(m => {
+      const cats = (m.dataset.cat || '').split(/\s+/);
+      const show = f === 'all' || cats.includes(f);
+      m.style.display = show ? '' : 'none';
+    });
+  });
+});
+
+// Contact form
+document.getElementById('contactForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const btn = this.querySelector('button[type="submit"]');
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.innerHTML = 'Sent &check;';
+    this.reset();
+    setTimeout(() => { btn.innerHTML = 'Send Message <span class="arr">→</span>'; btn.disabled = false; }, 2400);
+  }, 700);
+});
+</script>
+</body>
+</html>
