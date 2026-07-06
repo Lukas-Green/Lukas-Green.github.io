@@ -58,7 +58,7 @@ Entity: LUXIGA LLC — Oregon (amended from LUXIK LLC, registered 2026-04-03)
 
 - Case study layout rebuilt: `.cs-hero` full-width, `.cs-hero-inner` centered. Body sections restructured into `cs-section-wrap` blocks with alternating backgrounds. `.cs-content` now `margin: 0 auto`. `.cs-breakout` for pull quotes.
 - CanvassKit copy rewritten with real origin: contracting role at nonprofit, recorded coordinator describing 3-step reporting chain, transcript drove the product design
-- SoloBill copy rewritten with real origin: journeyman plumber friend new to private contracting, dual need — his billing records + real estate paper trail for inspection inquiries
+- LUXIGA Bill copy rewritten with real origin: journeyman plumber friend new to private contracting, dual need — his billing records + real estate paper trail for inspection inquiries
 - Em dashes removed from all 6 HTML files — year ranges to en dashes, sentences restructured, quote attributions use parentheses, captions use colons
 - Widow fix in career timeline (`and&nbsp;UX.`)
 - Project cards fully clickable via `::after` overlay on `.project-card-link`
@@ -116,7 +116,7 @@ Entity: LUXIGA LLC — Oregon (amended from LUXIK LLC, registered 2026-04-03)
 | `styles.css` | All shared styles |
 | `apple-maps.html` | Apple Maps UX case study |
 | `canvasskit.html` | CanvassKit case study detail page |
-| `solobill.html` | SoloBill case study detail page |
+| `solobill.html` | LUXIGA Bill case study detail page |
 | `cleandrive.html` | CleanDrive UX case study |
 | `digital-media.html` | Digital media research page |
 | `saas-ventures.html` | SaaS ventures showcase |
@@ -133,7 +133,7 @@ Entity: LUXIGA LLC — Oregon (amended from LUXIK LLC, registered 2026-04-03)
 | Project | Tag | Stack | Status |
 |---|---|---|---|
 | CanvassKit | CRM / Outreach | Google Apps Script, Sheets, HTML/Tailwind | Functional build |
-| SoloBill | Invoicing / Finance | Google Apps Script, Docs, PDF Export | Tested, in refinement |
+| LUXIGA Bill | Invoicing / Finance | Google Apps Script, Docs, PDF Export | Tested, in refinement |
 | RecallAI | AI / Healthcare | Python, FastAPI, AI Integration | Unfinished, unvetted |
 | FreedEase | Civic / UX | PWA, Google Apps Script, Vanilla JS | Design prototype |
 | GH2 Contact Tracker | Nonprofit Tooling | Google Apps Script, Sheets | Delivered to org |
