@@ -50,7 +50,7 @@
 **Built / Changed:**
 - Case study layout rebuilt: `.cs-hero` full-width via `.cs-hero-inner` wrapper. Body sections replaced single `cs-body` wrapper with individual `cs-section-wrap` blocks (alternating `--bg` / `--bg2` backgrounds). `.cs-content` centered with `margin: 0 auto`. `.cs-breakout` for pull-quote breakouts. Hero title bumped to 68px, more vertical padding.
 - CanvassKit copy rewritten: nonprofit contracting role origin, coordinator's 3-step reporting chain (text → phone note → file), transcript-to-product pipeline
-- SoloBill copy rewritten: journeyman plumber friend, dual need (his invoicing + real estate paper trail for inspection inquiries). Meta strip "Users" → "Built for."
+- LUXIGA Bill copy rewritten: journeyman plumber friend, dual need (his invoicing + real estate paper trail for inspection inquiries). Meta strip "Users" → "Built for."
 - Em dashes removed across all 6 HTML files. Strategy: en dashes for year ranges, periods/commas for sentences, colons for captions, parentheses for quote attributions.
 - Widow fix: `and&nbsp;UX.` in career timeline
 - Clickable project cards: `.project-card-link::after { inset: 0 }` overlays full card
@@ -71,7 +71,7 @@
 - `demo/solobill-demo.html` — standalone demo with live line-item calculations, GAS calls stubbed with demo messages, mock client/unit data seeded
 - `canvasskit.html` — detail page, browser-chrome iframe embed, 5-section story (Pain, Constraint, What I Built, How It Works, Status)
 - `solobill.html` — same structure
-- `index.html` — CanvassKit and SoloBill cards wired to detail pages via `project-card-link`
+- `index.html` — CanvassKit and LUXIGA Bill cards wired to detail pages via `project-card-link`
 
 **Standard established:** project detail pages use browser-chrome iframe embed + narrative sections + meta strip. Template for RecallAI, LUCID, BRIGS, GH2, FreedEase.
 
@@ -81,7 +81,7 @@
 
 **Pending from this session:**
 - Full-card click target on project cards (whole card should be the link, not just text)
-- CanvassKit + SoloBill copy to be rewritten by user (current copy is placeholder)
+- CanvassKit + LUXIGA Bill copy to be rewritten by user (current copy is placeholder)
 - Case study layout: content column too narrow/left-aligned, blank right side on wide screens
 - Motion layer: `IntersectionObserver` scroll animations across sections and cards
 
@@ -99,7 +99,7 @@
 
 **Content extracted from JSON chat exports:**
 - GH2 Contact Tracker: full story in conversations-000.json
-- SoloBill: full story in conversations-001.json
+- LUXIGA Bill: full story in conversations-001.json
 - FreedEase: full story in conversations3.json (Claude export)
 - Audio/Video Transcription: full story in conversations-000.json
 - CanvassKit, LUCID, RecallAI: not in exports, need manual write or newer Claude export
