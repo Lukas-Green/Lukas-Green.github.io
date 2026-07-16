@@ -434,8 +434,10 @@
           <span class="slot"><b>Participant photo</b>real person, with consent<br>(first name or pseudonym)</span>
         </div>
         <div>
-          <p class="nb__q">&ldquo;For the first time, I wasn't the worst thing I'd ever done. I was someone who could make something. That changed everything about how I saw getting out.&rdquo;</p>
-          <p class="nb__by">A program participant<span>Shared with consent &middot; <span class="todo">real story &amp; name to add</span></span></p>
+          <p class="nb__q" style="color:var(--soft)">A participant's own words belong here, in their voice. We have not published one yet.</p>
+          <p class="nb__by">No story published yet
+            <span>We will not publish anyone's story until they have given consent freely, know that saying no changes nothing about the support they receive, and understand they can withdraw at any time. <span class="todo">awaiting a real, consented story</span></span>
+          </p>
         </div>
       </div>
     </div>
@@ -643,7 +645,7 @@
             <h3>Logo t-shirt</h3>
             <p>Soft cotton tee with the house mark. Free at the Advocate membership level.</p>
             <div class="prod__buy">
-              <span class="prod__price">$25</span>
+              <span class="prod__price">$&mdash;</span>
               <button type="button" class="btn btn--ghost buy" data-item="Logo t-shirt">Buy</button>
             </div>
             <p style="margin-top:.5rem"><span class="todo">price to confirm</span></p>
@@ -657,7 +659,7 @@
             <h3>Logo cap</h3>
             <p>Five-panel cap with the house mark embroidered on the front.</p>
             <div class="prod__buy">
-              <span class="prod__price">$28</span>
+              <span class="prod__price">$&mdash;</span>
               <button type="button" class="btn btn--ghost buy" data-item="Logo cap">Buy</button>
             </div>
             <p style="margin-top:.5rem"><span class="todo">price to confirm</span></p>
@@ -671,7 +673,7 @@
             <h3>Logo mug</h3>
             <p>For the coffee that gets somebody through a hard first month out.</p>
             <div class="prod__buy">
-              <span class="prod__price">$18</span>
+              <span class="prod__price">$&mdash;</span>
               <button type="button" class="btn btn--ghost buy" data-item="Logo mug">Buy</button>
             </div>
             <p style="margin-top:.5rem"><span class="todo">price to confirm</span></p>
@@ -685,7 +687,7 @@
             <h3>Art Inside Out</h3>
             <p>Kirk's twelve-lesson method, self-directed. Sold on the Art Inside Out site.</p>
             <div class="prod__buy">
-              <span class="prod__price">$24.95</span>
+              <span class="prod__price">$&mdash;</span>
               <a class="btn btn--ghost" href="./art-inside-out.html#shop">View <span class="arrow" aria-hidden="true">&rarr;</span></a>
             </div>
           </div>
@@ -727,15 +729,13 @@
         <p class="lede">Every dollar goes into real programming: art supplies inside a facility, a facilitator in the room, support in someone's first months out.</p>
         <div style="margin-top:1.6rem">
           <p style="font-weight:700; color:var(--on-dark)">Where your gift goes</p>
-          <div class="alloc__bar" role="img" aria-label="Programs 80 percent, operations 12 percent, fundraising 8 percent">
-            <i style="width:80%; background:var(--gold-cta)"></i><i style="width:12%; background:var(--mint)"></i><i style="width:8%; background:var(--on-dark-soft)"></i>
+          <div class="alloc__bar" role="img" aria-label="Gift allocation not yet published">
+            <i style="width:100%; background:rgba(255,255,255,.14)"></i>
           </div>
           <div class="alloc__lg">
-            <span><b style="background:var(--gold-cta)"></b> 80% Programs</span>
-            <span><b style="background:var(--mint)"></b> 12% Operations</span>
-            <span><b style="background:var(--on-dark-soft)"></b> 8% Fundraising</span>
+            <span>We will publish our real expense breakdown here, from our actual books, rather than a number that looks good.</span>
           </div>
-          <p style="margin-top:.7rem"><span class="todo">illustrative &mdash; real allocation to confirm</span></p>
+          <p style="margin-top:.7rem"><span class="todo">real allocation to add from the org's financials</span></p>
         </div>
       </div>
       <form class="give reveal" id="giveForm" novalidate>
@@ -830,19 +830,20 @@
     var freqs = document.querySelectorAll('.freq button'), best = document.getElementById('best');
     var impact = document.getElementById('impact'), btnAmt = document.getElementById('btnAmt');
     var st = { amt: 25, freq: 'monthly' };
+    // Impact copy intentionally names only the membership level, which is real.
+    // No per-dollar outcome claims until the org can back them from its own books.
     function impactFor(a) {
-      if (a >= 1000) return 'sponsors a program cycle, at our Visionary level.';
-      if (a >= 250) return 'helps fund a month of reentry support for one person.';
-      if (a >= 100) return 'helps bring a facilitated session into a facility, at our Builder level.';
-      if (a >= 25) return 'covers art materials for a class session, at our Advocate level.';
-      if (a >= 10) return 'keeps one participant supplied, at our Ally level.';
-      if (a >= 5) return 'puts pencils and paper in someone’s hands, at our Friend level.';
-      return 'goes straight into programming for people rebuilding their lives.';
+      if (a >= 1000) return 'matches our Visionary membership level.';
+      if (a >= 100) return 'matches our Builder membership level.';
+      if (a >= 25) return 'matches our Advocate membership level.';
+      if (a >= 10) return 'matches our Ally membership level.';
+      if (a >= 5) return 'matches our Friend membership level.';
+      return 'goes into programming for people rebuilding their lives.';
     }
     function render() {
       var sfx = st.freq === 'monthly' ? '/mo' : '';
       btnAmt.textContent = '$' + st.amt + sfx;
-      impact.innerHTML = '<b>$' + st.amt + sfx + '</b> ' + impactFor(st.amt) + ' <span class="todo">illustrative</span>';
+      impact.innerHTML = '<b>$' + st.amt + sfx + '</b> ' + impactFor(st.amt);
       best.style.display = st.freq === 'monthly' ? '' : 'none';
     }
     amts.forEach(function (b) { b.addEventListener('click', function () {
