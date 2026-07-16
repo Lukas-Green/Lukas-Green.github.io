@@ -75,7 +75,7 @@ Every unconfirmed item shows on the page as a dashed **◇ chip**. Search either
 - [ ] Advisor titles and photos (11 names are in, from the live About page)
 - [ ] Merch mockups still show the **old Better Neighbors** mark — need re-mocking
 - [ ] Domain + contact email (`hello@restorativereentry.org` is a placeholder)
-- [ ] **The exact OHOH relationship** (see §7 — this is the big one)
+- [ ] 501(c)(3) filing status (OHOH decoupling — see §7)
 
 ## 6. Going live: connecting money
 
@@ -96,7 +96,11 @@ Donations and sales use **different rails on purpose** — a tax-deductible gift
 
 **🔴 Oregon DOJ charitable registration.** Oregon has **no small-org or revenue exemption** — it's an explicit outlier (ORS 128.640 exempts only governments, religious corps, cemeteries, certain trusts). The trigger is **holding assets or doing business as a charity**, *not* the first donation. **The duty may already be live.**
 
-> **This hinges on one unanswered question: is Restorative Reentry incorporated as an Oregon public benefit nonprofit, or is it a fiscally sponsored project of Oregon Harbor of Hope?** If it's sponsored, **OHOH carries the duty** and this re-targets entirely. Ask Robin. Nothing else on this list matters as much.
+> **ANSWERED 2026-07-15 (Lukas):** the org is **filing for its own 501(c)(3)** and moving away from Oregon Harbor of Hope for funding. OHOH is part of the origin story, not the future.
+>
+> **So the duty is Restorative Reentry's own — it does not pass to OHOH.** Two things follow:
+> 1. Register with Oregon DOJ. There is no small-org exemption, and the trigger is doing business as a charity, so this is likely already live rather than something to do "before the donate button."
+> 2. **Do not claim tax-deductibility until the 501(c)(3) is approved.** Claiming it early is a false representation in the course of solicitation (ORS 128.886) — precisely the risk this research surfaced. The site now says the application is in progress and promises to confirm before accepting a gift. Keep it that way until the letter arrives.
 >
 > https://www.doj.state.or.us/charitable-activities/starting-or-closing-a-charity/registering-a-new-charity/
 
@@ -139,7 +143,7 @@ What I know without research: the pages use semantic HTML, alt text on every ima
 
 ## The short version
 
-1. **Ask Robin whether the org is incorporated or fiscally sponsored.** It decides who owes Oregon DOJ registration and whether someone's already late.
+1. **Register with Oregon DOJ.** The org is filing its own 501(c)(3), so the duty is its own. No small-org exemption exists, and the trigger has likely already passed. **Do not claim tax-deductibility until the letter arrives.**
 2. **Get Kirk's real lesson list and real prices.** Everything else on his site is done.
 3. **Pick a Robin demo** — `index.html` or `restorative-reentry.html`.
 4. **Paste the checkout links.** Then it takes money.
