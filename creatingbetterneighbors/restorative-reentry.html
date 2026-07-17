@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Restorative Reentry helps people rebuild their lives after prison and addiction through mentorship, support, and art.">
 <title>Restorative Reentry — rebuilding lives after prison and addiction</title>
 <style>
   /* ============================================================
@@ -89,6 +95,10 @@
   .themebtn { background: none; border: 1px solid var(--rule); color: var(--soft); width: 36px; height: 36px; border-radius: 4px; cursor: pointer; display: grid; place-items: center; }
   .themebtn:hover { color: var(--ink); border-color: var(--ink); }
   @media (max-width: 1040px) { .bar__nav, .help { display: none; } }
+  @media (max-width: 480px) {
+    .brand small { display: none; }
+    .brand b { font-size: .98rem; white-space: nowrap; }
+  }
 
   .hero { position: relative; min-height: clamp(460px, 66vh, 640px); display: grid; align-items: end; color: #fff; }
   .hero__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; }
@@ -280,6 +290,8 @@
     .reveal { opacity: 1; transform: none; }
   }
 </style>
+</head>
+<body>
 
 <a class="skip" href="#main">Skip to content</a>
 <header class="bar">
@@ -874,3 +886,5 @@
     });
   })();
 </script>
+</body>
+</html>
