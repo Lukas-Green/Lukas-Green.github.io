@@ -80,6 +80,7 @@
     transform: rotate(-1.5deg) scaleX(0); transform-origin: left center; opacity: .88;
     transition: transform .75s cubic-bezier(.2,.7,.2,1); }
   .in .swipe::before, .swipe.in::before { transform: rotate(-1.5deg) scaleX(1); }
+  html:not(.js) .swipe::before { transform: rotate(-1.5deg) scaleX(1); }
 
   .note { font-family: var(--serif); font-style: italic; font-size: .88rem; line-height: 1.45; color: var(--ink-soft);
     border-left: 1px solid var(--red); padding-left: .8rem; max-width: 15rem; }
@@ -294,12 +295,12 @@
   .toast[hidden] { display: none; }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-  .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1); }
-  .reveal.in { opacity: 1; transform: none; }
+  html.js .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1); }
+  html.js .reveal.in { opacity: 1; transform: none; }
 
   @media (prefers-reduced-motion: reduce) {
     * { animation: none !important; transition: none !important; }
-    .reveal { opacity: 1; transform: none; }
+    html.js .reveal { opacity: 1; transform: none; }
     .swipe::before { transform: rotate(-1.5deg) scaleX(1); }
     .draw { position: static; }
   }
@@ -666,6 +667,7 @@
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
 <script>
+  document.documentElement.classList.add('js');
   document.getElementById('yr').textContent = new Date().getFullYear();
   (function () {
     var root = document.documentElement, btn = document.getElementById('themebtn');
