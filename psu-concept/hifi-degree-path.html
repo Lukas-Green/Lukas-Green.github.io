@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Concept: one place to change your degree path</title>
+<style>
+  :root{
+    --ink:#1b1e19; --soft:#414636; --mute:#6a7060; --line:#e3e6dc;
+    --bg:#f5f6f0; --card:#ffffff;
+    --psu:#2e4a1f; --psu2:#3f6a24; --psu-tint:#eaf0e0; --psu-ink:#294417;
+    --gold:#c9a227; --blue:#2f5a6a; --blue-tint:#e6eef2;
+    --ok:#3f6a24; --warn:#8a6d1f; --todo:#8a2b20;
+    --radius:12px;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.55;font-size:18px;}
+  .wrap{max-width:64rem;margin:0 auto;padding:0 1.25rem;}
+  a{color:var(--psu2);}
+  .concept-banner{background:var(--gold);color:#2a2408;font-size:.82rem;text-align:center;padding:.5rem 1rem;font-weight:600;}
+
+  /* header / nav (Finding 4 fix: few clear doors + search) */
+  .topbar{background:var(--psu);color:#eef3e6;}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;padding:.5rem 1.25rem;font-size:.82rem;}
+  .topbar a{color:#dfe8d3;text-decoration:none;margin-left:1rem;}
+  .nav{background:#fff;border-bottom:1px solid var(--line);}
+  .nav .wrap{display:flex;align-items:center;gap:1.2rem;padding:.9rem 1.25rem;flex-wrap:wrap;}
+  .brand{display:flex;align-items:center;gap:.6rem;font-weight:700;color:var(--psu-ink);font-size:1.15rem;letter-spacing:.01em;}
+  .brand .mark{width:2rem;height:2rem;border-radius:6px;background:var(--psu);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;}
+  .navlinks{display:flex;gap:1.1rem;margin-left:.5rem;flex-wrap:wrap;}
+  .navlinks a{color:var(--ink);text-decoration:none;font-weight:600;font-size:1rem;}
+  .navlinks a:hover{color:var(--psu2);}
+  .navsearch{margin-left:auto;display:flex;gap:.4rem;}
+  .navsearch input{border:2px solid var(--line);border-radius:8px;padding:.4rem .6rem;font:inherit;font-size:.9rem;width:12rem;}
+
+  /* hero: search-first (Finding 2 fix) */
+  .hero{background:linear-gradient(160deg,var(--psu) 0%,var(--psu2) 100%);color:#fff;padding:2.6rem 0 2.8rem;}
+  .hero h1{font-size:2.1rem;line-height:1.12;margin:0 0 .5rem;max-width:32ch;}
+  .hero p{font-size:1.1rem;color:#e4eeda;margin:0 0 1.3rem;max-width:52ch;}
+  .bigsearch{display:flex;gap:.5rem;max-width:44rem;background:#fff;border-radius:12px;padding:.5rem;box-shadow:0 6px 24px rgba(0,0,0,.18);}
+  .bigsearch input{flex:1;border:none;font:inherit;font-size:1.15rem;padding:.7rem .8rem;color:var(--ink);border-radius:8px;}
+  .bigsearch input:focus{outline:2px solid var(--gold);}
+  .bigsearch button{background:var(--psu);color:#fff;border:none;font:inherit;font-size:1.05rem;font-weight:700;padding:0 1.4rem;border-radius:8px;cursor:pointer;}
+  .hero .hint{margin:.8rem 0 0;font-size:.9rem;color:#cfe0bd;}
+
+  main{padding:2rem 0 3rem;}
+  .lead-result{font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);}
+  .result-title{font-size:1.7rem;margin:.2rem 0 .3rem;}
+  .result-sub{color:var(--soft);margin:0 0 1.4rem;font-size:1.05rem;}
+
+  .grid{display:grid;grid-template-columns:1.35fr 1fr;gap:1.3rem;}
+  @media(max-width:820px){.grid{grid-template-columns:1fr;}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.5rem 1.5rem;}
+  .card h2{font-size:1.3rem;margin:0 0 .3rem;color:var(--psu-ink);}
+  .card .note{color:var(--mute);font-size:.9rem;margin:0 0 1rem;}
+
+  /* merged major-change stepper (Finding 1 fix) */
+  .step{display:flex;gap:.9rem;padding:1rem 0;border-bottom:1px solid var(--line);}
+  .step:last-child{border-bottom:none;}
+  .step .num{flex:0 0 2rem;height:2rem;border-radius:50%;background:var(--psu);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;}
+  .step h3{margin:.1rem 0 .3rem;font-size:1.08rem;}
+  .step p{margin:0;color:var(--soft);font-size:.96rem;}
+  .flag{display:inline-flex;align-items:center;gap:.4rem;margin-top:.5rem;font-size:.86rem;font-weight:600;border-radius:8px;padding:.35rem .6rem;}
+  .flag.warn{background:#fbf3dc;color:var(--warn);}
+  .flag.info{background:var(--blue-tint);color:var(--blue);}
+  .flag.gold{background:#f7efd0;color:#7a6410;}
+
+  /* requirement mapper (Finding 3 fix) */
+  .connect{background:var(--blue-tint);border:1px dashed #9cbcc9;border-radius:10px;padding:.9rem 1rem;margin-bottom:1.1rem;font-size:.94rem;color:var(--blue);}
+  .connect b{color:var(--blue);}
+  .creditbar{height:.7rem;background:#e7eae0;border-radius:99px;overflow:hidden;margin:.5rem 0 .3rem;}
+  .creditbar i{display:block;height:100%;background:var(--psu2);}
+  .creditmeta{display:flex;justify-content:space-between;font-size:.86rem;color:var(--soft);}
+  .req{display:flex;align-items:center;gap:.7rem;padding:.6rem 0;border-bottom:1px solid var(--line);}
+  .req:last-child{border-bottom:none;}
+  .req .dot{flex:0 0 .9rem;height:.9rem;border-radius:50%;}
+  .dot.ok{background:var(--ok);} .dot.part{background:var(--gold);} .dot.todo{background:var(--todo);}
+  .req .name{flex:1;font-weight:600;font-size:.98rem;}
+  .req .state{font-size:.84rem;color:var(--mute);}
+  .catalog{font-size:.86rem;color:var(--mute);margin-top:1rem;}
+
+  .cta{display:inline-block;background:var(--psu);color:#fff;text-decoration:none;font-weight:700;padding:.7rem 1.3rem;border-radius:9px;margin-top:.4rem;}
+  .cta.ghost{background:#fff;color:var(--psu-ink);border:2px solid var(--psu);}
+  .helprow{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1.2rem;}
+
+  .callout{background:var(--psu-tint);border:1px solid #cdd9bd;border-radius:var(--radius);padding:1.2rem 1.4rem;margin-top:1.3rem;}
+  .callout h2{color:var(--psu-ink);margin:0 0 .4rem;font-size:1.15rem;}
+  .callout ul{margin:.3rem 0 0;padding-left:1.2rem;color:var(--soft);}
+  .callout li{margin:.3rem 0;}
+
+  footer{border-top:1px solid var(--line);padding:1.4rem 0 2.5rem;color:var(--mute);font-size:.84rem;}
+</style>
+</head>
+<body>
+
+<div class="concept-banner">CONCEPT PROTOTYPE by Lukas Green · not affiliated with or endorsed by Portland State University · illustrative student data, not real records</div>
+
+<div class="topbar"><div class="wrap"><span>Portland State University</span><span><a href="#">myPSU</a><a href="#">Give</a><a href="#">Apply</a></span></div></div>
+
+<!-- Finding 4 fix: a short, clear nav plus a real search, instead of a 35-link mega-menu -->
+<div class="nav"><div class="wrap">
+  <div class="brand"><span class="mark">P</span> Portland State</div>
+  <nav class="navlinks">
+    <a href="#">Find a program</a>
+    <a href="#">Get help</a>
+    <a href="#">Money</a>
+    <a href="#">Student life</a>
+  </nav>
+  <div class="navsearch"><input value="change my BA Graphic Design to a BS" aria-label="Search pdx.edu"></div>
+</div></div>
+
+<!-- Finding 2 fix: search-first, plain-language entry -->
+<section class="hero"><div class="wrap">
+  <h1>Tell us what you are trying to do.</h1>
+  <p>Type it the way you would say it. One answer, not a tab hunt. The site figures out the pages, the steps, and the requirements for you.</p>
+  <div class="bigsearch">
+    <input value="change my BA in Graphic Design to a BS" aria-label="What do you need to do?">
+    <button>Search</button>
+  </div>
+  <p class="hint">Examples: "how do I graduate on time" · "declare a minor" · "what transfers from my old college"</p>
+</div></section>
+
+<main><div class="wrap">
+
+  <p class="lead-result">One result for your search</p>
+  <h1 class="result-title">Change your degree: BA in Graphic Design to a Bachelor of Science</h1>
+  <p class="result-sub">Everything for this change on one page: the steps, every rule that applies to you, and what you still need to finish, mapped from your own record.</p>
+
+  <div class="grid">
+
+    <!-- LEFT: merged major-change flow (Finding 1 fix) -->
+    <div class="card">
+      <h2>How to make the change</h2>
+      <p class="note">One flow that both explains the change and starts it. No guessing which page does what.</p>
+
+      <div class="step">
+        <div class="num">1</div>
+        <div>
+          <h3>Confirm the switch is a good fit</h3>
+          <p>See how a BS differs from your BA, which credits carry over, and talk to an adviser if you want a second read.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="num">2</div>
+        <div>
+          <h3>Check the rules that apply to you</h3>
+          <p>Every constraint that touches this change is here, not buried on another page.</p>
+          <span class="flag warn">Deadline: you must declare a major by 90 credits</span><br>
+          <span class="flag gold">Graphic Design and Architecture require a portfolio review, held once a year, after 100 and 200 level courses</span>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="num">3</div>
+        <div>
+          <h3>Make it official in myPSU</h3>
+          <p>The final step happens inside your student account under Academics, then Academic Program Change.</p>
+          <span class="flag info">Heads up: this step opens behind the myPSU login</span>
+        </div>
+      </div>
+
+      <div class="helprow">
+        <a class="cta" href="#">Start the change in myPSU</a>
+        <a class="cta ghost" href="#">Talk to an adviser</a>
+      </div>
+    </div>
+
+    <!-- RIGHT: requirement mapper fed by DARS + transcript (Finding 3 fix) -->
+    <div class="card">
+      <h2>What you still need to finish</h2>
+      <p class="note">Assembled from the general, degree-type, and major requirements, in one view.</p>
+
+      <div class="connect"><b>Connected:</b> your DARS audit and uploaded transcript. This maps your remaining path automatically. <a href="#">Update</a></div>
+
+      <div class="creditbar"><i style="width:66%"></i></div>
+      <div class="creditmeta"><span>118 of 180 credits</span><span>62 credits to go</span></div>
+
+      <div style="margin-top:1rem;">
+        <div class="req"><span class="dot ok"></span><span class="name">General Education</span><span class="state">Complete</span></div>
+        <div class="req"><span class="dot ok"></span><span class="name">University Writing</span><span class="state">Complete</span></div>
+        <div class="req"><span class="dot part"></span><span class="name">Degree requirements (BS)</span><span class="state">In progress</span></div>
+        <div class="req"><span class="dot todo"></span><span class="name">Major requirements (new major)</span><span class="state">Remaining</span></div>
+        <div class="req"><span class="dot todo"></span><span class="name">Race and Ethnic Studies</span><span class="state">Remaining</span></div>
+        <div class="req"><span class="dot part"></span><span class="name">Credit limits and upper-division</span><span class="state">Check</span></div>
+      </div>
+
+      <p class="catalog">Pinned to your catalog year: <b>2024-25</b>. You are seeing the right degree map automatically, not one of several year versions.</p>
+    </div>
+
+  </div>
+
+  <!-- what this fixes, tied back to the findings -->
+  <div class="callout">
+    <h2>What this one page replaces</h2>
+    <ul>
+      <li><b>Finding 1:</b> the two overlapping major-change pages become one flow, and the portfolio rule can no longer hide on the page you did not land on.</li>
+      <li><b>Finding 2:</b> a plain-language search that understands "change my BA to a BS," instead of "your search yielded no results."</li>
+      <li><b>Finding 3:</b> the six scattered requirement sources become one view, fed by your DARS and transcript and pinned to your catalog year.</li>
+      <li><b>Finding 4:</b> a short, readable nav and a strong search bar instead of a menu with thirty-five links in small type.</li>
+    </ul>
+  </div>
+
+</div></main>
+
+<footer><div class="wrap">
+  Concept prototype by Lukas Green, prepared for a conversation with Kari Goin Kono. Independent design study, not affiliated with or endorsed by Portland State University. Student progress shown is illustrative, not a real record.
+</div></footer>
+
+</body>
+</html>
