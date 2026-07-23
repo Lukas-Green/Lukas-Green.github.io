@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,45 +20,34 @@
     --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Palladio, "Book Antiqua", Georgia, serif;
     --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
-    --desk: #191D1B;
-    --desk-2: #0F1311;
-    --paper: #F6F1E3;
-    --paper-edge: #E4DCC7;
-    --ink: #1D2521;
-    --ink-soft: #5B6660;
-    /* from the logo: red A, blue I, green O, black brush */
-    --red: #D8232A;
-    --blue: #2E3192;
-    --green: #17714F;
-    --red-lite: #F2565C;
-    --green-lite: #2FA97A;
-    --gold-bright: #E9B23C;
-    --rule: rgba(29,37,33,.16);
-    --rule-soft: rgba(29,37,33,.09);
-    --on-desk: #E9E5D8;
-    --on-desk-soft: #8E9A94;
+    --desk: #FFF9F0;
+    --desk-2: #FBEFDD;
+    --paper: #FFF9F0;
+    --paper-edge: #FFF9F0;
+    --ink: #1F1B16;
+    --ink-soft: #5A5348;
+    /* logo primaries promoted to bright accents on warm ivory (research-backed) */
+    --red: #E03131;
+    --blue: #1971C2;
+    --green: #2F9E44;
+    --red-lite: #C92A2A;
+    --green-lite: #237032;
+    --gold-bright: #F6B01E;
+    --rule: rgba(31,27,22,.16);
+    --rule-soft: rgba(31,27,22,.09);
+    --on-desk: #1F1B16;
+    --on-desk-soft: #5A5348;
 
     --sheet: 760px;
     --pad: clamp(1.2rem, 7vw, 7.5rem);
   }
-  @media (prefers-color-scheme: dark) {
-    :root { --desk: #0A0D0C; --desk-2: #050807; --paper: #1A2320; --paper-edge: #101815;
-      --ink: #ECE7D9; --ink-soft: #9AA69F; --red: #FF6B6B; --blue: #7C81FF; --green: #35C08C;
-      --rule: rgba(236,231,217,.16); --rule-soft: rgba(236,231,217,.08); }
-  }
-  :root[data-theme="light"] { --desk: #191D1B; --desk-2: #0F1311; --paper: #F6F1E3; --paper-edge: #E4DCC7;
-    --ink: #1D2521; --ink-soft: #5B6660; --red: #D8232A; --blue: #2E3192; --green: #17714F;
-    --rule: rgba(29,37,33,.16); --rule-soft: rgba(29,37,33,.09); }
-  :root[data-theme="dark"] { --desk: #0A0D0C; --desk-2: #050807; --paper: #1A2320; --paper-edge: #101815;
-    --ink: #ECE7D9; --ink-soft: #9AA69F; --red: #FF6B6B; --blue: #7C81FF; --green: #35C08C;
-    --rule: rgba(236,231,217,.16); --rule-soft: rgba(236,231,217,.08); }
 
   body { background: var(--desk); color: var(--ink); font-family: var(--serif);
     font-size: clamp(1.05rem, .45vw + .96rem, 1.16rem); line-height: 1.68;
     -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 
   .sheet { background: var(--paper); max-width: calc(var(--sheet) + 15rem); margin: 0 auto; padding: 0 var(--pad);
-    box-shadow: 0 0 0 1px var(--paper-edge), 0 40px 90px -30px rgba(0,0,0,.7); position: relative; }
+    box-shadow: none; position: relative; }
   .col { max-width: var(--sheet); margin: 0 auto; }
   .out { max-width: calc(var(--sheet) + 15rem); margin: 0 auto; padding: 0 var(--pad); }
 
@@ -302,6 +291,24 @@
     .swipe::before { transform: rotate(-1deg) scaleX(1); }
     .draw { position: static; }
   }
+
+  /* ---- bright ivory theme: flip dark-surface UI to light ---- */
+  header.mast { border-bottom-color: rgba(31,27,22,.10); }
+  .item, .fcard { background: #fff; border-color: rgba(31,27,22,.14); }
+  .fcard:hover { border-color: rgba(31,27,22,.35); }
+  .fmt { border-color: rgba(31,27,22,.2); }
+  .fmt button + button { border-left-color: rgba(31,27,22,.2); }
+  .band__foot { border-top-color: rgba(31,27,22,.14); }
+  .mlist { border-top-color: rgba(31,27,22,.14); }
+  .mlist li { border-bottom-color: rgba(31,27,22,.14); }
+  .mlist a:hover { background: rgba(31,27,22,.05); }
+  .type { border-color: rgba(31,27,22,.28); }
+  .type--print { border-color: rgba(31,27,22,.35); }
+  footer.foot { border-top-color: rgba(31,27,22,.12); }
+  .marker { color: var(--red-lite); }
+  .ilink { color: var(--green-lite); }
+  .btn--gold { background: var(--red); color: #fff; }
+  :focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
 </style>
 </head>
 <body>
@@ -329,9 +336,6 @@
       <a href="#kirk">Kirk</a>
     </nav>
     <div class="mast__r">
-      <button class="themebtn" id="themebtn" aria-label="Toggle light or dark theme" title="Toggle theme">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4" stroke-linecap="round"/></svg>
-      </button>
       <a class="btn btn--gold" href="#shop">Get the book</a>
     </div>
   </div>
@@ -478,10 +482,31 @@
             <p style="margin-top:.6rem"><span class="todo">price to confirm</span></p>
           </div>
         </article>
+        <article class="item">
+          <div class="cover" aria-hidden="true">
+            <span class="cs">Kirk Charlton</span><span class="ct">Art Inside Out</span>
+            <span class="cw" style="background:var(--blue)"></span><span class="cs" style="color:var(--on-desk-soft)">Faith-Based Edition</span>
+          </div>
+          <div>
+            <h3>Faith-Based Edition</h3>
+            <p class="item__sub">The same method, told through a faith lens</p>
+            <p class="item__d">The twelve lessons with scripture woven in, for faith-based settings.</p>
+            <div class="fmt" role="radiogroup" aria-label="Format for Faith-Based Edition">
+              <button type="button" class="on" role="radio" aria-checked="true" data-price="0" data-fmt="Paperback" data-ship="1">Paperback</button>
+              <button type="button" role="radio" aria-checked="false" data-price="0" data-fmt="eBook" data-ship="0">eBook</button>
+            </div>
+            <div class="item__buy">
+              <span class="price">$&mdash;</span>
+              <button type="button" class="btn btn--gold buy" data-title="Art Inside Out: Faith-Based Edition">Buy <span class="arrow" aria-hidden="true">&rarr;</span></button>
+            </div>
+            <p style="margin-top:.6rem"><span class="todo">price to confirm</span></p>
+          </div>
+        </article>
       </div>
       <div class="band__foot">
         <p>Want to put copies into a facility? <a class="ilink" href="mailto:aio.kirkcharltonarts@gmail.com?subject=Sponsoring%20Art%20Inside%20Out%20books">Sponsor books <span class="arrow" aria-hidden="true">&rarr;</span></a></p>
         <p>Also on major retailers <span class="todo">Amazon / B&amp;N links to confirm</span></p>
+        <p style="margin-top:.4rem">Printed and shipped by <b>Abundance Books</b>.</p>
       </div>
     </div>
   </section>
@@ -605,6 +630,10 @@
             <em>My Personal Experience</em> — over forty pencil-and-pen drawings of life
             behind bars. I've since put the method into a book so it can go where I can't.
           </p>
+          <p>
+            I illustrate too, all by hand, never a computer. Three books carry my drawings,
+            and two of them have won awards for illustration.
+          </p>
           <p><a class="ilink" href="#media">See every appearance <span class="arrow" aria-hidden="true">&rarr;</span></a></p>
         </div>
       </div>
@@ -619,8 +648,10 @@
     <div class="out facility__in reveal">
       <p class="marker">For facilities</p>
       <h2>Bring <span style="white-space:nowrap">Art Inside Out</span> to your people.</h2>
+      <p style="color:var(--on-desk-soft)">Art Inside Out runs in the Oregon Department of Corrections, and in recovery centers, behavioral-health programs, and schools, with new sites opening in other states.</p>
       <p style="color:var(--on-desk-soft)">Corrections, recovery centers, elder care, youth programs. Tell me about your setting and we'll scope a program that fits it.</p>
-      <div><a class="btn btn--gold" href="mailto:aio.kirkcharltonarts@gmail.com?subject=Bringing%20Art%20Inside%20Out%20to%20our%20facility">Email the program <span class="arrow" aria-hidden="true">&rarr;</span></a></div>
+      <p style="color:var(--on-desk-soft); margin-top:1rem">Art Inside Out is a program of <b>Better Neighbors</b>, our home and our priority. We can also raise funds and run programming for other nonprofits whose mission fits the work.</p>
+      <div style="margin-top:1.4rem"><a class="btn btn--gold" href="mailto:aio.kirkcharltonarts@gmail.com?subject=Bringing%20Art%20Inside%20Out%20to%20our%20facility">Email the program <span class="arrow" aria-hidden="true">&rarr;</span></a></div>
     </div>
   </section>
 </main>
@@ -634,7 +665,7 @@
         <path d="M8.5 15 V28 H25.5 V15" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
         <path d="M17 28 V19" stroke="#E9B23C" stroke-width="2.6" stroke-linecap="round"/>
       </svg>
-      A program of Restorative Reentry
+      A program of Better Neighbors
     </a>
     <a href="mailto:aio.kirkcharltonarts@gmail.com">aio.kirkcharltonarts@gmail.com</a>
   </div>
@@ -664,14 +695,6 @@
 
 <script>
   document.getElementById('yr').textContent = new Date().getFullYear();
-  (function () {
-    var root = document.documentElement, btn = document.getElementById('themebtn');
-    btn.addEventListener('click', function () {
-      var cur = root.getAttribute('data-theme');
-      if (!cur) cur = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      root.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
-    });
-  })();
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   (function () {
     var els = document.querySelectorAll('.reveal');
