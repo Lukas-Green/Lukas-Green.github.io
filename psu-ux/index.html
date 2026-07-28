@@ -83,7 +83,8 @@
   .row b{ color:var(--ink); }
   .row.miss{ color:var(--red); } .row.miss b{ color:var(--red); }
   .row.good b{ color:var(--green-ink); }
-  .chip404{ display:inline-block; font-family:var(--mono); font-size:.82rem; color:var(--red); background:var(--red-tint); border:1px solid var(--red-line); border-radius:6px; padding:.15rem .5rem; }
+  .chip404{ display:inline-block; font-family:var(--mono); font-size:.82rem; color:var(--red); background:var(--red-tint); border:1px solid var(--red-line); border-radius:6px; padding:.15rem .5rem; text-decoration:none; }
+  a.chip404:hover{ text-decoration:underline; }
   .seelive{ margin-top:1rem; font-size:.92rem; color:var(--mute); }
   .seelive b{ color:var(--blue); } .seelive a{ color:var(--blue); }
 
@@ -245,7 +246,7 @@
           <span class="row"><span class="u">/registration/major-change</span><b>Registrar, where you act.</b> Leads with "Log in to myPSU" and states the 90-credit rule.</span>
           <span class="row miss">Same page: it never mentions the Graphic Design portfolio review, the once-a-year rule that gates the switch.</span>
           <span class="row"><span class="u">/advising/exploring-changing-majors</span><b>Advising.</b> Repeats the 90-credit rule and is the <b>only</b> page carrying the portfolio rule.</span>
-          <span class="row"><span class="chip404">/advising/change-your-major → 404</span></span>
+          <span class="row"><a class="chip404" href="https://www.pdx.edu/advising/change-your-major">/advising/change-your-major → 404</a> <span style="color:var(--mute);font-size:.82rem;">click to see it 404</span></span>
         </div>
       </div>
       <div class="panel">
@@ -300,17 +301,19 @@
   <div class="inner">
     <span class="tag">Finding 3 · Overloaded navigation</span>
     <h2>The tabs carry too much to read</h2>
-    <p class="why">Open "Student Life" and dozens of links appear in one panel, under seven labeled categories, so the issue is not missing structure, it is sheer volume. Fine for a 19-year-old with sharp eyes. A real scannability and low-vision cost for an older or returning learner, which is exactly the retention population.</p>
+    <p class="why">Open "Student Life" and <b>46 links</b> appear in one panel, across seven categories, so the issue is not missing structure, it is sheer volume. Fine for a 19-year-old with sharp eyes. A real scannability and low-vision cost for an older or returning learner, which is exactly the retention population.</p>
     <div class="compare">
       <div class="panel">
-        <div class="cap before">Live today: one tab, ~35 links</div>
+        <div class="cap before">Live today: one panel, 46 links</div>
         <div class="body">
           <div class="megacols">
             <div class="grp"><b>Campus Life</b>Athletics · Dining · Housing · Student Union · Transportation &amp; Parking</div>
-            <div class="grp"><b>Involvement</b>Clubs &amp; Groups · Jobs &amp; Internships · Student Government</div>
-            <div class="grp"><b>Health &amp; Wellness</b>Campus Recreation · Health &amp; Counseling</div>
-            <div class="grp"><b>Resource Centers</b>Cultural · Disability · DREAMer · Native American · Queer · Students with Children · Transfer · Veteran's · Women's</div>
-            <div class="grp"><b>Support Services</b>Advising · BUILD EXITO · Career · Intl Learning · Learning Center · LSAMP · McNair · Legal · Student Finance · Study Abroad · Technology · TRIO · Writing Center</div>
+            <div class="grp"><b>Involvement &amp; Leadership</b>Clubs &amp; Student Groups · Jobs &amp; Internships · Student Government</div>
+            <div class="grp"><b>Health &amp; Wellness</b>Campus Recreation · Student Health &amp; Counseling</div>
+            <div class="grp"><b>Resource Centers</b>Cultural · Disability · DREAMer · Native American · Queer · Students with Children · Transfer &amp; Returning · Veteran's · Women's</div>
+            <div class="grp"><b>Support Services</b>Advising · BUILD EXITO · Career · Intl &amp; English Learning · Intl Student Services · Learning Center · Library · LSAMP · McNair · Multicultural Retention · Legal · Student Finance · Study Abroad · Technology · TRIO · Writing Center</div>
+            <div class="grp"><b>Diversity</b>Global Diversity &amp; Inclusion</div>
+            <div class="grp"><b>Student Life</b>Student Affairs · Dean of Student Life · Inside Portland State</div>
           </div>
         </div>
       </div>
@@ -327,7 +330,7 @@
         </div>
       </div>
     </div>
-    <p class="seelive"><b>Confirmed live:</b> the Student Life menu stacks dozens of links under seven categories; Academics and Admissions are lighter but still dense. Kari also confirmed from inside PSU that the volume comes from six or seven offices each requiring their links, which is why "search first, fewer doors" is the realistic fix.</p>
+    <p class="seelive"><b>Count it yourself:</b> open <a href="https://www.pdx.edu/">pdx.edu</a> and click <b>Student Life</b>. It holds <b>46 links</b> (seven category headers plus 39 sub-links). Kari also confirmed from inside PSU that the volume comes from six or seven offices each requiring their links, which is why "search first, fewer doors" is the realistic fix.</p>
   </div>
 </section>
 
@@ -419,6 +422,8 @@
 <script>
 (function(){
   document.body.classList.add('js');
+  // every real link (see-it-live, concept mockups, the 404) opens in a new tab so the deck stays put
+  document.querySelectorAll('a[href]').forEach(function(a){ var href=a.getAttribute('href'); if(href && href.charAt(0)!=='#'){ a.target='_blank'; a.rel='noopener noreferrer'; } });
   var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
   var i = 0;
   var counter = document.getElementById('counter');
