@@ -19,7 +19,8 @@
   *{box-sizing:border-box;}
   body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.55;font-size:18px;}
   .wrap{max-width:64rem;margin:0 auto;padding:0 1.25rem;}
-  a{color:var(--psu2);}
+  a{color:var(--psu2);cursor:pointer;}
+  .task,.navlinks a{cursor:pointer;}
   .concept-banner{background:var(--gold);color:#2a2408;font-size:.82rem;text-align:center;padding:.5rem 1rem;font-weight:600;}
 
   /* topbar / nav (consistent with the other concept pages) */
@@ -29,7 +30,9 @@
   .nav{background:#fff;border-bottom:1px solid var(--line);}
   .nav .wrap{display:flex;align-items:center;gap:1.2rem;padding:.9rem 1.25rem;flex-wrap:wrap;}
   .brand{display:flex;align-items:center;gap:.6rem;font-weight:700;color:var(--psu-ink);font-size:1.15rem;}
-  .brand .mark{width:2rem;height:2rem;border-radius:6px;background:var(--psu);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;}
+  .psulogo{height:1.7rem;width:auto;display:block;}
+  .brand-div{width:1px;height:1.35rem;background:rgba(0,0,0,.16);display:inline-block;}
+  .brand-app{font-weight:700;color:var(--psu-ink);font-size:1.02rem;}
   .navlinks{display:flex;gap:1.1rem;margin-left:.5rem;flex-wrap:wrap;}
   .navlinks a{color:var(--ink);text-decoration:none;font-weight:600;font-size:1rem;}
   .navlinks a[aria-current]{color:var(--psu2);border-bottom:2px solid var(--psu2);padding-bottom:.15rem;}
@@ -117,7 +120,7 @@
 <div class="topbar"><div class="wrap"><span>Portland State University</span><span><a href="#">myPSU</a><a href="#">Help</a><a href="#">Sign out</a></span></div></div>
 
 <div class="nav"><div class="wrap">
-  <div class="brand"><span class="mark">P</span> Registration</div>
+  <div class="brand"><img class="psulogo" src="psulogo.svg" alt="Portland State University"><span class="brand-div"></span><span class="brand-app">Registration</span></div>
   <nav class="navlinks">
     <a href="#" aria-current="page">Home</a>
     <a href="#">Classes</a>

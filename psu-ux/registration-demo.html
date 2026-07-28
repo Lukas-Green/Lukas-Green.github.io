@@ -19,7 +19,8 @@
   *{box-sizing:border-box;}
   body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.55;font-size:18px;}
   .wrap{max-width:64rem;margin:0 auto;padding:0 1.25rem;}
-  a{color:var(--psu2);}
+  a{color:var(--psu2);cursor:pointer;}
+  a[data-go],.navlinks a,.task,.link,.back,.rm,.detailbtn,.addbtn{cursor:pointer;}
   button{font:inherit;cursor:pointer;}
 
   .concept-banner{background:var(--gold);color:#2a2408;font-size:.82rem;text-align:center;padding:.5rem 1rem;font-weight:600;}
@@ -31,7 +32,9 @@
   .nav{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;}
   .nav .wrap{display:flex;align-items:center;gap:1rem;padding:.7rem 1.25rem;flex-wrap:wrap;}
   .brand{display:flex;align-items:center;gap:.6rem;font-weight:700;color:var(--psu-ink);font-size:1.1rem;}
-  .brand .mark{width:1.9rem;height:1.9rem;border-radius:6px;background:var(--psu);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.95rem;}
+  .psulogo{height:1.7rem;width:auto;display:block;}
+  .brand-div{width:1px;height:1.35rem;background:rgba(0,0,0,.16);display:inline-block;}
+  .brand-app{font-weight:700;color:var(--psu-ink);font-size:1.02rem;}
   .navlinks{display:flex;gap:.9rem;margin-left:.4rem;flex-wrap:wrap;}
   .navlinks a{color:var(--ink);text-decoration:none;font-weight:600;font-size:.95rem;background:none;border:none;padding:.2rem 0;}
   .navlinks a.on{color:var(--psu2);border-bottom:2px solid var(--psu2);}
@@ -183,7 +186,7 @@
 <div class="topbar"><div class="wrap"><span>Portland State University</span><span><a href="#">myPSU</a><a href="#">Help</a><a href="#">Sign out</a></span></div></div>
 
 <div class="nav"><div class="wrap">
-  <div class="brand"><span class="mark">P</span> Registration</div>
+  <div class="brand"><img class="psulogo" src="psulogo.svg" alt="Portland State University"><span class="brand-div"></span><span class="brand-app">Registration</span></div>
   <nav class="navlinks">
     <a data-go="home" class="on">Home</a>
     <a data-go="find">Classes</a>
