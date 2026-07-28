@@ -309,6 +309,15 @@
   .ilink { color: var(--green-lite); }
   .btn--gold { background: var(--red); color: #fff; }
   :focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+  /* ---- Also by Kirk: children's books (placeholders) ---- */
+  .kidsgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(1rem, 2.4vw, 1.6rem); margin-top: 2rem; }
+  @media (max-width: 860px) { .kidsgrid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 440px) { .kidsgrid { grid-template-columns: 1fr; } }
+  .kidcover { aspect-ratio: 3/4; background: var(--desk-2); border: 1px solid var(--rule); border-radius: 3px;
+    display: grid; place-items: center; box-shadow: 0 12px 26px -16px rgba(0,0,0,.35); }
+  .kidcover span { font-family: var(--sans); font-size: .7rem; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-soft); }
+  .kidcard h3 { margin: .7rem 0 .15rem; font-size: 1.05rem; }
+  .kidcard > p { font-family: var(--sans); font-size: .84rem; color: var(--ink-soft); }
   /* ---- What AIO is (program overview) ---- */
   .about { padding-top: clamp(1.6rem, 4vw, 2.6rem); }
   .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.4rem, 3vw, 2.6rem); margin-top: 2.4rem; }
@@ -551,6 +560,37 @@
       </div>
     </div>
   </section>
+
+  <section class="kids col reveal" id="kids">
+      <p class="marker">Also by Kirk</p>
+      <h2>Children's books, illustrated by Kirk.</h2>
+      <p class="lede" style="margin-top:.9rem; max-width:54ch">
+        Kirk's award-winning children's book illustrations, published by Abundance Books, all drawn by
+        hand. Titles coming from Kirk. <span class="todo">4 titles to confirm</span>
+      </p>
+      <div class="kidsgrid">
+        <article class="kidcard">
+          <div class="kidcover" style="border-top:4px solid var(--red)"><span>Cover to confirm</span></div>
+          <h3>Title to confirm</h3>
+          <p>Illustrated by Kirk Charlton</p>
+        </article>
+        <article class="kidcard">
+          <div class="kidcover" style="border-top:4px solid var(--blue)"><span>Cover to confirm</span></div>
+          <h3>Title to confirm</h3>
+          <p>Illustrated by Kirk Charlton</p>
+        </article>
+        <article class="kidcard">
+          <div class="kidcover" style="border-top:4px solid var(--green)"><span>Cover to confirm</span></div>
+          <h3>Title to confirm</h3>
+          <p>Illustrated by Kirk Charlton</p>
+        </article>
+        <article class="kidcard">
+          <div class="kidcover" style="border-top:4px solid var(--gold-bright)"><span>Cover to confirm</span></div>
+          <h3>Title to confirm</h3>
+          <p>Illustrated by Kirk Charlton</p>
+        </article>
+      </div>
+    </section>
 
   <!-- ============ MEDIA ============ -->
   <section class="band band--deep" id="media">
