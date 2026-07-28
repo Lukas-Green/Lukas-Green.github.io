@@ -188,8 +188,8 @@
     <a data-go="home" class="on">Home</a>
     <a data-go="find">Classes</a>
     <a data-go="plan">My plan</a>
-    <a data-go="home">Records</a>
-    <a data-go="home">Money</a>
+    <a data-go="records">Records</a>
+    <a data-go="money">Money</a>
   </nav>
   <button class="cartbtn" data-go="plan">Plan <span class="count" id="cartCount">0</span></button>
 </div></div>
@@ -230,12 +230,12 @@
         <h3>Plan my schedule</h3>
         <p>Build a plan now so registration day is one click.</p>
       </button>
-      <button class="task" data-go="home">
+      <button class="task" data-go="records">
         <div class="ic">&#127891;</div>
         <h3>What I need to graduate</h3>
         <p>Your remaining requirements, from your own record.</p>
       </button>
-      <button class="task" data-go="home">
+      <button class="task" data-go="money">
         <div class="ic">&#128179;</div>
         <h3>Pay &amp; financial aid</h3>
         <p>Balance, aid status, and payment plans.</p>
@@ -404,6 +404,63 @@
       <div class="btnrow"><button class="btn" data-go="home">Back to your hub</button><button class="btn ghost" id="restartBtn">Restart the demo</button></div>
     </div>
     <div class="why"><b>Why this matters:</b> a returning student just went from a blocking hold to a finished registration without being bounced to another office, told to "look on the website," or forced onto a desktop. Every step named the one next thing to do.</div>
+  </div>
+</section>
+
+<!-- ============ RECORDS ============ -->
+<section class="screen" id="screen-records">
+  <div class="wrap">
+    <div class="shead">
+      <button class="back" data-go="home">&larr; Back to home</button>
+      <h1>Your records</h1>
+      <p>Your progress and audit in one place. Everything here is illustrative for the demo.</p>
+    </div>
+    <div class="split" style="margin-top:1rem;">
+      <div class="panel">
+        <h2>Degree progress</h2>
+        <div class="creditbar"><i style="width:66%"></i></div>
+        <div class="creditmeta"><span>118 of 180 credits</span><span>62 to go</span></div>
+        <div class="kv"><span class="k">Program</span><span class="v">Systems Science, BS</span></div>
+        <div class="kv"><span class="k">Catalog year</span><span class="v">2024-25</span></div>
+        <div class="kv"><span class="k">Standing</span><span class="v" style="color:var(--psu-ink)">Good standing</span></div>
+        <div class="btnrow"><button class="btn ghost" data-go="find">Plan your next classes</button></div>
+      </div>
+      <div class="panel">
+        <h2>Your documents</h2>
+        <div class="kv"><span class="k">Unofficial transcript</span><span class="v" style="color:var(--mute)">Ready to view</span></div>
+        <div class="kv"><span class="k">DARS degree audit</span><span class="v" style="color:var(--mute)">Run in myPSU</span></div>
+        <div class="kv"><span class="k">Enrollment verification</span><span class="v" style="color:var(--mute)">Request</span></div>
+        <p style="color:var(--mute);font-size:.85rem;margin:1rem 0 0;">DARS is an advising tool, not an official record. You still apply to graduate to have your degree awarded.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MONEY ============ -->
+<section class="screen" id="screen-money">
+  <div class="wrap">
+    <div class="shead">
+      <button class="back" data-go="home">&larr; Back to home</button>
+      <h1>Money</h1>
+      <p>Your balance, aid, and payment options. Illustrative figures for the demo.</p>
+    </div>
+    <div class="split" style="margin-top:1rem;">
+      <div class="panel">
+        <h2>Your account</h2>
+        <div class="kv"><span class="k">Balance due now</span><span class="v" style="color:var(--psu-ink)">$0.00</span></div>
+        <div class="kv"><span class="k">Estimated Fall tuition</span><span class="v">Shown once you register</span></div>
+        <div class="kv"><span class="k">Tuition due</span><span class="v">Jan 20, 2026</span></div>
+        <div class="kv"><span class="k">Payment plan</span><span class="v">Available</span></div>
+        <div class="btnrow"><button class="btn" data-go="find">Register to see your tuition</button></div>
+      </div>
+      <div class="panel">
+        <h2>Financial aid</h2>
+        <div class="kv"><span class="k">FAFSA</span><span class="v" style="color:var(--psu-ink)">On file</span></div>
+        <div class="kv"><span class="k">Aid status</span><span class="v">Accepted</span></div>
+        <div class="kv"><span class="k">Disburses</span><span class="v">Jan 8, 2026</span></div>
+        <p style="color:var(--mute);font-size:.85rem;margin:1rem 0 0;">In the real hub, this connects to your student account and the aid portal, so you are not hunting across systems.</p>
+      </div>
+    </div>
   </div>
 </section>
 
