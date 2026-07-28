@@ -22,6 +22,11 @@
   a{color:var(--psu2);cursor:pointer;}
   a[data-go],.navlinks a,.task,.link,.back,.rm,.detailbtn,.addbtn{cursor:pointer;}
   button{font:inherit;cursor:pointer;}
+  :focus-visible{outline:3px solid var(--gold);outline-offset:2px;}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+  .skip{position:absolute;left:.5rem;top:-3rem;background:#fff;color:var(--psu-ink);padding:.5rem .8rem;border-radius:8px;z-index:60;font-weight:700;transition:top .15s;}
+  .skip:focus{top:.5rem;}
+  h1{font-size:1.7rem;}
 
   .concept-banner{background:var(--gold);color:#2a2408;font-size:.82rem;text-align:center;padding:.5rem 1rem;font-weight:600;}
 
@@ -31,14 +36,14 @@
   .topbar a{color:#dfe8d3;text-decoration:none;margin-left:1rem;}
   .nav{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;}
   .nav .wrap{display:flex;align-items:center;gap:1rem;padding:.7rem 1.25rem;flex-wrap:wrap;}
-  .brand{display:flex;align-items:center;gap:.6rem;font-weight:700;color:var(--psu-ink);font-size:1.1rem;}
+  .brand{display:flex;align-items:center;gap:.6rem;font-weight:700;color:var(--psu-ink);font-size:1.1rem;background:none;border:none;}
   .psulogo{height:1.7rem;width:auto;display:block;}
   .brand-div{width:1px;height:1.35rem;background:rgba(0,0,0,.16);display:inline-block;}
   .brand-app{font-weight:700;color:var(--psu-ink);font-size:1.02rem;}
   .navlinks{display:flex;gap:.9rem;margin-left:.4rem;flex-wrap:wrap;}
   .navlinks a{color:var(--ink);text-decoration:none;font-weight:600;font-size:.95rem;background:none;border:none;padding:.2rem 0;}
   .navlinks a.on{color:var(--psu2);border-bottom:2px solid var(--psu2);}
-  .cartbtn{margin-left:auto;display:flex;align-items:center;gap:.4rem;background:var(--psu-tint);color:var(--psu-ink);border:1px solid var(--green-line,#cdd9bd);border-radius:99px;padding:.35rem .8rem;font-weight:700;font-size:.9rem;}
+  .cartbtn{margin-left:auto;display:flex;align-items:center;gap:.4rem;background:var(--psu-tint);color:var(--psu-ink);border:1px solid #cdd9bd;border-radius:99px;padding:.35rem .8rem;font-weight:700;font-size:.9rem;}
   .cartbtn .count{background:var(--psu);color:#fff;border-radius:99px;min-width:1.4rem;height:1.4rem;display:inline-flex;align-items:center;justify-content:center;font-size:.8rem;padding:0 .3rem;}
 
   main{padding:0 0 3rem;min-height:60vh;}
@@ -48,7 +53,7 @@
   /* hero */
   .hero{background:linear-gradient(160deg,var(--psu) 0%,var(--psu2) 100%);color:#fff;padding:2rem 0 4.2rem;}
   .hero .greet{font-size:.9rem;color:#cfe0bd;margin:0 0 .3rem;}
-  .hero h1{font-size:1.9rem;line-height:1.12;margin:0 0 .5rem;max-width:24ch;}
+  .hero h1{font-size:1.9rem;line-height:1.12;margin:0 0 .5rem;max-width:24ch;color:#fff;}
   .hero p{font-size:1.02rem;color:#e4eeda;margin:0 0 1.1rem;max-width:50ch;}
   .statuspills{display:flex;gap:.6rem;flex-wrap:wrap;}
   .pill{display:inline-flex;align-items:center;gap:.45rem;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);color:#eef3e6;border-radius:99px;padding:.35rem .8rem;font-size:.88rem;font-weight:600;}
@@ -71,7 +76,7 @@
   .cleared .h .dot{width:1.5rem;height:1.5rem;border-radius:50%;background:var(--psu2);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;}
   .cleared p{margin:0;color:var(--soft);font-size:.98rem;}
 
-  .btn{display:inline-block;background:var(--psu);color:#fff;border:none;text-decoration:none;font-weight:700;padding:.65rem 1.2rem;border-radius:9px;}
+  .btn{display:inline-block;background:var(--psu);color:#fff;border:none;text-decoration:none;font-weight:700;padding:.65rem 1.2rem;border-radius:9px;font-size:1rem;}
   .btn.todo{background:var(--todo);}
   .btn.ghost{background:#fff;color:var(--psu-ink);border:2px solid var(--psu);}
   .btn.block{display:block;width:100%;text-align:center;}
@@ -103,14 +108,14 @@
   .creditbar{height:.7rem;background:#e7eae0;border-radius:99px;overflow:hidden;margin:.4rem 0 .3rem;}
   .creditbar i{display:block;height:100%;background:var(--psu2);}
   .creditmeta{display:flex;justify-content:space-between;font-size:.86rem;color:var(--soft);margin-bottom:1rem;}
-  .kv{display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid var(--line);font-size:.94rem;}
+  .kv{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 0;border-bottom:1px solid var(--line);font-size:.94rem;}
   .kv:last-child{border-bottom:none;}
   .kv .k{color:var(--mute);}
-  .kv .v{font-weight:600;}
+  .kv .v{font-weight:600;text-align:right;}
   .timeline{list-style:none;margin:0;padding:0;}
   .timeline li{display:flex;gap:.8rem;padding:.55rem 0;border-bottom:1px solid var(--line);}
   .timeline li:last-child{border-bottom:none;}
-  .timeline .date{flex:0 0 5rem;font-weight:700;color:var(--psu-ink);font-size:.88rem;}
+  .timeline .date{flex:0 0 6.5rem;font-weight:700;color:var(--psu-ink);font-size:.88rem;}
   .timeline .what{font-size:.92rem;color:var(--soft);}
   .timeline .soon{color:var(--todo);font-weight:600;}
   .mobilenote{display:flex;align-items:center;gap:.7rem;background:var(--psu-tint);border:1px solid #cdd9bd;border-radius:var(--radius);padding:.85rem 1.1rem;margin-top:1.2rem;font-size:.92rem;color:var(--psu-ink);}
@@ -120,11 +125,68 @@
   .shead{padding:1.5rem 0 .3rem;}
   .back{background:none;border:none;color:var(--psu2);font-weight:600;font-size:.9rem;padding:.2rem 0;margin-bottom:.4rem;}
   .shead h1{font-size:1.7rem;margin:.1rem 0 .3rem;color:var(--ink);}
-  .shead p{color:var(--soft);margin:0;max-width:52ch;}
+  .shead p{color:var(--soft);margin:0;max-width:56ch;}
   .stepbar{display:flex;gap:.4rem;margin:.9rem 0 0;flex-wrap:wrap;}
   .stepbar span{font-size:.76rem;font-weight:700;color:var(--mute);background:#eceee6;border-radius:99px;padding:.2rem .6rem;}
   .stepbar span.on{background:var(--psu);color:#fff;}
   .stepbar span.done{background:var(--psu-tint);color:var(--psu-ink);}
+
+  /* ported components: step, flag, connect, req */
+  .step{display:flex;gap:.9rem;padding:1rem 0;border-bottom:1px solid var(--line);}
+  .step:last-child{border-bottom:none;}
+  .step .num{flex:0 0 2rem;height:2rem;border-radius:50%;background:var(--psu);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;}
+  .step h3{margin:.1rem 0 .3rem;font-size:1.06rem;}
+  .step p{margin:0;color:var(--soft);font-size:.95rem;}
+  .flag{display:inline-flex;align-items:center;gap:.4rem;margin-top:.5rem;font-size:.86rem;font-weight:600;border-radius:8px;padding:.35rem .6rem;}
+  .flag.warn{background:#fbf3dc;color:var(--warn);}
+  .flag.info{background:var(--blue-tint);color:var(--blue);}
+  .flag.gold{background:#f7efd0;color:#7a6410;}
+  .connect{background:var(--blue-tint);border:1px dashed #9cbcc9;border-radius:10px;padding:.9rem 1rem;margin-bottom:1.1rem;font-size:.94rem;color:var(--blue);}
+  .connect b{color:var(--blue);}
+  .req{display:flex;align-items:center;gap:.7rem;padding:.55rem 0;border-bottom:1px solid var(--line);}
+  .req:last-child{border-bottom:none;}
+  .req .dot{flex:0 0 .9rem;height:.9rem;border-radius:50%;}
+  .dot.ok{background:var(--ok);} .dot.part{background:var(--gold);} .dot.todo{background:var(--todo);} .dot.check{background:var(--blue);}
+  .req .name{flex:1;font-weight:600;font-size:.95rem;}
+  .req .state{font-size:.82rem;color:var(--mute);font-weight:600;}
+
+  /* new: wizard + booking + accordion */
+  .callout-gold{background:#f7efd0;border:1px solid #e6d9a8;border-left:5px solid var(--gold);border-radius:10px;padding:1rem 1.2rem;margin:.4rem 0 1.2rem;}
+  .callout-gold h3{margin:0 0 .3rem;color:#7a6410;font-size:1.05rem;}
+  .callout-gold p{margin:.25rem 0;color:var(--soft);font-size:.94rem;}
+  .callout-gold.done{background:var(--psu-tint);border-color:#cdd9bd;border-left-color:var(--psu2);}
+  .callout-gold.done h3{color:var(--psu-ink);}
+  .compare2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:.6rem 0;}
+  @media(max-width:640px){.compare2{grid-template-columns:1fr;}}
+  .compare2 .col{border:1px solid var(--line);border-radius:10px;padding:.9rem 1rem;}
+  .compare2 .col h4{margin:0 0 .4rem;font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);}
+  .compare2 .col ul{margin:0;padding-left:1.1rem;color:var(--soft);font-size:.92rem;}
+  .compare2 .col li{margin:.3rem 0;}
+  .ackrow{display:flex;gap:.6rem;align-items:flex-start;padding:.7rem 0;border-top:1px solid var(--line);}
+  .ackrow input{margin-top:.2rem;width:1.2rem;height:1.2rem;flex:0 0 auto;}
+  .ackrow label{font-size:.94rem;color:var(--soft);}
+  .inlineerr{color:var(--todo);font-size:.9rem;font-weight:600;margin:.6rem 0 0;}
+  .acc{border:1px solid var(--line);border-radius:10px;margin-bottom:.6rem;overflow:hidden;background:#fff;}
+  .acc>.acch{width:100%;text-align:left;background:#fff;border:none;padding:.85rem 1rem;display:flex;justify-content:space-between;align-items:center;gap:.6rem;font-weight:700;color:var(--ink);font-size:.98rem;}
+  .acc>.acch .st{font-size:.76rem;font-weight:700;padding:.12rem .55rem;border-radius:99px;background:#eceee6;color:var(--soft);white-space:nowrap;}
+  .acc>.acch .st.ok{background:var(--psu-tint);color:var(--psu-ink);}
+  .acc>.acch .st.part{background:var(--gold-tint);color:var(--warn);}
+  .acc>.acch .st.todo{background:var(--todo-tint);color:var(--todo);}
+  .acc .body2{padding:0 1rem 1rem;display:none;}
+  .acc.open .body2{display:block;}
+  .daychips{display:flex;gap:.5rem;flex-wrap:wrap;margin:.5rem 0;}
+  .daychip{border:1px solid var(--line);border-radius:10px;padding:.5rem .8rem;background:#fff;text-align:center;min-width:4.4rem;font-size:.85rem;font-weight:600;color:var(--ink);}
+  .daychip.on{border-color:var(--psu);background:var(--psu-tint);color:var(--psu-ink);}
+  .daychip small{display:block;color:var(--mute);font-size:.72rem;font-weight:400;}
+  .slots{display:flex;flex-direction:column;gap:.5rem;margin:.6rem 0;}
+  .slot{display:flex;justify-content:space-between;align-items:center;gap:.6rem;border:1px solid var(--line);border-radius:10px;padding:.7rem .9rem;background:#fff;font-size:.95rem;color:var(--ink);text-align:left;}
+  .slot.on{border-color:var(--psu);background:var(--psu-tint);}
+  .slot .tag{font-size:.74rem;color:var(--warn);font-weight:700;}
+  .radios{display:flex;gap:.5rem;flex-wrap:wrap;margin:.4rem 0 .2rem;}
+  .radios label{border:1px solid var(--line);border-radius:10px;padding:.5rem .9rem;background:#fff;cursor:pointer;font-size:.9rem;display:flex;gap:.45rem;align-items:center;}
+  .radios input{width:1rem;height:1rem;}
+  fieldset{border:none;padding:0;margin:1rem 0 0;}
+  legend{font-weight:700;font-size:.95rem;color:var(--psu-ink);padding:0;margin-bottom:.2rem;}
 
   /* find classes */
   .filters{display:flex;gap:.5rem;flex-wrap:wrap;margin:.4rem 0 1rem;}
@@ -160,7 +222,7 @@
   /* confirmation */
   .success{background:var(--psu-tint);border:1px solid #cdd9bd;border-radius:var(--radius);padding:1.4rem 1.5rem;text-align:center;margin:1.4rem 0;}
   .success .check{width:3.2rem;height:3.2rem;border-radius:50%;background:var(--psu2);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.7rem;margin:0 auto .6rem;}
-  .success h2{margin:0 0 .3rem;color:var(--psu-ink);}
+  .success h1,.success h2{margin:0 0 .3rem;color:var(--psu-ink);font-size:1.5rem;}
   .success p{margin:0;color:var(--soft);}
   .schedule{width:100%;border-collapse:collapse;margin:.5rem 0 0;font-size:.92rem;}
   .schedule th,.schedule td{text-align:left;padding:.6rem .5rem;border-bottom:1px solid var(--line);}
@@ -171,7 +233,7 @@
   .nextsteps .n{flex:0 0 1.6rem;height:1.6rem;border-radius:50%;background:var(--psu);color:#fff;font-weight:700;font-size:.85rem;display:flex;align-items:center;justify-content:center;}
 
   /* toast */
-  .toast{position:fixed;left:50%;bottom:1.4rem;transform:translateX(-50%) translateY(2rem);background:var(--psu-ink);color:#eef3e6;padding:.7rem 1.2rem;border-radius:10px;font-weight:600;font-size:.92rem;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:40;box-shadow:0 6px 20px rgba(0,0,0,.25);}
+  .toast{position:fixed;left:50%;bottom:1.4rem;transform:translateX(-50%) translateY(2rem);background:var(--psu-ink);color:#eef3e6;padding:.7rem 1.2rem;border-radius:10px;font-weight:600;font-size:.92rem;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:40;box-shadow:0 6px 20px rgba(0,0,0,.25);max-width:90vw;text-align:center;}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
   footer{border-top:1px solid var(--line);padding:1.4rem 0 2.5rem;color:var(--mute);font-size:.84rem;}
@@ -181,13 +243,14 @@
 </head>
 <body>
 
+<a class="skip" href="#maincontent">Skip to content</a>
 <div class="concept-banner">CONCEPT PROTOTYPE by Lukas Green · not affiliated with or endorsed by Portland State University · illustrative data, not real records · nothing here submits anywhere</div>
 
 <div class="topbar"><div class="wrap"><span>Portland State University</span><span><a href="#">myPSU</a><a href="#">Help</a><a href="#">Sign out</a></span></div></div>
 
 <div class="nav"><div class="wrap">
-  <div class="brand"><img class="psulogo" src="psulogo.svg" alt="Portland State University"><span class="brand-div"></span><span class="brand-app">Registration</span></div>
-  <nav class="navlinks">
+  <button class="brand" data-go="home" aria-label="myPSU Registration home"><img class="psulogo" src="psulogo.svg" alt="Portland State University"><span class="brand-div"></span><span class="brand-app">Registration</span></button>
+  <nav class="navlinks" aria-label="Main">
     <a data-go="home" class="on">Home</a>
     <a data-go="find">Classes</a>
     <a data-go="plan">My plan</a>
@@ -197,13 +260,13 @@
   <button class="cartbtn" data-go="plan">Plan <span class="count" id="cartCount">0</span></button>
 </div></div>
 
-<main>
+<main id="maincontent">
 
 <!-- ============ HOME / HUB ============ -->
 <section class="screen active" id="screen-home">
   <div class="hero"><div class="wrap">
     <p class="greet">Signed in as Renée A. · Fall 2026</p>
-    <h1>Your registration, all in one place.</h1>
+    <h1 tabindex="-1">Your registration, all in one place.</h1>
     <p>What needs doing, what is coming up, and one clear next step. Built to finish on a phone between shifts.</p>
     <div class="statuspills" id="homePills">
       <span class="pill"><span class="a"></span> Registration opens for you: Nov 12, 8:00 AM</span>
@@ -213,14 +276,14 @@
 
   <div class="wrap">
     <div class="bigsearch">
-      <input value="what do I need to do to register?" aria-label="What do you need to do?">
-      <button data-go="find">Search</button>
+      <input value="change my BA in Graphic Design to a BS" aria-label="What do you need to do?">
+      <button data-go="search">Search</button>
     </div>
 
     <!-- blocker OR cleared, swapped by JS -->
     <div id="holdSlot"></div>
 
-    <div class="sectionhead"><h2>What do you want to do?</h2><button class="link" data-go="find">See all tasks</button></div>
+    <div class="sectionhead"><h2>What do you want to do?</h2><button class="link" data-go="search">See all tasks</button></div>
     <div class="tasks">
       <button class="task" id="taskRegister" data-register>
         <div class="ic">&#128218;</div>
@@ -233,7 +296,7 @@
         <h3>Plan my schedule</h3>
         <p>Build a plan now so registration day is one click.</p>
       </button>
-      <button class="task" data-go="records">
+      <button class="task" data-go="graduate">
         <div class="ic">&#127891;</div>
         <h3>What I need to graduate</h3>
         <p>Your remaining requirements, from your own record.</p>
@@ -243,12 +306,12 @@
         <h3>Pay &amp; financial aid</h3>
         <p>Balance, aid status, and payment plans.</p>
       </button>
-      <a class="task" href="hifi-degree-path.html">
+      <button class="task" data-go="change-1">
         <div class="ic">&#128100;</div>
         <h3>Change or declare a major</h3>
         <p>Start a program change and see the rules first.</p>
-      </a>
-      <button class="task" data-go="hold">
+      </button>
+      <button class="task" data-go="book" data-reason="general">
         <div class="ic">&#128222;</div>
         <h3>Get a person</h3>
         <p>Advising, the Registrar, or the help desk.</p>
@@ -260,10 +323,11 @@
         <h2>Your term at a glance</h2>
         <div class="creditbar"><i style="width:66%"></i></div>
         <div class="creditmeta"><span>118 of 180 credits toward your degree</span><span>62 to go</span></div>
+        <div class="kv"><span class="k">Program</span><span class="v" id="homeProgram">Graphic Design, BA</span></div>
         <div class="kv"><span class="k">Catalog year</span><span class="v">2024-25</span></div>
         <div class="kv"><span class="k">Registration window</span><span class="v">Opens Nov 12, 8:00 AM</span></div>
-        <div class="kv"><span class="k">Planned this term</span><span class="v" id="plannedKv">0 credits</span></div>
         <div class="kv"><span class="k">Holds</span><span class="v" id="holdsKv" style="color:var(--todo)">1 (advising)</span></div>
+        <div id="homeExtra"></div>
       </div>
       <div class="panel">
         <h2>Dates that matter</h2>
@@ -281,28 +345,308 @@
   </div>
 </section>
 
+<!-- ============ SEARCH ANSWER ============ -->
+<section class="screen" id="screen-search">
+  <div class="wrap">
+    <div class="shead">
+      <button class="back" data-go="home">&larr; Back to home</button>
+      <h1 tabindex="-1">Here is what I found</h1>
+      <p>You searched: "change my BA in Graphic Design to a BS." One answer, not a tab hunt.</p>
+    </div>
+    <div class="panel" style="margin-top:1rem;border-color:var(--psu2);">
+      <h2>Change your degree from a BA to a BS</h2>
+      <p style="color:var(--soft);margin:.2rem 0 0;font-size:.95rem;">One flow that shows the rules, what carries over, and starts the change in your account. About 10 minutes.</p>
+      <div class="btnrow"><button class="btn" data-go="change-1">Start my degree change</button></div>
+    </div>
+    <div class="sectionhead"><h2>Related</h2></div>
+    <div class="tasks">
+      <button class="task" data-go="graduate"><div class="ic">&#127891;</div><h3>See what I still need to graduate</h3><p>Your remaining requirements in one view.</p></button>
+      <button class="task" data-go="book" data-reason="advising"><div class="ic">&#128197;</div><h3>Book time with an adviser</h3><p>Talk it through, by phone or Zoom.</p></button>
+      <button class="task" data-go="find"><div class="ic">&#128203;</div><h3>Find classes for this term</h3><p>Search sections and build a plan.</p></button>
+    </div>
+    <p class="why" style="margin-top:1.4rem;"><b>Not finding it?</b> <button class="link" data-go="book" data-reason="general" style="text-decoration:underline;">Get a person</button> and we will help you find the right office.</p>
+  </div>
+</section>
+
+<!-- ============ CHANGE WIZARD: STEP 1 ============ -->
+<section class="screen" id="screen-change-1">
+  <div class="wrap">
+    <div class="shead">
+      <button class="back" data-go="home">&larr; Back to home</button>
+      <nav class="stepbar" aria-label="Change major steps"><span class="on" aria-current="step">1. Choose</span><span>2. Rules</span><span>3. What changes</span><span>4. Review</span><span>5. Done</span></nav>
+      <h1 tabindex="-1">Is a Bachelor of Science the right fit?</h1>
+      <p>Before you change anything, here is how a BS differs from your BA and what carries over. Most of your credits come with you.</p>
+    </div>
+    <div class="panel" style="margin-top:1rem;">
+      <div class="kv"><span class="k">Current program</span><span class="v">Graphic Design, BA</span></div>
+      <div class="kv"><span class="k">Catalog year</span><span class="v">2024-25</span></div>
+      <div class="kv"><span class="k">Progress</span><span class="v">118 of 180 credits</span></div>
+      <div class="creditbar" style="margin-top:.7rem;"><i style="width:66%"></i></div>
+      <div class="creditmeta"><span>Most of your credits carry over</span><span>62 to go</span></div>
+    </div>
+    <div class="compare2">
+      <div class="col"><h4>Your BA now</h4><ul><li>Requires two years of a college-level second language</li><li>Graphic Design major requirements</li><li>General education, University Writing, Race and Ethnic Studies</li></ul></div>
+      <div class="col"><h4>Your BS after</h4><ul><li>No two-year language requirement (the Second Language Admission requirement, SLAD, can still apply if not yet met)</li><li>BS degree-type requirements (science and quantitative credits)</li><li>The same general education and writing credits carry over</li></ul></div>
+    </div>
+    <p style="color:var(--soft);font-size:.92rem;">What carries over: your general requirements, your Race and Ethnic Studies and University Writing credits, and your 100 and 200 level design courses. What changes is the degree-type requirements and any new major requirements.</p>
+    <div class="btnrow">
+      <button class="btn" data-go="change-2">This fits, show me the rules</button>
+      <button class="btn ghost" data-go="book" data-reason="advising">Not sure? Talk to an adviser</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHANGE WIZARD: STEP 2 (rules) ============ -->
+<section class="screen" id="screen-change-2">
+  <div class="wrap">
+    <div class="shead">
+      <button class="back" data-go="change-1">&larr; Back to fit</button>
+      <nav class="stepbar" aria-label="Change major steps"><span class="done">1. Choose</span><span class="on" aria-current="step">2. Rules</span><span>3. What changes</span><span>4. Review</span><span>5. Done</span></nav>
+      <h1 tabindex="-1">The rules that apply to you</h1>
+      <p>Every rule that touches this change, in one place, checked against your record.</p>
+    </div>
+    <div id="portfolioCallout"></div>
+    <div class="panel">
+      <div class="req"><span class="dot ok"></span><span class="name">Declare a major by 90 credits</span><span class="state">You are fine</span></div>
+      <p style="color:var(--soft);font-size:.9rem;margin:.2rem 0 .6rem;">You are at 118 credits and already have a declared major, so this is a change, not a first declaration.</p>
+      <div class="req"><span class="dot ok"></span><span class="name">Your general requirements carry over</span><span class="state">No action</span></div>
+      <p style="color:var(--soft);font-size:.9rem;margin:.2rem 0 0;">The BS degree-type requirements and the new major requirements are what change. <button class="link" data-go="graduate" style="text-decoration:underline;">See the full list on What you need to graduate.</button></p>
+    </div>
+    <div class="ackrow">
+      <input type="checkbox" id="ackPortfolio">
+      <label for="ackPortfolio">I have seen when the portfolio review happens.</label>
+    </div>
+    <p class="inlineerr" id="ackErr" style="display:none;">Please confirm you have seen the portfolio review timing before you continue.</p>
+    <div class="btnrow">
+      <button class="btn" id="change2Continue">I understand the rules, continue</button>
+      <button class="btn ghost" data-go="change-1">Back to fit</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PORTFOLIO BRANCH ============ -->
+<section class="screen" id="screen-portfolio">
+  <div class="wrap">
+    <div class="shead">
+      <button class="back" data-go="change-2">&larr; Back to the rules</button>
+      <h1 tabindex="-1">Graphic Design portfolio review</h1>
+      <p>This review decides entry into the Graphic Design track. It is held once a year. If you miss it, you wait until the next year, so it is worth putting on your calendar now.</p>
+    </div>
+    <div class="panel" style="margin-top:1rem;">
+      <div class="req" id="portStatus"></div>
+      <h2 style="margin:1rem 0 .3rem;">Key dates</h2>
+      <ul class="timeline">
+        <li><span class="date soon">Mar 2, 2027</span><span class="what">Review window opens</span></li>
+        <li><span class="date">Mar 20, 2027</span><span class="what">Review window closes</span></li>
+        <li><span class="date">Apr 15, 2027</span><span class="what">Decisions by</span></li>
+      </ul>
+      <p style="color:var(--soft);font-size:.9rem;margin:.8rem 0 0;">Prepare: bring work from your 100 and 200 level design courses.</p>
+      <div class="btnrow">
+        <button class="btn" data-go="book" data-reason="portfolio">Add me to the next review</button>
+        <button class="btn ghost" data-go="book" data-reason="portfolio">Ask the department a question</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHANGE WIZARD: STEP 3 (what changes) ============ -->
+<section class="screen" id="screen-change-3">
+  <div class="wrap">
+    <div class="shead">
+      <button class="back" data-go="change-2">&larr; Back to the rules</button>
+      <nav class="stepbar" aria-label="Change major steps"><span class="done">1. Choose</span><span class="done">2. Rules</span><span class="on" aria-current="step">3. What changes</span><span>4. Review</span><span>5. Done</span></nav>
+      <h1 tabindex="-1">What changes if you switch</h1>
+      <p>Here is how your remaining requirements change moving from the BA to the BS.</p>
+    </div>
+    <div class="compare2">
+      <div class="col"><h4>No longer needed</h4><ul><li>The two-year second language requirement drops on the BS</li></ul></div>
+      <div class="col"><h4>Now needed</h4><ul><li>BS degree-type requirements (science and quantitative credits)</li><li>Any new major requirements for the BS track</li></ul></div>
+    </div>
+    <div class="panel">
+      <p style="margin:0;color:var(--ink);font-weight:600;">Bottom line</p>
+      <p style="color:var(--soft);font-size:.94rem;margin:.3rem 0 0;">Switching to the BS removes the two-year language requirement and adds the BS degree-type and major requirements. This is an estimate. An adviser confirms it, and your degree audit updates after the change is approved.</p>
+      <div class="btnrow"><button class="btn ghost" data-go="graduate">See my full requirements</button></div>
+    </div>
+    <div class="btnrow">
+      <button class="btn" data-go="change-4">Review and confirm</button>
+      <button class="btn ghost" data-go="change-2">Back to the rules</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHANGE WIZARD: STEP 4 (review) ============ -->
+<section class="screen" id="screen-change-4">
+  <div class="wrap">
+    <div class="shead">
+      <button class="back" data-go="change-3">&larr; Back to what changes</button>
+      <nav class="stepbar" aria-label="Change major steps"><span class="done">1. Choose</span><span class="done">2. Rules</span><span class="done">3. What changes</span><span class="on" aria-current="step">4. Review</span><span>5. Done</span></nav>
+      <h1 tabindex="-1">Make the change official</h1>
+      <p>This is the real step. Review it, then submit through myPSU.</p>
+    </div>
+    <div class="panel" style="margin-top:1rem;">
+      <div class="kv"><span class="k">From</span><span class="v">BA, Graphic Design</span></div>
+      <div class="kv"><span class="k">To</span><span class="v">BS, Graphic Design track</span></div>
+      <div class="kv"><span class="k">Catalog year</span><span class="v">Stays 2024-25</span></div>
+      <div class="kv"><span class="k">Effective</span><span class="v">Fall 2026</span></div>
+      <div class="kv"><span class="k">Carried reminder</span><span class="v" id="review-portfolio">Portfolio review, March 2027</span></div>
+      <p class="flag info" style="margin-top:.8rem;">In myPSU this action lives under Academics, then Academic Program Change. Submitting here records it the same way.</p>
+    </div>
+    <div class="ackrow"><input type="checkbox" id="ack1"><label for="ack1">I understand this change goes to an adviser for review before it is final.</label></div>
+    <div class="ackrow"><input type="checkbox" id="ack2"><label for="ack2">I have checked how this affects my financial aid. <button class="link" data-go="money" style="text-decoration:underline;">See how this affects aid</button></label></div>
+    <p class="inlineerr" id="ack4Err" style="display:none;">Please check both boxes so we know you have reviewed the change, then submit.</p>
+    <div class="btnrow">
+      <button class="btn" id="change4Submit" disabled>Submit my program change</button>
+      <button class="btn ghost" data-go="book" data-reason="advising">Talk to an adviser first</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHANGE WIZARD: STEP 5 (done) ============ -->
+<section class="screen" id="screen-change-5">
+  <div class="wrap">
+    <div class="success" style="margin-top:1.4rem;">
+      <div class="check">&#10003;</div>
+      <h1 tabindex="-1">Your program change is in</h1>
+      <p>A confirmation went to your PSU email. Here is what happens next.</p>
+    </div>
+    <div class="panel">
+      <div class="kv"><span class="k">Request</span><span class="v">2026-GD-BS-0417</span></div>
+      <div class="kv"><span class="k">Submitted</span><span class="v">Today</span></div>
+      <div class="kv"><span class="k">Change</span><span class="v">BA to BS, Graphic Design</span></div>
+      <div class="kv"><span class="k">Status</span><span class="v" style="color:var(--warn)">Submitted, pending review</span></div>
+    </div>
+    <div class="panel" style="margin-top:1.2rem;">
+      <h2>What is next</h2>
+      <ul class="nextsteps">
+        <li><span class="n">1</span><span><b>A new adviser is assigned for the BS path.</b> Watch for an intro email within a few days.</span></li>
+        <li><span class="n">2</span><span><b>Your degree map updates to the BS</b> once the change is approved.</span></li>
+        <li><span class="n">3</span><span id="change5-portfolio"><b>Your portfolio review is set for March 2027.</b> We will remind you before the window.</span></li>
+        <li><span class="n">4</span><span><b>You can keep planning classes now.</b> Nothing here blocks you from registering once your advising hold is cleared.</span></li>
+      </ul>
+      <div class="btnrow" id="change5Actions"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHAT I NEED TO GRADUATE ============ -->
+<section class="screen" id="screen-graduate">
+  <div class="wrap">
+    <div class="shead">
+      <button class="back" data-go="home">&larr; Back to home</button>
+      <h1 tabindex="-1">What you need to graduate</h1>
+      <p>The six places PSU keeps this, assembled into one view from your own record.</p>
+    </div>
+    <div class="connect" style="margin-top:1rem;"><b>Connected:</b> assembled from your DARS audit and your transcript, pinned to catalog year 2024-25. You are seeing the one right map, not several year versions. <button class="link" data-go="grad-source" style="text-decoration:underline;">How this maps</button></div>
+    <div class="panel">
+      <div class="creditbar"><i style="width:66%"></i></div>
+      <div class="creditmeta"><span>118 of 180 credits</span><span>62 to go</span></div>
+      <div class="kv"><span class="k">Upper-division</span><span class="v">62 of 62 on track</span></div>
+      <div class="kv"><span class="k">GPA</span><span class="v">Above the 2.0 minimum</span></div>
+    </div>
+    <div id="reqGroups" style="margin-top:1rem;"></div>
+    <div class="btnrow">
+      <button class="btn" data-go="find" data-filter="degree">Plan classes that count</button>
+      <button class="btn ghost" data-go="change-1">Thinking of changing your degree?</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW THIS MAPS (grad-source) ============ -->
+<section class="screen" id="screen-grad-source">
+  <div class="wrap">
+    <div class="shead">
+      <button class="back" data-go="graduate">&larr; Back to what I need to graduate</button>
+      <h1 tabindex="-1">How this maps from your DARS and transcript</h1>
+      <p>Your one requirements view is put together from the six places PSU keeps this information. Here is what each one gave you.</p>
+    </div>
+    <div class="panel" style="margin-top:1rem;">
+      <div class="kv"><span class="k">1. General baccalaureate requirements</span><span class="v" style="color:var(--mute);font-weight:400;">180 credits, 62 upper-division, RESR, writing</span></div>
+      <div class="kv"><span class="k">2. BA vs BS degree-type requirements</span><span class="v" style="color:var(--mute);font-weight:400;">BS science/quant credits</span></div>
+      <div class="kv"><span class="k">3. Graphic Design BS major requirements</span><span class="v" style="color:var(--mute);font-weight:400;">from the department</span></div>
+      <div class="kv"><span class="k">4. The PSU Bulletin (catalog.pdx.edu)</span><span class="v" style="color:var(--mute);font-weight:400;">source of record</span></div>
+      <div class="kv"><span class="k">5. Your DARS degree audit</span><span class="v" style="color:var(--mute);font-weight:400;">updated today</span></div>
+      <div class="kv"><span class="k">6. Degree map, pinned to 2024-25</span><span class="v" style="color:var(--mute);font-weight:400;">2025-26 available, not applied</span></div>
+      <p style="color:var(--soft);font-size:.9rem;margin:1rem 0 0;">PSU labels DARS an advising tool, not an official record, so confirm anything that affects graduation with an adviser. You are on catalog year 2024-25. We are not mixing in the 2025-26 map.</p>
+      <div class="btnrow"><button class="btn ghost" data-go="records">Open my DARS in myPSU</button><button class="btn ghost" data-go="book" data-reason="advising">Talk to an adviser</button></div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ RESOLVE HOLD ============ -->
 <section class="screen" id="screen-hold">
   <div class="wrap">
     <div class="shead">
       <button class="back" data-go="home">&larr; Back to home</button>
-      <h1>Clear your advising hold</h1>
-      <p>This is the only thing between you and registering for Fall. It takes about 20 minutes and can be done by phone or Zoom.</p>
+      <h1 tabindex="-1">Clear your advising hold</h1>
+      <p>This is the only thing between you and registering for Fall. About 20 minutes, by phone or Zoom. No need to come to campus.</p>
     </div>
     <div class="panel" style="margin-top:1rem;">
       <div class="kv"><span class="k">Hold type</span><span class="v">Advising</span></div>
       <div class="kv"><span class="k">Placed by</span><span class="v">Your advising pathway</span></div>
       <div class="kv"><span class="k">Why</span><span class="v">A quick check-in before you register</span></div>
       <div class="kv"><span class="k">Blocks</span><span class="v" style="color:var(--todo)">Registration</span></div>
-      <p style="color:var(--soft);margin:1rem 0 0;font-size:.95rem;">Pick a time that works around your schedule. Your adviser can meet by phone or Zoom, no need to come to campus.</p>
       <div class="btnrow">
-        <button class="btn" id="bookBtn">Book a Zoom time &rarr;</button>
+        <button class="btn" data-go="book" data-reason="advising">Find an advising time</button>
         <button class="btn ghost" data-go="home">Not now</button>
       </div>
-      <p id="bookedMsg" style="display:none;color:var(--psu-ink);font-weight:600;margin:1rem 0 0;">Booked for Thu, Nov 6 at 4:00 PM (Zoom link sent to your email). For this demo, we will treat the meeting as done so you can keep going.</p>
-      <div class="btnrow" id="clearRow" style="display:none;">
-        <button class="btn" id="clearBtn">Mark advising as met and clear the hold</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BOOK A PERSON ============ -->
+<section class="screen" id="screen-book">
+  <div class="wrap">
+    <div class="shead">
+      <button class="back" data-go="home">&larr; Back to home</button>
+      <nav class="stepbar" aria-label="Booking steps"><span class="on" aria-current="step">1. Time</span><span>2. Confirm</span><span>3. Booked</span></nav>
+      <h1 tabindex="-1">Book time with a person</h1>
+      <p>Pick what it is about and a time that fits your schedule. Phone and Zoom mean no trip to campus.</p>
+    </div>
+    <div class="panel" style="margin-top:1rem;">
+      <div class="kv"><span class="k">What is this about?</span><span class="v" id="bookReasonLabel">Advising hold check-in</span></div>
+      <p class="flag info" id="bookPortfolioNote" style="display:none;">Portfolio review for Graphic Design is held once a year. The next window is March 2 to March 20, 2027. Reserve early.</p>
+      <fieldset>
+        <legend>How would you like to meet?</legend>
+        <div class="radios" role="radiogroup" aria-label="Meeting method">
+          <label><input type="radio" name="modality" value="Phone" checked> Phone</label>
+          <label><input type="radio" name="modality" value="Zoom"> Zoom</label>
+          <label><input type="radio" name="modality" value="In person"> In person</label>
+        </div>
+        <p style="color:var(--mute);font-size:.85rem;margin:.2rem 0 0;">Phone and Zoom need no campus trip.</p>
+      </fieldset>
+      <fieldset>
+        <legend>Pick a day</legend>
+        <div class="daychips" id="dayChips"></div>
+      </fieldset>
+      <fieldset>
+        <legend id="slotLegend">Pick a time (evenings and early mornings marked for anyone who works during the day)</legend>
+        <div class="slots" id="slotList"></div>
+      </fieldset>
+      <div class="btnrow">
+        <button class="btn" id="bookConfirm" disabled>Book this time</button>
+        <button class="btn ghost" data-go="home">Cancel</button>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BOOKED CONFIRMATION ============ -->
+<section class="screen" id="screen-booked">
+  <div class="wrap">
+    <div class="success" style="margin-top:1.4rem;">
+      <div class="check">&#10003;</div>
+      <h1 tabindex="-1">You are booked</h1>
+      <p id="bookedSub">A calendar invite went to your PSU email.</p>
+    </div>
+    <div class="panel">
+      <div class="kv"><span class="k">About</span><span class="v" id="bookedReason"></span></div>
+      <div class="kv"><span class="k">When</span><span class="v" id="bookedWhen"></span></div>
+      <div class="kv"><span class="k">How</span><span class="v" id="bookedHow"></span></div>
+      <div class="btnrow"><button class="btn ghost" id="bookedCal">Add to calendar</button></div>
+    </div>
+    <div class="panel" style="margin-top:1.2rem;">
+      <div id="bookedStatus"></div>
+      <div class="btnrow" id="bookedActions"></div>
     </div>
   </div>
 </section>
@@ -312,7 +656,7 @@
   <div class="wrap">
     <div class="shead">
       <button class="back" data-go="home">&larr; Back to home</button>
-      <h1>Find classes</h1>
+      <h1 tabindex="-1">Find classes</h1>
       <p>Search the way you would say it. Filter to what fits your life, then add sections to your plan.</p>
       <div class="stepbar"><span class="on">1. Find classes</span><span>2. Review your plan</span><span>3. Register</span><span>4. Done</span></div>
     </div>
@@ -320,7 +664,7 @@
       <input value="classes for my degree, online or evenings" aria-label="Search classes">
       <button>Search</button>
     </div>
-    <div class="filters">
+    <div class="filters" id="findFilters">
       <button class="f on">All</button>
       <button class="f">Online</button>
       <button class="f">Evenings</button>
@@ -337,7 +681,7 @@
   <div class="wrap">
     <div class="shead">
       <button class="back" data-go="find">&larr; Back to results</button>
-      <h1 id="cdTitle">Course</h1>
+      <h1 id="cdTitle" tabindex="-1">Course</h1>
       <p id="cdSub"></p>
     </div>
     <div class="split" style="margin-top:1rem;">
@@ -366,7 +710,7 @@
   <div class="wrap">
     <div class="shead">
       <button class="back" data-go="find">&larr; Add more classes</button>
-      <h1>Your plan</h1>
+      <h1 tabindex="-1">Your plan</h1>
       <p>Review what you picked, check for conflicts, then register in one step.</p>
       <div class="stepbar"><span class="done">1. Find classes</span><span class="on">2. Review your plan</span><span>3. Register</span><span>4. Done</span></div>
     </div>
@@ -386,12 +730,12 @@
   <div class="wrap">
     <div class="success">
       <div class="check">&#10003;</div>
-      <h2>You are registered for Fall 2026</h2>
+      <h1 tabindex="-1">You are registered for Fall 2026</h1>
       <p>A confirmation went to your PSU email. Here is your schedule and what is next.</p>
     </div>
     <div class="panel">
       <h2>Your Fall schedule</h2>
-      <table class="schedule"><thead><tr><th>Course</th><th>Meets</th><th>Credits</th></tr></thead>
+      <table class="schedule"><thead><tr><th scope="col">Course</th><th scope="col">Meets</th><th scope="col">Credits</th></tr></thead>
         <tbody id="confRows"></tbody>
       </table>
       <div class="totalbar" style="margin-top:1rem;"><span>Registered</span><span id="confCredits">0 credits</span></div>
@@ -415,7 +759,7 @@
   <div class="wrap">
     <div class="shead">
       <button class="back" data-go="home">&larr; Back to home</button>
-      <h1>Your records</h1>
+      <h1 tabindex="-1">Your records</h1>
       <p>Your progress and audit in one place. Everything here is illustrative for the demo.</p>
     </div>
     <div class="split" style="margin-top:1rem;">
@@ -423,15 +767,15 @@
         <h2>Degree progress</h2>
         <div class="creditbar"><i style="width:66%"></i></div>
         <div class="creditmeta"><span>118 of 180 credits</span><span>62 to go</span></div>
-        <div class="kv"><span class="k">Program</span><span class="v">Systems Science, BS</span></div>
+        <div class="kv"><span class="k">Program</span><span class="v" id="recProgram">Graphic Design, BA</span></div>
         <div class="kv"><span class="k">Catalog year</span><span class="v">2024-25</span></div>
         <div class="kv"><span class="k">Standing</span><span class="v" style="color:var(--psu-ink)">Good standing</span></div>
-        <div class="btnrow"><button class="btn ghost" data-go="find">Plan your next classes</button></div>
+        <div class="btnrow"><button class="btn" data-go="graduate">See my full requirements</button></div>
       </div>
       <div class="panel">
         <h2>Your documents</h2>
         <div class="kv"><span class="k">Unofficial transcript</span><span class="v" style="color:var(--mute)">Ready to view</span></div>
-        <div class="kv"><span class="k">DARS degree audit</span><span class="v" style="color:var(--mute)">Run in myPSU</span></div>
+        <div class="kv"><span class="k">DARS degree audit</span><span class="v"><button class="link" data-go="graduate" style="text-decoration:underline;">Run my degree audit</button></span></div>
         <div class="kv"><span class="k">Enrollment verification</span><span class="v" style="color:var(--mute)">Request</span></div>
         <p style="color:var(--mute);font-size:.85rem;margin:1rem 0 0;">DARS is an advising tool, not an official record. You still apply to graduate to have your degree awarded.</p>
       </div>
@@ -444,7 +788,7 @@
   <div class="wrap">
     <div class="shead">
       <button class="back" data-go="home">&larr; Back to home</button>
-      <h1>Money</h1>
+      <h1 tabindex="-1">Money</h1>
       <p>Your balance, aid, and payment options. Illustrative figures for the demo.</p>
     </div>
     <div class="split" style="margin-top:1rem;">
@@ -461,7 +805,7 @@
         <div class="kv"><span class="k">FAFSA</span><span class="v" style="color:var(--psu-ink)">On file</span></div>
         <div class="kv"><span class="k">Aid status</span><span class="v">Accepted</span></div>
         <div class="kv"><span class="k">Disburses</span><span class="v">Jan 8, 2026</span></div>
-        <p style="color:var(--mute);font-size:.85rem;margin:1rem 0 0;">In the real hub, this connects to your student account and the aid portal, so you are not hunting across systems.</p>
+        <p style="color:var(--mute);font-size:.85rem;margin:1rem 0 0;">Changing your degree can affect aid. In the real hub, this connects to your student account and the aid portal, so you are not hunting across systems.</p>
       </div>
     </div>
   </div>
@@ -470,6 +814,7 @@
 </main>
 
 <div class="toast" id="toast"></div>
+<div id="live" class="sr-only" aria-live="polite"></div>
 
 <footer><div class="wrap">
   Concept prototype by Lukas Green, prepared for a conversation with PSU Registration and OAI. Independent design study, not affiliated with or endorsed by Portland State University. All data is illustrative; nothing here registers you for anything.
@@ -477,41 +822,81 @@
 
 <script>
 (function(){
-  var state = { holdCleared:false, cart:[] };
+  var state = { holdCleared:false, cart:[], programChanged:false, portfolioReserved:false, changeAcks:{portfolioSeen:false, aidSeen:false}, bookReason:null, bookedSlot:null };
 
   var COURSES = [
-    { id:'sysc311', code:'SYSC 311', title:'Systems Thinking', credits:4, crn:'41022', meets:'Tue/Thu 6:00-7:50 PM', slot:'TR-eve', instr:'Dr. A. Okafor', seats:'12 of 30 open', format:'In person, evenings', prereq:'None', counts:'Systems Science major (required)', open:true, prereqMet:true, note:'An evening section that fits around a work schedule, and it counts toward your major.' },
+    { id:'sysc311', code:'ART 320', title:'Design Systems Thinking', credits:4, crn:'41022', meets:'Tue/Thu 6:00-7:50 PM', slot:'TR-eve', instr:'Prof. A. Okafor', seats:'12 of 30 open', format:'In person, evenings', prereq:'None', counts:'Upper-division, counts toward the BS', open:true, prereqMet:true, note:'An evening section that fits around a work schedule, and it counts toward your degree.' },
     { id:'wr323', code:'WR 323', title:'Writing as Critical Inquiry', credits:4, crn:'40988', meets:'Online, asynchronous', slot:'online', instr:'Prof. L. Reyes', seats:'8 of 25 open', format:'Online, async', prereq:'WR 121 (you have credit)', counts:'University Writing requirement', open:true, prereqMet:true, note:'Fully online and self-paced. Clears your remaining University Writing requirement.' },
-    { id:'stat243', code:'STAT 243', title:'Introduction to Statistics', credits:4, crn:'41190', meets:'Online, asynchronous', slot:'online', instr:'Dr. M. Chen', seats:'3 of 40 open', format:'Online, async', prereq:'MTH 111 (you have credit)', counts:'Degree requirement (BS)', open:true, prereqMet:true, note:'Nearly full, but still open. Online and async, which pairs well with an evening course.' },
-    { id:'comm220', code:'COMM 220', title:'Public Speaking', credits:4, crn:'41055', meets:'Tue/Thu 6:30-8:20 PM', slot:'TR-eve', instr:'Prof. J. Alvarez', seats:'6 of 30 open', format:'In person, evenings', prereq:'None', counts:'Elective', open:true, prereqMet:true, note:'A popular evening elective. Heads up: it overlaps the SYSC 311 evening slot.' },
-    { id:'sysc411', code:'SYSC 411', title:'Advanced Systems Modeling', credits:4, crn:'41300', meets:'Mon/Wed 2:00-3:50 PM', slot:'MW-pm', instr:'Dr. A. Okafor', seats:'10 of 25 open', format:'In person, daytime', prereq:'MTH 251 (Calculus I)', counts:'Systems Science major', open:true, prereqMet:false, prereqMsg:'You need MTH 251 (Calculus I) first, and it is not on your record yet.', alt:'stat243', note:'Counts toward your major, but it has a prerequisite you have not completed.' },
+    { id:'stat243', code:'STAT 243', title:'Introduction to Statistics', credits:4, crn:'41190', meets:'Online, asynchronous', slot:'online', instr:'Dr. M. Chen', seats:'3 of 40 open', format:'Online, async', prereq:'MTH 111 (you have credit)', counts:'BS degree-type requirement', open:true, prereqMet:true, note:'Nearly full, but still open. Online and async, which pairs well with an evening course.' },
+    { id:'comm220', code:'COMM 220', title:'Public Speaking', credits:4, crn:'41055', meets:'Tue/Thu 6:30-8:20 PM', slot:'TR-eve', instr:'Prof. J. Alvarez', seats:'6 of 30 open', format:'In person, evenings', prereq:'None', counts:'Elective', open:true, prereqMet:true, note:'A popular evening elective. Heads up: it overlaps the ART 320 evening slot.' },
+    { id:'sysc411', code:'ART 415', title:'Advanced Studio', credits:4, crn:'41300', meets:'Mon/Wed 2:00-3:50 PM', slot:'MW-pm', instr:'Prof. A. Okafor', seats:'10 of 25 open', format:'In person, daytime', prereq:'ART 315 (Studio II)', counts:'Graphic Design (BS) major', open:true, prereqMet:false, prereqMsg:'You need ART 315 (Studio II) first, and it is not on your record yet.', alt:'stat243', note:'Counts toward your major, but it has a prerequisite you have not completed.' },
     { id:'psy350', code:'PSY 350', title:'Human Development', credits:4, crn:'40771', meets:'Mon/Wed 10:00-11:50 AM', slot:'MW-am', instr:'Dr. S. Patel', seats:'Full, 5 on waitlist', format:'In person, daytime', prereq:'PSY 204 (you have credit)', counts:'Elective', open:false, prereqMet:true, note:'This one is full and meets during the day. You can join the waitlist, but it may conflict with work hours.' }
+  ];
+
+  var REQS = [
+    { group:'General education and university', status:'part', source:'General baccalaureate requirements', items:[
+      { name:'General Education', status:'ok', text:'Complete.' },
+      { name:'University Writing', status:'ok', text:'Complete. WR 121 and WR 323 satisfy it.' },
+      { name:'Race and Ethnic Studies (RESR)', status:'ok', text:'Complete.' },
+      { name:'Total credits: 180, with 62 upper-division', status:'part', text:'118 of 180 done, 62 to go. Upper-division is on track.' },
+      { name:'GPA 2.0 or higher', status:'ok', text:'You are in good standing.' }
+    ]},
+    { group:'Degree type (BS)', status:'part', source:'BA vs BS degree-type requirements', items:[
+      { name:'BS science and quantitative credits', status:'part', text:'In progress. STAT 243 counts here.' },
+      { name:'Second Language (SLAD)', status:'ok', text:'Met at admission. The BS does not add a two-year language requirement.' }
+    ]},
+    { group:'Major requirements', status:'todo', source:'Graphic Design BS major requirements and the PSU Bulletin', items:[
+      { name:'Graphic Design (BS) major courses', status:'todo', text:'Remaining. Updates after your program change is approved.' }
+    ]}
+  ];
+
+  var DAYS = [
+    { key:'wed', label:'Wed', sub:'Nov 5', slots:[ {t:'7:30 AM', tag:'Early'}, {t:'12:00 PM'}, {t:'5:30 PM', tag:'Evening'} ] },
+    { key:'thu', label:'Thu', sub:'Nov 6', slots:[ {t:'8:00 AM', tag:'Early'}, {t:'4:00 PM', tag:'Evening'}, {t:'6:00 PM', tag:'Evening'} ] },
+    { key:'fri', label:'Fri', sub:'Nov 7', slots:[] },
+    { key:'mon', label:'Mon', sub:'Nov 10', slots:[ {t:'9:00 AM'}, {t:'1:00 PM'}, {t:'5:00 PM', tag:'Evening'} ] }
   ];
 
   // ---- helpers ----
   function $(s){ return document.querySelector(s); }
-  function toast(msg){ var t=$('#toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(t._t); t._t=setTimeout(function(){t.classList.remove('show');},1900); }
+  function toast(msg){ var t=$('#toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(t._t); t._t=setTimeout(function(){t.classList.remove('show');},2000); }
+  function announce(msg){ var l=$('#live'); if(l) l.textContent=msg; }
   function inCart(id){ return state.cart.indexOf(id)>-1; }
   function courseById(id){ for(var i=0;i<COURSES.length;i++){ if(COURSES[i].id===id) return COURSES[i]; } return null; }
   function totalCredits(){ var c=0; state.cart.forEach(function(id){ var x=courseById(id); if(x) c+=x.credits; }); return c; }
 
   // ---- navigation ----
   function go(name){
+    if(location.hash!=='#'+name){ try{ history.replaceState(null,'','#'+name); }catch(e){} }
     document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
-    var el=$('#screen-'+name); if(el){ el.classList.add('active'); }
+    var el=$('#screen-'+name); if(!el){ el=$('#screen-home'); name='home'; }
+    el.classList.add('active');
     document.querySelectorAll('.navlinks a').forEach(function(a){ a.classList.toggle('on', a.getAttribute('data-go')===name); });
-    window.scrollTo(0,0);
     if(name==='home') renderHome();
-    if(name==='find') renderCourses();
-    if(name==='plan') renderPlan();
-    if(name==='confirm') renderConfirm();
+    else if(name==='find') renderCourses();
+    else if(name==='plan') renderPlan();
+    else if(name==='confirm') renderConfirm();
+    else if(name==='records') renderRecords();
+    else if(name==='change-2') renderChange2();
+    else if(name==='portfolio') renderPortfolio();
+    else if(name==='change-4') renderChange4();
+    else if(name==='change-5') renderChange5();
+    else if(name==='graduate') renderGraduate();
+    else if(name==='book') renderBook();
+    else if(name==='booked') renderBooked();
+    window.scrollTo(0,0);
+    var h=el.querySelector('h1'); if(h){ h.setAttribute('tabindex','-1'); try{ h.focus({preventScroll:true}); }catch(e){ h.focus(); } announce(h.textContent); }
   }
   document.addEventListener('click', function(e){
-    var g=e.target.closest('[data-go]'); if(g){ go(g.getAttribute('data-go')); return; }
+    var g=e.target.closest('[data-go]');
+    if(g){ var rs=g.getAttribute('data-reason'); if(rs) state.bookReason=rs; var f=g.getAttribute('data-filter'); if(f) state._findFilter=f; go(g.getAttribute('data-go')); return; }
   });
 
   // ---- home ----
   function renderHome(){
+    $('#recProgram'); // noop guard
+    var prog = state.programChanged ? 'Graphic Design, BS (change pending)' : 'Graphic Design, BA';
+    if($('#homeProgram')) $('#homeProgram').textContent = prog;
     var slot=$('#holdSlot');
     if(state.holdCleared){
       slot.innerHTML='<div class="cleared"><p class="h"><span class="dot">&#10003;</span> Your hold is cleared. You can register.</p><p>Advising is done. When your window opens Nov 12 you are ready, or plan your classes now so it is one tap.</p></div>';
@@ -524,9 +909,12 @@
       $('#taskRegister').classList.add('locked');
       $('#holdsKv').textContent='1 (advising)'; $('#holdsKv').style.color='var(--todo)';
     }
+    var extra='';
+    if(state.programChanged) extra+='<div class="kv"><span class="k">Program change</span><span class="v" style="color:var(--warn)">Pending review</span></div>';
+    if(state.portfolioReserved) extra+='<div class="kv"><span class="k">Portfolio review</span><span class="v" style="color:var(--psu-ink)">Reserved for March 2027</span></div>';
+    $('#homeExtra').innerHTML=extra;
     var c=totalCredits();
     $('#pillCredits').textContent=c+' credits planned';
-    $('#plannedKv').textContent=c+' credits'+(state.cart.length?' ('+state.cart.length+' courses)':'');
     $('#cartCount').textContent=state.cart.length;
   }
 
@@ -537,20 +925,173 @@
     }
   });
 
-  // ---- hold flow ----
-  $('#bookBtn').addEventListener('click', function(){
-    $('#bookedMsg').style.display='block';
-    $('#clearRow').style.display='flex';
-    this.disabled=true;
+  // ---- records ----
+  function renderRecords(){
+    $('#recProgram').textContent = state.programChanged ? 'Graphic Design, BS (change pending)' : 'Graphic Design, BA';
+  }
+
+  // ---- change wizard ----
+  function renderChange2(){
+    var box=$('#portfolioCallout');
+    if(state.portfolioReserved){
+      box.innerHTML='<div class="callout-gold done"><h3>&#10003; Portfolio review reserved</h3><p>You are on the list for the next Graphic Design portfolio review, March 2 to March 20, 2027. We will remind you before the window.</p></div>';
+    } else {
+      box.innerHTML='<div class="callout-gold"><h3>Portfolio review, held once a year</h3>'+
+        '<p>Graphic Design requires a portfolio review. It runs only once a year. If you miss the window, the next one is a full year away. This is the rule students miss most, so we put it first.</p>'+
+        '<p><b>Status:</b> not yet scheduled. The next window opens March 2, 2027.</p>'+
+        '<div class="btnrow"><button class="btn ghost" data-go="portfolio">See the portfolio review dates</button><button class="btn" data-go="book" data-reason="portfolio">Reserve my portfolio review</button></div></div>';
+    }
+    var chk=$('#ackPortfolio'); chk.checked=state.changeAcks.portfolioSeen; $('#ackErr').style.display='none';
+  }
+  $('#ackPortfolio').addEventListener('change', function(){ state.changeAcks.portfolioSeen=this.checked; if(this.checked) $('#ackErr').style.display='none'; });
+  $('#change2Continue').addEventListener('click', function(){
+    if(!state.changeAcks.portfolioSeen){ $('#ackErr').style.display='block'; $('#ackPortfolio').focus(); return; }
+    go('change-3');
   });
-  $('#clearBtn').addEventListener('click', function(){
-    state.holdCleared=true;
-    toast('Advising hold cleared');
-    go('home');
+
+  function renderPortfolio(){
+    var s=$('#portStatus');
+    if(state.portfolioReserved){ s.innerHTML='<span class="dot ok"></span><span class="name">Reserved for the next review</span><span class="state">March 2027</span>'; }
+    else { s.innerHTML='<span class="dot todo"></span><span class="name">Not yet on the list for the next review</span><span class="state">Action needed</span>'; }
+  }
+
+  function renderChange4(){
+    $('#ack1').checked=state.changeAcks.reviewSeen||false;
+    $('#ack2').checked=state.changeAcks.aidSeen;
+    updateChange4Btn();
+    $('#review-portfolio').textContent = state.portfolioReserved ? 'Portfolio review reserved for March 2027' : 'Portfolio review, March 2027';
+  }
+  function updateChange4Btn(){
+    var ok = $('#ack1').checked && $('#ack2').checked;
+    $('#change4Submit').disabled=!ok;
+    if(ok) $('#ack4Err').style.display='none';
+  }
+  $('#ack1').addEventListener('change', function(){ state.changeAcks.reviewSeen=this.checked; updateChange4Btn(); });
+  $('#ack2').addEventListener('change', function(){ state.changeAcks.aidSeen=this.checked; updateChange4Btn(); });
+  $('#change4Submit').addEventListener('click', function(){
+    if(this.disabled){ $('#ack4Err').style.display='block'; return; }
+    if(window.confirm('You are changing from a BA to a BS. Ready to submit?')){
+      state.programChanged=true;
+      toast('Program change submitted');
+      go('change-5');
+    }
   });
+
+  function renderChange5(){
+    $('#change5-portfolio').innerHTML = state.portfolioReserved
+      ? '<b>Your portfolio review is reserved for March 2027.</b> We will remind you before the window.'
+      : '<b>Reserve your portfolio review for March 2027.</b> It is held once a year, so put it on your calendar.';
+    var box=$('#change5Actions'); var html='';
+    html+='<button class="btn" data-go="graduate">See what I need to graduate now</button>';
+    if(!state.holdCleared) html+='<button class="btn ghost" data-go="hold">Clear your advising hold to register</button>';
+    else html+='<button class="btn ghost" data-go="find">Plan classes for Fall</button>';
+    html+='<button class="btn ghost" data-go="home">Back to my hub</button>';
+    box.innerHTML=html;
+  }
+
+  // ---- graduate / requirements ----
+  function renderGraduate(){
+    var wrap=$('#reqGroups'); wrap.innerHTML='';
+    REQS.forEach(function(gp, gi){
+      var label=gp.group, status=gp.status;
+      if(gp.group==='Major requirements' && state.programChanged){ label='Major requirements (Graphic Design, BS)'; }
+      var stTxt = status==='ok'?'Complete':(status==='part'?'In progress':'Still needed');
+      var items='';
+      gp.items.forEach(function(it){
+        var d = it.status==='ok'?'ok':(it.status==='part'?'part':(it.status==='todo'?'todo':'check'));
+        var st = it.status==='ok'?'Done':(it.status==='part'?'In progress':(it.status==='todo'?'Still needed':'Check'));
+        var extra = (gp.group==='Major requirements' && state.programChanged) ? ' Updating while your change is pending.' : '';
+        items+='<div class="req"><span class="dot '+d+'"></span><span class="name">'+it.name+'</span><span class="state">'+st+'</span></div>'+
+               '<p style="color:var(--soft);font-size:.88rem;margin:.1rem 0 .5rem 1.6rem;">'+it.text+extra+'</p>';
+      });
+      wrap.innerHTML+='<div class="acc" id="acc-'+gi+'">'+
+        '<button class="acch" data-acc="'+gi+'" aria-expanded="'+(gi===0?'true':'false')+'">'+label+' <span class="st '+status+'">'+stTxt+'</span></button>'+
+        '<div class="body2">'+items+'<p style="color:var(--mute);font-size:.82rem;margin:.4rem 0 0;">Source: '+gp.source+'.</p><div class="btnrow" style="margin-top:.6rem;"><button class="btn ghost" data-go="find" data-filter="degree">Find a class for this</button></div></div>'+
+      '</div>';
+    });
+    // open first by default
+    var first=$('#acc-0'); if(first) first.classList.add('open');
+  }
+  document.addEventListener('click', function(e){
+    var a=e.target.closest('[data-acc]');
+    if(a){ var acc=a.closest('.acc'); var open=acc.classList.toggle('open'); a.setAttribute('aria-expanded', open?'true':'false'); }
+  });
+
+  // ---- booking ----
+  var chosenDay=null, chosenSlot=null;
+  function reasonText(r){
+    if(r==='portfolio') return 'Portfolio review for Graphic Design';
+    if(r==='advising') return 'Advising hold check-in';
+    if(r==='degree') return 'Advice about changing my degree';
+    return 'A question for the Registrar';
+  }
+  function renderBook(){
+    chosenDay=null; chosenSlot=null;
+    $('#bookReasonLabel').textContent=reasonText(state.bookReason);
+    $('#bookPortfolioNote').style.display = state.bookReason==='portfolio' ? 'inline-flex' : 'none';
+    var dc=$('#dayChips'); dc.innerHTML='';
+    DAYS.forEach(function(d){
+      dc.innerHTML+='<button class="daychip" data-day="'+d.key+'">'+d.label+'<small>'+d.sub+'</small></button>';
+    });
+    $('#slotList').innerHTML='<p style="color:var(--mute);font-size:.9rem;">Pick a day to see open times.</p>';
+    $('#bookConfirm').disabled=true;
+  }
+  document.addEventListener('click', function(e){
+    var dch=e.target.closest('[data-day]');
+    if(dch){
+      document.querySelectorAll('#dayChips .daychip').forEach(function(x){ x.classList.remove('on'); });
+      dch.classList.add('on'); chosenDay=dch.getAttribute('data-day'); chosenSlot=null; $('#bookConfirm').disabled=true;
+      var day=null; DAYS.forEach(function(d){ if(d.key===chosenDay) day=d; });
+      var sl=$('#slotList');
+      if(!day.slots.length){
+        sl.innerHTML='<p style="color:var(--warn);font-size:.92rem;">No open times that day. The next open day is Monday, Nov 10. <button class="link" data-day="mon" style="text-decoration:underline;">Jump to Monday</button> or ask for a callback.</p>';
+        return;
+      }
+      var h='';
+      day.slots.forEach(function(s,i){ h+='<button class="slot" data-slot="'+i+'"><span>'+s.t+'</span>'+(s.tag?'<span class="tag">'+s.tag+'</span>':'<span></span>')+'</button>'; });
+      sl.innerHTML=h;
+      return;
+    }
+    var slb=e.target.closest('[data-slot]');
+    if(slb){
+      document.querySelectorAll('#slotList .slot').forEach(function(x){ x.classList.remove('on'); });
+      slb.classList.add('on'); chosenSlot=slb.querySelector('span').textContent; $('#bookConfirm').disabled=false;
+      return;
+    }
+  });
+  $('#bookConfirm').addEventListener('click', function(){
+    if(!chosenDay||!chosenSlot){ return; }
+    var day=null; DAYS.forEach(function(d){ if(d.key===chosenDay) day=d; });
+    var mod='Phone'; document.querySelectorAll('input[name="modality"]').forEach(function(r){ if(r.checked) mod=r.value; });
+    state.bookedSlot={ day:day.label+', '+day.sub, time:chosenSlot, how:mod, reason:state.bookReason };
+    go('booked');
+  });
+
+  function renderBooked(){
+    var b=state.bookedSlot||{day:'Thu, Nov 6', time:'4:00 PM', how:'Zoom', reason:state.bookReason};
+    $('#bookedReason').textContent=reasonText(b.reason);
+    $('#bookedWhen').textContent=b.day+' at '+b.time+', Pacific';
+    $('#bookedHow').textContent=b.how+(b.how==='In person'?', on campus':', no campus trip');
+    var st=$('#bookedStatus'), act=$('#bookedActions'), html='', a='';
+    if(b.reason==='advising'){
+      html='<p style="margin:0;color:var(--soft);font-size:.94rem;"><b style="color:var(--ink);">Your registration hold lifts once this check-in is done.</b> For this walkthrough, mark the meeting as done to see the hold clear.</p>';
+      a='<button class="btn" id="markMet">Mark advising as met and clear the hold</button><button class="btn ghost" data-go="home">Back to home</button>';
+    } else if(b.reason==='portfolio'){
+      html='<p style="margin:0;color:var(--soft);font-size:.94rem;">You are reserved for the next portfolio review. Back to your degree change whenever you are ready.</p>';
+      a='<button class="btn" id="portReserved">Back to finish my degree change</button><button class="btn ghost" data-go="home">Back to home</button>';
+    } else {
+      html='<p style="margin:0;color:var(--soft);font-size:.94rem;">You are all set. We will see you then.</p>';
+      a='<button class="btn" data-go="home">Back to home</button>';
+    }
+    st.innerHTML=html; act.innerHTML=a;
+    var mm=$('#markMet'); if(mm) mm.onclick=function(){ state.holdCleared=true; toast('Advising hold cleared'); go('home'); };
+    var pr=$('#portReserved'); if(pr) pr.onclick=function(){ state.portfolioReserved=true; toast('Portfolio review reserved'); go('change-2'); };
+  }
+  $('#bookedCal').addEventListener('click', function(){ toast('Added to your calendar'); });
 
   // ---- find classes ----
   function renderCourses(){
+    if(state._findFilter==='degree'){ document.querySelectorAll('#findFilters .f').forEach(function(f,i){ f.classList.toggle('on', f.textContent.indexOf('Counts')>-1); }); state._findFilter=null; }
     var list=$('#courseList'); list.innerHTML='';
     COURSES.forEach(function(c){
       var added=inCart(c.id);
@@ -578,6 +1119,8 @@
     if(a){ var id=a.getAttribute('data-add'); if(!inCart(id)){ state.cart.push(id); var c=courseById(id); toast((c.open?'Added ':'Added to waitlist: ')+c.code); } renderCourses(); $('#cartCount').textContent=state.cart.length; return; }
     var d=e.target.closest('[data-detail]');
     if(d){ openCourse(d.getAttribute('data-detail')); return; }
+    var ff=e.target.closest('#findFilters .f');
+    if(ff){ document.querySelectorAll('#findFilters .f').forEach(function(x){x.classList.remove('on');}); ff.classList.add('on'); return; }
   });
   function showPrereq(id){
     var c=courseById(id); if(!c) return;
@@ -629,7 +1172,6 @@
     $('#planTotal').style.display='flex';
     $('#planCredits').textContent=totalCredits()+' credits';
     $('#planActions').style.display='flex';
-    // time-conflict detection (two courses sharing a non-online slot)
     var conflict=null;
     for(var i=0;i<state.cart.length && !conflict;i++){
       for(var j=i+1;j<state.cart.length;j++){
@@ -673,13 +1215,22 @@
     $('#confCredits').textContent=totalCredits()+' credits';
   }
   $('#restartBtn').addEventListener('click', function(){
-    state.holdCleared=false; state.cart=[];
-    $('#bookBtn').disabled=false; $('#bookedMsg').style.display='none'; $('#clearRow').style.display='none';
+    state.holdCleared=false; state.cart=[]; state.programChanged=false; state.portfolioReserved=false;
+    state.changeAcks={portfolioSeen:false, aidSeen:false}; state.bookReason=null; state.bookedSlot=null;
     go('home'); toast('Demo reset');
   });
 
-  // init
-  renderHome();
+  // ---- init + hash routing ----
+  function fromHash(){
+    var h=(location.hash||'').replace('#','');
+    if(!h){ go('home'); return; }
+    if(h==='book-advising'){ state.bookReason='advising'; go('book'); return; }
+    if(h==='book-portfolio'){ state.bookReason='portfolio'; go('book'); return; }
+    var known=['home','search','change-1','change-2','change-3','change-4','change-5','portfolio','graduate','grad-source','hold','book','booked','find','course','plan','confirm','records','money'];
+    if(known.indexOf(h)>-1){ go(h); } else { go('home'); }
+  }
+  window.addEventListener('hashchange', fromHash);
+  fromHash();
 })();
 </script>
 
