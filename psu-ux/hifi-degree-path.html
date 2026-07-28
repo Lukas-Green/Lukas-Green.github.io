@@ -92,6 +92,8 @@
   .callout li{margin:.3rem 0;}
 
   footer{border-top:1px solid var(--line);padding:1.4rem 0 2.5rem;color:var(--mute);font-size:.84rem;}
+  .toast{position:fixed;left:50%;bottom:1.4rem;transform:translateX(-50%) translateY(2rem);background:var(--psu-ink);color:#eef3e6;padding:.7rem 1.2rem;border-radius:10px;font-weight:600;font-size:.92rem;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:60;box-shadow:0 6px 20px rgba(0,0,0,.25);max-width:90vw;text-align:center;}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 </style>
 </head>
 <body>
@@ -197,10 +199,9 @@
   <div class="callout">
     <h2>What this one page replaces</h2>
     <ul>
-      <li><b>Finding 1:</b> the two overlapping major-change pages become one flow, and the portfolio rule can no longer hide on the page you did not land on.</li>
-      <li><b>Finding 2:</b> a plain-language search that understands "change my BA to a BS," instead of "your search yielded no results."</li>
-      <li><b>Finding 3:</b> the six scattered requirement sources become one view, fed by your DARS and transcript and pinned to your catalog year.</li>
-      <li><b>Finding 4:</b> a short, readable nav and a strong search bar instead of a menu with thirty-five links in small type.</li>
+      <li><b>Finding 1:</b> the two official change-major pages, the Registrar's and Advising's, become one flow, so the portfolio rule can no longer be missing from the page where you actually act.</li>
+      <li><b>Finding 2:</b> the six scattered requirement sources become one view, fed by your DARS and transcript and pinned to your catalog year.</li>
+      <li><b>Finding 3:</b> a short, readable nav and a strong search bar instead of a menu with dozens of links.</li>
     </ul>
   </div>
 
@@ -209,6 +210,23 @@
 <footer><div class="wrap">
   Concept prototype by Lukas Green, prepared for a conversation with Kari. Independent design study, not affiliated with or endorsed by Portland State University. Student progress shown is illustrative, not a real record.
 </div></footer>
+
+<div class="toast" id="toast"></div>
+<script>
+(function(){
+  var t=document.getElementById('toast');
+  function toast(msg){ t.textContent=msg; t.classList.add('show'); clearTimeout(t._t); t._t=setTimeout(function(){ t.classList.remove('show'); },2600); }
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href="#"]');
+    if(a){ e.preventDefault(); toast('Concept prototype: "'+a.textContent.trim()+'" is illustrative here.'); return; }
+    var btn=e.target.closest('button');
+    if(btn){ e.preventDefault(); toast('Concept: a plain-language search that returns the single answer shown below.'); return; }
+  });
+  document.querySelectorAll('input[aria-label]').forEach(function(inp){
+    inp.addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); toast('Concept: this search understands plain language and returns one answer.'); } });
+  });
+})();
+</script>
 
 </body>
 </html>
