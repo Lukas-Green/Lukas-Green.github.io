@@ -309,6 +309,14 @@
   .ilink { color: var(--green-lite); }
   .btn--gold { background: var(--red); color: #fff; }
   :focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+  /* ---- What AIO is (program overview) ---- */
+  .about { padding-top: clamp(1.6rem, 4vw, 2.6rem); }
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.4rem, 3vw, 2.6rem); margin-top: 2.4rem; }
+  @media (max-width: 720px) { .pillars { grid-template-columns: 1fr; } }
+  .pillar { border-top: 2px solid var(--rule); padding-top: .8rem; }
+  .pillar__n { font-family: var(--sans); font-weight: 800; font-size: 1rem; letter-spacing: .08em; }
+  .pillar h3 { margin: .5rem 0 .45rem; font-size: clamp(1.05rem, 1.5vw, 1.28rem); }
+  .pillar p { font-family: var(--sans); font-size: .92rem; color: var(--ink-soft); line-height: 1.55; }
 </style>
 </head>
 <body>
@@ -328,6 +336,7 @@
       <span>Art Inside Out</span>
     </a>
     <nav class="mast__nav" aria-label="Primary">
+      <a href="#program">The Program</a>
       <a href="#method">The Method</a>
       <a href="#lessons">The Lessons</a>
       <a href="#shop">The Book</a>
@@ -384,6 +393,38 @@
     </aside>
 
     <div class="rule"></div>
+
+    <section class="about col reveal" id="program">
+      <p class="marker">The program</p>
+      <h2>What Art Inside Out is.</h2>
+      <p class="lede" style="margin-top:.9rem; max-width:54ch">
+        An evidence-based program with a proven concept: art paired with positive, motivational
+        conversation, used as therapy. It relieves unhealthy stress and helps people work through
+        a hard situation or old pain. Built first as a prison program, it now works for anyone.
+        Fun, effective, and no experience needed.
+      </p>
+      <p class="pull" style="margin-top:1.8rem; max-width:34ch">
+        Creating art takes real concentration. You let go of the negative to make room for the good,
+        and that is when a <span class="g">positive dialogue</span> can land.
+      </p>
+      <div class="pillars">
+        <div class="pillar">
+          <span class="pillar__n" style="color:var(--red-lite)">01</span>
+          <h3>Make real art</h3>
+          <p>Draw, paint, and finish an original piece, and learn how an artist actually thinks.</p>
+        </div>
+        <div class="pillar">
+          <span class="pillar__n" style="color:var(--blue)">02</span>
+          <h3>Connect life to art</h3>
+          <p>Making mistakes and fixing them is part of both. The work on the page mirrors the living.</p>
+        </div>
+        <div class="pillar">
+          <span class="pillar__n" style="color:var(--green-lite)">03</span>
+          <h3>Talk it through</h3>
+          <p>Every class holds an honest, positive conversation: kindness, forgiveness, patience, trust.</p>
+        </div>
+      </div>
+    </section>
 
     <section class="method col reveal" id="method">
       <p class="marker">The method</p>
