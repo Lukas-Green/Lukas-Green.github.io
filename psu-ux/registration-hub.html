@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Concept: a registration hub students can actually finish on their phone</title>
+<style>
+  :root{
+    --ink:#1b1e19; --soft:#414636; --mute:#6a7060; --line:#e3e6dc;
+    --bg:#f5f6f0; --card:#ffffff;
+    --psu:#2e4a1f; --psu2:#3f6a24; --psu-tint:#eaf0e0; --psu-ink:#294417;
+    --gold:#c9a227; --blue:#2f5a6a; --blue-tint:#e6eef2;
+    --ok:#3f6a24; --warn:#8a6d1f; --todo:#8a2b20; --todo-tint:#f6e6e3;
+    --radius:12px;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.55;font-size:18px;}
+  .wrap{max-width:64rem;margin:0 auto;padding:0 1.25rem;}
+  a{color:var(--psu2);}
+  .concept-banner{background:var(--gold);color:#2a2408;font-size:.82rem;text-align:center;padding:.5rem 1rem;font-weight:600;}
+
+  /* topbar / nav (consistent with the other concept pages) */
+  .topbar{background:var(--psu);color:#eef3e6;}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;padding:.5rem 1.25rem;font-size:.82rem;}
+  .topbar a{color:#dfe8d3;text-decoration:none;margin-left:1rem;}
+  .nav{background:#fff;border-bottom:1px solid var(--line);}
+  .nav .wrap{display:flex;align-items:center;gap:1.2rem;padding:.9rem 1.25rem;flex-wrap:wrap;}
+  .brand{display:flex;align-items:center;gap:.6rem;font-weight:700;color:var(--psu-ink);font-size:1.15rem;}
+  .brand .mark{width:2rem;height:2rem;border-radius:6px;background:var(--psu);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;}
+  .navlinks{display:flex;gap:1.1rem;margin-left:.5rem;flex-wrap:wrap;}
+  .navlinks a{color:var(--ink);text-decoration:none;font-weight:600;font-size:1rem;}
+  .navlinks a[aria-current]{color:var(--psu2);border-bottom:2px solid var(--psu2);padding-bottom:.15rem;}
+
+  /* hero */
+  .hero{background:linear-gradient(160deg,var(--psu) 0%,var(--psu2) 100%);color:#fff;padding:2.2rem 0 2.4rem;}
+  .hero .greet{font-size:.9rem;color:#cfe0bd;margin:0 0 .3rem;letter-spacing:.02em;}
+  .hero h1{font-size:2rem;line-height:1.12;margin:0 0 .5rem;max-width:24ch;}
+  .hero p{font-size:1.05rem;color:#e4eeda;margin:0 0 1.2rem;max-width:50ch;}
+  .statuspills{display:flex;gap:.6rem;flex-wrap:wrap;}
+  .pill{display:inline-flex;align-items:center;gap:.45rem;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);color:#eef3e6;border-radius:99px;padding:.35rem .8rem;font-size:.9rem;font-weight:600;}
+  .pill .g{width:.6rem;height:.6rem;border-radius:50%;background:#8fd66a;}
+  .pill .a{width:.6rem;height:.6rem;border-radius:50%;background:var(--gold);}
+
+  main{padding:1.6rem 0 3rem;}
+
+  /* search-first entry */
+  .bigsearch{display:flex;gap:.5rem;max-width:44rem;background:#fff;border:1px solid var(--line);border-radius:12px;padding:.5rem;box-shadow:0 4px 18px rgba(0,0,0,.06);margin:-3.2rem auto 1.6rem;position:relative;}
+  .bigsearch input{flex:1;border:none;font:inherit;font-size:1.1rem;padding:.7rem .8rem;color:var(--ink);border-radius:8px;}
+  .bigsearch input:focus{outline:2px solid var(--gold);}
+  .bigsearch button{background:var(--psu);color:#fff;border:none;font:inherit;font-size:1.02rem;font-weight:700;padding:0 1.3rem;border-radius:8px;cursor:pointer;}
+
+  /* the blocker card comes FIRST: surface holds before anything else */
+  .blocker{background:var(--todo-tint);border:1px solid #e3b5ad;border-left:6px solid var(--todo);border-radius:var(--radius);padding:1.2rem 1.4rem;margin-bottom:1.4rem;}
+  .blocker .h{display:flex;align-items:center;gap:.6rem;font-weight:700;color:var(--todo);font-size:1.1rem;margin:0 0 .3rem;}
+  .blocker .h .dot{width:1.5rem;height:1.5rem;border-radius:50%;background:var(--todo);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;}
+  .blocker p{margin:.2rem 0 .8rem;color:var(--soft);font-size:1rem;}
+  .blocker p b{color:var(--ink);}
+  .blocker .cta{display:inline-block;background:var(--todo);color:#fff;text-decoration:none;font-weight:700;padding:.6rem 1.15rem;border-radius:9px;}
+
+  .sectionhead{display:flex;align-items:baseline;justify-content:space-between;margin:1.8rem 0 .8rem;}
+  .sectionhead h2{font-size:1.25rem;margin:0;color:var(--psu-ink);}
+  .sectionhead .link{font-size:.9rem;}
+
+  /* task cards */
+  .tasks{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+  @media(max-width:820px){.tasks{grid-template-columns:1fr 1fr;}}
+  @media(max-width:520px){.tasks{grid-template-columns:1fr;}}
+  .task{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.1rem 1.2rem;text-decoration:none;color:var(--ink);display:block;transition:border-color .15s,transform .15s;}
+  .task:hover{border-color:var(--psu2);transform:translateY(-2px);}
+  .task .ic{width:2.4rem;height:2.4rem;border-radius:10px;background:var(--psu-tint);color:var(--psu-ink);display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:.6rem;}
+  .task h3{margin:0 0 .2rem;font-size:1.05rem;color:var(--psu-ink);}
+  .task p{margin:0;color:var(--soft);font-size:.9rem;}
+  .task .badge{display:inline-block;margin-top:.55rem;font-size:.76rem;font-weight:700;background:var(--gold);color:#2a2408;border-radius:99px;padding:.12rem .55rem;}
+
+  /* term at a glance + deadlines: two columns */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:.4rem;}
+  @media(max-width:820px){.split{grid-template-columns:1fr;}}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem 1.4rem;}
+  .panel h2{font-size:1.15rem;margin:0 0 .7rem;color:var(--psu-ink);}
+
+  .creditbar{height:.7rem;background:#e7eae0;border-radius:99px;overflow:hidden;margin:.4rem 0 .3rem;}
+  .creditbar i{display:block;height:100%;background:var(--psu2);}
+  .creditmeta{display:flex;justify-content:space-between;font-size:.88rem;color:var(--soft);margin-bottom:1rem;}
+  .kv{display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid var(--line);font-size:.96rem;}
+  .kv:last-child{border-bottom:none;}
+  .kv .k{color:var(--mute);}
+  .kv .v{font-weight:600;}
+
+  /* deadlines timeline */
+  .timeline{list-style:none;margin:0;padding:0;}
+  .timeline li{display:flex;gap:.8rem;padding:.6rem 0;border-bottom:1px solid var(--line);}
+  .timeline li:last-child{border-bottom:none;}
+  .timeline .date{flex:0 0 5.2rem;font-weight:700;color:var(--psu-ink);font-size:.9rem;}
+  .timeline .what{font-size:.95rem;color:var(--soft);}
+  .timeline .soon{color:var(--todo);font-weight:600;}
+
+  /* design-decisions callout (shows the thinking) */
+  .why{background:var(--blue-tint);border:1px solid #cfe0e6;border-radius:var(--radius);padding:1.3rem 1.5rem;margin-top:1.8rem;}
+  .why h2{color:var(--blue);margin:0 0 .5rem;font-size:1.15rem;}
+  .why ul{margin:.3rem 0 0;padding-left:1.2rem;color:var(--soft);}
+  .why li{margin:.4rem 0;}
+  .why li b{color:var(--ink);}
+
+  .mobilenote{display:flex;align-items:center;gap:.7rem;background:var(--psu-tint);border:1px solid #cdd9bd;border-radius:var(--radius);padding:.9rem 1.2rem;margin-top:1.2rem;font-size:.95rem;color:var(--psu-ink);}
+  .mobilenote .ic{font-size:1.3rem;}
+
+  footer{border-top:1px solid var(--line);padding:1.4rem 0 2.5rem;color:var(--mute);font-size:.84rem;}
+</style>
+</head>
+<body>
+
+<div class="concept-banner">CONCEPT PROTOTYPE by Lukas Green · not affiliated with or endorsed by Portland State University · illustrative student data, not real records</div>
+
+<div class="topbar"><div class="wrap"><span>Portland State University</span><span><a href="#">myPSU</a><a href="#">Help</a><a href="#">Sign out</a></span></div></div>
+
+<div class="nav"><div class="wrap">
+  <div class="brand"><span class="mark">P</span> Registration</div>
+  <nav class="navlinks">
+    <a href="#" aria-current="page">Home</a>
+    <a href="#">Classes</a>
+    <a href="#">My plan</a>
+    <a href="#">Records</a>
+    <a href="#">Money</a>
+  </nav>
+</div></div>
+
+<section class="hero"><div class="wrap">
+  <p class="greet">Signed in as Renée A. · Fall 2026</p>
+  <h1>Your registration, all in one place.</h1>
+  <p>What needs doing, what is coming up, and one clear next step. Built to finish on a phone between shifts.</p>
+  <div class="statuspills">
+    <span class="pill"><span class="a"></span> Registration opens for you: Nov 12, 8:00 AM</span>
+    <span class="pill"><span class="g"></span> 9 credits planned</span>
+  </div>
+</div></section>
+
+<main><div class="wrap">
+
+  <!-- search-first, plain language -->
+  <div class="bigsearch">
+    <input value="what do I need to do to register?" aria-label="What do you need to do?">
+    <button>Search</button>
+  </div>
+
+  <!-- BLOCKERS FIRST: the #1 registration pain is a hold you find out about too late -->
+  <div class="blocker">
+    <p class="h"><span class="dot">1</span> One thing is blocking your registration</p>
+    <p><b>Advising hold.</b> You need to meet with your adviser before you can register for Fall. This is the only thing standing between you and signing up. It takes about 20 minutes and can be done by phone or Zoom.</p>
+    <a class="cta" href="#">Book your advising meeting &rarr;</a>
+  </div>
+
+  <!-- TASK CARDS: verbs, plain language, task-based not system-based -->
+  <div class="sectionhead"><h2>What do you want to do?</h2><a class="link" href="#">See all tasks</a></div>
+  <div class="tasks">
+    <a class="task" href="#">
+      <div class="ic">&#128218;</div>
+      <h3>Register for classes</h3>
+      <p>Add, drop, or swap sections for Fall 2026.</p>
+      <span class="badge">Opens Nov 12</span>
+    </a>
+    <a class="task" href="#">
+      <div class="ic">&#128203;</div>
+      <h3>Plan my schedule</h3>
+      <p>Build a plan now so registration day is one click.</p>
+    </a>
+    <a class="task" href="hifi-degree-path.html">
+      <div class="ic">&#127891;</div>
+      <h3>What I need to graduate</h3>
+      <p>Your remaining requirements, from your own record.</p>
+    </a>
+    <a class="task" href="#">
+      <div class="ic">&#128179;</div>
+      <h3>Pay &amp; financial aid</h3>
+      <p>Balance, aid status, and payment plans.</p>
+    </a>
+    <a class="task" href="#">
+      <div class="ic">&#128100;</div>
+      <h3>Change or declare a major</h3>
+      <p>Start a program change and see the rules first.</p>
+    </a>
+    <a class="task" href="#">
+      <div class="ic">&#128222;</div>
+      <h3>Get a person</h3>
+      <p>Advising, the Registrar, or the help desk, by phone or chat.</p>
+    </a>
+  </div>
+
+  <!-- TERM AT A GLANCE + DEADLINES -->
+  <div class="split">
+    <div class="panel">
+      <h2>Your term at a glance</h2>
+      <div class="creditbar"><i style="width:66%"></i></div>
+      <div class="creditmeta"><span>118 of 180 credits toward your degree</span><span>62 to go</span></div>
+      <div class="kv"><span class="k">Catalog year</span><span class="v">2024-25</span></div>
+      <div class="kv"><span class="k">Registration window</span><span class="v">Opens Nov 12, 8:00 AM</span></div>
+      <div class="kv"><span class="k">Planned this term</span><span class="v">9 credits (3 courses)</span></div>
+      <div class="kv"><span class="k">Holds</span><span class="v" style="color:var(--todo)">1 (advising)</span></div>
+    </div>
+
+    <div class="panel">
+      <h2>Dates that matter</h2>
+      <ul class="timeline">
+        <li><span class="date soon">Nov 12</span><span class="what">Your registration window opens</span></li>
+        <li><span class="date">Nov 20</span><span class="what">Priority deadline for the classes you planned</span></li>
+        <li><span class="date">Jan 5</span><span class="what">Fall term begins</span></li>
+        <li><span class="date">Jan 16</span><span class="what">Last day to add or drop without a W</span></li>
+        <li><span class="date">Jan 20</span><span class="what">Tuition due</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="mobilenote"><span class="ic">&#128241;</span> <span><b>Every task above works on a phone.</b> No pinch-to-zoom, no desktop-only screens, no dead ends. The most common registration tasks are the ones students most often do on mobile between other obligations.</span></div>
+
+  <!-- DESIGN DECISIONS: show the thinking to Kari and Nicole -->
+  <div class="why">
+    <h2>The thinking behind this hub</h2>
+    <ul>
+      <li><b>Blockers first.</b> The single most common registration failure is a hold a student discovers only when they try to sign up. This hub surfaces it at the top, in plain language, with the one action that clears it.</li>
+      <li><b>Tasks, not systems.</b> Students think in verbs ("register," "pay," "change my major"), not in the names of the back-end systems. The hub is organized the way a student would ask, not the way the software is built.</li>
+      <li><b>Mobile-first, by default.</b> Returning and working adults do a lot of this on a phone. Every task is designed to finish on a small screen, which is where the current experience breaks down.</li>
+      <li><b>One clear next step.</b> The hub always answers "what now?" so no one gets bounced between offices or told to "look on the website."</li>
+      <li><b>Personal, from the student's own record.</b> Credits, catalog year, holds, and deadlines are the student's own, so the page is about their path, not a generic wall of links.</li>
+    </ul>
+  </div>
+
+</div></main>
+
+<footer><div class="wrap">
+  Concept prototype by Lukas Green, prepared for a conversation with PSU Registration and OAI. Independent design study, not affiliated with or endorsed by Portland State University. Student data shown is illustrative, not a real record. Dates and rules are placeholders for discussion.
+</div></footer>
+
+</body>
+</html>

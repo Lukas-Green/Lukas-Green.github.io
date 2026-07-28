@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Concept: register from start to finish, on a phone</title>
+<style>
+  :root{
+    --ink:#1b1e19; --soft:#414636; --mute:#6a7060; --line:#e3e6dc;
+    --bg:#f5f6f0; --card:#ffffff;
+    --psu:#2e4a1f; --psu2:#3f6a24; --psu-tint:#eaf0e0; --psu-ink:#294417;
+    --gold:#c9a227; --gold-tint:#fbf3dc; --blue:#2f5a6a; --blue-tint:#e6eef2;
+    --ok:#3f6a24; --warn:#8a6d1f; --todo:#8a2b20; --todo-tint:#f6e6e3; --todo-line:#e3b5ad;
+    --radius:12px;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.55;font-size:18px;}
+  .wrap{max-width:64rem;margin:0 auto;padding:0 1.25rem;}
+  a{color:var(--psu2);}
+  button{font:inherit;cursor:pointer;}
+
+  .concept-banner{background:var(--gold);color:#2a2408;font-size:.82rem;text-align:center;padding:.5rem 1rem;font-weight:600;}
+
+  /* chrome */
+  .topbar{background:var(--psu);color:#eef3e6;}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;padding:.5rem 1.25rem;font-size:.82rem;}
+  .topbar a{color:#dfe8d3;text-decoration:none;margin-left:1rem;}
+  .nav{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;}
+  .nav .wrap{display:flex;align-items:center;gap:1rem;padding:.7rem 1.25rem;flex-wrap:wrap;}
+  .brand{display:flex;align-items:center;gap:.6rem;font-weight:700;color:var(--psu-ink);font-size:1.1rem;}
+  .brand .mark{width:1.9rem;height:1.9rem;border-radius:6px;background:var(--psu);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.95rem;}
+  .navlinks{display:flex;gap:.9rem;margin-left:.4rem;flex-wrap:wrap;}
+  .navlinks a{color:var(--ink);text-decoration:none;font-weight:600;font-size:.95rem;background:none;border:none;padding:.2rem 0;}
+  .navlinks a.on{color:var(--psu2);border-bottom:2px solid var(--psu2);}
+  .cartbtn{margin-left:auto;display:flex;align-items:center;gap:.4rem;background:var(--psu-tint);color:var(--psu-ink);border:1px solid var(--green-line,#cdd9bd);border-radius:99px;padding:.35rem .8rem;font-weight:700;font-size:.9rem;}
+  .cartbtn .count{background:var(--psu);color:#fff;border-radius:99px;min-width:1.4rem;height:1.4rem;display:inline-flex;align-items:center;justify-content:center;font-size:.8rem;padding:0 .3rem;}
+
+  main{padding:0 0 3rem;min-height:60vh;}
+  .screen{display:none;}
+  .screen.active{display:block;}
+
+  /* hero */
+  .hero{background:linear-gradient(160deg,var(--psu) 0%,var(--psu2) 100%);color:#fff;padding:2rem 0 2.2rem;}
+  .hero .greet{font-size:.9rem;color:#cfe0bd;margin:0 0 .3rem;}
+  .hero h1{font-size:1.9rem;line-height:1.12;margin:0 0 .5rem;max-width:24ch;}
+  .hero p{font-size:1.02rem;color:#e4eeda;margin:0 0 1.1rem;max-width:50ch;}
+  .statuspills{display:flex;gap:.6rem;flex-wrap:wrap;}
+  .pill{display:inline-flex;align-items:center;gap:.45rem;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);color:#eef3e6;border-radius:99px;padding:.35rem .8rem;font-size:.88rem;font-weight:600;}
+  .pill .g{width:.6rem;height:.6rem;border-radius:50%;background:#8fd66a;}
+  .pill .a{width:.6rem;height:.6rem;border-radius:50%;background:var(--gold);}
+
+  .bigsearch{display:flex;gap:.5rem;max-width:44rem;background:#fff;border:1px solid var(--line);border-radius:12px;padding:.5rem;box-shadow:0 4px 18px rgba(0,0,0,.06);margin:-2.8rem auto 1.4rem;position:relative;}
+  .bigsearch input{flex:1;border:none;font:inherit;font-size:1.05rem;padding:.7rem .8rem;color:var(--ink);border-radius:8px;}
+  .bigsearch input:focus{outline:2px solid var(--gold);}
+  .bigsearch button{background:var(--psu);color:#fff;border:none;font-size:1rem;font-weight:700;padding:0 1.2rem;border-radius:8px;}
+
+  /* blocker + cleared banners */
+  .blocker{background:var(--todo-tint);border:1px solid var(--todo-line);border-left:6px solid var(--todo);border-radius:var(--radius);padding:1.1rem 1.3rem;margin-bottom:1.3rem;}
+  .blocker .h{display:flex;align-items:center;gap:.6rem;font-weight:700;color:var(--todo);font-size:1.05rem;margin:0 0 .3rem;}
+  .blocker .h .dot{width:1.5rem;height:1.5rem;border-radius:50%;background:var(--todo);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:800;}
+  .blocker p{margin:.2rem 0 .8rem;color:var(--soft);font-size:.98rem;}
+  .blocker p b{color:var(--ink);}
+  .cleared{background:var(--psu-tint);border:1px solid #cdd9bd;border-left:6px solid var(--psu2);border-radius:var(--radius);padding:1.1rem 1.3rem;margin-bottom:1.3rem;}
+  .cleared .h{display:flex;align-items:center;gap:.6rem;font-weight:700;color:var(--psu-ink);font-size:1.05rem;margin:0 0 .2rem;}
+  .cleared .h .dot{width:1.5rem;height:1.5rem;border-radius:50%;background:var(--psu2);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;}
+  .cleared p{margin:0;color:var(--soft);font-size:.98rem;}
+
+  .btn{display:inline-block;background:var(--psu);color:#fff;border:none;text-decoration:none;font-weight:700;padding:.65rem 1.2rem;border-radius:9px;}
+  .btn.todo{background:var(--todo);}
+  .btn.ghost{background:#fff;color:var(--psu-ink);border:2px solid var(--psu);}
+  .btn.block{display:block;width:100%;text-align:center;}
+  .btn:disabled{opacity:.5;cursor:not-allowed;}
+  .btnrow{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1rem;}
+
+  .sectionhead{display:flex;align-items:baseline;justify-content:space-between;margin:1.6rem 0 .8rem;}
+  .sectionhead h2{font-size:1.2rem;margin:0;color:var(--psu-ink);}
+  .sectionhead .link{font-size:.9rem;background:none;border:none;color:var(--psu2);}
+
+  /* task cards */
+  .tasks{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+  @media(max-width:820px){.tasks{grid-template-columns:1fr 1fr;}}
+  @media(max-width:520px){.tasks{grid-template-columns:1fr;}}
+  .task{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.05rem 1.15rem;text-align:left;color:var(--ink);display:block;width:100%;transition:border-color .15s,transform .15s;}
+  .task:hover{border-color:var(--psu2);transform:translateY(-2px);}
+  .task .ic{width:2.3rem;height:2.3rem;border-radius:10px;background:var(--psu-tint);color:var(--psu-ink);display:flex;align-items:center;justify-content:center;font-size:1.15rem;margin-bottom:.55rem;}
+  .task h3{margin:0 0 .2rem;font-size:1.02rem;color:var(--psu-ink);}
+  .task p{margin:0;color:var(--soft);font-size:.88rem;}
+  .task .badge{display:inline-block;margin-top:.5rem;font-size:.74rem;font-weight:700;background:var(--gold);color:#2a2408;border-radius:99px;padding:.12rem .55rem;}
+  .task.locked{opacity:.72;}
+  .task.locked .ic{background:var(--todo-tint);color:var(--todo);}
+
+  /* panels / two-col */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:1.4rem;}
+  @media(max-width:820px){.split{grid-template-columns:1fr;}}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.2rem 1.3rem;}
+  .panel h2{font-size:1.1rem;margin:0 0 .7rem;color:var(--psu-ink);}
+  .creditbar{height:.7rem;background:#e7eae0;border-radius:99px;overflow:hidden;margin:.4rem 0 .3rem;}
+  .creditbar i{display:block;height:100%;background:var(--psu2);}
+  .creditmeta{display:flex;justify-content:space-between;font-size:.86rem;color:var(--soft);margin-bottom:1rem;}
+  .kv{display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid var(--line);font-size:.94rem;}
+  .kv:last-child{border-bottom:none;}
+  .kv .k{color:var(--mute);}
+  .kv .v{font-weight:600;}
+  .timeline{list-style:none;margin:0;padding:0;}
+  .timeline li{display:flex;gap:.8rem;padding:.55rem 0;border-bottom:1px solid var(--line);}
+  .timeline li:last-child{border-bottom:none;}
+  .timeline .date{flex:0 0 5rem;font-weight:700;color:var(--psu-ink);font-size:.88rem;}
+  .timeline .what{font-size:.92rem;color:var(--soft);}
+  .timeline .soon{color:var(--todo);font-weight:600;}
+  .mobilenote{display:flex;align-items:center;gap:.7rem;background:var(--psu-tint);border:1px solid #cdd9bd;border-radius:var(--radius);padding:.85rem 1.1rem;margin-top:1.2rem;font-size:.92rem;color:var(--psu-ink);}
+  .mobilenote .ic{font-size:1.25rem;}
+
+  /* generic screen header with back */
+  .shead{padding:1.5rem 0 .3rem;}
+  .back{background:none;border:none;color:var(--psu2);font-weight:600;font-size:.9rem;padding:.2rem 0;margin-bottom:.4rem;}
+  .shead h1{font-size:1.7rem;margin:.1rem 0 .3rem;color:var(--ink);}
+  .shead p{color:var(--soft);margin:0;max-width:52ch;}
+  .stepbar{display:flex;gap:.4rem;margin:.9rem 0 0;flex-wrap:wrap;}
+  .stepbar span{font-size:.76rem;font-weight:700;color:var(--mute);background:#eceee6;border-radius:99px;padding:.2rem .6rem;}
+  .stepbar span.on{background:var(--psu);color:#fff;}
+  .stepbar span.done{background:var(--psu-tint);color:var(--psu-ink);}
+
+  /* find classes */
+  .filters{display:flex;gap:.5rem;flex-wrap:wrap;margin:.4rem 0 1rem;}
+  .filters .f{font-size:.85rem;border:1px solid var(--line);background:#fff;border-radius:99px;padding:.35rem .8rem;color:var(--soft);}
+  .filters .f.on{border-color:var(--psu);background:var(--psu-tint);color:var(--psu-ink);font-weight:600;}
+  .course{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.05rem 1.2rem;margin-bottom:.9rem;}
+  .course .top{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;}
+  .course h3{margin:0 0 .2rem;font-size:1.08rem;color:var(--psu-ink);}
+  .course .meta{color:var(--soft);font-size:.9rem;margin:.15rem 0;}
+  .course .tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.5rem;}
+  .course .tags span{font-size:.76rem;border-radius:99px;padding:.15rem .55rem;background:#eef2e7;color:var(--psu-ink);}
+  .course .tags span.open{background:var(--psu-tint);color:var(--psu-ink);}
+  .course .tags span.wait{background:var(--gold-tint);color:var(--warn);}
+  .course .actions{display:flex;flex-direction:column;gap:.5rem;align-items:flex-end;flex:0 0 auto;}
+  .addbtn{background:var(--psu);color:#fff;border:none;border-radius:8px;padding:.5rem .9rem;font-weight:700;font-size:.9rem;white-space:nowrap;}
+  .addbtn.added{background:var(--psu-tint);color:var(--psu-ink);border:1px solid #cdd9bd;}
+  .addbtn.wl{background:var(--gold);color:#2a2408;}
+  .detailbtn{background:none;border:none;color:var(--psu2);font-size:.85rem;font-weight:600;}
+
+  /* cart / plan */
+  .cartline{display:flex;justify-content:space-between;gap:1rem;align-items:center;padding:.8rem 0;border-bottom:1px solid var(--line);}
+  .cartline:last-child{border-bottom:none;}
+  .cartline .info h4{margin:0 0 .15rem;font-size:1rem;color:var(--psu-ink);}
+  .cartline .info p{margin:0;color:var(--soft);font-size:.86rem;}
+  .rm{background:none;border:none;color:var(--todo);font-size:.85rem;font-weight:600;}
+  .totalbar{display:flex;justify-content:space-between;align-items:center;background:var(--psu-tint);border-radius:10px;padding:.8rem 1.1rem;margin:1rem 0;font-weight:700;color:var(--psu-ink);}
+  .empty{text-align:center;color:var(--mute);padding:2.5rem 1rem;}
+  .prereqbox,.conflictbox{background:var(--todo-tint);border:1px solid var(--todo-line);border-radius:10px;padding:.8rem 1rem;font-size:.92rem;color:var(--soft);}
+  .prereqbox{margin:.4rem 0 .2rem;} .conflictbox{margin:.6rem 0 0;}
+  .prereqbox b,.conflictbox b{color:var(--todo);}
+  .prereqmsg:empty{display:none;}
+
+  /* confirmation */
+  .success{background:var(--psu-tint);border:1px solid #cdd9bd;border-radius:var(--radius);padding:1.4rem 1.5rem;text-align:center;margin:1.4rem 0;}
+  .success .check{width:3.2rem;height:3.2rem;border-radius:50%;background:var(--psu2);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.7rem;margin:0 auto .6rem;}
+  .success h2{margin:0 0 .3rem;color:var(--psu-ink);}
+  .success p{margin:0;color:var(--soft);}
+  .schedule{width:100%;border-collapse:collapse;margin:.5rem 0 0;font-size:.92rem;}
+  .schedule th,.schedule td{text-align:left;padding:.6rem .5rem;border-bottom:1px solid var(--line);}
+  .schedule th{font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);}
+  .nextsteps{list-style:none;margin:.4rem 0 0;padding:0;}
+  .nextsteps li{display:flex;gap:.7rem;align-items:flex-start;padding:.6rem 0;border-bottom:1px solid var(--line);color:var(--soft);}
+  .nextsteps li:last-child{border-bottom:none;}
+  .nextsteps .n{flex:0 0 1.6rem;height:1.6rem;border-radius:50%;background:var(--psu);color:#fff;font-weight:700;font-size:.85rem;display:flex;align-items:center;justify-content:center;}
+
+  /* toast */
+  .toast{position:fixed;left:50%;bottom:1.4rem;transform:translateX(-50%) translateY(2rem);background:var(--psu-ink);color:#eef3e6;padding:.7rem 1.2rem;border-radius:10px;font-weight:600;font-size:.92rem;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:40;box-shadow:0 6px 20px rgba(0,0,0,.25);}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+  footer{border-top:1px solid var(--line);padding:1.4rem 0 2.5rem;color:var(--mute);font-size:.84rem;}
+  .why{background:var(--blue-tint);border:1px solid #cfe0e6;border-radius:var(--radius);padding:1.1rem 1.3rem;margin-top:1.6rem;font-size:.92rem;color:var(--soft);}
+  .why b{color:var(--blue);}
+</style>
+</head>
+<body>
+
+<div class="concept-banner">CONCEPT PROTOTYPE by Lukas Green · not affiliated with or endorsed by Portland State University · illustrative data, not real records · nothing here submits anywhere</div>
+
+<div class="topbar"><div class="wrap"><span>Portland State University</span><span><a href="#">myPSU</a><a href="#">Help</a><a href="#">Sign out</a></span></div></div>
+
+<div class="nav"><div class="wrap">
+  <div class="brand"><span class="mark">P</span> Registration</div>
+  <nav class="navlinks">
+    <a data-go="home" class="on">Home</a>
+    <a data-go="find">Classes</a>
+    <a data-go="plan">My plan</a>
+    <a data-go="home">Records</a>
+    <a data-go="home">Money</a>
+  </nav>
+  <button class="cartbtn" data-go="plan">Plan <span class="count" id="cartCount">0</span></button>
+</div></div>
+
+<main>
+
+<!-- ============ HOME / HUB ============ -->
+<section class="screen active" id="screen-home">
+  <div class="hero"><div class="wrap">
+    <p class="greet">Signed in as Renée A. · Fall 2026</p>
+    <h1>Your registration, all in one place.</h1>
+    <p>What needs doing, what is coming up, and one clear next step. Built to finish on a phone between shifts.</p>
+    <div class="statuspills" id="homePills">
+      <span class="pill"><span class="a"></span> Registration opens for you: Nov 12, 8:00 AM</span>
+      <span class="pill"><span class="g"></span> <span id="pillCredits">0 credits planned</span></span>
+    </div>
+  </div></div>
+
+  <div class="wrap">
+    <div class="bigsearch">
+      <input value="what do I need to do to register?" aria-label="What do you need to do?">
+      <button data-go="find">Search</button>
+    </div>
+
+    <!-- blocker OR cleared, swapped by JS -->
+    <div id="holdSlot"></div>
+
+    <div class="sectionhead"><h2>What do you want to do?</h2><button class="link" data-go="find">See all tasks</button></div>
+    <div class="tasks">
+      <button class="task" id="taskRegister" data-register>
+        <div class="ic">&#128218;</div>
+        <h3>Register for classes</h3>
+        <p>Add, drop, or swap sections for Fall 2026.</p>
+        <span class="badge" id="regBadge">Clear your hold first</span>
+      </button>
+      <button class="task" data-go="find">
+        <div class="ic">&#128203;</div>
+        <h3>Plan my schedule</h3>
+        <p>Build a plan now so registration day is one click.</p>
+      </button>
+      <button class="task" data-go="home">
+        <div class="ic">&#127891;</div>
+        <h3>What I need to graduate</h3>
+        <p>Your remaining requirements, from your own record.</p>
+      </button>
+      <button class="task" data-go="home">
+        <div class="ic">&#128179;</div>
+        <h3>Pay &amp; financial aid</h3>
+        <p>Balance, aid status, and payment plans.</p>
+      </button>
+      <button class="task" data-go="home">
+        <div class="ic">&#128100;</div>
+        <h3>Change or declare a major</h3>
+        <p>Start a program change and see the rules first.</p>
+      </button>
+      <button class="task" data-go="hold">
+        <div class="ic">&#128222;</div>
+        <h3>Get a person</h3>
+        <p>Advising, the Registrar, or the help desk.</p>
+      </button>
+    </div>
+
+    <div class="split">
+      <div class="panel">
+        <h2>Your term at a glance</h2>
+        <div class="creditbar"><i style="width:66%"></i></div>
+        <div class="creditmeta"><span>118 of 180 credits toward your degree</span><span>62 to go</span></div>
+        <div class="kv"><span class="k">Catalog year</span><span class="v">2024-25</span></div>
+        <div class="kv"><span class="k">Registration window</span><span class="v">Opens Nov 12, 8:00 AM</span></div>
+        <div class="kv"><span class="k">Planned this term</span><span class="v" id="plannedKv">0 credits</span></div>
+        <div class="kv"><span class="k">Holds</span><span class="v" id="holdsKv" style="color:var(--todo)">1 (advising)</span></div>
+      </div>
+      <div class="panel">
+        <h2>Dates that matter</h2>
+        <ul class="timeline">
+          <li><span class="date soon">Nov 12</span><span class="what">Your registration window opens</span></li>
+          <li><span class="date">Nov 20</span><span class="what">Priority deadline for the classes you planned</span></li>
+          <li><span class="date">Jan 5</span><span class="what">Fall term begins</span></li>
+          <li><span class="date">Jan 16</span><span class="what">Last day to add or drop without a W</span></li>
+          <li><span class="date">Jan 20</span><span class="what">Tuition due</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mobilenote"><span class="ic">&#128241;</span> <span><b>Every task works on a phone.</b> No pinch-to-zoom, no desktop-only screens, no dead ends.</span></div>
+  </div>
+</section>
+
+<!-- ============ RESOLVE HOLD ============ -->
+<section class="screen" id="screen-hold">
+  <div class="wrap">
+    <div class="shead">
+      <button class="back" data-go="home">&larr; Back to home</button>
+      <h1>Clear your advising hold</h1>
+      <p>This is the only thing between you and registering for Fall. It takes about 20 minutes and can be done by phone or Zoom.</p>
+    </div>
+    <div class="panel" style="margin-top:1rem;">
+      <div class="kv"><span class="k">Hold type</span><span class="v">Advising</span></div>
+      <div class="kv"><span class="k">Placed by</span><span class="v">Your advising pathway</span></div>
+      <div class="kv"><span class="k">Why</span><span class="v">A quick check-in before you register</span></div>
+      <div class="kv"><span class="k">Blocks</span><span class="v" style="color:var(--todo)">Registration</span></div>
+      <p style="color:var(--soft);margin:1rem 0 0;font-size:.95rem;">Pick a time that works around your schedule. Your adviser can meet by phone or Zoom, no need to come to campus.</p>
+      <div class="btnrow">
+        <button class="btn" id="bookBtn">Book a Zoom time &rarr;</button>
+        <button class="btn ghost" data-go="home">Not now</button>
+      </div>
+      <p id="bookedMsg" style="display:none;color:var(--psu-ink);font-weight:600;margin:1rem 0 0;">Booked for Thu, Nov 6 at 4:00 PM (Zoom link sent to your email). For this demo, we will treat the meeting as done so you can keep going.</p>
+      <div class="btnrow" id="clearRow" style="display:none;">
+        <button class="btn" id="clearBtn">Mark advising as met and clear the hold</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FIND CLASSES ============ -->
+<section class="screen" id="screen-find">
+  <div class="wrap">
+    <div class="shead">
+      <button class="back" data-go="home">&larr; Back to home</button>
+      <h1>Find classes</h1>
+      <p>Search the way you would say it. Filter to what fits your life, then add sections to your plan.</p>
+      <div class="stepbar"><span class="on">1. Find classes</span><span>2. Review your plan</span><span>3. Register</span><span>4. Done</span></div>
+    </div>
+    <div class="bigsearch" style="margin:1rem auto 0;box-shadow:none;">
+      <input value="classes for my degree, online or evenings" aria-label="Search classes">
+      <button>Search</button>
+    </div>
+    <div class="filters">
+      <button class="f on">All</button>
+      <button class="f">Online</button>
+      <button class="f">Evenings</button>
+      <button class="f">Open seats</button>
+      <button class="f">Counts toward my degree</button>
+    </div>
+    <div id="courseList"></div>
+    <div class="btnrow"><button class="btn" data-go="plan">Go to my plan &rarr;</button></div>
+  </div>
+</section>
+
+<!-- ============ COURSE DETAIL ============ -->
+<section class="screen" id="screen-course">
+  <div class="wrap">
+    <div class="shead">
+      <button class="back" data-go="find">&larr; Back to results</button>
+      <h1 id="cdTitle">Course</h1>
+      <p id="cdSub"></p>
+    </div>
+    <div class="split" style="margin-top:1rem;">
+      <div class="panel">
+        <h2>Section details</h2>
+        <div class="kv"><span class="k">CRN</span><span class="v" id="cdCrn"></span></div>
+        <div class="kv"><span class="k">Meets</span><span class="v" id="cdMeets"></span></div>
+        <div class="kv"><span class="k">Instructor</span><span class="v" id="cdInstr"></span></div>
+        <div class="kv"><span class="k">Credits</span><span class="v" id="cdCredits"></span></div>
+        <div class="kv"><span class="k">Seats</span><span class="v" id="cdSeats"></span></div>
+        <div class="kv"><span class="k">Format</span><span class="v" id="cdFormat"></span></div>
+      </div>
+      <div class="panel">
+        <h2>Before you add it</h2>
+        <div class="kv"><span class="k">Prerequisites</span><span class="v" id="cdPrereq"></span></div>
+        <div class="kv"><span class="k">Counts toward</span><span class="v" id="cdCounts"></span></div>
+        <p id="cdNote" style="color:var(--soft);font-size:.92rem;margin:1rem 0 0;"></p>
+        <div class="btnrow"><button class="btn block" id="cdAdd">Add to my plan</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MY PLAN / CART ============ -->
+<section class="screen" id="screen-plan">
+  <div class="wrap">
+    <div class="shead">
+      <button class="back" data-go="find">&larr; Add more classes</button>
+      <h1>Your plan</h1>
+      <p>Review what you picked, check for conflicts, then register in one step.</p>
+      <div class="stepbar"><span class="done">1. Find classes</span><span class="on">2. Review your plan</span><span>3. Register</span><span>4. Done</span></div>
+    </div>
+    <div class="panel" style="margin-top:1rem;">
+      <div id="planList"></div>
+      <div class="totalbar" id="planTotal" style="display:none;"><span>Total</span><span id="planCredits">0 credits</span></div>
+      <div id="conflictNote"></div>
+      <div class="btnrow" id="planActions" style="display:none;">
+        <button class="btn block" id="registerBtn">Register for these classes</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONFIRMATION ============ -->
+<section class="screen" id="screen-confirm">
+  <div class="wrap">
+    <div class="success">
+      <div class="check">&#10003;</div>
+      <h2>You are registered for Fall 2026</h2>
+      <p>A confirmation went to your PSU email. Here is your schedule and what is next.</p>
+    </div>
+    <div class="panel">
+      <h2>Your Fall schedule</h2>
+      <table class="schedule"><thead><tr><th>Course</th><th>Meets</th><th>Credits</th></tr></thead>
+        <tbody id="confRows"></tbody>
+      </table>
+      <div class="totalbar" style="margin-top:1rem;"><span>Registered</span><span id="confCredits">0 credits</span></div>
+    </div>
+    <div class="panel" style="margin-top:1.2rem;">
+      <h2>What is next</h2>
+      <ul class="nextsteps">
+        <li><span class="n">1</span><span><b>Pay or set up a payment plan by Jan 20.</b> You can do it from Money, right here in the hub.</span></li>
+        <li><span class="n">2</span><span><b>Add your classes to your calendar.</b> One tap syncs the whole term.</span></li>
+        <li><span class="n">3</span><span><b>Check your book list.</b> We flagged which courses need materials.</span></li>
+        <li><span class="n">4</span><span><b>Changed your mind?</b> You can add or drop without a W until Jan 16.</span></li>
+      </ul>
+      <div class="btnrow"><button class="btn" data-go="home">Back to your hub</button><button class="btn ghost" id="restartBtn">Restart the demo</button></div>
+    </div>
+    <div class="why"><b>Why this matters:</b> a returning student just went from a blocking hold to a finished registration without being bounced to another office, told to "look on the website," or forced onto a desktop. Every step named the one next thing to do.</div>
+  </div>
+</section>
+
+</main>
+
+<div class="toast" id="toast"></div>
+
+<footer><div class="wrap">
+  Concept prototype by Lukas Green, prepared for a conversation with PSU Registration and OAI. Independent design study, not affiliated with or endorsed by Portland State University. All data is illustrative; nothing here registers you for anything.
+</div></footer>
+
+<script>
+(function(){
+  var state = { holdCleared:false, cart:[] };
+
+  var COURSES = [
+    { id:'sysc311', code:'SYSC 311', title:'Systems Thinking', credits:4, crn:'41022', meets:'Tue/Thu 6:00-7:50 PM', slot:'TR-eve', instr:'Dr. A. Okafor', seats:'12 of 30 open', format:'In person, evenings', prereq:'None', counts:'Systems Science major (required)', open:true, prereqMet:true, note:'An evening section that fits around a work schedule, and it counts toward your major.' },
+    { id:'wr323', code:'WR 323', title:'Writing as Critical Inquiry', credits:4, crn:'40988', meets:'Online, asynchronous', slot:'online', instr:'Prof. L. Reyes', seats:'8 of 25 open', format:'Online, async', prereq:'WR 121 (you have credit)', counts:'University Writing requirement', open:true, prereqMet:true, note:'Fully online and self-paced. Clears your remaining University Writing requirement.' },
+    { id:'stat243', code:'STAT 243', title:'Introduction to Statistics', credits:4, crn:'41190', meets:'Online, asynchronous', slot:'online', instr:'Dr. M. Chen', seats:'3 of 40 open', format:'Online, async', prereq:'MTH 111 (you have credit)', counts:'Degree requirement (BS)', open:true, prereqMet:true, note:'Nearly full, but still open. Online and async, which pairs well with an evening course.' },
+    { id:'comm220', code:'COMM 220', title:'Public Speaking', credits:4, crn:'41055', meets:'Tue/Thu 6:30-8:20 PM', slot:'TR-eve', instr:'Prof. J. Alvarez', seats:'6 of 30 open', format:'In person, evenings', prereq:'None', counts:'Elective', open:true, prereqMet:true, note:'A popular evening elective. Heads up: it overlaps the SYSC 311 evening slot.' },
+    { id:'sysc411', code:'SYSC 411', title:'Advanced Systems Modeling', credits:4, crn:'41300', meets:'Mon/Wed 2:00-3:50 PM', slot:'MW-pm', instr:'Dr. A. Okafor', seats:'10 of 25 open', format:'In person, daytime', prereq:'MTH 251 (Calculus I)', counts:'Systems Science major', open:true, prereqMet:false, prereqMsg:'You need MTH 251 (Calculus I) first, and it is not on your record yet.', alt:'stat243', note:'Counts toward your major, but it has a prerequisite you have not completed.' },
+    { id:'psy350', code:'PSY 350', title:'Human Development', credits:4, crn:'40771', meets:'Mon/Wed 10:00-11:50 AM', slot:'MW-am', instr:'Dr. S. Patel', seats:'Full, 5 on waitlist', format:'In person, daytime', prereq:'PSY 204 (you have credit)', counts:'Elective', open:false, prereqMet:true, note:'This one is full and meets during the day. You can join the waitlist, but it may conflict with work hours.' }
+  ];
+
+  // ---- helpers ----
+  function $(s){ return document.querySelector(s); }
+  function toast(msg){ var t=$('#toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(t._t); t._t=setTimeout(function(){t.classList.remove('show');},1900); }
+  function inCart(id){ return state.cart.indexOf(id)>-1; }
+  function courseById(id){ for(var i=0;i<COURSES.length;i++){ if(COURSES[i].id===id) return COURSES[i]; } return null; }
+  function totalCredits(){ var c=0; state.cart.forEach(function(id){ var x=courseById(id); if(x) c+=x.credits; }); return c; }
+
+  // ---- navigation ----
+  function go(name){
+    document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
+    var el=$('#screen-'+name); if(el){ el.classList.add('active'); }
+    document.querySelectorAll('.navlinks a').forEach(function(a){ a.classList.toggle('on', a.getAttribute('data-go')===name); });
+    window.scrollTo(0,0);
+    if(name==='home') renderHome();
+    if(name==='find') renderCourses();
+    if(name==='plan') renderPlan();
+    if(name==='confirm') renderConfirm();
+  }
+  document.addEventListener('click', function(e){
+    var g=e.target.closest('[data-go]'); if(g){ go(g.getAttribute('data-go')); return; }
+  });
+
+  // ---- home ----
+  function renderHome(){
+    var slot=$('#holdSlot');
+    if(state.holdCleared){
+      slot.innerHTML='<div class="cleared"><p class="h"><span class="dot">&#10003;</span> Your hold is cleared. You can register.</p><p>Advising is done. When your window opens Nov 12 you are ready, or plan your classes now so it is one tap.</p></div>';
+      $('#regBadge').textContent='Ready';
+      $('#taskRegister').classList.remove('locked');
+      $('#holdsKv').textContent='0'; $('#holdsKv').style.color='var(--psu-ink)';
+    } else {
+      slot.innerHTML='<div class="blocker"><p class="h"><span class="dot">1</span> One thing is blocking your registration</p><p><b>Advising hold.</b> You need to meet with your adviser before you can register for Fall. This is the only thing standing between you and signing up. About 20 minutes, by phone or Zoom.</p><button class="btn todo" data-go="hold">Clear your hold &rarr;</button></div>';
+      $('#regBadge').textContent='Clear your hold first';
+      $('#taskRegister').classList.add('locked');
+      $('#holdsKv').textContent='1 (advising)'; $('#holdsKv').style.color='var(--todo)';
+    }
+    var c=totalCredits();
+    $('#pillCredits').textContent=c+' credits planned';
+    $('#plannedKv').textContent=c+' credits'+(state.cart.length?' ('+state.cart.length+' courses)':'');
+    $('#cartCount').textContent=state.cart.length;
+  }
+
+  // register task respects the hold gate
+  document.addEventListener('click', function(e){
+    if(e.target.closest('[data-register]')){
+      if(state.holdCleared){ go('find'); } else { toast('Clear your advising hold first'); go('hold'); }
+    }
+  });
+
+  // ---- hold flow ----
+  $('#bookBtn').addEventListener('click', function(){
+    $('#bookedMsg').style.display='block';
+    $('#clearRow').style.display='flex';
+    this.disabled=true;
+  });
+  $('#clearBtn').addEventListener('click', function(){
+    state.holdCleared=true;
+    toast('Advising hold cleared');
+    go('home');
+  });
+
+  // ---- find classes ----
+  function renderCourses(){
+    var list=$('#courseList'); list.innerHTML='';
+    COURSES.forEach(function(c){
+      var added=inCart(c.id);
+      var seatClass=c.open?'open':'wait';
+      var btn;
+      if(added){ btn='<button class="addbtn added" data-added="'+c.id+'">Added &#10003;</button>'; }
+      else if(!c.prereqMet){ btn='<button class="addbtn" style="background:var(--todo-tint);color:var(--todo);border:1px solid var(--todo-line);" data-prereq="'+c.id+'">Prerequisite needed</button>'; }
+      else if(c.open){ btn='<button class="addbtn" data-add="'+c.id+'">Add to plan</button>'; }
+      else { btn='<button class="addbtn wl" data-add="'+c.id+'">Join waitlist</button>'; }
+      var el=document.createElement('div'); el.className='course';
+      el.innerHTML='<div class="top"><div>'+
+          '<h3>'+c.code+' &middot; '+c.title+'</h3>'+
+          '<p class="meta">'+c.meets+' &middot; '+c.instr+'</p>'+
+          '<p class="meta">'+c.credits+' credits &middot; CRN '+c.crn+'</p>'+
+          '<div class="tags"><span class="'+seatClass+'">'+c.seats+'</span><span>'+c.format+'</span><span>'+c.counts+'</span></div>'+
+        '</div><div class="actions">'+btn+'<button class="detailbtn" data-detail="'+c.id+'">View details</button></div></div>'+
+        '<div class="prereqmsg" id="pm-'+c.id+'"></div>';
+      list.appendChild(el);
+    });
+  }
+  document.addEventListener('click', function(e){
+    var pr=e.target.closest('[data-prereq]');
+    if(pr){ showPrereq(pr.getAttribute('data-prereq')); return; }
+    var a=e.target.closest('[data-add]');
+    if(a){ var id=a.getAttribute('data-add'); if(!inCart(id)){ state.cart.push(id); var c=courseById(id); toast((c.open?'Added ':'Added to waitlist: ')+c.code); } renderCourses(); $('#cartCount').textContent=state.cart.length; return; }
+    var d=e.target.closest('[data-detail]');
+    if(d){ openCourse(d.getAttribute('data-detail')); return; }
+  });
+  function showPrereq(id){
+    var c=courseById(id); if(!c) return;
+    var box=$('#pm-'+id); if(!box) return;
+    var alt=c.alt?courseById(c.alt):null;
+    box.innerHTML='<div class="prereqbox"><b>Hold on: '+c.code+' has a prerequisite.</b><br>'+c.prereqMsg+
+      (alt?('<br><br><b>'+alt.code+'</b> ('+alt.title+') counts toward your degree and is open. Add that instead?<div style="margin-top:.6rem;"><button class="addbtn" data-add="'+alt.id+'">Add '+alt.code+' instead</button></div>'):'')+'</div>';
+    toast('You need '+c.prereq+' first');
+  }
+
+  // ---- course detail ----
+  function openCourse(id){
+    var c=courseById(id); if(!c) return;
+    $('#cdTitle').textContent=c.code+' · '+c.title;
+    $('#cdSub').textContent=c.note;
+    $('#cdCrn').textContent=c.crn; $('#cdMeets').textContent=c.meets; $('#cdInstr').textContent=c.instr;
+    $('#cdCredits').textContent=c.credits; $('#cdSeats').textContent=c.seats; $('#cdFormat').textContent=c.format;
+    $('#cdPrereq').textContent=c.prereq; $('#cdCounts').textContent=c.counts; $('#cdNote').textContent=c.note;
+    var addBtn=$('#cdAdd');
+    if(inCart(c.id)){ addBtn.textContent='Added to your plan ✓'; addBtn.className='btn ghost block'; addBtn.style.background=''; addBtn.onclick=function(){}; }
+    else if(!c.prereqMet){
+      addBtn.textContent='Prerequisite needed'; addBtn.className='btn block'; addBtn.style.background='var(--todo)';
+      addBtn.onclick=function(){ var alt=c.alt?courseById(c.alt):null; $('#cdNote').innerHTML='<b style="color:var(--todo)">'+c.prereqMsg+'</b>'+(alt?(' Try <b>'+alt.code+'</b>, which is open and counts toward your degree.'):''); toast('You need '+c.prereq+' first'); };
+    }
+    else {
+      addBtn.textContent=c.open?'Add to my plan':'Join the waitlist'; addBtn.className='btn block'; addBtn.style.background='';
+      addBtn.onclick=function(){ if(!inCart(c.id)){ state.cart.push(c.id); toast((c.open?'Added ':'Added to waitlist: ')+c.code); $('#cartCount').textContent=state.cart.length; } openCourse(id); };
+    }
+    go('course');
+  }
+
+  // ---- plan / cart ----
+  function renderPlan(){
+    var list=$('#planList');
+    $('#cartCount').textContent=state.cart.length;
+    if(!state.cart.length){
+      list.innerHTML='<div class="empty">Your plan is empty.<br><br><button class="btn" data-go="find">Find classes</button></div>';
+      $('#planTotal').style.display='none'; $('#planActions').style.display='none'; $('#conflictNote').innerHTML='';
+      return;
+    }
+    list.innerHTML='';
+    state.cart.forEach(function(id){
+      var c=courseById(id);
+      var wl=c.open?'':' <span style="color:var(--warn);font-weight:600;">(waitlist)</span>';
+      var el=document.createElement('div'); el.className='cartline';
+      el.innerHTML='<div class="info"><h4>'+c.code+' · '+c.title+wl+'</h4><p>'+c.meets+' · '+c.credits+' credits · CRN '+c.crn+'</p></div><button class="rm" data-rm="'+c.id+'">Remove</button>';
+      list.appendChild(el);
+    });
+    $('#planTotal').style.display='flex';
+    $('#planCredits').textContent=totalCredits()+' credits';
+    $('#planActions').style.display='flex';
+    // time-conflict detection (two courses sharing a non-online slot)
+    var conflict=null;
+    for(var i=0;i<state.cart.length && !conflict;i++){
+      for(var j=i+1;j<state.cart.length;j++){
+        var a2=courseById(state.cart[i]), b2=courseById(state.cart[j]);
+        if(a2&&b2&&a2.slot&&a2.slot===b2.slot&&a2.slot!=='online'){ conflict=[a2,b2]; break; }
+      }
+    }
+    var hasWait = state.cart.some(function(id){ return !courseById(id).open; });
+    var note='';
+    if(conflict){
+      note+='<div class="conflictbox"><b>Time conflict.</b> '+conflict[0].code+' and '+conflict[1].code+' both meet '+conflict[0].meets+'. Keep one.'+
+        '<div style="margin-top:.6rem;display:flex;gap:.5rem;flex-wrap:wrap;">'+
+        '<button class="rm" style="border:1px solid var(--todo-line);border-radius:8px;padding:.4rem .8rem;" data-rm="'+conflict[1].id+'">Remove '+conflict[1].code+'</button>'+
+        '<button class="rm" style="border:1px solid var(--todo-line);border-radius:8px;padding:.4rem .8rem;" data-rm="'+conflict[0].id+'">Remove '+conflict[0].code+'</button></div></div>';
+    } else {
+      note+='<p style="color:var(--psu-ink);font-size:.9rem;margin:.2rem 0 0;">No time conflicts. This plan fits around evenings and online.</p>';
+    }
+    if(hasWait){ note+='<p style="color:var(--warn);font-size:.9rem;margin:.5rem 0 0;">Heads up: one section is a waitlist and meets during the day, which may clash with work hours. You can still register for the rest.</p>'; }
+    $('#conflictNote').innerHTML=note;
+    $('#registerBtn').disabled=!!conflict;
+    $('#registerBtn').textContent=conflict?'Resolve the conflict to register':'Register for these classes';
+  }
+  document.addEventListener('click', function(e){
+    var r=e.target.closest('[data-rm]');
+    if(r){ var id=r.getAttribute('data-rm'); state.cart=state.cart.filter(function(x){return x!==id;}); renderPlan(); $('#cartCount').textContent=state.cart.length; toast('Removed'); }
+  });
+  $('#registerBtn').addEventListener('click', function(){
+    if(!state.cart.length){ toast('Add a class first'); return; }
+    go('confirm');
+  });
+
+  // ---- confirmation ----
+  function renderConfirm(){
+    var rows=$('#confRows'); rows.innerHTML='';
+    state.cart.forEach(function(id){
+      var c=courseById(id);
+      var tr=document.createElement('tr');
+      tr.innerHTML='<td><b>'+c.code+'</b><br><span style="color:var(--mute);font-size:.85rem;">'+c.title+(c.open?'':' (waitlisted)')+'</span></td><td>'+c.meets+'</td><td>'+c.credits+'</td>';
+      rows.appendChild(tr);
+    });
+    $('#confCredits').textContent=totalCredits()+' credits';
+  }
+  $('#restartBtn').addEventListener('click', function(){
+    state.holdCleared=false; state.cart=[];
+    $('#bookBtn').disabled=false; $('#bookedMsg').style.display='none'; $('#clearRow').style.display='none';
+    go('home'); toast('Demo reset');
+  });
+
+  // init
+  renderHome();
+})();
+</script>
+
+</body>
+</html>

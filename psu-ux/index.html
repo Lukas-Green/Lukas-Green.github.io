@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Findability and retention on pdx.edu · a UX analysis</title>
+<style>
+  :root{
+    --ink:#1b1e19; --soft:#454b40; --mute:#6b7266; --line:#e2e5dc;
+    --card:#ffffff; --bg:#f6f7f2; --paper:#fbfcf8;
+    --green:#4a6a2f; --green-tint:#eaf0e0; --green-ink:#33501d; --green-line:#cdd9bd;
+    --red:#8a2b20; --red-tint:#f6e6e3; --red-line:#e6c6bf;
+    --blue:#2f5a6a; --blue-tint:#e9f1f4; --blue-line:#cfe0e6;
+    --gold:#8a6d1f;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{ font-family:var(--sans); color:var(--ink); background:var(--bg); line-height:1.5; -webkit-font-smoothing:antialiased; }
+
+  .slide{
+    position:relative; min-height:100vh; padding:4.5vh 6vw 9vh;
+    display:flex; flex-direction:column; justify-content:center;
+    border-bottom:1px solid var(--line); background:var(--bg);
+  }
+  .inner{ width:100%; max-width:64rem; margin:0 auto; }
+  body.js .slide{ display:none; border-bottom:none; }
+  body.js .slide.active{ display:flex; }
+
+  .kicker{ font-size:clamp(.72rem,1.4vw,.86rem); letter-spacing:.12em; text-transform:uppercase; color:var(--mute); font-weight:600; margin:0 0 1rem; }
+  h1{ font-size:clamp(2rem,5vw,3.4rem); line-height:1.07; margin:0 0 1rem; letter-spacing:-.01em; }
+  h2{ font-size:clamp(1.5rem,3.6vw,2.5rem); line-height:1.1; margin:0 0 .5rem; letter-spacing:-.01em; }
+  .lead{ font-size:clamp(1.05rem,2.1vw,1.4rem); color:var(--soft); max-width:46rem; margin:.4rem 0 0; }
+  .why{ font-size:clamp(1rem,1.9vw,1.2rem); color:var(--soft); max-width:46rem; margin:.2rem 0 1.4rem; }
+  .stamp{ margin-top:1.6rem; font-size:.86rem; color:var(--mute); font-family:var(--mono); }
+  .disclaimer{ margin:2.2rem 0 0; font-size:.8rem; color:var(--mute); }
+  .tag{ display:inline-block; font-size:.8rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase; padding:.28rem .7rem; border-radius:99px; background:var(--green-tint); color:var(--green-ink); margin-bottom:1rem; }
+  .tag.spot{ background:var(--red-tint); color:var(--red); }
+  ul.big{ margin:.4rem 0 0; padding:0; list-style:none; }
+  ul.big li{ position:relative; padding:.5rem 0 .5rem 1.9rem; font-size:clamp(1.02rem,2vw,1.28rem); color:var(--soft); border-bottom:1px solid var(--line); }
+  ul.big li:last-child{ border-bottom:none; }
+  ul.big li::before{ content:""; position:absolute; left:.2rem; top:1.15em; width:.55rem; height:.55rem; border-radius:2px; background:var(--green); transform:translateY(-50%); }
+  ul.big li b{ color:var(--ink); }
+  .after-note{ margin:1.3rem 0 0; font-size:clamp(1rem,1.9vw,1.2rem); color:var(--ink); font-weight:600; }
+
+  .title-slide{ background:linear-gradient(180deg,var(--paper),var(--bg)); }
+  .title-slide h1{ max-width:20ch; }
+
+  /* problem-statement slide (the 5-second test) */
+  .problem-slide{ background:var(--green-ink); color:#eef3e6; }
+  .problem-slide .kicker{ color:#b9cda4; }
+  .bigstate{ font-size:clamp(1.9rem,5vw,3.6rem); line-height:1.14; font-weight:700; letter-spacing:-.01em; margin:.3rem 0 0; max-width:20ch; text-wrap:balance; }
+  .problem-slide ul.big li{ color:#dbe7cd; border-color:rgba(255,255,255,.14); }
+  .problem-slide ul.big li::before{ background:#8fb96a; }
+  .problem-slide ul.big li b{ color:#fff; }
+  .problem-sub{ margin:1.6rem 0 0; }
+
+  /* persona slide */
+  .persona{ display:grid; grid-template-columns:auto 1fr; gap:1.3rem; align-items:start; background:var(--card); border:1px solid var(--line); border-radius:16px; padding:1.5rem 1.6rem; margin:.4rem 0 1.2rem; }
+  @media(max-width:640px){ .persona{ grid-template-columns:1fr; } }
+  .avatar{ width:5rem; height:5rem; border-radius:50%; background:var(--green); color:#fff; display:flex; align-items:center; justify-content:center; font-size:2rem; font-weight:800; }
+  .persona .pname{ font-size:clamp(1.3rem,2.6vw,1.8rem); font-weight:700; margin:0 0 .2rem; color:var(--ink); }
+  .persona .prole{ color:var(--mute); font-size:1.02rem; margin:0 0 .7rem; }
+  .persona ul{ margin:0; padding-left:1.1rem; color:var(--soft); font-size:clamp(.98rem,1.8vw,1.12rem); }
+  .persona li{ margin:.3rem 0; }
+  .pquote{ border-left:4px solid var(--green); padding:.3rem 0 .3rem 1.1rem; margin:.4rem 0 0; font-size:clamp(1.1rem,2.2vw,1.5rem); font-style:italic; color:var(--green-ink); font-weight:600; }
+  .pquote cite{ display:block; font-style:normal; font-weight:400; font-size:.9rem; color:var(--mute); margin-top:.4rem; }
+  .persona-foot{ font-size:clamp(1rem,1.9vw,1.2rem); color:var(--ink); font-weight:600; }
+
+  /* finding before/after */
+  .compare{ display:grid; grid-template-columns:1fr 1fr; gap:1.1rem; margin-top:.4rem; }
+  @media(max-width:820px){ .compare{ grid-template-columns:1fr; } }
+  .panel{ border:1px solid var(--line); border-radius:12px; overflow:hidden; background:var(--card); display:flex; flex-direction:column; }
+  .panel .cap{ font-size:.82rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:.6rem .9rem; }
+  .cap.before{ background:var(--red-tint); color:var(--red); border-bottom:1px solid var(--red-line); }
+  .cap.after{ background:var(--green-tint); color:var(--green-ink); border-bottom:1px solid var(--green-line); }
+  .body{ padding:1rem 1.1rem; }
+  .row{ display:block; padding:.5rem 0; border-bottom:1px dashed var(--line); font-size:clamp(.95rem,1.7vw,1.08rem); color:var(--soft); }
+  .row:last-child{ border-bottom:none; }
+  .row .u{ display:block; font-family:var(--mono); font-size:.78rem; color:var(--mute); margin-bottom:.15rem; word-break:break-all; }
+  .row b{ color:var(--ink); }
+  .row.miss{ color:var(--red); } .row.miss b{ color:var(--red); }
+  .row.good b{ color:var(--green-ink); }
+  .chip404{ display:inline-block; font-family:var(--mono); font-size:.82rem; color:var(--red); background:var(--red-tint); border:1px solid var(--red-line); border-radius:6px; padding:.15rem .5rem; }
+  .seelive{ margin-top:1rem; font-size:.92rem; color:var(--mute); }
+  .seelive b{ color:var(--blue); } .seelive a{ color:var(--blue); }
+
+  /* quote block inside a finding */
+  .quoteblock{ background:var(--green-ink); color:#eef3e6; border-radius:14px; padding:1.3rem 1.5rem; margin:.2rem 0 1.1rem; }
+  .quoteblock q{ font-size:clamp(1.3rem,3vw,2rem); line-height:1.2; font-weight:600; }
+  .quoteblock q:before{ content:"\201C"; } .quoteblock q:after{ content:"\201D"; }
+  .quoteblock .site{ font-family:var(--mono); font-weight:700; background:rgba(255,255,255,.13); padding:0 .25em; border-radius:5px; }
+  .quoteblock .attr{ margin:.8rem 0 0; font-size:1rem; color:#cfe0be; }
+
+  /* six-source list */
+  .sources{ list-style:none; margin:.2rem 0 0; padding:0; }
+  .sources li{ display:flex; align-items:center; gap:.7rem; font-size:clamp(.95rem,1.7vw,1.08rem); padding:.42rem 0; border-bottom:1px dashed var(--line); color:var(--soft); }
+  .sources li:last-child{ border-bottom:none; }
+  .sources .n{ flex:0 0 1.6rem; height:1.6rem; border-radius:6px; background:var(--red-tint); color:var(--red); font-weight:700; display:flex; align-items:center; justify-content:center; font-size:.85rem; }
+  .sources .loc{ font-family:var(--mono); font-size:.78rem; color:var(--mute); margin-left:auto; }
+
+  /* nav density visual */
+  .megacols{ columns:2; column-gap:1.1rem; font-size:.82rem; line-height:1.4; color:var(--soft); }
+  .megacols .grp{ break-inside:avoid; margin-bottom:.55rem; }
+  .megacols .grp b{ display:block; color:var(--ink); font-size:.8rem; text-transform:uppercase; letter-spacing:.02em; }
+  .cleanmenu .searchrow{ display:flex; gap:.4rem; margin-bottom:.7rem; }
+  .cleanmenu input{ flex:1; font:inherit; font-size:1rem; padding:.5rem .6rem; border:2px solid var(--green); border-radius:7px; background:#fff; color:var(--ink); }
+  .cleanmenu .sbtn{ background:var(--green); color:#fff; font-weight:600; padding:.5rem .9rem; border-radius:7px; align-self:center; }
+  .doors{ list-style:none; margin:0; padding:0; }
+  .doors li{ font-size:1.05rem; padding:.5rem 0; border-bottom:1px solid var(--line); color:var(--green-ink); font-weight:600; }
+  .doors li:last-child{ border-bottom:none; }
+  .doors li small{ display:block; font-weight:400; color:var(--mute); font-size:.85rem; }
+
+  /* spotlight (registration hub) */
+  .spotgrid{ display:grid; grid-template-columns:1fr 1fr; gap:1.1rem; margin-top:.4rem; }
+  @media(max-width:820px){ .spotgrid{ grid-template-columns:1fr; } }
+  .painbox{ background:var(--card); border:1px solid var(--red-line); border-radius:12px; padding:1.1rem 1.3rem; }
+  .painbox h3{ margin:0 0 .5rem; color:var(--red); font-size:1.05rem; }
+  .painbox ul{ margin:0; padding-left:1.1rem; color:var(--soft); font-size:clamp(.95rem,1.7vw,1.08rem); }
+  .painbox li{ margin:.35rem 0; }
+  .stakebox{ background:var(--green-tint); border:1px solid var(--green-line); border-radius:12px; padding:1.1rem 1.3rem; display:flex; flex-direction:column; justify-content:center; }
+  .stakebox p{ margin:0; font-size:clamp(1.05rem,2vw,1.3rem); color:var(--green-ink); font-weight:600; }
+
+  /* concept mockup cards */
+  .mockcards{ display:grid; grid-template-columns:1fr 1fr; gap:1.1rem; margin-top:.4rem; }
+  @media(max-width:820px){ .mockcards{ grid-template-columns:1fr; } }
+  .mock{ display:block; text-decoration:none; color:inherit; background:var(--card); border:1px solid var(--line); border-radius:14px; padding:1.3rem 1.4rem; transition:border-color .15s, transform .15s; }
+  .mock:hover{ border-color:var(--green); transform:translateY(-2px); }
+  .mock .mtag{ font-size:.76rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--green-ink); background:var(--green-tint); border-radius:99px; padding:.15rem .6rem; }
+  .mock h3{ margin:.7rem 0 .3rem; font-size:clamp(1.15rem,2.2vw,1.45rem); color:var(--green-ink); }
+  .mock p{ margin:0 0 .7rem; color:var(--soft); font-size:1rem; }
+  .mock .open{ font-weight:700; color:var(--green); }
+
+  /* benchmark matrix */
+  .matrix{ width:100%; border-collapse:separate; border-spacing:0; margin-top:.6rem; font-size:clamp(.95rem,1.7vw,1.1rem); }
+  .matrix th,.matrix td{ padding:.8rem .9rem; text-align:left; border-bottom:1px solid var(--line); }
+  .matrix thead th{ font-size:.82rem; text-transform:uppercase; letter-spacing:.05em; color:var(--mute); border-bottom:2px solid var(--line); }
+  .matrix tbody th{ font-weight:700; color:var(--ink); }
+  .matrix td.stat{ font-weight:600; }
+  .matrix .x{ color:var(--red); } .matrix .ok{ color:var(--green-ink); }
+  .matrix tr.psu th, .matrix tr.psu td{ background:var(--red-tint); }
+  .matrix tr.wou th, .matrix tr.wou td{ background:var(--green-tint); }
+  .matrix small{ display:block; font-weight:400; color:var(--mute); font-size:.8rem; }
+  .bench-note{ margin-top:1rem; font-size:.92rem; color:var(--mute); }
+
+  /* equity slide */
+  .equity-slide{ background:var(--green-tint); }
+  .scan{ display:grid; grid-template-columns:1fr 1fr; gap:1.1rem; margin:.6rem 0 1.2rem; }
+  @media(max-width:820px){ .scan{ grid-template-columns:1fr; } }
+  .scanbox{ background:#fff; border:1px solid var(--green-line); border-radius:12px; padding:1.1rem 1.2rem; }
+  .scanbox .h{ font-size:clamp(1.1rem,2.2vw,1.4rem); font-weight:700; margin:0 0 .3rem; }
+  .scanbox.pass .h{ color:var(--green-ink); } .scanbox.fail .h{ color:var(--red); }
+  .scanbox p{ margin:0; color:var(--soft); font-size:clamp(.95rem,1.7vw,1.08rem); }
+
+  /* close slide */
+  .close-slide{ background:linear-gradient(180deg,var(--paper),var(--bg)); }
+  .hopes{ margin:.4rem 0 0; padding:0; list-style:none; }
+  .hopes li{ position:relative; padding:.7rem 0 .7rem 2.6rem; border-bottom:1px solid var(--line); font-size:clamp(1.02rem,1.9vw,1.25rem); color:var(--ink); }
+  .hopes li:last-child{ border-bottom:none; }
+  .hopes li::before{ content:"\2713"; position:absolute; left:0; top:.7rem; width:1.8rem; height:1.8rem; background:var(--green); color:#fff; border-radius:50%; font-size:1rem; font-weight:700; display:flex; align-items:center; justify-content:center; }
+  .hopes li b{ color:var(--green-ink); }
+
+  /* chrome */
+  .progress{ position:fixed; top:0; left:0; height:4px; background:var(--green); width:0; z-index:50; transition:width .2s ease; }
+  .chrome{ position:fixed; right:1.1rem; bottom:1rem; display:flex; align-items:center; gap:.5rem; z-index:50; }
+  body:not(.js) .chrome, body:not(.js) .progress, body:not(.js) .hint{ display:none; }
+  .counter{ font-family:var(--mono); font-size:.82rem; color:var(--mute); background:rgba(255,255,255,.85); border:1px solid var(--line); border-radius:99px; padding:.25rem .7rem; }
+  .navbtn{ width:2.4rem; height:2.4rem; border-radius:50%; border:1px solid var(--line); background:#fff; color:var(--ink); font-size:1.1rem; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+  .navbtn:hover{ background:var(--green-tint); border-color:var(--green-line); }
+  .navbtn:disabled{ opacity:.35; cursor:default; }
+  .hint{ position:fixed; left:1.1rem; bottom:1rem; font-size:.8rem; color:var(--mute); z-index:50; }
+  kbd{ font-family:var(--mono); background:#fff; border:1px solid var(--line); border-bottom-width:2px; border-radius:5px; padding:.05rem .35rem; font-size:.78rem; }
+
+  @media print{
+    body{ background:#fff; }
+    .progress,.chrome,.hint{ display:none !important; }
+    body.js .slide{ display:flex !important; }
+    .slide{ min-height:auto; page-break-after:always; border-bottom:none; padding:5vh 6vw; }
+    .problem-slide,.quoteblock{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<!-- 1 · TITLE -->
+<section class="slide title-slide active">
+  <div class="inner">
+    <p class="kicker">Independent UX analysis · findability &amp; retention on pdx.edu</p>
+    <h1>Where pdx.edu loses the students it most needs to keep</h1>
+    <p class="lead">The information is there. But a returning student who can't get a straight answer doesn't ask twice, and getting a straight answer is harder than it should be. This looks at where that happens, who it costs, and what a fixed version looks like.</p>
+    <p class="stamp">Lukas Green · UX + QA · findings verified live on pdx.edu, July 2026</p>
+    <p class="disclaimer">Independent student and design analysis. Not affiliated with, endorsed by, or produced for Portland State University.</p>
+  </div>
+</section>
+
+<!-- 2 · PROBLEM STATEMENT (5-second test) -->
+<section class="slide problem-slide">
+  <div class="inner">
+    <p class="kicker">The problem, in one line</p>
+    <p class="bigstate">A student who can't find the answer doesn't email for help. They drop.</p>
+    <ul class="big problem-sub">
+      <li><b>Retention and enrollment</b> are the priority right now, and findability sits directly upstream of both</li>
+      <li>The students most likely to get lost are the ones PSU most needs to keep: <b>older, returning, second-career, and first-generation</b> learners</li>
+      <li>This is a <b>retention problem</b>, not a tidiness one</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 3 · PERSONA -->
+<section class="slide">
+  <div class="inner">
+    <p class="kicker">Who this is about</p>
+    <h2>Meet Renée</h2>
+    <div class="persona">
+      <div class="avatar">R</div>
+      <div>
+        <p class="pname">Renée, 52</p>
+        <p class="prole">Returning student · second career · works part-time · finishing a BS she started years ago</p>
+        <ul>
+          <li>Does most of this <b>on her phone</b>, between shifts. Comfortable with tech, but time-poor</li>
+          <li>Asks a normal question ("what do I need to register?") and gets bounced between offices and dense pages</li>
+          <li>Grew up with books and classrooms; the all-digital front door is newer to her than to an 18-year-old</li>
+        </ul>
+      </div>
+    </div>
+    <blockquote class="pquote">I almost quit my first term. I couldn't get my questions answered.<cite>A real returning PSU student</cite></blockquote>
+    <p class="persona-foot">Renée is not an edge case. She is what "retention" means.</p>
+  </div>
+</section>
+
+<!-- 4 · FINDING 1: ONE TASK, TWO OWNERS -->
+<section class="slide">
+  <div class="inner">
+    <span class="tag">Finding 1 · One task, two owners</span>
+    <h2>The search works. It hands you two owners of the same task.</h2>
+    <p class="why">Search "major change" and pdx.edu returns the right pages (about 12,200 results, the Registrar's page first). The problem is what comes next: two official destinations for one task, and the rule that matters most is missing from the page where you actually act.</p>
+    <div class="compare">
+      <div class="panel">
+        <div class="cap before">Live today · 2026-07</div>
+        <div class="body">
+          <span class="row"><span class="u">/registration/major-change</span><b>Registrar, where you act.</b> Leads with "Log in to myPSU" and states the 90-credit rule.</span>
+          <span class="row miss">Same page: it never mentions the Graphic Design portfolio review, the once-a-year rule that gates the switch.</span>
+          <span class="row"><span class="u">/advising/exploring-changing-majors</span><b>Advising.</b> Repeats the 90-credit rule and is the <b>only</b> page carrying the portfolio rule.</span>
+          <span class="row"><span class="chip404">/advising/change-your-major → 404</span></span>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="cap after">What it should do</div>
+        <div class="body">
+          <span class="row good"><b>One page</b> to make the change, with every rule that applies to you in it</span>
+          <span class="row good">The portfolio window shown <b>where you act</b>, not only where you read</span>
+          <span class="row good">No 404 on the obvious guess</span>
+        </div>
+      </div>
+    </div>
+    <p class="seelive"><b>See it live:</b> <a href="https://www.pdx.edu/registration/major-change">registration/major-change</a> (acts, omits the portfolio rule) · <a href="https://www.pdx.edu/advising/exploring-changing-majors">advising/exploring-changing-majors</a> (has the rule)</p>
+  </div>
+</section>
+
+<!-- 5 · FINDING 2: SIX PLACES -->
+<section class="slide">
+  <div class="inner">
+    <span class="tag">Finding 2 · The answer lives in six places</span>
+    <h2>"What do I need to finish?" has no single home</h2>
+    <p class="why">Six separate sources a returning student has to find and reconcile alone, and the degree map even forks by catalog year.</p>
+    <div class="compare">
+      <div class="panel">
+        <div class="cap before">Live today · 2026-07</div>
+        <div class="body">
+          <ul class="sources">
+            <li><span class="n">1</span> General bachelor's requirements <span class="loc">/advising</span></li>
+            <li><span class="n">2</span> BA vs BS degree-type requirements <span class="loc">/advising</span></li>
+            <li><span class="n">3</span> Your major's requirements <span class="loc">dept site</span></li>
+            <li><span class="n">4</span> The PSU Bulletin / catalog <span class="loc">catalog.pdx.edu</span></li>
+            <li><span class="n">5</span> Your DARS audit <span class="loc">myPSU login</span></li>
+            <li><span class="n">6</span> A degree map, one per catalog year <span class="loc">/registration</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="cap after">Concept</div>
+        <div class="body">
+          <span class="row good"><b>One view</b> that assembles general, degree-type, and major requirements</span>
+          <span class="row good">Reads <b>your DARS audit and transcript</b> to show only what you still need</span>
+          <span class="row good">Pinned to <b>your catalog year</b> automatically</span>
+          <span class="row good">Written so a returning student without an adviser on call can follow it</span>
+        </div>
+      </div>
+    </div>
+    <p class="seelive"><b>See it live:</b> same degree, two catalog years, two separate pages: <a href="https://www.pdx.edu/registration/science-bachelor-science-2024-25-degree-map">2024-25 map</a> · <a href="https://www.pdx.edu/registration/science-bachelor-science-2025-26-degree-map">2025-26 map</a></p>
+  </div>
+</section>
+
+<!-- 6 · FINDING 3: OVERLOADED NAV -->
+<section class="slide">
+  <div class="inner">
+    <span class="tag">Finding 3 · Overloaded navigation</span>
+    <h2>The tabs carry too much to read</h2>
+    <p class="why">Open "Student Life" and roughly 35 links appear in one panel. They sit under seven labeled categories, so the issue is not missing structure, it is sheer volume. Fine for a 19-year-old with sharp eyes. A real scannability and low-vision cost for an older or returning learner, which is exactly the retention population.</p>
+    <div class="compare">
+      <div class="panel">
+        <div class="cap before">Live today: one tab, ~35 links</div>
+        <div class="body">
+          <div class="megacols">
+            <div class="grp"><b>Campus Life</b>Athletics · Dining · Housing · Student Union · Transportation &amp; Parking</div>
+            <div class="grp"><b>Involvement</b>Clubs &amp; Groups · Jobs &amp; Internships · Student Government</div>
+            <div class="grp"><b>Health &amp; Wellness</b>Campus Recreation · Health &amp; Counseling</div>
+            <div class="grp"><b>Resource Centers</b>Cultural · Disability · DREAMer · Native American · Queer · Students with Children · Transfer · Veteran's · Women's</div>
+            <div class="grp"><b>Support Services</b>Advising · BUILD EXITO · Career · Intl Learning · Learning Center · LSAMP · McNair · Legal · Student Finance · Study Abroad · Technology · TRIO · Writing Center</div>
+          </div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="cap after">Concept: search first, few clear doors</div>
+        <div class="body cleanmenu">
+          <div class="searchrow"><input value="what do you need help with?" readonly aria-label="search"><span class="sbtn">Search</span></div>
+          <ul class="doors">
+            <li>Get help with school <small>advising, tutoring, writing, tech</small></li>
+            <li>Money &amp; paying for it <small>financial aid, student finance</small></li>
+            <li>Find your people <small>resource centers, clubs, communities</small></li>
+            <li>Health &amp; daily life <small>housing, dining, health, transport</small></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <p class="seelive"><b>Confirmed live:</b> Student Life carries ~35 links; Academics (~21) and Admissions (~18) are lighter. Kari also confirmed from inside PSU that the volume comes from six or seven offices each requiring their links, which is why "search first, fewer doors" is the realistic fix.</p>
+  </div>
+</section>
+
+<!-- 7 · SPOTLIGHT: REGISTRATION HUB -->
+<section class="slide">
+  <div class="inner">
+    <span class="tag spot">Spotlight · The registration hub</span>
+    <h2>Where all three converge, at the highest-stakes moment</h2>
+    <p class="why">Every finding above shows up at once in the place a student actually enrolls. This is the moment they decide to stay or go.</p>
+    <div class="spotgrid">
+      <div class="painbox">
+        <h3>What a student hits today</h3>
+        <ul>
+          <li>Old and hard to use, and you <b>can't really do it on a phone</b></li>
+          <li>No clear next step; you get told to "look on the website"</li>
+          <li>A <b>hold</b> you only discover when you try to register</li>
+          <li>Requirements, deadlines, and holds live in different places</li>
+        </ul>
+      </div>
+      <div class="stakebox">
+        <p>This is not a marketing page. It's the transaction. If a returning student stalls here, the university doesn't just lose a session. It loses the student.</p>
+      </div>
+    </div>
+    <p class="seelive"><b>Owned by Registration:</b> the office with the most direct stake in whether these students make it through.</p>
+  </div>
+</section>
+
+<!-- 8 · CONCEPT: MOCKUPS -->
+<section class="slide">
+  <div class="inner">
+    <p class="kicker">What fixed looks like</p>
+    <h2>Two working concepts you can click</h2>
+    <p class="why">Not static images. Real, responsive HTML, built to model the accessibility and mobile-first design the findings ask for.</p>
+    <div class="mockcards">
+      <a class="mock" href="registration-demo.html">
+        <span class="mtag">Flagship</span>
+        <h3>Register from start to finish, on a phone</h3>
+        <p>A clickable journey: clear a blocking hold, find classes, build a plan, and register. Blockers first, plain language, one clear next step, always.</p>
+        <span class="open">Walk the full registration demo &rarr;</span>
+      </a>
+      <a class="mock" href="hifi-degree-path.html">
+        <span class="mtag">Companion</span>
+        <h3>"Change my BA to a BS," answered on one page</h3>
+        <p>Search-first entry, every rule in one place, and remaining requirements mapped from the student's own DARS and transcript.</p>
+        <span class="open">Open the degree-path concept &rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 9 · WHY RETENTION / EQUITY -->
+<section class="slide equity-slide">
+  <div class="inner">
+    <p class="kicker">Why this is retention, not tidiness</p>
+    <div class="scan">
+      <div class="scanbox pass">
+        <p class="h">Fails a scanner? No.</p>
+        <p>None of these trip an automated accessibility check. The WCAG baseline holds.</p>
+      </div>
+      <div class="scanbox fail">
+        <p class="h">Fails a person? Yes.</p>
+        <p>And it fails the exact students the university is measured on keeping.</p>
+      </div>
+    </div>
+    <p class="why" style="margin-bottom:0;">The load lands on the students carrying the most already: working adults, older and returning learners, first-generation students, anyone without an adviser to call or the eyesight to skim a wall of small links. A scattered journey quietly costs the people with the least time and the least slack, and those are the people retention and enrollment depend on.</p>
+  </div>
+</section>
+
+<!-- 11 · CLOSE -->
+<section class="slide close-slide">
+  <div class="inner">
+    <p class="kicker">Where I'd love to help</p>
+    <h2>What I'm hoping for</h2>
+    <ul class="hopes">
+      <li><b>That these student stories reach the people who own these systems</b>, especially Registration, where the stakes are highest.</li>
+      <li><b>To help research and test these tech-UX issues</b> as PSU takes them on. I'm a student who lived this, with a UX and QA background and a habit of building working concepts, not just slides.</li>
+      <li><b>An honest read from people who do this inside PSU:</b> does this match what you see, and who is the right person to hear it?</li>
+    </ul>
+    <p class="stamp">Thank you for the time and the read. · Lukas Green · UX + QA</p>
+  </div>
+</section>
+
+<div class="chrome">
+  <button class="navbtn" id="prev" aria-label="Previous slide">‹</button>
+  <span class="counter" id="counter">1 / 10</span>
+  <button class="navbtn" id="next" aria-label="Next slide">›</button>
+</div>
+
+<script>
+(function(){
+  document.body.classList.add('js');
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var i = 0;
+  var counter = document.getElementById('counter');
+  var progress = document.getElementById('progress');
+  var prev = document.getElementById('prev');
+  var next = document.getElementById('next');
+  function show(n){
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach(function(s, idx){ s.classList.toggle('active', idx === i); });
+    counter.textContent = (i + 1) + ' / ' + slides.length;
+    progress.style.width = ((i + 1) / slides.length * 100) + '%';
+    prev.disabled = (i === 0); next.disabled = (i === slides.length - 1);
+    window.scrollTo(0, 0);
+  }
+  function go(d){ show(i + d); }
+  document.addEventListener('keydown', function(e){
+    if (e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '||e.key==='Spacebar'){ e.preventDefault(); go(1); }
+    else if (e.key==='ArrowLeft'||e.key==='PageUp'){ e.preventDefault(); go(-1); }
+    else if (e.key==='Home'){ e.preventDefault(); show(0); }
+    else if (e.key==='End'){ e.preventDefault(); show(slides.length-1); }
+    else if (e.key==='f'||e.key==='F'){
+      if(!document.fullscreenElement && document.documentElement.requestFullscreen){ document.documentElement.requestFullscreen(); }
+      else if(document.exitFullscreen){ document.exitFullscreen(); }
+    }
+  });
+  prev.addEventListener('click', function(){ go(-1); });
+  next.addEventListener('click', function(){ go(1); });
+  document.addEventListener('click', function(e){
+    if (e.target.closest('a, button, input')) return;
+    var x = e.clientX / window.innerWidth;
+    if (x > 0.66) go(1); else if (x < 0.20) go(-1);
+  });
+  var x0 = null;
+  document.addEventListener('touchstart', function(e){ x0 = e.touches[0].clientX; }, {passive:true});
+  document.addEventListener('touchend', function(e){
+    if (x0===null) return;
+    var dx = e.changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 50){ go(dx < 0 ? 1 : -1); }
+    x0 = null;
+  }, {passive:true});
+  show(0);
+})();
+</script>
+
+</body>
+</html>
