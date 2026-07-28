@@ -527,7 +527,7 @@
             </div>
             <div class="item__buy">
               <span class="price">$&mdash;</span>
-              <button type="button" class="btn btn--gold buy" data-title="Art Inside Out — Recovery Edition">Buy <span class="arrow" aria-hidden="true">&rarr;</span></button>
+              <button type="button" class="btn btn--gold buy" data-title="Art Inside Out: Recovery Edition">Buy <span class="arrow" aria-hidden="true">&rarr;</span></button>
             </div>
             <p style="margin-top:.6rem"><span class="todo">price to confirm</span></p>
           </div>
@@ -769,7 +769,7 @@
     <div class="row" id="mShipRow"><span>Shipping</span><span class="muted">Calculated at checkout</span></div>
     <div class="row row--t"><span>Total</span><span id="mTotal">$&mdash;</span></div>
     <a class="btn btn--gold btn--full" id="mCheckout" href="#" style="margin-top:1.1rem">Continue to secure checkout <span class="arrow" aria-hidden="true">&rarr;</span></a>
-    <p class="modal__note">Payment handled by a secure processor. <span class="todo">connect Stripe / Gumroad link</span></p>
+    <p class="modal__note">Secure checkout by Stripe. <span class="todo">paste the Stripe link to go live</span></p>
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
@@ -836,8 +836,14 @@
     new MutationObserver(onScroll).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
   })();
   (function () {
-    var CHECKOUT_URLS = {}; // paste Stripe Payment Link / Gumroad URLs per product title to go live
-    function money(n) { return "$" + n.toFixed(2); }
+    // ONLY STEP TO GO LIVE: create a Stripe Payment Link for each book, paste its URL here.
+    // Keys must match the book titles exactly. Nothing else is needed to take real payments.
+    var CHECKOUT_URLS = {
+      "Art Inside Out": "",
+      "Art Inside Out: Recovery Edition": "",
+      "Art Inside Out: Faith-Based Edition": ""
+    };
+    function money(n) { return n > 0 ? "$" + n.toFixed(2) : "Set at checkout"; }
     document.querySelectorAll('.fmt').forEach(function (grp) {
       grp.addEventListener('click', function (e) {
         var b = e.target.closest('button'); if (!b) return;
@@ -870,7 +876,7 @@
       var url = CHECKOUT_URLS[st.title];
       if (url) { window.location.href = url; return; }
       e.preventDefault(); close();
-      showToast('Demo: connect a Stripe or Gumroad checkout link to take real payments.');
+      showToast('Almost live: paste this book\'s Stripe Payment Link to take payments.');
     });
   })();
 </script>
