@@ -27,10 +27,10 @@
     --ink: #1F1B16;
     --ink-soft: #5A5348;
     /* logo primaries promoted to bright accents on warm ivory (research-backed) */
-    --red: #E03131;
+    --red: #1E7A45;   /* deep green, the primary accent since 2026-08-07 */
     --blue: #1971C2;
     --green: #2F9E44;
-    --red-lite: #C92A2A;
+    --red-lite: #17603A;
     --green-lite: #237032;
     --gold-bright: #F6B01E;
     --rule: rgba(31,27,22,.16);
@@ -39,17 +39,18 @@
     --on-desk-soft: #5A5348;
 
     --sheet: 760px;
-    --pad: clamp(1.2rem, 7vw, 7.5rem);
+    --wide: 1280px;
+    --pad: clamp(1.2rem, 4vw, 3.5rem);
   }
 
   body { background: var(--desk); color: var(--ink); font-family: var(--serif);
     font-size: clamp(1.05rem, .45vw + .96rem, 1.16rem); line-height: 1.68;
     -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 
-  .sheet { background: var(--paper); max-width: calc(var(--sheet) + 15rem); margin: 0 auto; padding: 0 var(--pad);
+  .sheet { background: var(--paper); max-width: var(--wide); margin: 0 auto; padding: 0 var(--pad);
     box-shadow: none; position: relative; }
   .col { max-width: var(--sheet); margin: 0 auto; }
-  .out { max-width: calc(var(--sheet) + 15rem); margin: 0 auto; padding: 0 var(--pad); }
+  .out { max-width: var(--wide); margin: 0 auto; padding: 0 var(--pad); }
 
   h1, h2, h3 { margin: 0; font-family: var(--serif); font-weight: 600; line-height: 1.08; letter-spacing: -.012em; text-wrap: balance; }
   h1 { font-size: clamp(2.3rem, 5.4vw, 3.9rem); line-height: 1.02; }
@@ -71,7 +72,7 @@
 
   .note { font-family: var(--serif); font-style: italic; font-size: .88rem; line-height: 1.45; color: var(--ink-soft);
     border-left: 1px solid var(--red); padding-left: .8rem; max-width: 15rem; }
-  @media (min-width: 1180px) { .note--float { position: absolute; left: calc(50% + var(--sheet) / 2 + 2.2rem); width: 13rem; transform: rotate(-.6deg); } }
+  @media (min-width: 1320px) { .note--float { position: absolute; left: calc(50% + var(--sheet) / 2 + 2.2rem); width: 14rem; transform: rotate(-.6deg); } }
   @media (max-width: 1179px) { .note--float { margin: 1.4rem 0; } }
 
   .btn { display: inline-flex; align-items: center; gap: .5em; font-family: var(--sans); font-weight: 600; font-size: .93rem;
@@ -94,7 +95,7 @@
 
   /* top promo bar — sell the book */
   .promo { background: var(--red); color: #fff; }
-  .promo__in { max-width: calc(var(--sheet) + 15rem); margin: 0 auto; padding: .6rem var(--pad); display: flex; flex-wrap: wrap;
+  .promo__in { max-width: var(--wide); margin: 0 auto; padding: .6rem var(--pad); display: flex; flex-wrap: wrap;
     align-items: center; justify-content: center; gap: .5rem 1rem; font-family: var(--sans); font-size: .84rem; text-align: center; }
   .promo__tag { background: rgba(255,255,255,.22); border-radius: 2px; padding: .15em .5em; font-size: .64rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
   .promo a { color: #fff; font-weight: 700; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.6); }
@@ -102,7 +103,7 @@
 
   /* book CTA on the paper */
   .bookcta { display: grid; grid-template-columns: auto 1fr auto; gap: clamp(1rem, 3vw, 2rem); align-items: center;
-    border: 1px solid var(--rule); border-left: 4px solid var(--red); border-radius: 3px; padding: clamp(1.1rem, 2.5vw, 1.5rem); margin: 0 0 .5rem; }
+    border: 1px solid var(--rule); border-left: 4px solid var(--red); border-radius: 3px; padding: clamp(1.1rem, 2.5vw, 1.5rem); margin: 0 auto .5rem; }
   @media (max-width: 760px) { .bookcta { grid-template-columns: auto 1fr; } .bookcta__buy { grid-column: 1 / -1; justify-content: flex-start; } }
   .bookcta__cover { width: 76px; aspect-ratio: 3/4.2; background: linear-gradient(158deg, #1b2b2a, #0d1817); border: 1px solid rgba(0,0,0,.25);
     display: grid; align-content: center; gap: .2rem; padding: .55rem; position: relative; box-shadow: 0 12px 26px -14px rgba(0,0,0,.6); flex: none; }
@@ -112,36 +113,55 @@
   .bookcta__cover .w { height: 4px; width: 58%; background: var(--gold-bright); border-radius: 50%; transform: rotate(-3deg); }
   .bookcta__body h3 { margin: .25rem 0 .3rem; }
   .bookcta__body p { font-family: var(--sans); font-size: .88rem; color: var(--ink-soft); }
-  .bookcta__buy { display: flex; align-items: center; gap: .9rem; }
-  .bookcta__price { font-family: var(--serif); font-size: 1.5rem; font-variant-numeric: tabular-nums; }
+  .bookcta__buy { display: flex; flex-direction: column; align-items: stretch; gap: .5rem; text-align: center; min-width: 9.5rem; }
+  .bookcta__price { font-family: var(--sans); font-size: .78rem; font-weight: 600; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--ink-soft); }
 
   /* masthead — real logo, on the desk */
   header.mast { background: var(--desk); border-bottom: 1px solid rgba(255,255,255,.07); position: sticky; top: 0; z-index: 50; }
-  .mast__in { max-width: calc(var(--sheet) + 15rem); margin: 0 auto; padding: 0 var(--pad); display: flex; align-items: center; gap: 1.2rem; height: 64px; }
+  .mast__in { max-width: var(--wide); margin: 0 auto; padding: 0 var(--pad); display: flex; align-items: center; gap: 1.6rem; height: 68px; }
   .logo { display: inline-flex; align-items: center; gap: .6rem; text-decoration: none; color: var(--on-desk); margin-right: auto; }
   .logo img { height: 30px; width: auto; }
   .logo span { font-family: var(--serif); font-size: .98rem; letter-spacing: .01em; }
   @media (max-width: 560px) { .logo span { display: none; } }
-  .mast__nav { display: flex; gap: 1.3rem; }
-  .mast__nav a { font-family: var(--sans); font-size: .8rem; text-decoration: none; color: var(--on-desk-soft); }
-  .mast__nav a:hover { color: var(--on-desk); }
+  .mast__nav { display: flex; gap: .35rem; align-items: center; }
+  .mast__nav a {
+    position: relative; font-family: var(--sans); font-size: .72rem; font-weight: 600;
+    letter-spacing: .11em; text-transform: uppercase; text-decoration: none;
+    color: var(--ink-soft); white-space: nowrap; padding: .55rem .7rem; border-radius: 2px;
+    transition: color .18s ease, background-color .18s ease;
+  }
+  /* the rule grows out from the centre, which reads as a pen stroke rather than
+     a generic underline, and matches the hand-drawn marks used elsewhere */
+  .mast__nav a::after {
+    content: ""; position: absolute; left: .7rem; right: .7rem; bottom: .28rem; height: 2px;
+    background: var(--red); border-radius: 2px;
+    transform: scaleX(0); transform-origin: 50% 50%;
+    transition: transform .22s cubic-bezier(.2,.7,.3,1);
+  }
+  .mast__nav a:hover, .mast__nav a:focus-visible { color: var(--ink); background: rgba(31,27,22,.045); }
+  .mast__nav a:hover::after, .mast__nav a:focus-visible::after { transform: scaleX(1); }
+  /* the section you are actually looking at stays marked */
+  .mast__nav a[aria-current="true"] { color: var(--ink); }
+  .mast__nav a[aria-current="true"]::after { transform: scaleX(1); background: var(--gold-bright); }
+  @media (prefers-reduced-motion: reduce) { .mast__nav a::after { transition: none; } }
   .mast__r { display: flex; align-items: center; gap: .8rem; }
   .themebtn { background: none; border: 1px solid rgba(255,255,255,.2); color: var(--on-desk-soft); width: 34px; height: 34px; border-radius: 2px; cursor: pointer; display: grid; place-items: center; }
   .themebtn:hover { color: var(--on-desk); border-color: var(--on-desk); }
-  @media (max-width: 980px) { .mast__nav { display: none; } }
+  @media (max-width: 900px) { .mast__nav { display: none; } }
 
   /* hero */
   .hero { padding: clamp(2.8rem, 6vw, 4.6rem) 0 clamp(1.8rem, 4vw, 2.8rem); position: relative; }
-  .hero__grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.8rem, 4vw, 3.2rem); align-items: stretch; }
+  .hero__grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(1.8rem, 4vw, 3.2rem); align-items: start; }
   @media (max-width: 860px) { .hero__grid { grid-template-columns: 1fr; } }
-  .hero__copy { display: flex; flex-direction: column; justify-content: center; }
+  .hero__copy { display: flex; flex-direction: column; justify-content: flex-start; }
   .hero h1 { margin: .9rem 0 0; }
   .hero__attr { font-family: var(--sans); font-size: .84rem; color: var(--ink-soft); margin-top: 1.2rem; }
   .hero__attr b { color: var(--ink); }
   .hero__sub { margin-top: 1.2rem; }
   .hero__ctas { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.7rem; }
   .hero__ph { position: relative; display: flex; flex-direction: column; }
-  .hero__ph img { width: 100%; height: 100%; flex: 1; min-height: 460px; object-fit: cover; object-position: center 28%; border-radius: 2px; box-shadow: 0 20px 44px -22px rgba(0,0,0,.55); }
+  .hero__ph img { width: 100%; height: auto; aspect-ratio: 4/5; max-height: 62vh; object-fit: cover; object-position: center 22%; border-radius: 2px; box-shadow: 0 20px 44px -22px rgba(0,0,0,.55); }
   .hero__ph figcaption { font-family: var(--serif); font-style: italic; font-size: .8rem; color: var(--ink-soft); margin-top: .5rem; }
 
   .rule { height: 1px; background: var(--rule-soft); }
@@ -160,6 +180,7 @@
   /* lessons */
   .lessons { padding: clamp(2.2rem, 5vw, 3.4rem) 0; }
   .lessons__list { list-style: none; margin: 1.5rem 0 0; padding: 0; column-count: 2; column-gap: 2.5rem; }
+  .lessons__note { margin-top: 1.3rem; font-family: var(--sans); font-size: .85rem; color: var(--ink-soft); }
   @media (max-width: 700px) { .lessons__list { column-count: 1; } }
   .lessons__list li { break-inside: avoid; display: flex; gap: .8rem; padding: .5rem 0; border-bottom: 1px solid var(--rule-soft); }
   .lessons__list .n { font-family: var(--sans); font-size: .72rem; font-weight: 700; color: var(--blue); min-width: 1.5rem; padding-top: .34rem; font-variant-numeric: tabular-nums; }
@@ -245,7 +266,21 @@
   .kirk__body p + p { margin-top: 1rem; }
 
   /* facility */
-  .facility__in { display: grid; gap: 1.1rem; max-width: 58ch; }
+  .facility__in { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+    column-gap: clamp(2rem, 5vw, 4rem); row-gap: 0; align-items: start; }
+  .facility__in > .marker { grid-column: 1; grid-row: 1; }
+  .facility__in > h2 { grid-column: 1; grid-row: 2; margin-top: .5rem; }
+  /* The copy stacks in the right column with its own rhythm. Letting the grid
+     row-gap space these instead produced 3.4rem chasms between paragraphs. */
+  .facility__in > p { grid-column: 2; max-width: 54ch; margin: 0; }
+  .facility__in > p + p { margin-top: .9rem; }
+  .facility__in > div { grid-column: 2; margin-top: 1.6rem; }
+  .facility__in > p:first-of-type { grid-row: 1 / span 2; align-self: start; }
+  @media (max-width: 860px) {
+    .facility__in { grid-template-columns: 1fr; gap: 1.1rem; }
+    .facility__in > .marker, .facility__in > h2,
+    .facility__in > p, .facility__in > div { grid-column: 1; }
+  }
 
   footer.foot { background: var(--desk-2); color: var(--on-desk-soft); padding: 2.2rem 0 1.8rem; border-top: 1px solid rgba(255,255,255,.08); }
   .foot__in { display: flex; flex-wrap: wrap; gap: 1.2rem; justify-content: space-between; align-items: center; font-family: var(--sans); font-size: .85rem; }
@@ -282,12 +317,17 @@
   .toast[hidden] { display: none; }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-  .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1); }
-  .reveal.in { opacity: 1; transform: none; }
+  /* Only hide for the fade-in when JavaScript is actually running. The script
+     stamps .js on <html> at parse time. Without this gate the page ships with
+     most of its content at opacity 0 to anything that does not run JS, which
+     includes search engines. verify-deliverable caught this, not a person. */
+  .js .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1); }
+  .js .reveal.in { opacity: 1; transform: none; }
+  .reveal { opacity: 1; transform: none; }
 
   @media (prefers-reduced-motion: reduce) {
     * { animation: none !important; transition: none !important; }
-    .reveal { opacity: 1; transform: none; }
+    .js .reveal { opacity: 1; transform: none; }
     .swipe::before { transform: rotate(-1deg) scaleX(1); }
     .draw { position: static; }
   }
@@ -313,7 +353,7 @@
   .kidsgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(1rem, 2.4vw, 1.6rem); margin-top: 2rem; }
   @media (max-width: 860px) { .kidsgrid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 440px) { .kidsgrid { grid-template-columns: 1fr; } }
-  .kidcover { aspect-ratio: 3/4; background: var(--desk-2); border: 1px solid var(--rule); border-radius: 3px;
+  .kidcover { aspect-ratio: 1/1.15; background: var(--desk-2); border: 1px solid var(--rule); border-radius: 3px;
     display: grid; place-items: center; box-shadow: 0 12px 26px -16px rgba(0,0,0,.35); }
   .kidcover span { font-family: var(--sans); font-size: .7rem; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-soft); }
   .kidcard h3 { margin: .7rem 0 .15rem; font-size: 1.05rem; }
@@ -326,6 +366,33 @@
   .pillar__n { font-family: var(--sans); font-weight: 800; font-size: 1rem; letter-spacing: .08em; }
   .pillar h3 { margin: .5rem 0 .45rem; font-size: clamp(1.05rem, 1.5vw, 1.28rem); }
   .pillar p { font-family: var(--sans); font-size: .92rem; color: var(--ink-soft); line-height: 1.55; }
+
+  #notify input[type=email] { flex:1 1 16rem; padding:.85rem 1rem; border-radius:.35rem;
+    border:1px solid rgba(31,27,22,.3); font-family:var(--sans); font-size:.95rem;
+    background:#fff; color:var(--ink); }
+  #notify input[type=email]::placeholder { color: rgba(31,27,22,.45); }
+  #notify input[type=email]:focus-visible { outline:2px solid var(--red); outline-offset:2px; border-color:transparent; }
+
+  /* Clicking a nav link used to drop four of the seven sections' headings
+     underneath the sticky masthead. Reserve the bar's height plus a little
+     breathing room so a jump always lands on the heading, not past it. */
+  section[id], [id="top"] { scroll-margin-top: 88px; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  /* Any full-width photo in the flow gets the same ceiling as the hero, so no
+     single image can swallow a screen. Caught by layout-audit, not by eye. */
+  figure > img { max-height: 78vh; object-fit: cover; }
+
+  /* Four tall empty boxes each captioned "cover to confirm" read as a broken
+     page. Squarer placeholders in a tighter grid, and one honest line under
+     them, read as work in progress. Flagged by layout-audit as a section only
+     10% filled at tablet and mobile. */
+  .kidsgrid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important; }
+  .kids__note { margin-top: 1.1rem; font-family: var(--sans); font-size: .85rem; color: var(--ink-soft); }
+
+  .kids { padding-bottom: clamp(3rem, 7vw, 5rem); }
+  .kidsgrid { margin-bottom: 1.4rem; }
 </style>
 </head>
 <body>
@@ -334,8 +401,8 @@
 <div class="promo">
   <div class="promo__in">
     <span class="promo__tag">The book</span>
-    <p>Twelve lessons, self-directed, in a book you can hold.</p>
-    <a href="#shop">Get your copy &rarr;</a>
+    <p>Twelve lessons, self-directed, in a book you can hold. Coming soon.</p>
+    <a href="#notify">Get notified &rarr;</a>
   </div>
 </div>
 <header class="mast">
@@ -354,7 +421,7 @@
       <a href="#kirk">Kirk</a>
     </nav>
     <div class="mast__r">
-      <a class="btn btn--gold" href="#shop">Get the book</a>
+      <a class="btn btn--gold" href="#notify">Get notified</a>
     </div>
   </div>
 </header>
@@ -375,7 +442,7 @@
             me. Twelve lessons. A pencil. That's all it takes to start.
           </p>
           <div class="hero__ctas">
-            <a class="btn btn--red" href="#shop">Get the book <span class="arrow" aria-hidden="true">&rarr;</span></a>
+            <a class="btn btn--red" href="#notify">Get notified <span class="arrow" aria-hidden="true">&rarr;</span></a>
             <a class="btn btn--quiet" href="#method">See how it works</a>
           </div>
         </div>
@@ -396,8 +463,8 @@
         <p>The complete method, self-directed, so you can work it anywhere. Written with Dr. Bud Beamer, MD and Rev. Jenn Dafoe-Turner.</p>
       </div>
       <div class="bookcta__buy">
-        <span class="bookcta__price">$&mdash;</span>
-        <a class="btn btn--red" href="#shop">Get the book <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        <span class="bookcta__price" style="font-size:.95rem">Coming soon</span>
+        <a class="btn btn--red" href="#notify">Get notified <span class="arrow" aria-hidden="true">&rarr;</span></a>
       </div>
     </aside>
 
@@ -461,8 +528,8 @@
           <div class="draw">
             <canvas id="circles" width="480" height="480" aria-hidden="true"></canvas>
             <p class="draw__cap">Keep scrolling. It finds the circle.</p>
+            <p class="note" style="margin-top:1.2rem">Kirk drew these by hand, thousands of times, in a cell with one pencil. The wrongs are the point.</p>
           </div>
-          <p class="note" style="margin-top:1.6rem">Kirk drew these by hand, thousands of times, in a cell with one pencil. The wrongs are the point.</p>
         </div>
       </div>
     </section>
@@ -476,10 +543,11 @@
         Each lesson teaches a drawing skill and a way of thinking at the same time. You work
         them in order, at your own pace, with whatever you have.
       </p>
-      <ol class="lessons__list">
-        <li><span class="n">01</span><span class="t" style="color:var(--ink-soft)">Lesson titles come from Kirk, not from us</span></li>
-      </ol>
-      <p style="margin-top:1.2rem; color:var(--ink-soft); font-family:var(--sans); font-size:.9rem">The real twelve lessons will be listed here exactly as Kirk teaches them. <span class="todo">awaiting Kirk's lesson list</span></p>
+      <!-- OPEN: replace this whole block with <ol class="lessons__list"> and Kirk's
+           twelve titles the moment he supplies them. The waiting state below is
+           deliberate: twelve numbered blanks read as a sequence that exists and is
+           being withheld, which is true. A single lonely list row read as broken. -->
+      <p class="lessons__note">The twelve titles are Kirk's to name. They go here when he does.</p>
     </section>
   </div>
 
@@ -501,15 +569,14 @@
             <h3>Art Inside Out</h3>
             <p class="item__sub">A Self-Directed Art Program with Insights for a Positive Life</p>
             <p class="item__d">The complete twelve-lesson method. Work it alone, or teach it to a room.</p>
-            <div class="fmt" role="radiogroup" aria-label="Format for Art Inside Out">
-              <button type="button" class="on" role="radio" aria-checked="true" data-price="0" data-fmt="Paperback" data-ship="1">Paperback</button>
-              <button type="button" role="radio" aria-checked="false" data-price="0" data-fmt="eBook" data-ship="0">eBook</button>
+            <div class="fmt fmt--static" role="group" aria-label="Format for Art Inside Out">
+              <button type="button" class="on" disabled data-price="0" data-fmt="Paperback" data-ship="1">Paperback</button>
+              <button type="button" disabled data-price="0" data-fmt="eBook" data-ship="0">eBook</button>
             </div>
             <div class="item__buy">
-              <span class="price">$&mdash;</span>
-              <button type="button" class="btn btn--gold buy" data-title="Art Inside Out">Buy <span class="arrow" aria-hidden="true">&rarr;</span></button>
+              <span class="price" style="font-size:1rem;letter-spacing:.02em">Coming soon</span>
             </div>
-            <p style="margin-top:.6rem"><span class="todo">price to confirm</span></p>
+            <p style="margin-top:.6rem"><a class="ilink" href="#notify">Tell me when it's out <span class="arrow" aria-hidden="true">&rarr;</span></a></p>
           </div>
         </article>
         <article class="item">
@@ -521,15 +588,14 @@
             <h3>Recovery Edition</h3>
             <p class="item__sub">The same method, adapted for addiction &amp; healing work</p>
             <p class="item__d">Reworked for recovery centers and the people in them.</p>
-            <div class="fmt" role="radiogroup" aria-label="Format for Recovery Edition">
-              <button type="button" class="on" role="radio" aria-checked="true" data-price="0" data-fmt="Paperback" data-ship="1">Paperback</button>
-              <button type="button" role="radio" aria-checked="false" data-price="0" data-fmt="eBook" data-ship="0">eBook</button>
+            <div class="fmt fmt--static" role="group" aria-label="Format for Recovery Edition">
+              <button type="button" class="on" disabled data-price="0" data-fmt="Paperback" data-ship="1">Paperback</button>
+              <button type="button" disabled data-price="0" data-fmt="eBook" data-ship="0">eBook</button>
             </div>
             <div class="item__buy">
-              <span class="price">$&mdash;</span>
-              <button type="button" class="btn btn--gold buy" data-title="Art Inside Out: Recovery Edition">Buy <span class="arrow" aria-hidden="true">&rarr;</span></button>
+              <span class="price" style="font-size:1rem;letter-spacing:.02em">Coming soon</span>
             </div>
-            <p style="margin-top:.6rem"><span class="todo">price to confirm</span></p>
+            <p style="margin-top:.6rem"><a class="ilink" href="#notify">Tell me when it's out <span class="arrow" aria-hidden="true">&rarr;</span></a></p>
           </div>
         </article>
         <article class="item">
@@ -541,21 +607,20 @@
             <h3>Faith-Based Edition</h3>
             <p class="item__sub">The same method, told through a faith lens</p>
             <p class="item__d">The twelve lessons with scripture woven in, for faith-based settings.</p>
-            <div class="fmt" role="radiogroup" aria-label="Format for Faith-Based Edition">
-              <button type="button" class="on" role="radio" aria-checked="true" data-price="0" data-fmt="Paperback" data-ship="1">Paperback</button>
-              <button type="button" role="radio" aria-checked="false" data-price="0" data-fmt="eBook" data-ship="0">eBook</button>
+            <div class="fmt fmt--static" role="group" aria-label="Format for Faith-Based Edition">
+              <button type="button" class="on" disabled data-price="0" data-fmt="Paperback" data-ship="1">Paperback</button>
+              <button type="button" disabled data-price="0" data-fmt="eBook" data-ship="0">eBook</button>
             </div>
             <div class="item__buy">
-              <span class="price">$&mdash;</span>
-              <button type="button" class="btn btn--gold buy" data-title="Art Inside Out: Faith-Based Edition">Buy <span class="arrow" aria-hidden="true">&rarr;</span></button>
+              <span class="price" style="font-size:1rem;letter-spacing:.02em">Coming soon</span>
             </div>
-            <p style="margin-top:.6rem"><span class="todo">price to confirm</span></p>
+            <p style="margin-top:.6rem"><a class="ilink" href="#notify">Tell me when it's out <span class="arrow" aria-hidden="true">&rarr;</span></a></p>
           </div>
         </article>
       </div>
       <div class="band__foot">
         <p>Want to put copies into a facility? <a class="ilink" href="mailto:aio.kirkcharltonarts@gmail.com?subject=Sponsoring%20Art%20Inside%20Out%20books">Sponsor books <span class="arrow" aria-hidden="true">&rarr;</span></a></p>
-        <p>Also on major retailers <span class="todo">Amazon / B&amp;N links to confirm</span></p>
+        <p>Retail availability to be announced.<!-- OPEN: confirm Amazon / B&N listings with Kirk --></p>
         <p style="margin-top:.4rem">Printed and shipped by <b>Abundance Books</b>.</p>
       </div>
     </div>
@@ -564,32 +629,26 @@
   <section class="kids col reveal" id="kids">
       <p class="marker">Also by Kirk</p>
       <h2>Children's books, illustrated by Kirk.</h2>
-      <p class="lede" style="margin-top:.9rem; max-width:54ch">
-        Kirk's award-winning children's book illustrations, published by Abundance Books, all drawn by
-        hand. Titles coming from Kirk. <span class="todo">4 titles to confirm</span>
-      </p>
+      <p class="lede" style="margin-top:.9rem; max-width:54ch">Kirk has illustrated four children's books.<!-- OPEN: 4 titles + covers to confirm with Kirk --></p>
       <div class="kidsgrid">
         <article class="kidcard">
-          <div class="kidcover" style="border-top:4px solid var(--red)"><span>Cover to confirm</span></div>
-          <h3>Title to confirm</h3>
-          <p>Illustrated by Kirk Charlton</p>
+          <div class="kidcover" style="border-top:4px solid #C2612F" aria-hidden="true"></div>
+          
         </article>
         <article class="kidcard">
-          <div class="kidcover" style="border-top:4px solid var(--blue)"><span>Cover to confirm</span></div>
-          <h3>Title to confirm</h3>
-          <p>Illustrated by Kirk Charlton</p>
+          <div class="kidcover" style="border-top:4px solid var(--blue)" aria-hidden="true"></div>
+          
         </article>
         <article class="kidcard">
-          <div class="kidcover" style="border-top:4px solid var(--green)"><span>Cover to confirm</span></div>
-          <h3>Title to confirm</h3>
-          <p>Illustrated by Kirk Charlton</p>
+          <div class="kidcover" style="border-top:4px solid var(--green)" aria-hidden="true"></div>
+          
         </article>
         <article class="kidcard">
-          <div class="kidcover" style="border-top:4px solid var(--gold-bright)"><span>Cover to confirm</span></div>
-          <h3>Title to confirm</h3>
-          <p>Illustrated by Kirk Charlton</p>
+          <div class="kidcover" style="border-top:4px solid var(--gold-bright)" aria-hidden="true"></div>
+          
         </article>
       </div>
+      <p class="kids__note">Four titles, illustrated by Kirk. Covers and titles coming from the publisher.</p>
     </section>
 
   <!-- ============ MEDIA ============ -->
@@ -661,7 +720,7 @@
           <span class="mdate">2018</span></a></li>
         <li><a href="#media">
           <span class="type type--tv">TV</span>
-          <span class="mtitle"><b>KOIN</b>Interview with Kirk Charlton <span class="todo">link to confirm</span></span>
+          <span class="mtitle"><b>KOIN</b>Interview with Kirk Charlton<!-- OPEN: confirm the KOIN link --></span>
           <span class="mdate">—</span></a></li>
       </ul>
     </div>
@@ -676,14 +735,14 @@
         <div class="cls__c">
           <span class="where">Portland, OR</span>
           <h3>Drawing with Kirk at ADX</h3>
-          <p class="fee">$&mdash; <span class="todo">fee to confirm</span></p>
+          <p class="fee" style="font-size:.95rem">Pricing on request</p>
           <p>Limited seats. Materials included.</p>
           <a class="ilink" href="mailto:aio.kirkcharltonarts@gmail.com?subject=ADX%20class">Sign up <span class="arrow" aria-hidden="true">&rarr;</span></a>
         </div>
         <div class="cls__c">
           <span class="where">Salem, OR</span>
           <h3>Drawing with Kirk at Hopewell Hub</h3>
-          <p class="fee">$&mdash; <span class="todo">fee to confirm</span></p>
+          <p class="fee" style="font-size:.95rem">Pricing on request</p>
           <p>The same method, taught in person.</p>
           <a class="ilink" href="mailto:aio.kirkcharltonarts@gmail.com?subject=Hopewell%20Hub%20class">Sign up <span class="arrow" aria-hidden="true">&rarr;</span></a>
         </div>
@@ -735,43 +794,39 @@
       <div style="margin-top:1.4rem"><a class="btn btn--gold" href="mailto:aio.kirkcharltonarts@gmail.com?subject=Bringing%20Art%20Inside%20Out%20to%20our%20facility">Email the program <span class="arrow" aria-hidden="true">&rarr;</span></a></div>
     </div>
   </section>
+
+  <!-- ============ NOTIFY ============ -->
+  <section class="band" id="notify">
+    <div class="out">
+      <div class="band__head reveal">
+        <p class="marker">The book</p>
+        <h2 style="margin-top:.5rem">Be first to know.</h2>
+        <p>All three editions are coming. Leave your email and you will hear the moment they are available, and nothing else.</p>
+      </div>
+      <form class="notify reveal" method="POST" action="#" id="notifyForm"
+            style="display:flex;gap:.6rem;flex-wrap:wrap;max-width:34rem;margin-top:1.4rem">
+        <label class="skip" for="notifyEmail">Your email address</label>
+        <input id="notifyEmail" name="email" type="email" required autocomplete="email" placeholder="you@example.com" />
+        <input type="hidden" name="_subject" value="Art Inside Out book launch list" />
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+        <button class="btn btn--gold" type="submit">Notify me <span class="arrow" aria-hidden="true">&rarr;</span></button>
+      </form>
+      <p id="notifySent" hidden style="margin-top:.9rem;color:var(--red);font-family:var(--sans);font-size:.9rem;font-weight:600">
+        Opening your email app. Send the message and you are on the list.</p>
+      <p style="margin-top:.9rem;color:var(--ink-soft);font-family:var(--sans);font-size:.85rem">
+        One email when the books are out. No list sharing, unsubscribe any time.</p>
+    </div>
+  </section>
 </main>
 
 <footer class="foot">
   <div class="out foot__in">
     <span>&copy; <span id="yr">2026</span> Art Inside Out &middot; Kirk Charlton</span>
-    <a class="parent" href="./restorative-reentry.html">
-      <svg viewBox="0 0 34 34" fill="none" aria-hidden="true">
-        <path d="M5 16 L17 5 L29 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M8.5 15 V28 H25.5 V15" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
-        <path d="M17 28 V19" stroke="#E9B23C" stroke-width="2.6" stroke-linecap="round"/>
-      </svg>
-      A program of Better Neighbors
-    </a>
+    
     <a href="mailto:aio.kirkcharltonarts@gmail.com">aio.kirkcharltonarts@gmail.com</a>
   </div>
 </footer>
 
-<div class="modal" id="buyModal" hidden>
-  <div class="modal__scrim" data-close></div>
-  <div class="modal__p" role="dialog" aria-modal="true" aria-labelledby="mTitle">
-    <button class="modal__x" type="button" data-close aria-label="Close">&times;</button>
-    <p class="marker">Your order</p>
-    <h3 id="mTitle">Art Inside Out</h3>
-    <p class="modal__f" id="mFmt">Paperback</p>
-    <div class="row"><span>Quantity</span>
-      <div class="stepper" role="group" aria-label="Quantity">
-        <button type="button" data-step="-1" aria-label="Decrease quantity">&minus;</button>
-        <span id="mQty" aria-live="polite">1</span>
-        <button type="button" data-step="1" aria-label="Increase quantity">+</button>
-      </div>
-    </div>
-    <div class="row" id="mShipRow"><span>Shipping</span><span class="muted">Calculated at checkout</span></div>
-    <div class="row row--t"><span>Total</span><span id="mTotal">$&mdash;</span></div>
-    <a class="btn btn--gold btn--full" id="mCheckout" href="#" style="margin-top:1.1rem">Continue to secure checkout <span class="arrow" aria-hidden="true">&rarr;</span></a>
-    <p class="modal__note">Secure checkout by Stripe. <span class="todo">paste the Stripe link to go live</span></p>
-  </div>
-</div>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
 <script>
@@ -823,8 +878,18 @@
     if (reduce) { draw(1); return; }
     var ticking = false;
     function progress() {
+      // The old range spread the drawing across the whole section plus a fifth
+      // of a screen, so the red circle only closed as the canvas was leaving
+      // the viewport and you never saw it finish. Complete it inside the first
+      // stretch of the section instead, while the canvas is still sitting in
+      // front of you, then hold it done.
+      // Anchored to the section entering the viewport, not to its full height.
+      // Starts as the section comes into view and closes 60% of a screen later,
+      // so the whole draw happens with the canvas in front of you. The old
+      // version stretched it across the entire section and the red ring only
+      // closed as the canvas was already leaving.
       var r = section.getBoundingClientRect(), vh = window.innerHeight || 800;
-      return Math.max(0, Math.min(1, ((vh * .8) - r.top) / (r.height + vh * .2)));
+      return Math.max(0, Math.min(1, ((vh * .85) - r.top) / (vh * .60)));
     }
     function onScroll() {
       if (ticking) return; ticking = true;
@@ -835,50 +900,55 @@
     onScroll();
     new MutationObserver(onScroll).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
   })();
+
+  /* Nav scroll-spy. Marks the section you are actually reading, so the bar
+     reports position instead of just listing links. Pure observer, no scroll
+     handler, so it costs nothing while you move. */
   (function () {
-    // ONLY STEP TO GO LIVE: create a Stripe Payment Link for each book, paste its URL here.
-    // Keys must match the book titles exactly. Nothing else is needed to take real payments.
-    var CHECKOUT_URLS = {
-      "Art Inside Out": "",
-      "Art Inside Out: Recovery Edition": "",
-      "Art Inside Out: Faith-Based Edition": ""
-    };
-    function money(n) { return n > 0 ? "$" + n.toFixed(2) : "Set at checkout"; }
-    document.querySelectorAll('.fmt').forEach(function (grp) {
-      grp.addEventListener('click', function (e) {
-        var b = e.target.closest('button'); if (!b) return;
-        grp.querySelectorAll('button').forEach(function (o) { o.classList.remove('on'); o.setAttribute('aria-checked', 'false'); });
-        b.classList.add('on'); b.setAttribute('aria-checked', 'true');
-        grp.closest('.item').querySelector('.price').textContent = money(parseFloat(b.dataset.price));
+    var links = Array.prototype.slice.call(document.querySelectorAll('.mast__nav a[href^="#"]'));
+    if (!links.length) return;
+    var byId = {};
+    var targets = [];
+    links.forEach(function (a) {
+      var el = document.getElementById(a.getAttribute('href').slice(1));
+      if (el) { byId[el.id] = a; targets.push(el); }
+    });
+    if (!targets.length) return;
+    var visible = {};
+    function paint() {
+      var best = null;
+      targets.forEach(function (t) {
+        if (visible[t.id] && (best === null || visible[t.id] > visible[best.id])) best = t;
       });
-    });
-    var modal = document.getElementById('buyModal');
-    var mTitle = document.getElementById('mTitle'), mFmt = document.getElementById('mFmt');
-    var mQty = document.getElementById('mQty'), mTotal = document.getElementById('mTotal');
-    var mShipRow = document.getElementById('mShipRow'), mCheckout = document.getElementById('mCheckout');
-    var last = null, st = { unit: 0, qty: 1, title: '', ship: true };
-    function render() { mTotal.textContent = money(st.unit * st.qty); mQty.textContent = st.qty; }
-    function open(card, title) {
-      var b = card.querySelector('.fmt button.on');
-      st.unit = parseFloat(b.dataset.price); st.qty = 1; st.title = title; st.ship = b.dataset.ship === '1';
-      mTitle.textContent = title; mFmt.textContent = b.dataset.fmt;
-      mShipRow.querySelector('.muted').textContent = st.ship ? 'Calculated at checkout' : 'Instant download';
-      render(); last = document.activeElement; modal.hidden = false; document.body.style.overflow = 'hidden'; mCheckout.focus();
+      links.forEach(function (a) { a.removeAttribute('aria-current'); });
+      if (best && byId[best.id]) byId[best.id].setAttribute('aria-current', 'true');
     }
-    function close() { modal.hidden = true; document.body.style.overflow = ''; if (last) last.focus(); }
-    document.querySelectorAll('.buy').forEach(function (b) { b.addEventListener('click', function () { open(b.closest('.item'), b.dataset.title); }); });
-    modal.querySelectorAll('[data-close]').forEach(function (e) { e.addEventListener('click', close); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modal.hidden) close(); });
-    modal.querySelectorAll('.stepper button').forEach(function (b) {
-      b.addEventListener('click', function () { st.qty = Math.max(1, Math.min(20, st.qty + parseInt(b.dataset.step, 10))); render(); });
-    });
-    mCheckout.addEventListener('click', function (e) {
-      var url = CHECKOUT_URLS[st.title];
-      if (url) { window.location.href = url; return; }
-      e.preventDefault(); close();
-      showToast('Almost live: paste this book\'s Stripe Payment Link to take payments.');
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) visible[e.target.id] = e.intersectionRatio;
+        else delete visible[e.target.id];
+      });
+      paint();
+    }, { rootMargin: '-68px 0px -55% 0px', threshold: [0, .15, .35, .6, 1] });
+    targets.forEach(function (t) { io.observe(t); });
+  })();
+
+  (function () {
+    var f = document.getElementById('notifyForm');
+    if (!f) return;
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var v = (f.querySelector('input[type=email]') || {}).value || '';
+      if (!v) return;
+      window.location.href = 'mailto:aio.kirkcharltonarts@gmail.com'
+        + '?subject=' + encodeURIComponent('Tell me when the book is out')
+        + '&body=' + encodeURIComponent('Please add this address to the Art Inside Out book list:\n\n' + v);
+      f.reset();
+      var note = document.getElementById('notifySent');
+      if (note) note.hidden = false;
     });
   })();
 </script>
+
 </body>
 </html>
