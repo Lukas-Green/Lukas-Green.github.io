@@ -23,6 +23,7 @@
     <li><a href="#home">Home</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#projects">Projects</a></li>
+    <li><a href="shop.html">Shop</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="resume.html">Resume</a></li>
   </ul>
@@ -352,6 +353,12 @@
   </div>
 </section>
 
+<!-- MERCH TEASER -->
+<a href="shop.html" class="merch-teaser">
+  <span class="merch-teaser-badge">New · Drop 01</span>
+  <span class="merch-teaser-text">LUXIGA merch is coming. Crewnecks at $25, stickers at $4. <strong>Get on the list →</strong></span>
+</a>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">
@@ -359,6 +366,42 @@
   </div>
   <p>© 2026 Lukas Green</p>
 </footer>
+
+<style>
+  .merch-teaser {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    padding: 18px 80px;
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    text-decoration: none;
+    color: var(--gray);
+    font-size: 14px;
+    transition: background .2s, color .2s;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+  .merch-teaser:hover { background: #14141d; color: var(--white); }
+  .merch-teaser-badge {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(100,255,218,0.08);
+    border: 1px solid rgba(100,255,218,0.25);
+    border-radius: 999px;
+    padding: 4px 12px;
+    white-space: nowrap;
+  }
+  .merch-teaser-text strong { color: var(--accent); font-weight: 700; }
+  @media (max-width: 640px) {
+    .merch-teaser { padding: 16px 24px; font-size: 13px; }
+  }
+</style>
 
 <script>
   // Mobile nav
