@@ -1384,4 +1384,294 @@ html, body { max-width: 100%; overflow-x: hidden; }
 }
 [data-theme="light"] .comparison-table th { color: var(--accent); }
 [data-theme="light"] .comparison-table td { border-color: rgba(0,0,0,0.08); }
+
+/* ── Partnership Intelligence ────────────────── */
+
+/* Filter Controls */
+.pi-filters {
+  display: flex;
+  gap: 12px;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 80px 32px;
+  flex-wrap: wrap;
+}
+.pi-search {
+  flex: 1;
+  min-width: 200px;
+  padding: 10px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg2);
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.pi-search:focus { border-color: var(--accent); }
+.pi-search::placeholder { color: var(--gray-dim); }
+.pi-select {
+  padding: 10px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg2);
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+}
+.pi-select:focus { border-color: var(--accent); }
+.pi-sort-btn {
+  padding: 10px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg2);
+  color: var(--gray);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.pi-sort-btn:hover { border-color: var(--accent); color: var(--accent); }
+.pi-sort-btn.active { border-color: var(--accent); color: var(--accent); }
+.pi-count {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  color: var(--gray-dim);
+  white-space: nowrap;
+}
+
+/* Company Cards Grid */
+.pi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 80px 80px;
+}
+
+/* Company Card */
+.pi-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.15s;
+}
+.pi-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.pi-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.pi-card-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.3;
+}
+.pi-card-score {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--bg);
+  background: var(--accent);
+  border-radius: 6px;
+  padding: 2px 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.pi-card-score.tier2 { background: #fbbf24; }
+.pi-card-score.tier3 { background: var(--gray-dim); color: var(--white); }
+
+/* Category Badge */
+.pi-cat-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+.pi-cat-badge--deai { background: rgba(139,92,246,0.15); color: #a78bfa; }
+.pi-cat-badge--compute { background: rgba(59,130,246,0.15); color: #60a5fa; }
+.pi-cat-badge--opensource { background: rgba(249,115,22,0.15); color: #fb923c; }
+.pi-cat-badge--nonprofit { background: rgba(34,197,94,0.15); color: #4ade80; }
+.pi-cat-badge--dao { background: rgba(236,72,153,0.15); color: #f472b6; }
+.pi-cat-badge--healthcare { background: rgba(6,182,212,0.15); color: #22d3ee; }
+.pi-cat-badge--construction { background: rgba(245,158,11,0.15); color: #fbbf24; }
+.pi-cat-badge--government { background: rgba(168,85,247,0.15); color: #c084fc; }
+
+/* Score Bar */
+.pi-score-bar {
+  width: 100%;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  margin: 10px 0;
+  overflow: hidden;
+}
+.pi-score-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: var(--accent);
+  transition: width 0.4s ease;
+}
+.pi-score-fill.tier2 { background: #fbbf24; }
+.pi-score-fill.tier3 { background: var(--gray-dim); }
+
+/* Opportunity Text */
+.pi-card-opp {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+/* Tags */
+.pi-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.pi-tag {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(100,255,218,0.08);
+  color: var(--accent);
+  letter-spacing: 0.02em;
+}
+
+/* Expandable Detail Panel */
+.pi-detail {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, margin-top 0.35s ease, opacity 0.25s ease;
+  opacity: 0;
+  margin-top: 0;
+}
+.pi-card.expanded .pi-detail {
+  max-height: 600px;
+  opacity: 1;
+  margin-top: 16px;
+}
+.pi-detail-inner {
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+}
+.pi-detail-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.pi-detail-label {
+  font-weight: 600;
+  color: var(--gray);
+  min-width: 90px;
+  flex-shrink: 0;
+}
+.pi-detail-val { color: var(--gray); }
+.pi-detail-val a { color: var(--accent); text-decoration: none; }
+.pi-detail-val a:hover { text-decoration: underline; }
+
+/* Score Breakdown Mini Bars */
+.pi-breakdown {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 16px;
+  margin-top: 12px;
+}
+.pi-bd-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+}
+.pi-bd-label {
+  width: 50px;
+  text-align: right;
+  color: var(--gray-dim);
+  flex-shrink: 0;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.pi-bd-bar {
+  flex: 1;
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.pi-bd-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+}
+.pi-bd-num {
+  width: 14px;
+  text-align: center;
+  color: var(--gray);
+  font-weight: 600;
+  font-size: 11px;
+}
+
+/* No Results */
+.pi-no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--gray-dim);
+  font-size: 15px;
+}
+
+/* Light Theme Overrides */
+[data-theme="light"] .pi-search,
+[data-theme="light"] .pi-select {
+  background: #f3f4f6;
+  border-color: rgba(0,0,0,0.1);
+  color: #111;
+}
+[data-theme="light"] .pi-sort-btn {
+  background: #f3f4f6;
+  border-color: rgba(0,0,0,0.1);
+  color: #6b7280;
+}
+[data-theme="light"] .pi-card {
+  background: #fff;
+  border-color: rgba(0,0,0,0.08);
+}
+[data-theme="light"] .pi-card:hover { border-color: var(--accent); }
+[data-theme="light"] .pi-card-name { color: #111; }
+[data-theme="light"] .pi-tag { background: rgba(100,255,218,0.12); }
+[data-theme="light"] .pi-detail-inner { border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .pi-score-bar { background: rgba(0,0,0,0.06); }
+[data-theme="light"] .pi-bd-bar { background: rgba(0,0,0,0.06); }
+
+/* Responsive — Partnership Intelligence */
+@media (max-width: 768px) {
+  .pi-filters { padding: 0 24px 24px; flex-direction: column; }
+  .pi-grid { grid-template-columns: 1fr; padding: 0 24px 60px; }
+  .pi-search { min-width: 100%; }
+  .pi-breakdown { grid-template-columns: 1fr; }
+}
+@media (max-width: 390px) {
+  .pi-filters { padding: 0 16px 20px; }
+  .pi-grid { padding: 0 16px 48px; gap: 16px; }
+  .pi-card { padding: 20px; }
+}
 [data-theme="light"] .comparison-table tr:hover td { background: rgba(10,122,90,0.03); }
