@@ -14,8 +14,25 @@ Keep current — a stale file produces confidently wrong triage.
 | Certification | Status | Filed | Expires |
 |---|---|---|---|
 | COBID — ESB | ⬜ Not started | — | — |
+| COBID — VBE (veteran) | ❓ Check eligibility | — | — |
+| COBID — DBE | ❓ Check eligibility | — | — |
 | COBID — WBE | ⬜ N/A — requires future entity | — | — |
 | OregonBuys supplier registration | ✅ Registered | — | n/a |
+
+**Open eligibility questions.** Two categories changed recently and may now
+apply where they previously did not. See `oregon-procurement-reference.md`
+§2.5 and §2.6 for full detail and sources.
+
+- **VBE** — as of 2024-01-01 (HB 2295) this covers *any* veteran with an
+  honorable discharge, not only service-disabled veterans. If there is
+  military service in the owner's history, check this.
+- **DBE** — as of 2025-10-03 USDOT removed race- and sex-based presumptions;
+  eligibility is now an individualized narrative of social and economic
+  disadvantage, open to any applicant who can document it. Personal net worth
+  cap $1.32M excluding home and business. Heavy application; only relevant to
+  federally-funded transportation work (ODOT, TriMet).
+
+Holding more than one certification is allowed and each is free.
 
 ESB eligibility: under 19 employees and under roughly $789K three-year average
 gross receipts for a non-construction firm. Re-indexed to CPI annually —
@@ -69,6 +86,8 @@ None yet.
 - [ ] Review/expand NIGP commodity codes on the OregonBuys profile
 - [ ] Add ESB certification to the OregonBuys profile once granted
 - [ ] File ESB application (45–90 days processing)
+- [ ] Determine VBE eligibility (any honorable-discharge veteran now qualifies)
+- [ ] Determine whether DBE is worth the individualized-disadvantage application
 - [ ] Write one-page capability statement
 - [ ] Get insurance quotes, do not bind
 - [ ] Cancel duplicate registered agent (carryover from LUXIGA formation)
