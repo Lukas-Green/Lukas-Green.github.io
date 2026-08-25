@@ -15,7 +15,7 @@ Keep current — a stale file produces confidently wrong triage.
 |---|---|---|---|
 | COBID — ESB | ⬜ Not started | — | — |
 | COBID — WBE | ⬜ N/A — requires future entity | — | — |
-| OregonBuys supplier registration | ⬜ Not started | — | — |
+| OregonBuys supplier registration | ✅ Registered | — | n/a |
 
 ESB eligibility: under 19 employees and under roughly $789K three-year average
 gross receipts for a non-construction firm. Re-indexed to CPI annually —
@@ -23,9 +23,11 @@ confirm the current figure with COBID before filing.
 
 ## Commodity codes
 
-⬜ To be selected during OregonBuys registration. Candidates: graphic design,
-web design and development, software development, accessibility consulting,
-training services, technical writing.
+⚠️ Registered in OregonBuys — commodity codes need review. Confirm the
+selected NIGP codes cover: graphic design, web design and development,
+software development, accessibility consulting, training services,
+technical writing. Codes drive which solicitation notices reach you, so an
+incomplete selection means opportunities never arrive.
 
 ## Insurance posture
 
@@ -63,7 +65,9 @@ None yet.
 
 ## Open items
 
-- [ ] Register in OregonBuys
+- [x] Register in OregonBuys
+- [ ] Review/expand NIGP commodity codes on the OregonBuys profile
+- [ ] Add ESB certification to the OregonBuys profile once granted
 - [ ] File ESB application (45–90 days processing)
 - [ ] Write one-page capability statement
 - [ ] Get insurance quotes, do not bind
