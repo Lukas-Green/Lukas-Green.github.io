@@ -10,6 +10,9 @@ answers three questions without opening twenty repos:
    project is really several projects.
 3. **What is the same thing built twice?** Clusters by shared concept, plus an
    Overlaps view that scores every pair and names the merges worth making.
+4. **Where does it actually live?** Every card says whether the work is on
+   `main`, stranded on an unmerged branch, in a separate repo, or nowhere but a
+   document. Twelve of the thirty-six are on branches.
 
 Open `scope/index.html`. It works straight off disk (`file://`), no build step
 and no server. Data lives in `scope/projects.js`; the page is just the reader.
@@ -32,6 +35,7 @@ This board applies that to a project list rather than an instruction set.
 | **Park** | Moves a project out of the way without deleting it. Reversible, stored locally. | Parking is not failure and should not require a commit. |
 | **Hide parked & dormant** | Removes the guilt pile from view entirely. | Sometimes the honest answer is "not this month." |
 | **Hide blockers** | Turns off the "in the way" list. | On a bad day the blocker column is the thing that closes the tab. |
+| **Lives in** | Filters to unmerged branches, docs-only projects, `main`, or separate repos. | The single most useful filter here. "Unmerged branch" is the list of work you finished and then lost. |
 
 Everything persists in `localStorage`, so the board opens the way you left it.
 Keyboard: <kbd>/</kbd> search, <kbd>f</kbd> focus panel, <kbd>1</kbd>
@@ -46,7 +50,7 @@ Keyboard: <kbd>/</kbd> search, <kbd>f</kbd> focus panel, <kbd>1</kbd>
   cold floats to the top. That is the most expensive thing on the board.
 - **Clusters** — grouped by the cluster you assign each project. Seven groups
   today: engine, workspace tools, civic, brand, intelligence, learning, client.
-- **Overlaps** — the hand-written merge calls first, then a computed table.
+- **Overlaps** — the 17 hand-written merge calls first, then a computed table.
   Every pair sharing two or more concepts, scored by Jaccard overlap, marked
   `called out` or `unexamined`. The unexamined rows are the point.
 - **One thing** — one project, one step, one button.
@@ -69,6 +73,9 @@ page works over `file://` with no fetch and no server.
   confidence: 'verified',       // verified | inferred  (inferred shows "unconfirmed")
   active: true,                 // counts against the WIP limit
   lastWorked: '2026-09-05',     // YYYY-MM-DD
+  home: { type:'branch', ref:'claude/…' },  // where the work actually lives:
+                                //   main | branch | repo | nowhere
+                                //   branch and nowhere render as warnings
   summary: '…',                 // 2-4 sentences, honest
   concepts: ['local-llm', 'whisper'],   // drives clustering and overlap scoring
   blockers: ['…', '…', '…'],            // max 3
@@ -77,6 +84,11 @@ page works over `file://` with no fetch and no server.
   image: null                   // 'shots/luxiga-os.png', or null for a generated tile
 }
 ```
+
+**`home` drives the honesty.** `branch` means finished work nobody can see;
+`nowhere` means the project exists only as prose in a doc or a research file.
+Both add weight to the "needs attention" sort, because invisible work is the
+kind you rebuild by accident.
 
 **Concepts are the load-bearing field.** Clustering and overlap detection both
 run off them, so reuse the same strings across projects. Two projects that
@@ -93,13 +105,22 @@ Regenerating these automatically is a next step on the Scope card itself.
 
 ---
 
+## Where this data came from
+
+- `main` of this repo: folders, pages, `SESSION.md`, `BUILD-LOG.md`, `research/`, `radar/`
+- The other 20 branches on `origin`, read with `git diff --name-only main...<branch>`
+- The 7 GitHub repos under `Lukas-Green`, plus 3 under `nickmccarty` you can push to
+- `luxiga.co`, cloned and read for the product copy
+
+`lastWorked` is `git log -1 --format=%as -- <path>` for folders on main, the
+branch tip date for branch work, and the GitHub push date for separate repos.
+
 ## What is unconfirmed
 
-Cards marked `unconfirmed` were inferred from repo contents and session notes
-rather than confirmed by you. As of the first pass: Creating Better Neighbors,
-Art Inside Out, Next Reentry, Sovereign Tattoo, ScholarOS / Gradian and
-Partnership Intelligence. Walk the board once and fix them, and the badge goes
-away.
+Cards marked `unconfirmed` were inferred from repo contents, branch diffs and
+research files rather than confirmed by you. Currently 18 of 36 — most of the
+branch work, since a branch diff shows what was built but never why it stopped.
+Walk the board once and fix them, and the badge goes away.
 
 ## Design
 

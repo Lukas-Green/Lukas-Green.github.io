@@ -216,6 +216,10 @@ body.density-calm .grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr)
 .age.cold{color:var(--warn)}
 .age.dormant{color:var(--danger)}
 .unverified{border:1px dotted var(--border-lit);padding:.05rem .4rem;border-radius:3px;cursor:help}
+.home{display:inline-flex;align-items:center;gap:.3rem;font-family:var(--mono);font-size:.66rem;padding:.1rem .45rem;border-radius:3px;border:1px solid var(--border-lit);color:var(--muted)}
+.home.branch{border-color:var(--warn);color:var(--warn)}
+.home.nowhere{border-style:dashed;border-color:var(--danger);color:var(--danger)}
+.home .ref{opacity:.75;max-width:26ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
 .block{border-top:1px solid var(--border);padding-top:.7rem}
 .block h4{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.45rem;display:flex;justify-content:space-between}
@@ -380,6 +384,16 @@ kbd{font-family:var(--mono);font-size:.7rem;border:1px solid var(--border-lit);b
       <div class="chips" id="statusChips" role="group" aria-label="Filter by status"></div>
     </div>
     <div class="field">
+      <span>Lives in</span>
+      <select id="homeFilter" aria-label="Filter by where the work lives">
+        <option value="all">Anywhere</option>
+        <option value="branch">Unmerged branch</option>
+        <option value="nowhere">Nowhere (docs only)</option>
+        <option value="main">This repo, main</option>
+        <option value="repo">A separate repo</option>
+      </select>
+    </div>
+    <div class="field">
       <span>Sort</span>
       <select id="sort" aria-label="Sort projects">
         <option value="attention">Needs attention</option>
@@ -431,11 +445,19 @@ kbd{font-family:var(--mono);font-size:.7rem;border:1px solid var(--border-lit);b
   var EFFORT_LABEL = { quick:'15 min', medium:'1 hr', deep:'deep' };
   var KEY = 'scope.v1';
 
+  var HOME_LABEL = {
+    main:     function(r){ return 'main · ' + r; },
+    branch:   function(r){ return 'unmerged · ' + r; },
+    repo:     function(r){ return r; },
+    nowhere:  function(r){ return r; }
+  };
+
+
   /* ---------------------------------------------------------
      STATE
      --------------------------------------------------------- */
   var defaults = {
-    q:'', statuses:[], concept:null, sort:'attention', view:'board',
+    q:'', statuses:[], concept:null, sort:'attention', view:'board', homeFilter:'all',
     density:'standard', energy:'any', lowstim:false, hideDormant:false,
     blockersOff:false, wipLimit:DATA.wipLimit || 3, theme:'auto',
     overrides:{}, skipped:[]
@@ -453,7 +475,7 @@ kbd{font-family:var(--mono);font-size:.7rem;border:1px solid var(--border-lit);b
   function save(){
     try{
       localStorage.setItem(KEY, JSON.stringify({
-        statuses:S.statuses, sort:S.sort, view:S.view, density:S.density,
+        statuses:S.statuses, sort:S.sort, view:S.view, density:S.density, homeFilter:S.homeFilter,
         energy:S.energy, lowstim:S.lowstim, hideDormant:S.hideDormant,
         blockersOff:S.blockersOff, wipLimit:S.wipLimit, theme:S.theme,
         overrides:S.overrides
@@ -549,10 +571,11 @@ kbd{font-family:var(--mono);font-size:.7rem;border:1px solid var(--border-lit);b
       var st = statusOf(p);
       if(S.statuses.length && S.statuses.indexOf(st) === -1) return false;
       if(S.concept && (p.concepts||[]).indexOf(S.concept) === -1) return false;
+      if(S.homeFilter !== 'all' && (p.home && p.home.type) !== S.homeFilter) return false;
       if(S.hideDormant && (st === 'parked' || ageBucket(daysSince(p.lastWorked)) === 'dormant')) return false;
       if(S.energy !== 'any' && stepsFor(p).length === 0) return false;
       if(q){
-        var hay = [p.name, p.aka, p.tag, p.summary, (p.concepts||[]).join(' '),
+        var hay = [p.name, p.aka, p.tag, p.summary, (p.home && p.home.ref) || '', (p.concepts||[]).join(' '),
                    (p.blockers||[]).join(' '),
                    (p.next||[]).map(function(s){ return s.text; }).join(' ')]
                    .join(' ').toLowerCase();
@@ -568,6 +591,8 @@ kbd{font-family:var(--mono);font-size:.7rem;border:1px solid var(--border-lit);b
          + Math.min(d, 400) / 8
          + (p.blockers || []).length * 4
          + (p.confidence === 'inferred' ? 6 : 0)
+         + (p.home && p.home.type === 'branch' ? 12 : 0)
+         + (p.home && p.home.type === 'nowhere' ? 8 : 0)
          - (statusOf(p) === 'parked' ? 60 : 0);
   }
   function sorter(a,b){
@@ -591,13 +616,19 @@ kbd{font-family:var(--mono);font-size:.7rem;border:1px solid var(--border-lit);b
       return (b === 'cold' || b === 'dormant') && statusOf(p) !== 'parked';
     });
     var blocked = all.filter(function(p){ return (p.blockers||[]).length > 0 && statusOf(p) !== 'parked'; });
+    var stranded = all.filter(function(p){ return p.home && p.home.type === 'branch'; });
+    var nowhere = all.filter(function(p){ return p.home && p.home.type === 'nowhere'; });
     var quick = all.reduce(function(n,p){
       return n + (p.next||[]).filter(function(s){ return s.effort === 'quick'; }).length;
     }, 0);
     var over = active.length - S.wipLimit;
 
     var verdict;
-    if(over > 0){
+    if(stranded.length >= 5){
+      verdict = '<span class="chip">' + stranded.length + ' stranded</span> <span><b>' + stranded.length +
+        ' projects exist only on unmerged branches</b> and ' + nowhere.length +
+        ' only in documents. Half this board is invisible from main, which is why you forget it is there.</span>';
+    } else if(over > 0){
       verdict = '<span class="chip">over by ' + over + '</span> <span><b>' + active.length +
         ' projects are marked active</b> against a limit of ' + S.wipLimit +
         '. Park ' + over + ' rather than carrying ' + active.length + ' half-finished.</span>';
@@ -612,8 +643,9 @@ kbd{font-family:var(--mono);font-size:.7rem;border:1px solid var(--border-lit);b
     document.getElementById('sanityBar').innerHTML =
       stat(all.length, 'tracked') +
       stat(active.length + '/' + S.wipLimit, 'active', over > 0 ? 'over' : '') +
+      stat(stranded.length, 'on branches', stranded.length ? 'alarm' : '') +
+      stat(nowhere.length, 'nowhere', nowhere.length ? 'over' : '') +
       stat(stale.length, 'cold 60d+', stale.length ? 'alarm' : '') +
-      stat(blocked.length, 'blocked') +
       stat(quick, '15-min wins') +
       '<div class="verdict">' + verdict + '</div>';
 
@@ -689,6 +721,8 @@ kbd{font-family:var(--mono);font-size:.7rem;border:1px solid var(--border-lit);b
         '<div class="meta-row">' +
           '<span class="age ' + bucket + '">' + ageLabel(days) + '</span>' +
           (isActive(p) ? '<span class="pill">active</span>' : '') +
+          (p.home ? '<span class="home ' + p.home.type + '" title="Where this work actually lives">' +
+            '<span class="ref">' + esc(HOME_LABEL[p.home.type](p.home.ref)) + '</span></span>' : '') +
           (p.confidence === 'inferred' ? '<span class="unverified" title="Claude inferred this from your files. Confirm or correct it.">unconfirmed</span>' : '') +
           '<span class="full-only">' + esc(p.lastWorked) + '</span>' +
         '</div>' +
@@ -871,6 +905,7 @@ kbd{font-family:var(--mono);font-size:.7rem;border:1px solid var(--border-lit);b
     document.getElementById('blockersOff').checked = S.blockersOff;
     document.getElementById('wipLimit').value = S.wipLimit;
     document.getElementById('sort').value = S.sort;
+    document.getElementById('homeFilter').value = S.homeFilter;
     document.getElementById('themeBtn').textContent = 'Theme: ' + S.theme;
   }
 
@@ -923,7 +958,7 @@ kbd{font-family:var(--mono);font-size:.7rem;border:1px solid var(--border-lit);b
       else toast(path);
     }
     else if(t.id === 'clearAll'){
-      S.q = ''; S.statuses = []; S.concept = null; S.energy = 'any'; S.hideDormant = false;
+      S.q = ''; S.statuses = []; S.concept = null; S.energy = 'any'; S.hideDormant = false; S.homeFilter = 'all';
       document.getElementById('q').value = ''; save(); render();
     }
     else if(t.id === 'focusToggle'){
@@ -945,6 +980,9 @@ kbd{font-family:var(--mono);font-size:.7rem;border:1px solid var(--border-lit);b
   });
   document.getElementById('sort').addEventListener('change', function(e){
     S.sort = e.target.value; save(); render();
+  });
+  document.getElementById('homeFilter').addEventListener('change', function(e){
+    S.homeFilter = e.target.value; save(); render();
   });
   ['lowstim','hideDormant','blockersOff'].forEach(function(id){
     document.getElementById(id).addEventListener('change', function(e){

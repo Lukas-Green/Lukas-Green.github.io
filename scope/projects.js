@@ -25,7 +25,8 @@ window.SCOPE = {
     brand:     { name: 'Brand & Portfolio',       blurb: 'LUXIGA and the personal site. The storefront for everything else.' },
     intel:     { name: 'Research & Intelligence', blurb: 'Automated and manual market research feeding positioning and scoping.' },
     learning:  { name: 'Learning Systems',        blurb: 'Guided instruction, density tiers, degree paths. The teaching pattern.' },
-    client:    { name: 'Client & Vertical Work',  blurb: 'Paid builds and the demos that sell them.' }
+    client:    { name: 'Client & Vertical Work',  blurb: 'Paid builds, local business redesigns and the demos that sell them.' },
+    commerce:  { name: 'Commerce Experiments',    blurb: 'Revenue lines that do not require finding a client first.' }
   },
 
   projects: [
@@ -38,6 +39,7 @@ window.SCOPE = {
       confidence: 'verified',
       active: true,
       lastWorked: '2026-09-05',
+      home: { type:'nowhere', ref:'described on luxiga.co only' },
       summary: 'The local-first intelligence layer everything else is supposed to sit on. Scan, transcribe, summarize and route files and voice memos on your own hardware, for teams whose data cannot leave the building. Named as the engine under the LUXIGA vertical tools, but it is still described more clearly on the marketing site than it is built in a repo.',
       concepts: ['local-llm', 'whisper', 'voice-to-record', 'privacy', 'platform', 'structured-output'],
       blockers: [
@@ -63,6 +65,7 @@ window.SCOPE = {
       confidence: 'verified',
       active: true,
       lastWorked: '2026-09-05',
+      home: { type:'repo', ref:'Lukas-Green/luxiga.co' },
       summary: 'Invoice out of Google Sheets in about ninety seconds, with PDF export, client tracking, reminders and payment links. Built for the journeyman plumber going private who needed billing records and a paper trail, not a SaaS subscription. Shipped and demoable, still in refinement.',
       concepts: ['apps-script', 'google-workspace', 'pdf', 'smb', 'billing', 'trades'],
       blockers: [
@@ -87,6 +90,7 @@ window.SCOPE = {
       confidence: 'verified',
       active: true,
       lastWorked: '2026-09-05',
+      home: { type:'nowhere', ref:'described on luxiga.co only' },
       summary: 'A step engine for setups that eat an afternoon. It reads the official docs, drafts a verified flow, and serves it at the density that fits you: Guided, Standard or Expert. Exact values stay visible at every level, only the hand-holding fades. Works offline, because the worst time to lose the instructions is halfway through. This is also the design source for the focus controls on this board.',
       concepts: ['guided-setup', 'local-llm', 'offline', 'accessibility', 'density-tiers', 'docs'],
       blockers: [
@@ -111,6 +115,7 @@ window.SCOPE = {
       confidence: 'verified',
       active: false,
       lastWorked: '2026-04-08',
+      home: { type:'main', ref:'canvasskit.html' },
       summary: 'An outreach CRM that lives in a Google Sheets sidebar. Came out of a contracting role at a nonprofit where a coordinator described a three-step reporting chain out loud and the transcript became the product spec. Functional, case-studied on both sites.',
       concepts: ['apps-script', 'google-workspace', 'sheets', 'crm', 'nonprofit', 'contact-tracking'],
       blockers: [
@@ -135,6 +140,7 @@ window.SCOPE = {
       confidence: 'verified',
       active: false,
       lastWorked: '2026-04-08',
+      home: { type:'nowhere', ref:'delivered to the org, no repo here' },
       summary: 'Contact tracking in Sheets, delivered to the org and in use. The earliest of the Apps Script builds and the one with a real deployment story, but it has no detail page on the portfolio and no case study written.',
       concepts: ['apps-script', 'google-workspace', 'sheets', 'nonprofit', 'contact-tracking'],
       blockers: [
@@ -159,6 +165,7 @@ window.SCOPE = {
       confidence: 'verified',
       active: false,
       lastWorked: '2026-04-08',
+      home: { type:'nowhere', ref:'story in a chat export' },
       summary: 'Functional transcription builds as Apps Script plus a PWA front end. Predates LUXIGA OS and solves the same first mile: get spoken work into text you can route. Effectively the prototype of the engine, filed as a separate project.',
       concepts: ['whisper', 'voice-to-record', 'apps-script', 'pwa', 'automation'],
       blockers: [
@@ -183,6 +190,7 @@ window.SCOPE = {
       confidence: 'verified',
       active: false,
       lastWorked: '2026-04-08',
+      home: { type:'nowhere', ref:'no repo' },
       summary: 'Python and FastAPI with an AI integration, aimed at healthcare recall. Listed on the portfolio as unfinished and unvetted, which is the honest label. The riskiest of the concepts because of the domain, and the one with the clearest reason to either commit or kill.',
       concepts: ['python', 'fastapi', 'ai', 'healthcare', 'voice', 'regulated'],
       blockers: [
@@ -207,6 +215,7 @@ window.SCOPE = {
       confidence: 'verified',
       active: false,
       lastWorked: '2026-04-08',
+      home: { type:'nowhere', ref:'no repo' },
       summary: 'Context architecture for LLM systems, built on Python, Ollama and markdown. In architecture phase since spring. It is the structural idea behind how you hand context to a model, and it quietly underwrites OS, Runbook and this board.',
       concepts: ['local-llm', 'ollama', 'context', 'markdown', 'python', 'architecture'],
       blockers: [
@@ -231,6 +240,7 @@ window.SCOPE = {
       confidence: 'inferred',
       active: false,
       lastWorked: '2026-08-28',
+      home: { type:'nowhere', ref:'radar research only' },
       summary: 'A student-facing PWA with gamification, streaks, offline support and push, aimed at Gen Z. It gets a full sector in the weekly RADAR research run, complete with retention advice and an LTI 1.3 integration path, but it appears nowhere else: no repo, no portfolio card, no spec. The clearest example of the thing this board exists to catch.',
       concepts: ['pwa', 'edtech', 'gamification', 'offline', 'ai', 'density-tiers', 'retention'],
       blockers: [
@@ -255,6 +265,7 @@ window.SCOPE = {
       confidence: 'verified',
       active: true,
       lastWorked: '2026-08-28',
+      home: { type:'main', ref:'radar/, research/' },
       summary: 'An automated Friday run that produces weekly market research per sector, currently LUXIGA brand and ScholarOS/Gradian, with sourced findings, impact ratings and actions. It is the only project here that produces new material without you touching it, and the output is going unread.',
       concepts: ['agent', 'research', 'automation', 'market-intel', 'scheduled'],
       blockers: [
@@ -279,6 +290,7 @@ window.SCOPE = {
       confidence: 'verified',
       active: false,
       lastWorked: '2026-08-17',
+      home: { type:'main', ref:'research/' },
       summary: 'Private competitive intelligence briefs in an eight-section consulting format, built for pre-call prep and contract scoping. Social media management and content/DAM are written. Ad tech and creator economy are planned files with nothing in them.',
       concepts: ['research', 'consulting', 'market-intel', 'sales-enablement', 'content'],
       blockers: [
@@ -303,6 +315,7 @@ window.SCOPE = {
       confidence: 'inferred',
       active: false,
       lastWorked: '2026-04-13',
+      home: { type:'main', ref:'partnerships.html' },
       summary: 'A partnerships page on the portfolio plus a partnership intelligence brief in research. Aimed at agency and platform partnerships as a channel. Untouched since April and not linked from the current navigation story.',
       concepts: ['research', 'bizdev', 'partnerships', 'sales-enablement'],
       blockers: [
@@ -327,6 +340,7 @@ window.SCOPE = {
       confidence: 'verified',
       active: true,
       lastWorked: '2026-09-05',
+      home: { type:'repo', ref:'Lukas-Green/luxiga.co' },
       summary: 'The LUXIGA business site in its own deploy repo, with case studies, vertical teasers, a Playwright test suite and an audit folder. The most maintained property you own and the canonical source of the brand tokens this board uses.',
       concepts: ['site', 'brand', 'marketing', 'playwright', 'case-studies'],
       blockers: [
@@ -351,6 +365,7 @@ window.SCOPE = {
       confidence: 'verified',
       active: true,
       lastWorked: '2026-08-28',
+      home: { type:'main', ref:'index.html' },
       summary: 'The personal portfolio and the repo this board ships inside. Holds the resume, the case studies, the demos, the research and the radar. Its open question has been open since April: stay a distinct personal portfolio, or redirect to luxiga.co.',
       concepts: ['site', 'brand', 'portfolio', 'case-studies'],
       blockers: [
@@ -375,6 +390,7 @@ window.SCOPE = {
       confidence: 'verified',
       active: true,
       lastWorked: '2026-04-08',
+      home: { type:'nowhere', ref:'SESSION.md pending list' },
       summary: 'Not a build, but it blocks builds. LUXIGA LLC is registered in Oregon (amended from LUXIK). Outstanding: a duplicate registered agent being paid twice, the CMRA form, Proton Mail on the domain, EIN and a business bank account. Every one of these gates invoicing a real client.',
       concepts: ['admin', 'llc', 'billing', 'brand'],
       blockers: [
@@ -399,6 +415,7 @@ window.SCOPE = {
       confidence: 'inferred',
       active: true,
       lastWorked: '2026-09-16',
+      home: { type:'branch', ref:'claude/redesign-nonprofit-site-3LIKV' },
       summary: 'The parent nonprofit, with a redirect repo pushed as recently as this week and two inlined program pages built in this portfolio repo. The most recently touched thing you own, and the hub that Art Inside Out and Restorative Reentry hang off.',
       concepts: ['nonprofit', 'civic', 'site', 'client-work', 'redirect'],
       blockers: [
@@ -423,6 +440,7 @@ window.SCOPE = {
       confidence: 'inferred',
       active: false,
       lastWorked: '2026-09-14',
+      home: { type:'repo', ref:'Lukas-Green/artinsideout-site' },
       summary: 'A program site for the arts arm of the CBN family, with its own repo and an inlined copy in this portfolio. Actively pushed in September, which makes it live client work rather than a concept.',
       concepts: ['nonprofit', 'civic', 'site', 'arts', 'client-work'],
       blockers: [
@@ -448,6 +466,7 @@ window.SCOPE = {
       confidence: 'inferred',
       active: false,
       lastWorked: '2026-09-05',
+      home: { type:'repo', ref:'Lukas-Green/nextreentry-site' },
       summary: 'The reentry program site, third in the CBN family, with an inlined copy here as restorative-reentry. Same shape as Art Inside Out and the same duplication problem. It also shares its entire subject matter with FreedEase, which nothing currently connects.',
       concepts: ['nonprofit', 'civic', 'site', 'reentry', 'client-work'],
       blockers: [
@@ -472,6 +491,7 @@ window.SCOPE = {
       confidence: 'verified',
       active: false,
       lastWorked: '2026-07-17',
+      home: { type:'repo', ref:'Lukas-Green/freedease-site' },
       summary: 'A reentry-focused PWA built on Apps Script and vanilla JS, with a design prototype and a full origin story in an old Claude export. It has its own repo, last pushed in July, and sits in exactly the domain the Next Reentry client site serves.',
       concepts: ['civic', 'pwa', 'apps-script', 'reentry', 'ux', 'offline'],
       blockers: [
@@ -496,6 +516,7 @@ window.SCOPE = {
       confidence: 'inferred',
       active: false,
       lastWorked: '2026-06-09',
+      home: { type:'repo', ref:'Lukas-Green/sovereign-tattoo' },
       summary: 'A client site repo untouched since June. It does not appear on either portfolio, is not in any session log, and there is no note about whether the engagement finished, stalled or was abandoned.',
       concepts: ['site', 'client-work', 'smb'],
       blockers: [
@@ -520,6 +541,7 @@ window.SCOPE = {
       confidence: 'verified',
       active: false,
       lastWorked: '2026-07-27',
+      home: { type:'main', ref:'psu-ux/, psu-concept/' },
       summary: 'Two folders of concept work: a hi-fi degree path explorer and a registration hub with a working demo, done twice under psu-concept and psu-ux. Real interaction design, sitting in the repo with no case study framing and no link from the portfolio.',
       concepts: ['ux', 'edtech', 'prototype', 'case-study', 'higher-ed', 'wayfinding'],
       blockers: [
@@ -544,6 +566,7 @@ window.SCOPE = {
       confidence: 'verified',
       active: false,
       lastWorked: '2026-04-08',
+      home: { type:'main', ref:'apple-maps.html, cleandrive.html' },
       summary: 'Two finished UX case study pages, written and styled, deliberately hidden on the index since March because the imagery is not replaced. Complete work that is invisible for one reason, which makes it the cheapest win on this board.',
       concepts: ['ux', 'case-study', 'portfolio', 'blocked-on-assets'],
       blockers: [
@@ -568,6 +591,7 @@ window.SCOPE = {
       confidence: 'verified',
       active: false,
       lastWorked: '2026-04-08',
+      home: { type:'main', ref:'ventures/, demo/' },
       summary: 'Five vertical venture pages (construction, healthcare, SMB office, social media management, content/DAM) with matching demos, plus the LLM onboarding demo and the Pulse, Signal and Assembly teasers on luxiga.co. Nine or so surfaces all arguing the same thing: the engine, pointed at another trade.',
       concepts: ['vertical-demo', 'smb', 'ai', 'sales-enablement', 'marketing', 'platform'],
       blockers: [
@@ -592,6 +616,7 @@ window.SCOPE = {
       confidence: 'verified',
       active: true,
       lastWorked: '2026-09-17',
+      home: { type:'branch', ref:'claude/project-scope-assistant-ecqkxn' },
       summary: 'This board. One page that holds every project with its status, age, three blockers, three next steps and the clusters they fall into, plus focus controls borrowed from the Runbook density tiers. Built to answer "what do I actually have, and what is the one next thing" without opening twenty repos.',
       concepts: ['internal-tool', 'density-tiers', 'accessibility', 'site', 'clustering'],
       blockers: [
@@ -605,6 +630,307 @@ window.SCOPE = {
         { text: 'Script the lastWorked dates from git and the GitHub API so they self-update.', effort: 'deep' }
       ],
       links: { local: 'scope/index.html' },
+      image: null
+    },
+    {
+      id: 'fieldkit',
+      name: 'FieldKit',
+      tag: 'Productized Service / Field Data',
+      cluster: 'workspace',
+      status: 'build',
+      confidence: 'inferred',
+      active: false,
+      lastWorked: '2026-03-31',
+      home: { type:'branch', ref:'claude/update-website-text-JSeI8' },
+      summary: 'A configurable white-label field data capture framework on Google Workspace, sold as a productized service rather than SaaS: one engine, deployed in hours, $300-800 once instead of $150/month forever. It has a v1.0 business plan, financial projections, and eight built vertical configs (construction, events, health, HR, outreach, property, sales, volunteer). The plan says "framework built, seeking first three paying clients." It has been sitting on an unmerged branch since March, while RADAR keeps researching its market.',
+      concepts: ['apps-script', 'google-workspace', 'sheets', 'productized-service', 'field-capture', 'contact-tracking', 'smb', 'nonprofit', 'pricing'],
+      blockers: [
+        'Lives on an unmerged branch from March. Nothing about it is visible on either site.',
+        'Zero of the three validation clients approached, six months after the plan said to.',
+        'It generalizes CanvassKit and GH2, but both still exist as separate projects.'
+      ],
+      next: [
+        { text: 'Merge the branch, or at minimum open the business plan and read it again.', effort: 'quick' },
+        { text: 'Pick the one vertical you can sell this month and name three real prospects.', effort: 'medium' },
+        { text: 'Fold CanvassKit and GH2 into FieldKit as configs and retire them as projects.', effort: 'deep' }
+      ],
+      links: { local: 'fieldkit/docs/BUSINESS-PLAN.md' },
+      image: null
+    },
+    {
+      id: 'seeng',
+      name: 'SEENG',
+      tag: 'Legal Agent / Reentry',
+      cluster: 'civic',
+      status: 'concept',
+      confidence: 'inferred',
+      active: false,
+      lastWorked: '2026-04-07',
+      home: { type:'branch', ref:'claude/document-environment-Nol3k' },
+      summary: 'A post-incarceration legal intelligence agent for supervision law: post-prison supervision, parole, probation. Architected as a jurisdiction-agnostic core (identity, method, a ten-phase investigative procedure) with jurisdiction as a loadable module, piloting in Oregon. The most fully specified agent design you have written, and it sits on a branch called document-environment where nobody would look for it.',
+      concepts: ['agent', 'legal', 'reentry', 'civic', 'context', 'architecture', 'markdown', 'jurisdiction-modular'],
+      blockers: [
+        'Buried on a branch named after something else entirely.',
+        'Architecture is complete on paper with no runtime behind it.',
+        'Legal advice in a supervision context carries real exposure that is not addressed.'
+      ],
+      next: [
+        { text: 'Rename the branch, or move SEENG.md somewhere you would find it again.', effort: 'quick' },
+        { text: 'Run the ten-phase procedure by hand on one real Oregon case file.', effort: 'deep' },
+        { text: 'Decide what it is: your agent, a tool for a reentry org, or a product.', effort: 'medium' }
+      ],
+      links: { local: 'SEENG.md' },
+      image: null
+    },
+    {
+      id: 'pps-relief',
+      name: 'PPS Relief Guide',
+      tag: 'Legal PWA / Oregon',
+      cluster: 'civic',
+      status: 'build',
+      confidence: 'inferred',
+      active: false,
+      lastWorked: '2026-04-07',
+      home: { type:'branch', ref:'claude/pps-relief-legal-guide-Okpji' },
+      summary: 'An offline PWA walking Oregon Measure 11 offenders through a ten-step process to seek reduction or termination of post-prison supervision. Vanilla JS, hash routing, localStorage, installable, with a glossary and structured step data already written. Its build context marks it private and says explicitly not to merge or open a PR until told. The app shell is done; the rest is pending.',
+      concepts: ['pwa', 'offline', 'legal', 'reentry', 'civic', 'guided-setup', 'density-tiers', 'localstorage'],
+      blockers: [
+        'Deliberately private, so it cannot ship the way the other pages do. That is a decision, not an accident.',
+        'App shell complete, all ten steps of content still pending.',
+        'Legal accuracy has no reviewer named.'
+      ],
+      next: [
+        { text: 'Re-read BUILD-CONTEXT.md and confirm the private-by-design call still holds.', effort: 'quick' },
+        { text: 'Write the content for step one and see how long a step actually takes.', effort: 'medium' },
+        { text: 'Find one person who can check the legal substance before anyone relies on it.', effort: 'deep' }
+      ],
+      links: { local: 'pps-relief/BUILD-CONTEXT.md' },
+      image: null
+    },
+    {
+      id: 'oregon-buys',
+      name: 'OregonBuys Bid Triage',
+      tag: 'Public Procurement',
+      cluster: 'intel',
+      status: 'build',
+      confidence: 'inferred',
+      active: true,
+      lastWorked: '2026-08-25',
+      home: { type:'branch', ref:'claude/oregon-buys-contracts-3ztm7r' },
+      summary: 'A public-sector pursuit system: a bid-triage skill that scores solicitations against a LUXIGA rubric and defaults to no-bid, backed by a standing procurement context file and an Oregon reference. Your most recent unmerged work. The context file shows COBID ESB certification not started and veteran and DBE eligibility unchecked, which is the actual gate on any of it.',
+      concepts: ['agent', 'procurement', 'government', 'research', 'sales-enablement', 'rubric', 'admin'],
+      blockers: [
+        'COBID ESB certification not started. Most set-aside work is unreachable without it.',
+        'Veteran and DBE eligibility marked unchecked, so you do not know what you qualify for.',
+        'The skill has never been run against a live solicitation.'
+      ],
+      next: [
+        { text: 'Check COBID veteran and DBE eligibility. One page on the state site.', effort: 'quick' },
+        { text: 'Run bid-triage against one live OregonBuys listing and see if the rubric holds.', effort: 'medium' },
+        { text: 'File the COBID ESB application.', effort: 'deep' }
+      ],
+      links: { local: 'research/procurement-context.md', live: 'https://oregonbuys.gov' },
+      image: null
+    },
+    {
+      id: 'courier-direct',
+      name: 'Courier Direct',
+      tag: 'Client Redesign',
+      cluster: 'client',
+      status: 'prototype',
+      confidence: 'inferred',
+      active: false,
+      lastWorked: '2026-06-01',
+      home: { type:'branch', ref:'claude/courier-direct-redesign-gMyeS' },
+      summary: 'A single-page redesign for courier-direct.com, a 24/7 courier in Tualatin run by Sue and Barry Miller since 2006. Built from owner-supplied screenshots after the live site returned 403 to every fetch. Ships with a decisions log, an about page, a demo, and two drafted versions of a pitch email to Barry. The work is finished. The email appears never to have been sent.',
+      concepts: ['site', 'client-work', 'smb', 'redesign', 'local-business', 'pitch'],
+      blockers: [
+        'Two drafts of the Barry email and no evidence either went out.',
+        'Three months cold on finished work.',
+        'Lives on a branch, so there is no link you could send even if you wanted to.'
+      ],
+      next: [
+        { text: 'Open barry-email-v2.md, pick one, and send it.', effort: 'quick' },
+        { text: 'Publish the demo somewhere linkable first so the email has a URL.', effort: 'medium' },
+        { text: 'If the answer is no, add it to the portfolio as spec work.', effort: 'medium' }
+      ],
+      links: { local: 'projects/courier-direct/', live: 'https://courier-direct.com' },
+      image: null
+    },
+    {
+      id: 'villa-health',
+      name: 'The Villa Health',
+      tag: 'Client Site',
+      cluster: 'client',
+      status: 'prototype',
+      confidence: 'inferred',
+      active: false,
+      lastWorked: '2026-05-04',
+      home: { type:'branch', ref:'claude/redesign-villa-health-site-q6p3T' },
+      summary: 'A preview site for an integrative care clinic in Vancouver, Washington. One file on one branch, untouched since May, with no record of whether it was ever shown to the client. The same shape as Courier Direct and Sovereign Tattoo: a finished-looking local business redesign with no outcome recorded.',
+      concepts: ['site', 'client-work', 'smb', 'redesign', 'local-business', 'healthcare'],
+      blockers: [
+        'No record of whether the client ever saw it.',
+        'Single preview file on a branch, not deployed anywhere.',
+        'Four months cold.'
+      ],
+      next: [
+        { text: 'Answer in one line: pitched, ignored, or never sent?', effort: 'quick' },
+        { text: 'Publish it as a linkable preview.', effort: 'medium' },
+        { text: 'Send it, or close the loop and file it as spec work.', effort: 'medium' }
+      ],
+      links: { local: 'villa-health-preview.html' },
+      image: null
+    },
+    {
+      id: 'whatnotpro',
+      name: 'WhatNotPro',
+      tag: 'Live Commerce Automation',
+      cluster: 'commerce',
+      status: 'concept',
+      confidence: 'inferred',
+      active: false,
+      lastWorked: '2026-04-04',
+      home: { type:'branch', ref:'claude/whatnot-automation-research-4gOqB' },
+      summary: 'Automation and monetization tooling for Whatnot, the live-stream auction marketplace doing $8B+ GMV. A deep research report plus an execution playbook, both written in April and both on a branch. RADAR has covered it as a live sector three times since, which means the research kept going after the build stopped.',
+      concepts: ['commerce', 'automation', 'research', 'marketplace', 'live-selling', 'smb'],
+      blockers: [
+        'Research and playbook written, nothing built.',
+        'RADAR keeps producing findings that route nowhere.',
+        'No answer to whether you want to be a seller or sell to sellers.'
+      ],
+      next: [
+        { text: 'Read the execution playbook and mark step one.', effort: 'quick' },
+        { text: 'Decide: seller tooling, or you selling. They are different businesses.', effort: 'medium' },
+        { text: 'Either build the first automation or take it off RADAR.', effort: 'deep' }
+      ],
+      links: { local: 'whatnot-execution-playbook.md' },
+      image: null
+    },
+    {
+      id: 'merch-store',
+      name: 'LUXIGA Merch Store',
+      tag: 'Commerce / Automation',
+      cluster: 'commerce',
+      status: 'prototype',
+      confidence: 'inferred',
+      active: false,
+      lastWorked: '2026-04-17',
+      home: { type:'branch', ref:'claude/merch-store-automation-S6c7W' },
+      summary: 'A shop page and merch automation built on the portfolio, branded LUXIGA, pitched around quality blanks. On a branch since April with no fulfilment path recorded. The nearest thing to a revenue experiment that does not depend on finding a client.',
+      concepts: ['commerce', 'automation', 'brand', 'site', 'marketplace'],
+      blockers: [
+        'No print or fulfilment provider decided.',
+        'Unmerged, so the store does not exist to anyone.',
+        'Competes for attention with the client work that actually pays.'
+      ],
+      next: [
+        { text: 'Decide whether this is a real line or a distraction. Write the answer down.', effort: 'quick' },
+        { text: 'If real, pick a print-on-demand provider and wire one product.', effort: 'medium' },
+        { text: 'If not, delete the branch so it stops counting.', effort: 'quick' }
+      ],
+      links: { local: 'shop.html' },
+      image: null
+    },
+    {
+      id: 'points-exchange',
+      name: 'Points Exchange',
+      tag: 'Marketplace Concept',
+      cluster: 'commerce',
+      status: 'concept',
+      confidence: 'inferred',
+      active: false,
+      lastWorked: '2026-08-12',
+      home: { type:'nowhere', ref:'radar research only' },
+      summary: 'A points and miles exchange marketplace, researched by RADAR twice on the back of airline and hotel devaluations (Hyatt category 8 up 67%, Marriott up 5-10%, ongoing Delta cuts). Like ScholarOS, it exists entirely inside research documents: no repo, no page, no spec, no decision.',
+      concepts: ['commerce', 'marketplace', 'research', 'fintech', 'travel'],
+      blockers: [
+        'Exists only in RADAR output. Nothing has ever been built or drawn.',
+        'Furthest from your actual skill set of anything on this board.',
+        'Consumes a RADAR slot every run regardless.'
+      ],
+      next: [
+        { text: 'Decide whether to keep spending a RADAR slot on it.', effort: 'quick' },
+        { text: 'If keeping it, write the one-paragraph thesis so the research has a target.', effort: 'medium' },
+        { text: 'If not, drop the sector and give the slot to FieldKit.', effort: 'quick' }
+      ],
+      links: { local: 'research/radar-2026-08-12.md' },
+      image: null
+    },
+    {
+      id: 'nick-sites',
+      name: 'Editorial-Quant Template',
+      aka: 'Nick McCarty sites',
+      tag: 'Template System / Client',
+      cluster: 'client',
+      status: 'prototype',
+      confidence: 'inferred',
+      active: false,
+      lastWorked: '2026-04-16',
+      home: { type:'branch', ref:'claude/redesign-nick-sites-2LRYU' },
+      summary: 'A portfolio template with its own design system document, applied to two sites for Nick McCarty. You also have push access to three of his repos (OHOH redesign, Harbor of Hope, NASA research assistant). The template is the interesting part: it is the shared civic and client site system the other eight one-off sites keep not having.',
+      concepts: ['site', 'client-work', 'template', 'design-system', 'portfolio', 'redesign'],
+      blockers: [
+        'Template exists on a branch and is used by nothing else.',
+        'Three of his repos are open to you with no stated status.',
+        'Design system is documented but not named as a reusable offer.'
+      ],
+      next: [
+        { text: 'Open design-system.html and decide whether it is the house template.', effort: 'quick' },
+        { text: 'Rebuild one civic site on it as a proof.', effort: 'deep' },
+        { text: 'Note the status of the three nickmccarty repos.', effort: 'quick' }
+      ],
+      links: { local: 'assets/templates/portfolio/editorial-quant/', repo: 'https://github.com/nickmccarty/OHOH-site-redesign' },
+      image: null
+    },
+    {
+      id: 'hq-system',
+      name: 'HQ / Workflow Project System',
+      tag: 'Internal Tool',
+      cluster: 'intel',
+      status: 'parked',
+      confidence: 'inferred',
+      active: false,
+      lastWorked: '2026-04-04',
+      home: { type:'branch', ref:'claude/workflow-project-system-0Eb4a' },
+      summary: 'An earlier attempt at exactly what Scope is: a project HQ with its own stylesheet, PWA manifest, icons and a CLAUDE.md laying out the vanilla-only, no-build architecture rules for the whole repo. Abandoned in April. Its CLAUDE.md is the most useful thing on the branch and applies to everything you build.',
+      concepts: ['internal-tool', 'pwa', 'site', 'clustering', 'architecture', 'workflow'],
+      blockers: [
+        'Superseded by Scope before either one was finished.',
+        'Its CLAUDE.md architecture rules never made it to main, so nothing enforces them.',
+        'Two half-built project dashboards is worse than one.'
+      ],
+      next: [
+        { text: 'Lift CLAUDE.md onto main. It is useful regardless of which board wins.', effort: 'quick' },
+        { text: 'Strip anything worth keeping out of hq-styles.css into Scope.', effort: 'medium' },
+        { text: 'Delete the branch and let Scope be the only board.', effort: 'quick' }
+      ],
+      links: { local: 'CLAUDE.md' },
+      image: null
+    },
+    {
+      id: 'branch-hygiene',
+      name: 'Branch Backlog',
+      tag: 'Repo Maintenance',
+      cluster: 'intel',
+      status: 'build',
+      confidence: 'verified',
+      active: true,
+      lastWorked: '2026-09-17',
+      home: { type:'main', ref:'21 heads on origin' },
+      summary: 'The repo carries twenty-one branches. Sixteen hold unmerged work, including four wip/legal-agent-nest-* snapshots from a single day in July that duplicate the courier, Nick and nonprofit work already on their own branches. Two branches (hypertensor-partnership, test-write-access, update-websites) are zero commits ahead and safe to delete outright. This is why half your projects were invisible.',
+      concepts: ['admin', 'workflow', 'internal-tool', 'architecture'],
+      blockers: [
+        'Sixteen branches hold work that main has never seen.',
+        'Four legal-agent-nest snapshots duplicate three other branches.',
+        'No convention for what a branch means, so none of them ever close.'
+      ],
+      next: [
+        { text: 'Delete the three branches that are zero commits ahead of main.', effort: 'quick' },
+        { text: 'Delete the four wip/legal-agent-nest-* snapshots once you confirm they duplicate.', effort: 'medium' },
+        { text: 'Merge or formally abandon each of the remaining branches, one per sitting.', effort: 'deep' }
+      ],
+      links: { repo: 'https://github.com/Lukas-Green/Lukas-Green.github.io/branches' },
       image: null
     }
   ],
@@ -657,6 +983,46 @@ window.SCOPE = {
       ids: ['radar', 'digital-media-research', 'partnerships'],
       verdict: 'Three research outputs, one reader',
       note: 'Automated radar, manual vertical briefs and partnership intel all produce documents nobody routes anywhere. One intake, one action list, feeding this board.'
+    },
+    {
+      ids: ['fieldkit', 'canvasskit', 'gh2-tracker'],
+      verdict: 'The generalization already exists',
+      note: 'FieldKit is CanvassKit generalized: same Apps Script and Sheets pattern, eight vertical configs, a business plan and a price. OPPORTUNITIES.md on the same branch spells the mapping out. CanvassKit and GH2 should be FieldKit configs with case studies attached, not three projects competing for the same slot.'
+    },
+    {
+      ids: ['pps-relief', 'luxiga-runbook'],
+      verdict: 'The step engine, already built once',
+      note: 'PPS Relief is a ten-step guided legal process as an offline PWA with localStorage progress. Runbook is a density-tiered step engine that works offline. One is a concept on a marketing page, the other is a working app shell. Runbook does not need to be built from nothing; it needs PPS Relief generalized.'
+    },
+    {
+      ids: ['seeng', 'pps-relief', 'freedease', 'next-reentry'],
+      verdict: 'A reentry practice, filed as four unrelated things',
+      note: 'A supervision-law agent, a Measure 11 relief PWA, a reentry tool with no org, and a reentry org with no tool. Four projects, one domain, one client family you already serve. This is the most coherent offer on the board and nothing presents it as one.'
+    },
+    {
+      ids: ['seeng', 'brigs'],
+      verdict: 'Context architecture, specified twice',
+      note: 'SEENG is a jurisdiction-agnostic core of identity, method and procedure with swappable modules. BRIGS is context architecture for local LLM systems, in architecture phase with no artifact. SEENG is the artifact BRIGS never produced.'
+    },
+    {
+      ids: ['hq-system', 'scope'],
+      verdict: 'This board, built twice',
+      note: 'The workflow-project-system branch is an earlier project HQ with a stylesheet, a manifest and architecture rules. Scope is the second attempt. Keep one. The CLAUDE.md on that branch is worth rescuing either way, because it documents the vanilla-only no-build rules that govern the whole repo and never reached main.'
+    },
+    {
+      ids: ['courier-direct', 'villa-health', 'sovereign-tattoo', 'nick-sites'],
+      verdict: 'Four local redesigns, no template, no outcomes',
+      note: 'Courier Direct, Villa Health, Sovereign Tattoo and the Nick sites are the same job done four times from scratch, each stranded on a branch or a repo with no record of whether the client ever saw it. The editorial-quant design system on the Nick branch is the template the other three needed.'
+    },
+    {
+      ids: ['oregon-buys', 'radar'],
+      verdict: 'Two intake agents, no shared outbox',
+      note: 'RADAR pulls market findings weekly. Bid-triage scores public solicitations on demand. Both produce scored, actioned output that lands in a markdown file and stops. One action queue, feeding this board, would make either of them worth running.'
+    },
+    {
+      ids: ['whatnotpro', 'merch-store', 'points-exchange'],
+      verdict: 'Three revenue experiments, none started',
+      note: 'Live-selling automation, a merch line and a points marketplace. All three avoid the hard part of consulting, which is finding clients, and all three are unstarted. Pick at most one, and be honest that the other two are procrastination with a research report attached.'
     }
   ]
 };
