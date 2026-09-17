@@ -1,7 +1,8 @@
 # The triage pass
 
-Eighteen cards carry a claim nobody has checked. This is how to clear them
-without it becoming a project of its own.
+**Eleven cards left.** Started at eighteen; the six that needed a branch read
+are done and what they turned up is recorded below. This is how to clear the
+rest without it becoming a project of its own.
 
 **Do it in the tool, not in this file.** Open Scope → Triage. It shows one
 project, one proposed lane, and the reason. Yes, a different lane, or skip.
@@ -37,7 +38,7 @@ If a card needs more than those three, it is hiding two projects. Split it.
 
 Grouped by what the answer costs. Work down, not across.
 
-### One line of your own knowledge settles it (nine cards, ~15 min total)
+### One line of your own knowledge settles it (eight cards, ~15 min total)
 
 These need no research. You already know; it has just never been written down.
 
@@ -46,25 +47,55 @@ These need no research. You already know; it has just never been written down.
 | Sovereign Tattoo | Finished, stalled, or dead? |
 | The Villa Health | Pitched, ignored, or never sent? |
 | Courier Direct | Did the Barry email ever go out? |
+| HQ / Workflow system | Is anything on that branch worth keeping besides CLAUDE.md? |
 | Creating Better Neighbors | What does `cbn-redirect` point from and to? |
 | Art Inside Out | Repo or the inlined copy here — which is canonical? |
 | Next Reentry | Next Reentry or Restorative Reentry? |
-| Nick sites | Are the three `nickmccarty` repos live work or archive? |
-| Points Exchange | Keep the RADAR slot, or drop it? |
 | Partnership Intelligence | Does this live on the personal site or luxiga.co? |
+| WhatNotPro | Seller tooling, or you selling? |
+| Points Exchange | Keep the RADAR slot, or drop it? |
 
-### Ten minutes of looking settles it (six cards)
+### ✅ Done — the six that needed a branch read
 
-Open the branch, read the top of one file, close it.
+Read on 17 Sep. All six are now `verified` on the board, with summaries and
+blockers rewritten to match. Four of my six guesses were wrong.
 
-| Card | Where to look | What you are checking |
-|---|---|---|
-| FieldKit | `fieldkit/docs/BUSINESS-PLAN.md` | Is "framework built" still true six months on? |
-| SEENG | `SEENG.md` on `claude/document-environment-Nol3k` | Architecture only, or is there a runtime? |
-| PPS Relief | `pps-relief/BUILD-CONTEXT.md` | Does private-by-design still hold? How many of the ten steps have content? |
-| OregonBuys | `research/procurement-context.md` | Has any COBID row moved since 25 Aug? |
-| Editorial-Quant | `assets/templates/.../design-system.html` | Is this the house template or a one-off? |
-| Merch Store | `shop.html` | Was a fulfilment provider ever chosen? |
+**PPS Relief — the big one.** Its `BUILD-CONTEXT.md` says "app shell complete,
+everything else is pending" and lists ten remaining files. **All ten exist.**
+26KB of step data carrying real statutory content, 26KB of UI, 26KB of CSS,
+router, state, onboarding, service worker, manifest, icons — seventeen files, a
+working PWA. The status line has been wrong since April. This is the most
+finished unshipped thing you own and the board had it as a shell.
+
+**FieldKit — half right.** The configs are real: declarative schemas with field
+definitions, roles, branding and the Hard/Quick contact split. The financial
+model is fully costed ($350/$600/$900 setup, $75–150/mo at 35% attach,
+$750–1500/yr consultant licence, $67–97 digital product, AppSumo, 3 hours to
+deploy). But **there is no engine on the branch.** The configs configure
+CanvassKit, which lives on main as one HTML file. "Framework built" is true
+only if CanvassKit counts as the framework — which is exactly why the FOLD IN
+call holds.
+
+**OregonBuys — further along than the board said.** You are **already
+registered** as an OregonBuys supplier. The real blockers are different from
+the ones I guessed: commodity codes unreviewed (codes decide which notices
+reach you, so an incomplete set means opportunities *never arrive*), ESB
+unfiled, and insurance quoted but not bound (an automatic disqualifier for any
+bid needing a certificate up front). Two rules also moved: HB 2295 opened VBE
+to any honorable discharge, and USDOT dropped race and sex presumptions from
+DBE in favour of an individualized narrative.
+
+**Editorial-Quant — a house style, not a one-off.** Its README says so in as
+many words: "a light, paper-canvas design system for senior practitioners.
+Serif display, mono metrics, one confident accent, zero gradients." 43KB design
+system, 15KB stylesheet, two sites built on it. The template the civic sites
+need already exists and is documented.
+
+**SEENG — confirmed as guessed.** The branch is main plus two markdown files.
+No runtime, no prompt files, no modules.
+
+**Merch Store — confirmed as guessed.** Every product says Coming Soon, seven
+times. Shopify and print-on-demand named, nothing connected.
 
 ### A real decision (three cards)
 
@@ -76,6 +107,10 @@ Do these at level 5 or above, not on a bad day.
   one dated paragraph.
 - **WhatNotPro** — seller tooling or you selling? Different businesses, and the
   research does not decide it for you.
+
+Note that PPS Relief now arguably belongs at COMMITTED rather than QUEUED: it
+is nearly finished and the only thing between it and done is a legal reviewer.
+COMMITTED is capped at two and currently full, so that is a swap, not an add.
 
 ---
 
@@ -108,7 +143,9 @@ Do not batch this. One triage card is a complete session — the point is that
 stopping after one is a success, not an abandonment.
 
 - **After each pass**, the confirmed count in the footer goes up and stays up.
-- **`lastWorked` drifts.** Regenerate from git and the GitHub API rather than
-  editing by hand. That is a next step on the Scope card itself.
+- **`lastWorked` drifts.** Don't edit it by hand — run
+  `node scope/tools/refresh-dates.js --dry-run`, then without the flag. It
+  reads git for anything on main or a branch and the GitHub API for separate
+  repos, and moves nothing else in the file.
 - **When a lane gets crowded**, the fix is FOLD IN, not a bigger THE ONE. The
   ladder only works if the top two rungs stay small.

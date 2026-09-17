@@ -445,7 +445,7 @@ window.SCOPE = {
       status: 'live',
       confidence: 'verified',
       active: true,
-      lastWorked: '2026-08-28',
+      lastWorked: '2026-04-08',
       home: { type:'main', ref:'index.html' },
       lane: 'queued',
       laneWhy: 'Live, and the keep-or-redirect call is five months overdue.',
@@ -505,6 +505,7 @@ window.SCOPE = {
       active: true,
       lastWorked: '2026-09-16',
       home: { type:'branch', ref:'claude/redesign-nonprofit-site-3LIKV' },
+      track: ['branch:claude/redesign-nonprofit-site-3LIKV', 'repo:Lukas-Green/cbn-redirect'],
       lane: 'queued',
       laneWhy: 'Live client family, most recently touched thing you own.',
       laneSet: 'proposed',
@@ -768,7 +769,7 @@ window.SCOPE = {
       tag: 'Productized Service / Field Data',
       cluster: 'workspace',
       status: 'build',
-      confidence: 'inferred',
+      confidence: 'verified',
       active: false,
       lastWorked: '2026-03-31',
       home: { type:'branch', ref:'claude/update-website-text-JSeI8' },
@@ -776,17 +777,17 @@ window.SCOPE = {
       laneWhy: 'The only project with a business plan, a price and eight built configs. If anything earns this quarter, it is this.',
       laneSet: 'proposed',
       micro: 'Open BUSINESS-PLAN.md and read only the Executive Summary.',
-      summary: 'A configurable white-label field data capture framework on Google Workspace, sold as a productized service rather than SaaS: one engine, deployed in hours, $300-800 once instead of $150/month forever. It has a v1.0 business plan, financial projections, and eight built vertical configs (construction, events, health, HR, outreach, property, sales, volunteer). The plan says "framework built, seeking first three paying clients." It has been sitting on an unmerged branch since March, while RADAR keeps researching its market.',
+      summary: 'A configurable white-label field data capture framework on Google Workspace, sold as a productized service rather than SaaS. Checked on the branch: the eight vertical configs are real declarative schemas (field definitions, roles, branding, the Hard/Quick contact split) and the financial model is fully costed \u2014 $350/$600/$900 setup tiers, $75-150/mo retainer at 35% attach, $750-1500/yr consultant licence, a $67-97 digital product, AppSumo launch, 3 hours to deploy a client. What the branch does not contain is an engine. The configs configure CanvassKit, which lives on main. "Framework built" is true only if you count CanvassKit as the framework.',
       concepts: ['apps-script', 'google-workspace', 'sheets', 'productized-service', 'field-capture', 'contact-tracking', 'smb', 'nonprofit', 'pricing'],
       blockers: [
-        'Lives on an unmerged branch from March. Nothing about it is visible on either site.',
+        'The eight configs have no engine on the branch. They configure CanvassKit, which sits on main as one HTML file.',
         'Zero of the three validation clients approached, six months after the plan said to.',
-        'It generalizes CanvassKit and GH2, but both still exist as separate projects.'
+        'Fully priced and never quoted. The pricing exists only in a projections file.'
       ],
       next: [
-        { text: 'Merge the branch, or at minimum open the business plan and read it again.', effort: 'quick' },
+        { text: 'Write one line in the FieldKit README naming CanvassKit as the engine.', effort: 'quick' },
         { text: 'Pick the one vertical you can sell this month and name three real prospects.', effort: 'medium' },
-        { text: 'Fold CanvassKit and GH2 into FieldKit as configs and retire them as projects.', effort: 'deep' }
+        { text: 'Wire one config to the CanvassKit engine end to end, so the framework claim is literally true.', effort: 'deep' }
       ],
       links: { local: 'fieldkit/docs/BUSINESS-PLAN.md' },
       image: null
@@ -797,7 +798,7 @@ window.SCOPE = {
       tag: 'Legal Agent / Reentry',
       cluster: 'civic',
       status: 'concept',
-      confidence: 'inferred',
+      confidence: 'verified',
       active: false,
       lastWorked: '2026-04-07',
       home: { type:'branch', ref:'claude/document-environment-Nol3k' },
@@ -809,7 +810,7 @@ window.SCOPE = {
       concepts: ['agent', 'legal', 'reentry', 'civic', 'context', 'architecture', 'markdown', 'jurisdiction-modular'],
       blockers: [
         'Buried on a branch named after something else entirely.',
-        'Architecture is complete on paper with no runtime behind it.',
+        'Confirmed: the branch is main plus two markdown files. SEENG.md and a session summary. No runtime, no prompt files, no modules.',
         'Legal advice in a supervision context carries real exposure that is not addressed.'
       ],
       next: [
@@ -826,24 +827,24 @@ window.SCOPE = {
       tag: 'Legal PWA / Oregon',
       cluster: 'civic',
       status: 'build',
-      confidence: 'inferred',
+      confidence: 'verified',
       active: false,
       lastWorked: '2026-04-07',
       home: { type:'branch', ref:'claude/pps-relief-legal-guide-Okpji' },
       lane: 'queued',
       laneWhy: 'Private by design, but the app shell is real and the domain is yours.',
       laneSet: 'proposed',
-      micro: 'Open BUILD-CONTEXT.md and confirm the private call still stands.',
-      summary: 'An offline PWA walking Oregon Measure 11 offenders through a ten-step process to seek reduction or termination of post-prison supervision. Vanilla JS, hash routing, localStorage, installable, with a glossary and structured step data already written. Its build context marks it private and says explicitly not to merge or open a PR until told. The app shell is done; the rest is pending.',
+      micro: 'Open BUILD-CONTEXT.md and delete the line saying everything is pending.',
+      summary: 'An offline PWA walking Oregon Measure 11 offenders through a ten-step process to seek reduction or termination of post-prison supervision. Its own status line says "app shell complete, everything else pending" and lists ten remaining files. All ten now exist: 26KB of step data with real statutory content, 26KB of UI, 26KB of CSS, router, state, onboarding, service worker, manifest and icons. Seventeen files, a working PWA. The status line is five months stale and this is the most finished unshipped thing you own.',
       concepts: ['pwa', 'offline', 'legal', 'reentry', 'civic', 'guided-setup', 'density-tiers', 'localstorage'],
       blockers: [
-        'Deliberately private, so it cannot ship the way the other pages do. That is a decision, not an accident.',
-        'App shell complete, all ten steps of content still pending.',
-        'Legal accuracy has no reviewer named.'
+        'Its own BUILD-CONTEXT.md still says the work is pending. The doc has been wrong since April.',
+        'Deliberately private, so there is no deploy path. That is a decision, not an accident.',
+        'Legal accuracy has no reviewer named, and this one gives procedural advice to people under supervision.'
       ],
       next: [
-        { text: 'Re-read BUILD-CONTEXT.md and confirm the private-by-design call still holds.', effort: 'quick' },
-        { text: 'Write the content for step one and see how long a step actually takes.', effort: 'medium' },
+        { text: 'Fix the status line in BUILD-CONTEXT.md. It says pending and the files are all there.', effort: 'quick' },
+        { text: 'Open index.html in a browser and click through all ten steps to find what is actually missing.', effort: 'medium' },
         { text: 'Find one person who can check the legal substance before anyone relies on it.', effort: 'deep' }
       ],
       links: { local: 'pps-relief/BUILD-CONTEXT.md' },
@@ -855,25 +856,25 @@ window.SCOPE = {
       tag: 'Public Procurement',
       cluster: 'intel',
       status: 'build',
-      confidence: 'inferred',
+      confidence: 'verified',
       active: true,
       lastWorked: '2026-08-25',
       home: { type:'branch', ref:'claude/oregon-buys-contracts-3ztm7r' },
       lane: 'committed',
       laneWhy: 'Newest work, and the certification gate is a form, not a build.',
       laneSet: 'proposed',
-      micro: 'Open the COBID eligibility page. Do not fill anything in.',
-      summary: 'A public-sector pursuit system: a bid-triage skill that scores solicitations against a LUXIGA rubric and defaults to no-bid, backed by a standing procurement context file and an Oregon reference. Your most recent unmerged work. The context file shows COBID ESB certification not started and veteran and DBE eligibility unchecked, which is the actual gate on any of it.',
+      micro: 'Answer one question: is there military service in your history? That decides VBE.',
+      summary: 'A public-sector pursuit system: a bid-triage skill that scores solicitations against a rubric and defaults to no-bid, a 22KB Oregon procurement reference, and a standing context file. Further along than it looked \u2014 you are already registered as an OregonBuys supplier. What is not done: COBID ESB unfiled, commodity codes unreviewed, insurance quoted but not bound. Two eligibility rules also changed recently: HB 2295 opened VBE to any honorably discharged veteran, and USDOT dropped the race and sex presumptions from DBE in favour of an individualized narrative.',
       concepts: ['agent', 'procurement', 'government', 'research', 'sales-enablement', 'rubric', 'admin'],
       blockers: [
-        'COBID ESB certification not started. Most set-aside work is unreachable without it.',
-        'Veteran and DBE eligibility marked unchecked, so you do not know what you qualify for.',
-        'The skill has never been run against a live solicitation.'
+        'Commodity codes unreviewed. Codes decide which notices reach you, so an incomplete set means opportunities never arrive at all.',
+        'COBID ESB unfiled. Eligibility looks likely: under 19 employees and under roughly $789K three-year average receipts.',
+        'Insurance quoted but not bound. Any solicitation needing a certificate with the bid is an automatic disqualifier.'
       ],
       next: [
-        { text: 'Check COBID veteran and DBE eligibility. One page on the state site.', effort: 'quick' },
-        { text: 'Run bid-triage against one live OregonBuys listing and see if the rubric holds.', effort: 'medium' },
-        { text: 'File the COBID ESB application.', effort: 'deep' }
+        { text: 'Check the VBE rule. Since HB 2295 it covers any honorable discharge, not only service-disabled.', effort: 'quick' },
+        { text: 'Review your NIGP commodity codes so design, dev, accessibility and training notices actually reach you.', effort: 'medium' },
+        { text: 'File the COBID ESB application. It is free and you appear to qualify.', effort: 'deep' }
       ],
       links: { local: 'research/procurement-context.md', live: 'https://oregonbuys.gov' },
       image: null
@@ -971,7 +972,7 @@ window.SCOPE = {
       tag: 'Commerce / Automation',
       cluster: 'commerce',
       status: 'prototype',
-      confidence: 'inferred',
+      confidence: 'verified',
       active: false,
       lastWorked: '2026-04-17',
       home: { type:'branch', ref:'claude/merch-store-automation-S6c7W' },
@@ -979,11 +980,11 @@ window.SCOPE = {
       laneWhy: 'Revenue experiment that avoids the hard part of consulting.',
       laneSet: 'proposed',
       micro: 'Write one word: real, or delete.',
-      summary: 'A shop page and merch automation built on the portfolio, branded LUXIGA, pitched around quality blanks. On a branch since April with no fulfilment path recorded. The nearest thing to a revenue experiment that does not depend on finding a client.',
+      summary: 'A LUXIGA-branded shop page pitched around quality blanks. Checked: every product on it says Coming Soon, seven times. Shopify and print-on-demand are named as the intended route but nothing is connected. It is a storefront shell, and the nearest thing to a revenue experiment that does not depend on finding a client.',
       concepts: ['commerce', 'automation', 'brand', 'site', 'marketplace'],
       blockers: [
-        'No print or fulfilment provider decided.',
-        'Unmerged, so the store does not exist to anyone.',
+        'Seven products, all marked Coming Soon. Nothing is buyable.',
+        'Shopify is named but no store, no account and no print provider is connected.',
         'Competes for attention with the client work that actually pays.'
       ],
       next: [
@@ -1030,7 +1031,7 @@ window.SCOPE = {
       tag: 'Template System / Client',
       cluster: 'client',
       status: 'prototype',
-      confidence: 'inferred',
+      confidence: 'verified',
       active: false,
       lastWorked: '2026-04-16',
       home: { type:'branch', ref:'claude/redesign-nick-sites-2LRYU' },
@@ -1039,12 +1040,12 @@ window.SCOPE = {
       laneWhy: 'The editorial-quant design system is the template the civic sites need.',
       laneSet: 'proposed',
       micro: 'Open design-system.html. Just look.',
-      summary: 'A portfolio template with its own design system document, applied to two sites for Nick McCarty. You also have push access to three of his repos (OHOH redesign, Harbor of Hope, NASA research assistant). The template is the interesting part: it is the shared civic and client site system the other eight one-off sites keep not having.',
+      summary: 'Not a one-off. Its README calls it a house style: "a light, paper-canvas design system for senior practitioners. Serif display, mono metrics, one confident accent, zero gradients." A 43KB design-system document, a 15KB stylesheet, and two sites built on it. This is the shared template the other eight one-off sites keep not having, and it already exists, documented, on a branch from April.',
       concepts: ['site', 'client-work', 'template', 'design-system', 'portfolio', 'redesign'],
       blockers: [
-        'Template exists on a branch and is used by nothing else.',
-        'Three of his repos are open to you with no stated status.',
-        'Design system is documented but not named as a reusable offer.'
+        'A documented house style that nothing in your own portfolio uses.',
+        'Three nickmccarty repos are open to you with no stated status.',
+        'Built for portfolios. Whether it stretches to nonprofit sites is untested.'
       ],
       next: [
         { text: 'Open design-system.html and decide whether it is the house template.', effort: 'quick' },
