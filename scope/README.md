@@ -1,131 +1,178 @@
 # SCOPE
 
-A sanity and scope board for everything you have going at once. One page that
-answers three questions without opening twenty repos:
+A project board for 37 projects and a brain that does not reliably start
+things. One page, no build step, no dependencies. Open `scope/index.html` —
+it works straight off disk.
 
-1. **What do I actually have?** Every project with a status, an age, a preview
-   tile and a short but real explanation.
-2. **What is stuck, and on what?** Three blockers and three next steps per
-   project. Three is the cap on purpose. If a blocker list runs to seven, the
-   project is really several projects.
-3. **What is the same thing built twice?** Clusters by shared concept, plus an
-   Overlaps view that scores every pair and names the merges worth making.
-4. **Where does it actually live?** Every card says whether the work is on
-   `main`, stranded on an unmerged branch, in a separate repo, or nowhere but a
-   document. Twelve of the thirty-six are on branches.
+Three documents:
 
-Open `scope/index.html`. It works straight off disk (`file://`), no build step
-and no server. Data lives in `scope/projects.js`; the page is just the reader.
+- **this file** — how it works and how to edit it
+- **[`docs/RESEARCH.md`](docs/RESEARCH.md)** — the 22 design rules and the
+  literature behind them. Every interface decision traces to a numbered rule.
+- **[`docs/TRIAGE.md`](docs/TRIAGE.md)** — how to clear the 18 unconfirmed
+  cards, and the concepts that have no card yet
 
 ---
 
-## The AuDHD layer
+## The commitment ladder
 
-The Runbook idea is that the same information is served at the density that
-fits you, and the exact values never disappear — only the hand-holding fades.
-This board applies that to a project list rather than an instruction set.
+Lanes are the importance levels. Colour is the code, and position on the ladder
+is the meaning. The order never changes at any dial level.
 
-| Control | What it does | Why |
-|---|---|---|
-| **Density: Calm / Standard / Everything** | Calm shows name, status and one next step, six cards maximum. Everything adds raw dates and every concept tag. | The Runbook tiers. Nothing is hidden that changes a decision, only the surrounding weight. |
-| **Energy available** | Filters to projects that have a step you could do in 15 minutes, an hour, or a deep session — and hides the steps you cannot. | Task lists usually assume unlimited executive function. This one asks what you have and answers with only that. |
-| **One thing** | Picks a single project and a single step, leads with the action, and offers "not that one" instead of a list. | Twenty-four cards is a decision. One card is a start. |
-| **Low stimulation** | Removes the grain, the glow, the motion and the bright accent. | Same page, turned down. Also honours `prefers-reduced-motion` on its own. |
-| **WIP limit** | You set a number. The top bar states plainly when you are over it. | The scope assist. It does not congratulate you for having nine active projects. |
-| **Park** | Moves a project out of the way without deleting it. Reversible, stored locally. | Parking is not failure and should not require a commit. |
-| **Hide parked & dormant** | Removes the guilt pile from view entirely. | Sometimes the honest answer is "not this month." |
-| **Hide blockers** | Turns off the "in the way" list. | On a bad day the blocker column is the thing that closes the tab. |
-| **Lives in** | Filters to unmerged branches, docs-only projects, `main`, or separate repos. | The single most useful filter here. "Unmerged branch" is the list of work you finished and then lost. |
+| Lane | Colour | Cap | What it means |
+|---|---|---|---|
+| **THE ONE** | lime, solid | 1 | One commitment. Everything else waits. |
+| **COMMITTED** | lime, dimmed | 2 | Actively yours this month. |
+| **QUEUED** | violet | — | Real, next, not started. No guilt attached. |
+| **FOLD IN** | violet, faint | — | Absorb into another project. **This lane is how scope shrinks.** |
+| **PARKED** | slate | — | Deliberately not now. Reversible, and not a failure. |
+| **CLOSED** | dotted outline | — | Done with. Kept so it stops being rediscovered. |
 
-Everything persists in `localStorage`, so the board opens the way you left it.
-Keyboard: <kbd>/</kbd> search, <kbd>f</kbd> focus panel, <kbd>1</kbd>
-<kbd>2</kbd> <kbd>3</kbd> density, <kbd>Esc</kbd> clear filters.
+FOLD IN is the anti-scope-creep mechanism, and the one that does real work
+here: 14 of 37 projects are marked to fold into another. Each carries a
+`foldInto` target and the reason, so the card says *"Fold into FieldKit —
+FieldKit is this, generalized, with a price attached."*
+
+An empty lane still shows its heading. The skeleton of the page is identical
+every time you open it, because unpredictability is itself an anxiety input
+(Rule 15).
 
 ---
 
-## The four views
+## The nine-level dial
 
-- **Board** — everything, sorted by what needs attention. The default sort
-  weighs active status, staleness and blocker count, so an active project going
-  cold floats to the top. That is the most expensive thing on the board.
-- **Clusters** — grouped by the cluster you assign each project. Seven groups
-  today: engine, workspace tools, civic, brand, intelligence, learning, client.
-- **Overlaps** — the 17 hand-written merge calls first, then a computed table.
-  Every pair sharing two or more concepts, scored by Jaccard overlap, marked
-  `called out` or `unexamined`. The unexamined rows are the point.
-- **One thing** — one project, one step, one button.
+One control. It sets how much work you are offered **and** how loud the page
+is, because task load and sensory load draw on the same budget (Rule 11).
+Arrow keys or number keys move it.
+
+| Level | Cards | Biggest task | Colour | Adds |
+|---|---|---|---|---|
+| 1 · Barely | 1 | 2 min | none | The step. Two escape hatches. A timer. |
+| 2 · Low | 1 | 2 min | 15% | What it belongs to |
+| 3 · Warming up | 3 | 15 min | 30% | Lanes, Triage |
+| 4 · Steady | 3 | 15 min | 45% | Dates, branch labels |
+| 5 · Working | 5 | 1 hr | 60% | Screenshots, search, counts |
+| 6 · Good day | 7 | 1 hr | 75% | Blockers |
+| 7 · Sharp | all | deep | 90% | Concepts, clusters, alarm colours |
+| 8 · Strategic | all | deep | 100% | Overlaps |
+| 9 · Everything | all | deep | 100% | Raw dates |
+
+The card cap is a **budget spent across the whole view**, top lane first — three
+at level 3 means three cards total, not three per lane.
+
+**Nothing changes position between levels.** Level 1 and level 9 are the same
+room with the lights at different settings. Views above your level stay visible
+in the tab row, dimmed; clicking one raises the dial and says so.
+
+**Down is as legitimate as up.** Level 1 is a supported state with useful
+output, not a failure mode. Every project carries a `micro` action under two
+minutes, so level 1 always has something real to offer.
+
+---
+
+## What else the research changed
+
+- **The step comes before the blockers**, always. The unit of work is one
+  action, never a project (Rule 1).
+- **Steps are typed by demand, not just duration** — `call`, `email`, `decide`,
+  `admin`, `read`, `build`. A two-minute phone call and a two-minute file rename
+  are not the same task (Rule 17).
+- **Call and email steps ship with the opening line already written.** Removing
+  "what do I even say" removes most of the cost (Rule 18).
+- **Sit with me** — a count-up timer on the Now view. No logging, no score, no
+  report. Body doubling without surveillance (Rule 20).
+- **No streaks. No overdue red. No guilt notifications.** Punishing UI is a
+  documented reason people abandon these tools (Rule 21). Alarm colours only
+  exist at level 7+, and can be switched off entirely.
+- **Age can be hidden** in Settings. It is information, not an accusation.
+- **Nothing is asked twice.** Level, view, lanes and preferences persist.
+
+---
+
+## Triage
+
+Triage shows **one** project, **one** proposed lane, and the reason. Yes, a
+different lane, or skip. Unconfirmed guesses come first.
+
+A proposal rather than a blank field is the whole point: it turns an open
+decision into a yes/no, and yes/no survives a bad day. See `docs/TRIAGE.md` for
+what "confirmed" requires per card.
 
 ---
 
 ## Editing the data
 
-Everything is in `projects.js`. It is plain JavaScript rather than JSON so the
-page works over `file://` with no fetch and no server.
+Everything is in `projects.js` — plain JavaScript, not JSON, so the page works
+over `file://` with no fetch and no server.
 
 ```js
 {
-  id: 'luxiga-os',              // unique, also used for #anchors and merge refs
-  name: 'LUXIGA OS',
-  aka: 'Old name',              // optional
-  tag: 'Platform / Local AI',   // the small category line
-  cluster: 'engine',            // must be a key in SCOPE.clusters
-  status: 'build',              // live | build | prototype | concept | delivered | parked
-  confidence: 'verified',       // verified | inferred  (inferred shows "unconfirmed")
-  active: true,                 // counts against the WIP limit
-  lastWorked: '2026-09-05',     // YYYY-MM-DD
-  home: { type:'branch', ref:'claude/…' },  // where the work actually lives:
-                                //   main | branch | repo | nowhere
-                                //   branch and nowhere render as warnings
-  summary: '…',                 // 2-4 sentences, honest
-  concepts: ['local-llm', 'whisper'],   // drives clustering and overlap scoring
-  blockers: ['…', '…', '…'],            // max 3
-  next: [{ text: '…', effort: 'quick' }],  // quick | medium | deep, max 3
-  links: { live, repo, caseStudy, local },  // all optional
-  image: null                   // 'shots/luxiga-os.png', or null for a generated tile
+  id: 'fieldkit',
+  name: 'FieldKit',
+  tag: 'Productized Service / Field Data',
+  cluster: 'workspace',          // key in SCOPE.clusters
+  status: 'build',               // live | build | prototype | concept | delivered | parked
+  confidence: 'inferred',        // verified | inferred → shows "unconfirmed"
+  active: false,
+  lastWorked: '2026-03-31',      // YYYY-MM-DD
+  home: { type:'branch', ref:'claude/update-website-text-JSeI8' },
+                                 // main | branch | repo | nowhere
+  lane: 'committed',             // the_one | committed | queued | fold | parked | closed
+  foldInto: 'fieldkit',          // required when lane is 'fold'
+  laneWhy: 'The only project with a business plan…',
+  laneSet: 'proposed',
+  micro: 'Open BUSINESS-PLAN.md and read only the Executive Summary.',
+  microDemand: 'read',           // optional; overrides the heuristic
+  summary: '…',
+  concepts: ['apps-script', 'productized-service'],
+  blockers: ['…'],               // max 3
+  next: [{ text:'…', effort:'quick', demand:'admin' }],
+                                 // micro | quick | medium | deep, max 3
+  links: { live, repo, caseStudy, local },
+  image: null                    // 'shots/fieldkit.png', or null for a tile
 }
 ```
 
+`SCOPE.scripts[id]` holds the opening line for a project's call or email step.
+
+**`micro` is required.** It is what level 1 and 2 serve, and it has to be
+genuinely under two minutes. If it isn't, shrink it — don't retag it.
+
+**`concepts` are load-bearing.** Clustering and overlap detection both run off
+them, so reuse the same strings. Two projects sharing `apps-script` and
+`nonprofit` will find each other whether or not you noticed.
+
 **`home` drives the honesty.** `branch` means finished work nobody can see;
-`nowhere` means the project exists only as prose in a doc or a research file.
-Both add weight to the "needs attention" sort, because invisible work is the
-kind you rebuild by accident.
+`nowhere` means it exists only as prose. Twelve are on branches, nine are
+nowhere.
 
-**Concepts are the load-bearing field.** Clustering and overlap detection both
-run off them, so reuse the same strings across projects. Two projects that
-share `apps-script` and `nonprofit` will find each other whether or not you
-noticed the pair.
-
-**Screenshots.** Drop images in `scope/shots/` named by project id and set
-`image: 'shots/<id>.png'`. Until then each card draws a deterministic node-graph
-tile from its id, so the board never looks half-built.
-
-**Status dates.** `lastWorked` comes from `git log -1 --format=%as -- <path>`
-for folders in this repo, and from the GitHub push date for separate repos.
-Regenerating these automatically is a next step on the Scope card itself.
+**Screenshots** go in `scope/shots/` named by id. Until then each card draws a
+deterministic node-graph tile, so the board never looks half-built.
 
 ---
 
-## Where this data came from
+## Auzmzs
 
-- `main` of this repo: folders, pages, `SESSION.md`, `BUILD-LOG.md`, `research/`, `radar/`
-- The other 20 branches on `origin`, read with `git diff --name-only main...<branch>`
-- The 7 GitHub repos under `Lukas-Green`, plus 3 under `nickmccarty` you can push to
-- `luxiga.co`, cloned and read for the product copy
+Auzmzs is a project on the board — your coined word for neurodivergent stimming
+and quirks, aimed at a channel or a brand. It is also an **opt-in voice layer**,
+off by default, that warms up the empty states. Settings → Auzmzs voice. A tool
+you open on bad days should not make jokes at you unless you asked it to.
 
-`lastWorked` is `git log -1 --format=%as -- <path>` for folders on main, the
-branch tip date for branch work, and the GitHub push date for separate repos.
+---
 
-## What is unconfirmed
+## Where the data came from
 
-Cards marked `unconfirmed` were inferred from repo contents, branch diffs and
-research files rather than confirmed by you. Currently 18 of 36 — most of the
-branch work, since a branch diff shows what was built but never why it stopped.
-Walk the board once and fix them, and the badge goes away.
+`main` of this repo; all 20 other branches on `origin`, read with
+`git diff --name-only main...<branch>`; the 7 GitHub repos under `Lukas-Green`
+plus 3 under `nickmccarty`; and `luxiga.co`, cloned and read for product copy.
+
+`lastWorked` is the last commit touching that path on main, the branch tip date
+for branch work, or the GitHub push date for separate repos.
 
 ## Design
 
-Tokens, type and card treatment are carried over from `luxiga.co`: Space
-Grotesk and Space Mono, `#080810` on `#C4FF53` and `#8B5CF6`, 12px cards, 1px
-`#1a1a2e` borders, violet glow on hover, the fixed grain overlay. Light mode
-uses the same light palette as the business site, with the accent text darkened
-to `#3D6B00` so it stays readable. No dependencies, no build.
+Tokens, type and card treatment carry over from `luxiga.co`: Space Grotesk and
+Space Mono, `#080810` with `#C4FF53` and `#8B5CF6`, 12px cards, 1px borders.
+Every hue passes through a `--chroma` variable the dial sets, which is how one
+control desaturates the whole page. Light mode darkens the accent to `#3D6B00`
+for contrast. No dependencies, no build.
