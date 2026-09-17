@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCOPE — Project Board</title>
+<meta name="description" content="Every project, one commitment ladder, and a nine-level dial that turns the whole thing down when you need it to.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TOKENS — from luxiga.co. --chroma is set by the dial (Rule 12).
+   ============================================================ */
+:root{
+  --bg:#080810; --surface:#0D0D1A; --surface-2:#12121F;
+  --accent-raw:#C4FF53; --violet-raw:#8B5CF6;
+  --text:#E8E8F0; --muted:#8E8AA0; --muted-strong:#DAD6EA;
+  --border:#1a1a2e; --border-lit:#2a2a45;
+  --warn-raw:#FFB454; --danger-raw:#FF6B6B;
+  --sans:'Space Grotesk',system-ui,-apple-system,sans-serif;
+  --mono:'Space Mono',ui-monospace,monospace;
+  --radius:12px; --radius-sm:6px;
+  --chroma:60%; --motion:1;
+  --speed:calc(.2s * var(--motion));
+  --noise:.035;
+  color-scheme:dark;
+}
+/* Every hue passes through --chroma, so one dial move desaturates the page. */
+:root{
+  --accent: color-mix(in srgb, var(--accent-raw) var(--chroma), var(--muted));
+  --violet: color-mix(in srgb, var(--violet-raw) var(--chroma), var(--muted));
+  --warn:   color-mix(in srgb, var(--warn-raw)   var(--chroma), var(--muted));
+  --danger: color-mix(in srgb, var(--danger-raw) var(--chroma), var(--muted));
+  --accent-text:var(--accent);
+}
+:root[data-theme="light"]{
+  --bg:#FAFAF8; --surface:#F0EFF4; --surface-2:#E9E7F0;
+  --accent-raw:#3D6B00; --violet-raw:#6D28D9;
+  --text:#1A1A2E; --muted:#5C566E; --muted-strong:#443E55;
+  --border:#D8D4E2; --border-lit:#C3BDD4;
+  --warn-raw:#8A5200; --danger-raw:#B3261E;
+  --noise:.02;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:light){
+  :root[data-theme="auto"]{
+    --bg:#FAFAF8; --surface:#F0EFF4; --surface-2:#E9E7F0;
+    --accent-raw:#3D6B00; --violet-raw:#6D28D9;
+    --text:#1A1A2E; --muted:#5C566E; --muted-strong:#443E55;
+    --border:#D8D4E2; --border-lit:#C3BDD4;
+    --warn-raw:#8A5200; --danger-raw:#B3261E;
+    --noise:.02;
+    color-scheme:light;
+  }
+}
+@media (prefers-reduced-motion:reduce){ :root{ --motion:0 } }
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{font-size:16px}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:calc(var(--noise) * var(--motion));
+  background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+a{color:inherit}
+button,input,select,textarea{font-family:inherit;font-size:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--violet);outline-offset:2px;border-radius:4px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.wrap{max-width:1240px;margin:0 auto;padding:0 2rem}
+@media(max-width:640px){ .wrap{padding:0 1rem} }
+.mono{font-family:var(--mono)}
+.label{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-text)}
+
+/* ============================================================
+   HEADER — fixed contents at every level (Rule 15)
+   ============================================================ */
+header.top{border-bottom:1px solid var(--border);background:var(--bg);position:sticky;top:0;z-index:50}
+.top-inner{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;padding:.9rem 0;flex-wrap:wrap}
+.brand{display:flex;align-items:baseline;gap:.8rem}
+.brand h1{font-family:var(--mono);font-size:1.3rem;font-weight:700;letter-spacing:.12em}
+.brand h1 .dot{color:var(--accent-text)}
+.brand .sub{font-size:.82rem;color:var(--muted)}
+.top-actions{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn{background:transparent;border:1px solid var(--border-lit);color:var(--text);padding:.45rem .9rem;border-radius:var(--radius-sm);
+  font-size:.82rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:.45rem;text-decoration:none;white-space:nowrap;
+  transition:border-color var(--speed),color var(--speed),background var(--speed)}
+.btn:hover{border-color:var(--accent);color:var(--accent-text)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#0c0c14;font-weight:700}
+:root[data-theme="light"] .btn.primary{color:#FAFAF8}
+.btn.primary:hover{opacity:.88}
+.btn.ghost{border-color:transparent;color:var(--muted)}
+.btn.ghost:hover{color:var(--text);border-color:var(--border-lit)}
+.btn[aria-pressed="true"]{border-color:var(--accent);color:var(--accent-text)}
+.btn.sm{padding:.3rem .65rem;font-size:.74rem}
+.btn.big{padding:.7rem 1.4rem;font-size:.95rem}
+.btn[disabled],.btn.locked{opacity:.4;cursor:pointer}
+
+/* ============================================================
+   THE DIAL — always here, always this shape (Rule 15)
+   ============================================================ */
+.dial-bar{border-bottom:1px solid var(--border);background:var(--surface)}
+.dial-inner{display:flex;align-items:center;gap:1.4rem;padding:.9rem 0;flex-wrap:wrap}
+.dial{display:flex;align-items:flex-end;gap:3px}
+.dial button{
+  width:26px;border:1px solid var(--border-lit);background:transparent;border-radius:3px;cursor:pointer;padding:0;
+  transition:background var(--speed),border-color var(--speed);
+}
+.dial button:nth-child(1){height:12px} .dial button:nth-child(2){height:16px}
+.dial button:nth-child(3){height:20px} .dial button:nth-child(4){height:24px}
+.dial button:nth-child(5){height:28px} .dial button:nth-child(6){height:32px}
+.dial button:nth-child(7){height:36px} .dial button:nth-child(8){height:40px}
+.dial button:nth-child(9){height:44px}
+.dial button.on{background:var(--accent);border-color:var(--accent)}
+.dial button:hover{border-color:var(--accent)}
+.dial-read{display:flex;flex-direction:column;gap:.1rem;min-width:min(420px,100%)}
+.dial-read .n{font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-text)}
+.dial-read .line{font-size:.9rem;color:var(--muted-strong)}
+.dial-nudge{margin-left:auto;display:flex;gap:.4rem}
+
+/* ============================================================
+   VERDICT — level 5+. States a count. Never instructs. (Rule 8, 21)
+   ============================================================ */
+.verdict{border-bottom:1px solid var(--border);background:var(--surface-2);font-size:.86rem;color:var(--muted-strong)}
+.verdict .wrap{padding-top:.8rem;padding-bottom:.8rem;display:flex;gap:1.4rem;flex-wrap:wrap;align-items:center}
+.verdict b{color:var(--text);font-weight:600}
+.vstat{font-family:var(--mono);font-size:.76rem;color:var(--muted)}
+.vstat i{font-style:normal;color:var(--text)}
+
+/* ============================================================
+   TOOLBAR + VIEWS
+   ============================================================ */
+[hidden]{display:none !important}
+.toolbar{padding:1rem 0;display:flex;gap:1rem;flex-wrap:wrap;align-items:flex-end;border-bottom:1px solid var(--border)}
+.field{display:flex;flex-direction:column;gap:.3rem}
+.field > span{font-size:.72rem;color:var(--muted);font-weight:600}
+select,input[type="search"]{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.5rem .8rem;outline:none;font-size:.85rem;transition:border-color var(--speed)}
+select:focus,input:focus{border-color:var(--accent)}
+.search-wrap{flex:1;min-width:200px}
+.search-wrap input{width:100%}
+.views{display:flex;gap:.2rem;border:1px solid var(--border);border-radius:var(--radius-sm);padding:.2rem;background:var(--surface);flex-wrap:wrap}
+.views button{background:transparent;border:none;padding:.4rem .8rem;border-radius:4px;font-size:.8rem;font-weight:600;color:var(--muted);cursor:pointer;transition:background var(--speed),color var(--speed)}
+.views button[aria-selected="true"]{background:var(--surface-2);color:var(--accent-text)}
+.views button.locked{opacity:.35}
+
+/* ============================================================
+   FOCUS PANEL
+   ============================================================ */
+.focus-panel{border-bottom:1px solid var(--border);background:var(--surface-2);display:none}
+.focus-panel.open{display:block}
+.focus-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.4rem;padding:1.5rem 0}
+.focus-block h3{font-size:.76rem;text-transform:uppercase;letter-spacing:.1em;color:var(--accent-text);font-family:var(--mono);margin-bottom:.5rem;font-weight:700}
+.focus-block p{font-size:.76rem;color:var(--muted);margin-top:.5rem;line-height:1.5}
+.switch-row{display:flex;align-items:center;gap:.6rem;padding:.25rem 0;font-size:.85rem}
+.switch-row input{accent-color:var(--violet);width:16px;height:16px;cursor:pointer}
+.switch-row label{cursor:pointer}
+
+/* ============================================================
+   LANES — colour IS the importance level
+   ============================================================ */
+main{padding:1.6rem 0 5rem;min-height:60vh}
+.lane{margin-bottom:2.2rem;border-left:3px solid var(--lane-c,var(--border-lit));padding-left:1.2rem}
+.lane[data-tone="lime"]       { --lane-c:var(--accent) }
+.lane[data-tone="lime-dim"]   { --lane-c:color-mix(in srgb,var(--accent) 55%,transparent) }
+.lane[data-tone="violet"]     { --lane-c:var(--violet) }
+.lane[data-tone="violet-dim"] { --lane-c:color-mix(in srgb,var(--violet) 50%,transparent) }
+.lane[data-tone="slate"]      { --lane-c:var(--border-lit) }
+.lane[data-tone="outline"]    { --lane-c:transparent;border-left-style:dotted;border-left-color:var(--border-lit) }
+.lane-head{display:flex;align-items:baseline;gap:.9rem;flex-wrap:wrap;margin-bottom:.9rem}
+.lane-head h2{font-family:var(--mono);font-size:.92rem;font-weight:700;letter-spacing:.14em;color:var(--lane-c)}
+.lane[data-tone="slate"] .lane-head h2,.lane[data-tone="outline"] .lane-head h2{color:var(--muted)}
+.lane-head .cap{font-family:var(--mono);font-size:.68rem;color:var(--muted)}
+.lane-head .cap.over{color:var(--warn)}
+.lane-head .blurb{flex-basis:100%;font-size:.8rem;color:var(--muted)}
+.lane-empty{font-size:.82rem;color:var(--muted);font-style:italic;padding:.3rem 0 .6rem}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.1rem}
+.grid.roomy{grid-template-columns:repeat(auto-fill,minmax(420px,1fr));gap:1.5rem}
+
+/* ============================================================
+   CARD
+   ============================================================ */
+.card{border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);display:flex;flex-direction:column;overflow:hidden;
+  transition:border-color var(--speed)}
+.card:hover{border-color:var(--lane-c,var(--violet))}
+.shot{aspect-ratio:16/9;background:var(--surface-2);border-bottom:1px solid var(--border);position:relative}
+.shot svg,.shot img{width:100%;height:100%;display:block;object-fit:cover}
+.card-body{padding:1rem 1.15rem 1.15rem;display:flex;flex-direction:column;gap:.65rem;flex:1}
+.card-tag{font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.card h3{font-size:1.08rem;font-weight:700;line-height:1.3}
+.card h3 .aka{font-size:.76rem;font-weight:400;color:var(--muted)}
+.card-desc{font-size:.84rem;color:var(--muted-strong);line-height:1.6}
+.meta-row{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;font-family:var(--mono);font-size:.68rem;color:var(--muted)}
+.pill{font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;padding:.15rem .5rem;border-radius:99px;border:1px solid var(--border-lit);color:var(--muted);white-space:nowrap}
+.age::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:currentColor;margin-right:.35rem}
+.home{font-family:var(--mono);font-size:.64rem;padding:.08rem .4rem;border-radius:3px;border:1px solid var(--border-lit);color:var(--muted);max-width:24ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.unverified{border:1px dotted var(--border-lit);padding:.04rem .38rem;border-radius:3px;cursor:help}
+/* alarm hues only exist at level 7+ (Rule 12, 21) */
+body.alarm .age.cold{color:var(--warn)} body.alarm .age.dormant{color:var(--danger)}
+body.alarm .home.branch{border-color:var(--warn);color:var(--warn)}
+body.alarm .home.nowhere{border-color:var(--danger);color:var(--danger);border-style:dashed}
+
+/* the step is the point (Rule 1) — it comes before blockers, always */
+.step{background:var(--surface-2);border-left:2px solid var(--lane-c,var(--accent));padding:.7rem .9rem;border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  font-size:.9rem;line-height:1.5;display:flex;gap:.6rem;align-items:flex-start;flex-wrap:wrap}
+.step .t{flex:1;min-width:12ch}
+.demand{font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--border-lit);border-radius:3px;padding:0 .35rem;color:var(--muted);white-space:nowrap}
+.demand.call,.demand.email{border-color:var(--violet);color:var(--violet)}
+.effort{font-family:var(--mono);font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px solid var(--border-lit);border-radius:3px;padding:0 .35rem;white-space:nowrap}
+.effort.micro{border-color:var(--accent);color:var(--accent-text)}
+
+.script{margin-top:.5rem}
+.script summary{font-family:var(--mono);font-size:.68rem;color:var(--accent-text);cursor:pointer;list-style:none}
+.script summary::-webkit-details-marker{display:none}
+.script summary::before{content:'▸ '}
+.script[open] summary::before{content:'▾ '}
+.script .body{margin-top:.5rem;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.8rem .9rem;font-size:.85rem;line-height:1.55;color:var(--muted-strong)}
+.script .body .copy{margin-top:.6rem}
+
+.block{border-top:1px solid var(--border);padding-top:.6rem}
+.block h4{font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
+.block ul{list-style:none;display:flex;flex-direction:column;gap:.35rem}
+.block li{font-size:.8rem;line-height:1.5;display:flex;gap:.5rem;align-items:flex-start}
+.block li::before{content:'';width:4px;height:4px;border-radius:1px;flex-shrink:0;margin-top:.5rem;background:var(--muted)}
+.fold-note{font-size:.8rem;color:var(--muted-strong);border-top:1px solid var(--border);padding-top:.6rem}
+.fold-note b{color:var(--violet)}
+.concepts{display:flex;flex-wrap:wrap;gap:.28rem}
+.concept{font-family:var(--mono);font-size:.6rem;color:var(--muted);border:1px solid var(--border);border-radius:3px;padding:.08rem .38rem;background:none;cursor:pointer}
+.concept:hover,.concept.on{border-color:var(--accent);color:var(--accent-text)}
+.card-foot{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center;margin-top:auto;padding-top:.75rem;border-top:1px solid var(--border)}
+.card-foot .spacer{flex:1}
+.lane-move{font-family:var(--mono);font-size:.68rem;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.25rem .4rem;color:var(--muted)}
+
+/* ============================================================
+   NOW — the single-thing view
+   ============================================================ */
+.now{max-width:660px;margin:1rem auto}
+.now .eyebrow{text-align:center;margin-bottom:1.1rem}
+.now .eyebrow p{color:var(--muted);font-size:.86rem;margin-top:.3rem}
+.now h2{font-size:1.5rem;text-align:center;line-height:1.25}
+.now .the-step{background:var(--surface-2);border-left:3px solid var(--accent);padding:1.1rem 1.3rem;border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  font-size:1.1rem;line-height:1.5;font-weight:600;margin:1.2rem 0}
+.now-actions{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap}
+.now .context-label{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:2rem 0 .6rem;text-align:center}
+.sitwith{margin-top:1.4rem;text-align:center;border-top:1px solid var(--border);padding-top:1.2rem}
+.sitwith .clock{font-family:var(--mono);font-size:2.2rem;font-weight:700;color:var(--accent-text);letter-spacing:.06em}
+.sitwith p{font-size:.78rem;color:var(--muted);margin-top:.3rem}
+
+/* ============================================================
+   TRIAGE
+   ============================================================ */
+.triage{max-width:680px;margin:1rem auto}
+.triage .progress{font-family:var(--mono);font-size:.7rem;color:var(--muted);text-align:center;margin-bottom:1rem;letter-spacing:.1em}
+.proposal{border:1px solid var(--accent);border-radius:var(--radius);background:var(--surface);padding:1.4rem 1.5rem;margin-bottom:1rem}
+.proposal .pl{font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.proposal .lane-name{font-family:var(--mono);font-size:1.3rem;font-weight:700;letter-spacing:.1em;color:var(--accent-text);margin:.25rem 0 .5rem}
+.proposal .why{font-size:.9rem;color:var(--muted-strong);line-height:1.6}
+.triage-actions{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin:1.2rem 0}
+.triage-alts{display:flex;gap:.35rem;flex-wrap:wrap;justify-content:center;margin-top:.6rem}
+
+/* ============================================================
+   OVERLAPS
+   ============================================================ */
+.merge{border:1px solid var(--border);border-left:3px solid var(--violet);border-radius:var(--radius);background:var(--surface);padding:1.2rem 1.4rem;margin-bottom:.9rem}
+.merge h3{font-size:1rem;margin-bottom:.3rem}
+.merge .who{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:.6rem}
+.merge .who button{font-family:var(--mono);font-size:.7rem;background:var(--surface-2);border:1px solid var(--border-lit);border-radius:99px;padding:.12rem .65rem;cursor:pointer}
+.merge .who button:hover{border-color:var(--accent);color:var(--accent-text)}
+.merge p{font-size:.87rem;color:var(--muted-strong);line-height:1.6}
+.merge .shared{font-family:var(--mono);font-size:.68rem;color:var(--muted);margin-top:.5rem}
+.overlap-table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:.8rem}
+.overlap-table th{text-align:left;font-family:var(--mono);font-size:.66rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);border-bottom:1px solid var(--border);padding:.5rem .6rem;font-weight:400}
+.overlap-table td{border-bottom:1px solid var(--border);padding:.5rem .6rem;vertical-align:top}
+.bar{height:4px;background:var(--border-lit);border-radius:2px;overflow:hidden;min-width:60px}
+.bar i{display:block;height:100%;background:var(--violet)}
+
+/* ============================================================
+   MISC
+   ============================================================ */
+.section-note{font-size:.84rem;color:var(--muted);max-width:70ch;margin-bottom:1.4rem}
+.cluster-head{margin:2rem 0 .9rem;padding-bottom:.5rem;border-bottom:1px solid var(--border);display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap}
+.cluster-head h2{font-size:1.1rem}
+.cluster-head .count{font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+.cluster-head .blurb{flex-basis:100%;font-size:.8rem;color:var(--muted)}
+.empty{text-align:center;padding:3.5rem 1rem;color:var(--muted)}
+.empty h3{color:var(--text);margin-bottom:.5rem}
+footer.bot{border-top:1px solid var(--border);padding:1.6rem 0;color:var(--muted);font-size:.76rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+kbd{font-family:var(--mono);font-size:.68rem;border:1px solid var(--border-lit);border-bottom-width:2px;border-radius:3px;padding:.03rem .32rem;color:var(--text)}
+.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);background:var(--surface-2);border:1px solid var(--accent);padding:.6rem 1.1rem;border-radius:var(--radius-sm);
+  font-size:.85rem;z-index:200;opacity:0;pointer-events:none;transition:opacity calc(.25s * var(--motion))}
+.toast.show{opacity:1}
+@media print{ header.top,.dial-bar,.toolbar,.focus-panel,.views,.card-foot{display:none} .card{break-inside:avoid} }
+</style>
+</head>
+<body>
+
+<a class="sr-only" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap top-inner">
+    <div class="brand">
+      <h1>SCOPE<span class="dot">.</span></h1>
+      <span class="sub" id="brandSub">What exists, what is stuck, what is next</span>
+    </div>
+    <div class="top-actions">
+      <button class="btn" id="focusToggle" aria-expanded="false" aria-controls="focusPanel">Settings</button>
+      <button class="btn" id="themeBtn">Theme: auto</button>
+    </div>
+  </div>
+</header>
+
+<!-- THE DIAL. Same place, same shape, every level. -->
+<section class="dial-bar" aria-label="Capacity dial">
+  <div class="wrap dial-inner">
+    <div class="dial" id="dial" role="group" aria-label="Capacity level, 1 to 9"></div>
+    <div class="dial-read">
+      <span class="n" id="dialName"></span>
+      <span class="line" id="dialLine"></span>
+    </div>
+    <div class="dial-nudge">
+      <button class="btn sm" id="dialDown">Less</button>
+      <button class="btn sm" id="dialUp">More</button>
+    </div>
+  </div>
+</section>
+
+<section class="focus-panel" id="focusPanel" aria-label="Settings">
+  <div class="wrap focus-grid">
+    <div class="focus-block">
+      <h3>The dial</h3>
+      <p>One control. It sets how much work you are offered <em>and</em> how loud the page is, because both draw on the same budget. Nothing moves position between levels: level 1 and level 9 are the same room at different volumes.</p>
+    </div>
+    <div class="focus-block">
+      <h3>Overrides</h3>
+      <div class="switch-row"><input type="checkbox" id="noAlarm"><label for="noAlarm">Never use alarm colours</label></div>
+      <div class="switch-row"><input type="checkbox" id="hideAge"><label for="hideAge">Hide how long since I touched it</label></div>
+      <div class="switch-row"><input type="checkbox" id="auzmzs"><label for="auzmzs">Auzmzs voice</label></div>
+      <p>Age is information, not an accusation. If it reads as one today, turn it off.</p>
+    </div>
+    <div class="focus-block">
+      <h3>Start again</h3>
+      <button class="btn sm ghost" id="resetLocal">Reset my local changes</button>
+      <p>Clears lane moves and skips made in this browser. The file on disk is untouched, and coming back after three months looks exactly like coming back after a day.</p>
+    </div>
+  </div>
+</section>
+
+<section class="verdict" id="verdictBar" hidden><div class="wrap"></div></section>
+
+<div class="wrap">
+  <div class="toolbar" id="toolbar" hidden>
+    <div class="field search-wrap">
+      <span>Search</span>
+      <input type="search" id="q" placeholder="name, concept, blocker, branch…" aria-label="Search projects">
+    </div>
+    <div class="field">
+      <span>Lives in</span>
+      <select id="homeFilter" aria-label="Filter by where the work lives">
+        <option value="all">Anywhere</option>
+        <option value="branch">Unmerged branch</option>
+        <option value="nowhere">Nowhere (docs only)</option>
+        <option value="main">This repo, main</option>
+        <option value="repo">A separate repo</option>
+      </select>
+    </div>
+  </div>
+  <div style="padding:.9rem 0 0">
+    <div class="views" role="tablist" aria-label="View" id="views"></div>
+  </div>
+</div>
+
+<main class="wrap" id="main"></main>
+
+<footer class="bot wrap">
+  <div id="footL"></div>
+  <div><kbd>/</kbd> search · <kbd>←</kbd><kbd>→</kbd> dial · <kbd>1</kbd>–<kbd>9</kbd> level · <kbd>Esc</kbd> clear</div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="projects.js"></script>
+<script>
+(function(){
+  'use strict';
+
+  var DATA = window.SCOPE;
+  if(!DATA){
+    document.getElementById('main').innerHTML = '<div class="empty"><h3>projects.js did not load</h3><p>It must sit next to this file.</p></div>';
+    return;
+  }
+
+  /* ============================================================
+     THE NINE LEVELS
+     Each level sets task load AND sensory load together (Rule 11).
+     Nothing here changes WHERE anything is, only how much (Rule 15).
+     ============================================================ */
+  var LEVELS = {
+    1: { name:'Level 1 · Barely',      cards:1,  effort:'micro',  chroma:0,   shot:false, meta:false, desc:false, blockers:false, concepts:false, verdict:false, alarm:false, tools:false, views:['now'],
+         line:'One thing. Under two minutes. That is the whole ask.' },
+    2: { name:'Level 2 · Low',         cards:1,  effort:'micro',  chroma:15,  shot:false, meta:false, desc:true,  blockers:false, concepts:false, verdict:false, alarm:false, tools:false, views:['now'],
+         line:'Still one thing, but you can see what it belongs to.' },
+    3: { name:'Level 3 · Warming up',  cards:3,  effort:'quick',  chroma:30,  shot:false, meta:false, desc:true,  blockers:false, concepts:false, verdict:false, alarm:false, tools:false, views:['now','lanes','triage'],
+         line:'Three options, fifteen minutes each. Pick one or none.' },
+    4: { name:'Level 4 · Steady',      cards:3,  effort:'quick',  chroma:45,  shot:false, meta:true,  desc:true,  blockers:false, concepts:false, verdict:false, alarm:false, tools:false, views:['now','lanes','triage'],
+         line:'Three, with enough context to choose between them.' },
+    5: { name:'Level 5 · Working',     cards:5,  effort:'medium', chroma:60,  shot:true,  meta:true,  desc:true,  blockers:false, concepts:false, verdict:true,  alarm:false, tools:true,  views:['now','lanes','board','triage'],
+         line:'The normal board. Five at a time, hour-sized work.' },
+    6: { name:'Level 6 · Good day',    cards:7,  effort:'medium', chroma:75,  shot:true,  meta:true,  desc:true,  blockers:true,  concepts:false, verdict:true,  alarm:false, tools:true,  views:['now','lanes','board','triage'],
+         line:'Seven, and you can see what is in the way.' },
+    7: { name:'Level 7 · Sharp',       cards:99, effort:'deep',   chroma:90,  shot:true,  meta:true,  desc:true,  blockers:true,  concepts:true,  verdict:true,  alarm:true,  tools:true,  views:['now','lanes','board','clusters','triage'],
+         line:'Everything, grouped, with the deep work unlocked.' },
+    8: { name:'Level 8 · Strategic',   cards:99, effort:'deep',   chroma:100, shot:true,  meta:true,  desc:true,  blockers:true,  concepts:true,  verdict:true,  alarm:true,  tools:true,  views:['now','lanes','board','clusters','overlaps','triage'],
+         line:'Plus the overlaps: what you are building more than once.' },
+    9: { name:'Level 9 · Everything',  cards:99, effort:'deep',   chroma:100, shot:true,  meta:true,  desc:true,  blockers:true,  concepts:true,  verdict:true,  alarm:true,  tools:true,  raw:true, views:['now','lanes','board','clusters','overlaps','triage'],
+         line:'All of it, raw dates included. Come down when you need to.' }
+  };
+  var VIEW_ORDER = ['now','lanes','board','clusters','overlaps','triage'];
+  var VIEW_NAME  = { now:'Now', lanes:'Lanes', board:'Board', clusters:'Clusters', overlaps:'Overlaps', triage:'Triage' };
+  var EFFORT_RANK = { micro:0, quick:1, medium:2, deep:3 };
+  var EFFORT_LABEL = { micro:'2 min', quick:'15 min', medium:'1 hr', deep:'deep' };
+  var LANES = DATA.lanes;
+  var LANE_BY = {}; LANES.forEach(function(l){ LANE_BY[l.id] = l; });
+  var KEY = 'scope.v2';
+
+  /* Auzmzs voice — opt-in, never the default (Rule 8: the tool does not
+     perform at you unless you asked it to). */
+  var VOICE = {
+    plain: {
+      empty:      'Nothing matches. Loosen the filters.',
+      doneAll:    'Nothing left in the pile.',
+      triageDone: 'Every project has a lane.',
+      parked:     'Parked. Still here, out of the way.'
+    },
+    auzmzs: {
+      empty:      'Nothing matches. Filters too tight. Loosen one and try again.',
+      doneAll:    'Pile empty. Go stim about it.',
+      triageDone: 'Every project has a lane. Genuinely unheard of.',
+      parked:     'Parked. Not dead. Just resting in a nice quiet drawer.'
+    }
+  };
+  function say(k){ return (S.auzmzs ? VOICE.auzmzs : VOICE.plain)[k]; }
+
+  /* ============================================================
+     STATE
+     ============================================================ */
+  var defaults = {
+    level:4, view:'now', q:'', homeFilter:'all', concept:null,
+    theme:'auto', noAlarm:false, hideAge:false, auzmzs:false,
+    laneOverride:{}, skipped:[], triageIdx:0
+  };
+  var S = load();
+  function load(){
+    try{
+      var raw = localStorage.getItem(KEY);
+      if(!raw) return Object.assign({}, defaults);
+      return Object.assign({}, defaults, JSON.parse(raw), { q:'', skipped:[] });
+    }catch(e){ return Object.assign({}, defaults); }
+  }
+  function save(){
+    try{ localStorage.setItem(KEY, JSON.stringify({
+      level:S.level, view:S.view, homeFilter:S.homeFilter, theme:S.theme,
+      noAlarm:S.noAlarm, hideAge:S.hideAge, auzmzs:S.auzmzs,
+      laneOverride:S.laneOverride, triageIdx:S.triageIdx
+    })); }catch(e){ /* storage blocked; the board still works */ }
+  }
+  function L(){ return LEVELS[S.level]; }
+
+  /* ============================================================
+     HELPERS
+     ============================================================ */
+  var TODAY = new Date();
+  function daysSince(iso){ var d = new Date(iso + 'T00:00:00'); return isNaN(d) ? 9999 : Math.max(0, Math.round((TODAY - d)/86400000)); }
+  function ageBucket(d){ return d < 21 ? 'fresh' : d < 60 ? 'cooling' : d < 120 ? 'cold' : 'dormant'; }
+  function ageLabel(d){ return d < 1 ? 'today' : d === 1 ? 'yesterday' : d < 30 ? d + 'd' : d < 365 ? Math.round(d/30) + 'mo' : Math.round(d/365) + 'y'; }
+  function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]; }); }
+  function laneOf(p){ return S.laneOverride[p.id] || p.lane; }
+  function laneConfirmed(p){ return !!S.laneOverride[p.id]; }
+  function toast(m){
+    var t = document.getElementById('toast');
+    t.textContent = m; t.classList.add('show');
+    clearTimeout(toast._t); toast._t = setTimeout(function(){ t.classList.remove('show'); }, 2400);
+  }
+
+  /* Rule 17: a two-minute phone call and a two-minute rename are not the
+     same task. Type the demand, not just the duration. This is a heuristic —
+     any step (or micro action) can set `demand` explicitly to override it. */
+  function demandOf(text){
+    var t = text.toLowerCase();
+    if(/\bcall\b|phone|ring\b/.test(t))                      return 'call';
+    if(/email|send (it|one)|reply|write to\b/.test(t))       return 'email';
+    if(/decide|pick |choose|answer in one|write one (line|word)|confirm/.test(t)) return 'decide';
+    if(/delete|cancel|file |form|upload|rename|merge |push|note|write down|list |claim /.test(t)) return 'admin';
+    if(/read|open |look/.test(t))                            return 'read';
+    return 'build';
+  }
+
+  /* Every project has a micro action. Below the effort cap, it IS the step. */
+  function stepsFor(p){
+    var cap = EFFORT_RANK[L().effort];
+    var list = (p.next || []).filter(function(s){ return EFFORT_RANK[s.effort || 'medium'] <= cap; });
+    if(cap === 0 || !list.length){
+      return [{ text:p.micro, effort:'micro', isMicro:true, demand:p.microDemand }];
+    }
+    return list;
+  }
+
+  function hash(str){ var h = 2166136261; for(var i=0;i<str.length;i++){ h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); } return Math.abs(h); }
+  function tile(p){
+    var h = hash(p.id), rnd = function(n){ h = Math.imul(h ^ (h>>>13), 1274126177); return Math.abs(h) % n; };
+    var initials = p.name.replace(/[^A-Za-z0-9 ]/g,'').split(/\s+/).slice(0,2).map(function(w){ return w[0]; }).join('').toUpperCase();
+    var nodes = [], n = 5 + rnd(4), i;
+    for(i=0;i<n;i++) nodes.push([12 + rnd(76), 14 + rnd(72)]);
+    var lines = '', dots = '';
+    for(i=0;i<nodes.length;i++){
+      var k = (i + 1 + rnd(2)) % nodes.length;
+      lines += '<line x1="'+nodes[i][0]+'" y1="'+nodes[i][1]+'" x2="'+nodes[k][0]+'" y2="'+nodes[k][1]+'" stroke="var(--violet)" stroke-width=".4" opacity=".45"/>';
+      dots  += '<circle cx="'+nodes[i][0]+'" cy="'+nodes[i][1]+'" r="'+(i%3===0?1.5:1)+'" fill="var(--accent)" opacity="'+(i%3===0?'.9':'.5')+'"/>';
+    }
+    return '<svg viewBox="0 0 100 56" preserveAspectRatio="xMidYMid slice" role="img" aria-label="'+esc(p.name)+'">'
+      + '<rect width="100" height="56" fill="var(--surface-2)"/>' + lines + dots
+      + '<text x="50" y="34" text-anchor="middle" font-family="Space Mono, monospace" font-size="17" font-weight="700" fill="var(--text)" opacity=".16">'+esc(initials)+'</text></svg>';
+  }
+
+  /* ============================================================
+     FILTER
+     ============================================================ */
+  function visible(){
+    var q = S.q.trim().toLowerCase();
+    return DATA.projects.filter(function(p){
+      if(S.homeFilter !== 'all' && (p.home && p.home.type) !== S.homeFilter) return false;
+      if(S.concept && (p.concepts||[]).indexOf(S.concept) === -1) return false;
+      if(q){
+        var hay = [p.name, p.aka, p.tag, p.summary, p.micro, (p.home && p.home.ref) || '',
+                   (p.concepts||[]).join(' '), (p.blockers||[]).join(' '),
+                   (p.next||[]).map(function(s){ return s.text; }).join(' ')].join(' ').toLowerCase();
+        if(hay.indexOf(q) === -1) return false;
+      }
+      return true;
+    });
+  }
+  /* Ranking inside a lane: the lane already carries the importance, so this
+     only decides reading order. Stranded and stale float up. */
+  function rank(p){
+    return daysSince(p.lastWorked)/30
+         + (p.home && p.home.type === 'branch' ? 3 : 0)
+         + (p.home && p.home.type === 'nowhere' ? 2 : 0)
+         + (p.blockers||[]).length * 0.4;
+  }
+
+  /* ============================================================
+     CARD
+     ============================================================ */
+  function card(p, opt){
+    opt = opt || {};
+    var lv = L(), lane = LANE_BY[laneOf(p)] || LANE_BY.queued;
+    var days = daysSince(p.lastWorked), steps = stepsFor(p);
+    var one = opt.oneStep ? steps.slice(0,1) : steps;
+    var links = p.links || {};
+
+    var shot = (lv.shot && !opt.noShot)
+      ? '<div class="shot">' + (p.image ? '<img src="'+esc(p.image)+'" alt="" loading="lazy">' : tile(p)) + '</div>' : '';
+
+    var meta = '';
+    if(lv.meta){
+      meta = '<div class="meta-row">' +
+        (S.hideAge ? '' : '<span class="age ' + ageBucket(days) + '">' + ageLabel(days) + '</span>') +
+        (p.home ? '<span class="home ' + p.home.type + '">' + esc(p.home.type === 'branch' ? 'unmerged · ' + p.home.ref : p.home.ref) + '</span>' : '') +
+        (p.confidence === 'inferred' ? '<span class="unverified" title="Inferred from your files. Confirm or correct it.">unconfirmed</span>' : '') +
+        (lv.raw ? '<span>' + esc(p.lastWorked) + '</span>' : '') +
+      '</div>';
+    }
+
+    var stepsHtml = one.map(function(s){
+      var e = s.effort || 'medium', d = s.demand || demandOf(s.text);
+      var sc = DATA.scripts && DATA.scripts[p.id];
+      var scriptHtml = (sc && (d === 'call' || d === 'email') && lv.meta)
+        ? '<details class="script"><summary>The opening line is already written</summary><div class="body">' + esc(sc.text) +
+          '<div class="copy"><button class="btn sm" data-copy="' + esc(sc.text) + '">Copy it</button></div></div></details>' : '';
+      return '<div class="step"><span class="t">' + esc(s.text) + '</span>' +
+             '<span class="demand ' + d + '">' + d + '</span>' +
+             '<span class="effort ' + e + '">' + EFFORT_LABEL[e] + '</span></div>' + scriptHtml;
+    }).join('');
+
+    var blockers = (lv.blockers && (p.blockers||[]).length)
+      ? '<div class="block"><h4>In the way</h4><ul>' + p.blockers.map(function(b){ return '<li><span>' + esc(b) + '</span></li>'; }).join('') + '</ul></div>' : '';
+
+    var fold = '';
+    if(laneOf(p) === 'fold' && p.foldInto){
+      var into = DATA.projects.filter(function(x){ return x.id === p.foldInto; })[0];
+      fold = '<div class="fold-note">Fold into <b>' + esc(into ? into.name : p.foldInto) + '</b>' +
+             (lv.desc && p.laneWhy ? ' — ' + esc(p.laneWhy) : '') + '</div>';
+    }
+
+    var concepts = (lv.concepts && (p.concepts||[]).length)
+      ? '<div class="concepts">' + p.concepts.map(function(c){
+          return '<button class="concept' + (S.concept === c ? ' on' : '') + '" data-concept="' + esc(c) + '">' + esc(c) + '</button>';
+        }).join('') + '</div>' : '';
+
+    var launch = links.live ? '<a class="btn primary sm" href="'+esc(links.live)+'" target="_blank" rel="noopener">Launch</a>'
+               : links.repo ? '<a class="btn primary sm" href="'+esc(links.repo)+'" target="_blank" rel="noopener">Open repo</a>'
+               : '';
+    var extra = '';
+    if(lv.meta){
+      if(links.live && links.repo) extra += '<a class="btn sm" href="'+esc(links.repo)+'" target="_blank" rel="noopener">Repo</a>';
+      if(links.local) extra += '<button class="btn sm" data-copy="'+esc(links.local)+'">Copy path</button>';
+    }
+    var mover = lv.meta ? '<select class="lane-move" data-move="' + p.id + '" aria-label="Move ' + esc(p.name) + ' to a lane">' +
+        LANES.map(function(l){ return '<option value="'+l.id+'"'+(l.id === laneOf(p) ? ' selected' : '')+'>'+l.name+'</option>'; }).join('') +
+      '</select>' : '';
+
+    return '<article class="card" id="p-' + p.id + '">' + shot +
+      '<div class="card-body">' +
+        (lv.meta ? '<div class="card-tag">' + esc(p.tag || '') + '</div>' : '') +
+        '<h3>' + esc(p.name) + (p.aka && lv.meta ? ' <span class="aka">aka ' + esc(p.aka) + '</span>' : '') + '</h3>' +
+        meta +
+        (lv.desc && !opt.noDesc ? '<p class="card-desc">' + esc(p.summary) + '</p>' : '') +
+        stepsHtml + fold + blockers + concepts +
+        ((launch || extra || mover) ? '<div class="card-foot">' + launch + extra + '<span class="spacer"></span>' + mover + '</div>' : '') +
+      '</div></article>';
+  }
+
+  /* ============================================================
+     VIEWS
+     ============================================================ */
+  function renderLanes(list){
+    var lv = L(), byLane = {};
+    list.forEach(function(p){ (byLane[laneOf(p)] = byLane[laneOf(p)] || []).push(p); });
+    /* Lane order never changes, and an empty lane still shows its heading,
+       so the page has the same skeleton every single time (Rule 15).
+       The level cap is a budget spent across the whole view, top lane first,
+       so "three at level 3" means three cards total, not three per lane
+       (Rule 13). */
+    var budget = lv.cards;
+    return LANES.map(function(l){
+      var items = (byLane[l.id] || []).sort(function(a,b){ return rank(b) - rank(a); });
+      var shown = items.slice(0, Math.max(0, budget));
+      budget -= shown.length;
+      var over = l.max && items.length > l.max;
+      return '<section class="lane" data-tone="' + l.tone + '">' +
+        '<div class="lane-head"><h2>' + l.name + '</h2>' +
+          '<span class="cap' + (over ? ' over' : '') + '">' + items.length + (l.max ? ' of ' + l.max : '') + '</span>' +
+          (lv.desc ? '<span class="blurb">' + esc(l.blurb) + '</span>' : '') +
+        '</div>' +
+        (shown.length
+          ? '<div class="grid' + (lv.cards <= 3 ? ' roomy' : '') + '">' + shown.map(function(p){ return card(p); }).join('') + '</div>' +
+            (items.length > shown.length ? '<p class="lane-empty">' + (items.length - shown.length) + ' more held back at this level.</p>' : '')
+          : '<p class="lane-empty">Empty.</p>') +
+      '</section>';
+    }).join('');
+  }
+
+  function renderBoard(list){
+    var lv = L();
+    var sorted = list.slice().sort(function(a,b){
+      var la = LANES.findIndex(function(l){ return l.id === laneOf(a); });
+      var lb = LANES.findIndex(function(l){ return l.id === laneOf(b); });
+      return la - lb || rank(b) - rank(a);
+    });
+    var shown = sorted.slice(0, lv.cards);
+    if(!shown.length) return '<div class="empty"><h3>' + esc(say('empty')) + '</h3><p><button class="btn sm" id="clearAll">Clear filters</button></p></div>';
+    return '<div class="grid">' + shown.map(function(p){ return card(p); }).join('') + '</div>' +
+      (sorted.length > shown.length ? '<p class="section-note" style="margin-top:1.4rem">' + (sorted.length - shown.length) + ' more at a higher level.</p>' : '');
+  }
+
+  function renderClusters(list){
+    var byC = {};
+    list.forEach(function(p){ (byC[p.cluster] = byC[p.cluster] || []).push(p); });
+    var budget = L().cards;
+    return Object.keys(DATA.clusters).filter(function(k){ return byC[k]; }).map(function(k){
+      var c = DATA.clusters[k], items = byC[k].slice(0, Math.max(0, budget));
+      budget -= items.length;
+      if(!items.length) return '';
+      return '<section><div class="cluster-head"><h2>' + esc(c.name) + '</h2>' +
+        '<span class="count">' + byC[k].length + '</span><span class="blurb">' + esc(c.blurb) + '</span></div>' +
+        '<div class="grid">' + items.map(function(p){ return card(p); }).join('') + '</div></section>';
+    }).join('');
+  }
+
+  function renderNow(list){
+    var pool = list.filter(function(p){
+      return ['parked','closed'].indexOf(laneOf(p)) === -1 && S.skipped.indexOf(p.id) === -1;
+    });
+    if(!pool.length){
+      return '<div class="empty"><h3>' + esc(say('doneAll')) + '</h3><p><button class="btn sm" id="resetSkips">Start over</button></p></div>';
+    }
+    /* Rule 3: the tool picks. Lane position decides, because the lane IS the
+       importance level. Ties break toward whatever is going coldest. */
+    pool.sort(function(a,b){
+      var la = LANES.findIndex(function(l){ return l.id === laneOf(a); });
+      var lb = LANES.findIndex(function(l){ return l.id === laneOf(b); });
+      return la - lb || rank(b) - rank(a);
+    });
+    var p = pool[0], step = stepsFor(p)[0], lv = L();
+    var d = step.demand || demandOf(step.text), sc = DATA.scripts && DATA.scripts[p.id];
+
+    return '<div class="now">' +
+      '<div class="eyebrow"><div class="label">' + esc(LANE_BY[laneOf(p)].name) + '</div>' +
+        '<h2>' + esc(p.name) + '</h2>' +
+        (lv.desc ? '<p>' + (pool.length - 1) + ' other things exist. They are not going anywhere.</p>' : '') +
+      '</div>' +
+      '<div class="the-step">' + esc(step.text) +
+        ' <span class="demand ' + d + '">' + d + '</span>' +
+        ' <span class="effort ' + (step.effort||'medium') + '">' + EFFORT_LABEL[step.effort||'medium'] + '</span></div>' +
+      ((sc && (d === 'call' || d === 'email'))
+        ? '<details class="script" open><summary>The opening line is already written</summary><div class="body">' + esc(sc.text) +
+          '<div class="copy"><button class="btn sm" data-copy="' + esc(sc.text) + '">Copy it</button></div></div></details>' : '') +
+      '<div class="now-actions" style="margin-top:1.2rem">' +
+        ((p.links && (p.links.live || p.links.repo))
+          ? '<a class="btn primary big" href="' + esc(p.links.live || p.links.repo) + '" target="_blank" rel="noopener">Open it</a>' : '') +
+        '<button class="btn big" data-skip="' + p.id + '">Not that one</button>' +
+        '<button class="btn big" data-park="' + p.id + '">Park it</button>' +
+      '</div>' +
+      /* Rule 20: company, not surveillance. Counts up, logs nothing. */
+      '<div class="sitwith"><div class="clock" id="clock">00:00</div>' +
+        '<button class="btn sm" id="sitBtn">Sit with me</button>' +
+        '<p>Counts up. Records nothing. Stop whenever.</p></div>' +
+      (lv.blockers ? '<div class="context-label">If you need the rest of it</div>' + card(p, { oneStep:true, noShot:true }) : '') +
+    '</div>';
+  }
+
+  function renderTriage(){
+    var pending = DATA.projects.filter(function(p){ return !laneConfirmed(p); }).sort(function(a,b){
+      /* Unconfirmed guesses first: those are the ones carrying a claim that
+         has never been checked. Then down the ladder, highest stakes first. */
+      var ga = a.confidence === 'inferred' ? 0 : 1, gb = b.confidence === 'inferred' ? 0 : 1;
+      if(ga !== gb) return ga - gb;
+      return LANES.findIndex(function(l){ return l.id === laneOf(a); }) -
+             LANES.findIndex(function(l){ return l.id === laneOf(b); });
+    });
+    if(!pending.length){
+      return '<div class="empty"><h3>' + esc(say('triageDone')) + '</h3><p>Every one is confirmed. Change any of them from its card.</p></div>';
+    }
+    var idx = Math.min(S.triageIdx, pending.length - 1), p = pending[idx];
+    var proposed = LANE_BY[laneOf(p)];
+    var into = p.foldInto ? DATA.projects.filter(function(x){ return x.id === p.foldInto; })[0] : null;
+
+    return '<div class="triage">' +
+      '<div class="progress">' + (DATA.projects.length - pending.length) + ' of ' + DATA.projects.length + ' confirmed · ' + pending.length + ' to go' +
+        (p.confidence === 'inferred' ? ' · this one was a guess' : '') + '</div>' +
+      '<div class="proposal">' +
+        '<div class="pl">' + esc(p.name) + ' — proposed lane</div>' +
+        '<div class="lane-name">' + esc(proposed.name) + (into ? ' → ' + esc(into.name) : '') + '</div>' +
+        '<p class="why">' + esc(p.laneWhy || proposed.blurb) + '</p>' +
+      '</div>' +
+      /* Rule 6: a proposal, not a blank field. Rule 9: declining is one click
+         and looks exactly as available as agreeing. */
+      '<div class="triage-actions">' +
+        '<button class="btn primary big" data-confirm="' + p.id + '">Yes, that lane</button>' +
+        '<button class="btn big" data-tskip="1">Skip for now</button>' +
+      '</div>' +
+      '<div class="triage-alts">' + LANES.filter(function(l){ return l.id !== proposed.id; }).map(function(l){
+        return '<button class="btn sm" data-confirm="' + p.id + '" data-lane="' + l.id + '">' + l.name + '</button>';
+      }).join('') + '</div>' +
+      '<div class="context-label" style="text-align:center;font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:2rem 0 .6rem">The project</div>' +
+      card(p, { oneStep:true, noShot:true }) +
+    '</div>';
+  }
+
+  function renderOverlaps(){
+    var byId = {}; DATA.projects.forEach(function(p){ byId[p.id] = p; });
+    var hand = (DATA.mergeIdeas || []).map(function(m){
+      var sets = m.ids.map(function(id){ return (byId[id] && byId[id].concepts) || []; });
+      var shared = sets.length ? sets[0].filter(function(c){ return sets.every(function(s){ return s.indexOf(c) !== -1; }); }) : [];
+      return '<div class="merge"><h3>' + esc(m.verdict) + '</h3><div class="who">' +
+        m.ids.map(function(id){ return byId[id] ? '<button data-goto="'+id+'">'+esc(byId[id].name)+'</button>' : ''; }).join('') +
+        '</div><p>' + esc(m.note) + '</p>' +
+        (shared.length ? '<div class="shared">shared: ' + shared.map(esc).join(' · ') + '</div>' : '') + '</div>';
+    }).join('');
+
+    var pairs = [], ps = DATA.projects, i, j;
+    for(i=0;i<ps.length;i++) for(j=i+1;j<ps.length;j++){
+      var a = ps[i].concepts || [], b = ps[j].concepts || [];
+      if(!a.length || !b.length) continue;
+      var inter = a.filter(function(c){ return b.indexOf(c) !== -1; });
+      if(inter.length < 2) continue;
+      var uni = a.concat(b.filter(function(c){ return a.indexOf(c) === -1; })).length;
+      pairs.push({ a:ps[i], b:ps[j], score:inter.length/uni, shared:inter });
+    }
+    pairs.sort(function(x,y){ return y.score - x.score; });
+    var stated = {};
+    (DATA.mergeIdeas||[]).forEach(function(m){
+      for(var x=0;x<m.ids.length;x++) for(var y=x+1;y<m.ids.length;y++) stated[[m.ids[x],m.ids[y]].sort().join('|')] = true;
+    });
+    var rows = pairs.slice(0,14).map(function(pr){
+      return '<tr><td><button class="concept" data-goto="'+pr.a.id+'">'+esc(pr.a.name)+'</button> + ' +
+        '<button class="concept" data-goto="'+pr.b.id+'">'+esc(pr.b.name)+'</button></td>' +
+        '<td class="mono" style="font-size:.7rem">'+pr.shared.map(esc).join(' · ')+'</td>' +
+        '<td style="width:120px"><div class="bar"><i style="width:'+Math.round(pr.score*100)+'%"></i></div></td>' +
+        '<td class="mono" style="font-size:.66rem;opacity:.6">'+(stated[[pr.a.id,pr.b.id].sort().join('|')] ? 'called out' : 'unexamined')+'</td></tr>';
+    }).join('');
+
+    return '<p class="section-note">Where the same idea is being built more than once. Written calls first, then every pair sharing two or more concepts.</p>' +
+      hand + '<div class="cluster-head"><h2>Computed overlap</h2><span class="count">' + pairs.length + ' pairs</span></div>' +
+      '<table class="overlap-table"><thead><tr><th>Pair</th><th>Shared</th><th>Overlap</th><th>Status</th></tr></thead><tbody>' + rows + '</tbody></table>';
+  }
+
+  /* ============================================================
+     RENDER
+     ============================================================ */
+  function render(){
+    var lv = L();
+    document.documentElement.setAttribute('data-theme', S.theme);
+    document.documentElement.style.setProperty('--chroma', lv.chroma + '%');
+    document.body.className = (lv.alarm && !S.noAlarm) ? 'alarm' : '';
+
+    if(lv.views.indexOf(S.view) === -1) S.view = lv.views[0];
+
+    /* dial */
+    document.getElementById('dial').innerHTML = [1,2,3,4,5,6,7,8,9].map(function(n){
+      return '<button data-level="' + n + '" class="' + (n <= S.level ? 'on' : '') + '" aria-label="Level ' + n + '"' +
+             (n === S.level ? ' aria-current="true"' : '') + '></button>';
+    }).join('');
+    document.getElementById('dialName').textContent = lv.name;
+    document.getElementById('dialLine').textContent = lv.line;
+
+    /* views: all six always rendered in the same order; the ones above your
+       level are dimmed and raise the dial when clicked (Rule 15 + Rule 9). */
+    document.getElementById('views').innerHTML = VIEW_ORDER.map(function(v){
+      var ok = lv.views.indexOf(v) !== -1;
+      return '<button role="tab" data-view="' + v + '" class="' + (ok ? '' : 'locked') + '"' +
+             ' aria-selected="' + (S.view === v) + '">' + VIEW_NAME[v] + '</button>';
+    }).join('');
+
+    document.getElementById('toolbar').hidden = !lv.tools;
+    var list = visible();
+
+    /* verdict: counts, never instructions (Rule 8, 21) */
+    var vb = document.getElementById('verdictBar');
+    vb.hidden = !lv.verdict;
+    if(lv.verdict){
+      var all = DATA.projects;
+      var stranded = all.filter(function(p){ return p.home && p.home.type === 'branch'; }).length;
+      var micro = all.length;
+      var overLanes = LANES.filter(function(l){
+        return l.max && all.filter(function(p){ return laneOf(p) === l.id; }).length > l.max;
+      });
+      vb.querySelector('.wrap').innerHTML =
+        '<span><b>' + all.length + ' projects.</b> ' +
+          all.filter(function(p){ return laneOf(p) === 'fold'; }).length + ' are marked to fold into another, which is how this number comes down.</span>' +
+        '<span class="vstat"><i>' + stranded + '</i> on unmerged branches</span>' +
+        '<span class="vstat"><i>' + micro + '</i> two-minute actions available</span>' +
+        (overLanes.length ? '<span class="vstat"><i>' + overLanes[0].name + '</i> is over its cap</span>' : '');
+    }
+
+    var out;
+    if(S.view === 'lanes')         out = renderLanes(list);
+    else if(S.view === 'board')    out = renderBoard(list);
+    else if(S.view === 'clusters') out = renderClusters(list);
+    else if(S.view === 'overlaps') out = renderOverlaps();
+    else if(S.view === 'triage')   out = renderTriage();
+    else                           out = renderNow(list);
+    document.getElementById('main').innerHTML = out;
+
+    var confirmed = DATA.projects.filter(laneConfirmed).length;
+    document.getElementById('footL').textContent =
+      DATA.projects.length + ' projects · ' + confirmed + ' lanes confirmed · data ' + DATA.updated;
+    document.getElementById('brandSub').textContent = lv.cards === 1
+      ? 'One thing at a time' : 'What exists, what is stuck, what is next';
+
+    document.getElementById('noAlarm').checked = S.noAlarm;
+    document.getElementById('hideAge').checked = S.hideAge;
+    document.getElementById('auzmzs').checked = S.auzmzs;
+    document.getElementById('homeFilter').value = S.homeFilter;
+    document.getElementById('themeBtn').textContent = 'Theme: ' + S.theme;
+    stopClock();
+  }
+
+  function setLevel(n){
+    S.level = Math.max(1, Math.min(9, n));
+    save(); render();
+  }
+
+  /* body-double timer */
+  var clockT = null, clockN = 0;
+  function stopClock(){ if(clockT){ clearInterval(clockT); clockT = null; clockN = 0; } }
+  function toggleClock(){
+    var el = document.getElementById('clock'), btn = document.getElementById('sitBtn');
+    if(!el) return;
+    if(clockT){ stopClock(); el.textContent = '00:00'; btn.textContent = 'Sit with me'; return; }
+    btn.textContent = 'Stop';
+    clockT = setInterval(function(){
+      clockN++;
+      var m = String(Math.floor(clockN/60)).padStart(2,'0'), s = String(clockN%60).padStart(2,'0');
+      if(el.isConnected) el.textContent = m + ':' + s; else stopClock();
+    }, 1000);
+  }
+
+  /* ============================================================
+     EVENTS
+     ============================================================ */
+  document.addEventListener('click', function(e){
+    var t = e.target.closest('button, a');
+    if(!t) return;
+
+    if(t.dataset.level){ setLevel(+t.dataset.level); }
+    else if(t.id === 'dialUp'){ setLevel(S.level + 1); }
+    else if(t.id === 'dialDown'){ setLevel(S.level - 1); }
+    else if(t.dataset.view){
+      var v = t.dataset.view;
+      if(L().views.indexOf(v) === -1){
+        var need = 9;
+        for(var n=1;n<=9;n++){ if(LEVELS[n].views.indexOf(v) !== -1){ need = n; break; } }
+        S.level = need; S.view = v; save(); render();
+        toast(VIEW_NAME[v] + ' needs level ' + need + '. Dial moved up.');
+      } else { S.view = v; save(); render(); }
+    }
+    else if(t.dataset.skip){ S.skipped.push(t.dataset.skip); render(); }
+    else if(t.id === 'resetSkips'){ S.skipped = []; render(); }
+    else if(t.dataset.park){ S.laneOverride[t.dataset.park] = 'parked'; save(); render(); toast(say('parked')); }
+    else if(t.dataset.confirm){
+      S.laneOverride[t.dataset.confirm] = t.dataset.lane || laneOf({ id:t.dataset.confirm, lane:(DATA.projects.filter(function(x){ return x.id === t.dataset.confirm; })[0]||{}).lane });
+      S.triageIdx = 0; save(); render();
+      toast('Filed. ' + DATA.projects.filter(laneConfirmed).length + ' of ' + DATA.projects.length + ' done.');
+    }
+    else if(t.dataset.tskip){
+      var pendingN = DATA.projects.filter(function(p){ return !laneConfirmed(p); }).length;
+      S.triageIdx = (S.triageIdx + 1) % Math.max(1, pendingN); save(); render();
+    }
+    else if(t.dataset.concept){ S.concept = (S.concept === t.dataset.concept) ? null : t.dataset.concept; render(); }
+    else if(t.dataset.goto){
+      S.view = 'lanes'; save(); render();
+      var el = document.getElementById('p-' + t.dataset.goto);
+      if(el) el.scrollIntoView({ behavior: (window.matchMedia('(prefers-reduced-motion:reduce)').matches ? 'auto' : 'smooth'), block:'center' });
+    }
+    else if(t.dataset.copy){
+      var txt = t.dataset.copy;
+      if(navigator.clipboard) navigator.clipboard.writeText(txt).then(function(){ toast('Copied.'); }, function(){ toast('Could not copy.'); });
+      else toast('Copy manually.');
+    }
+    else if(t.id === 'sitBtn'){ toggleClock(); }
+    else if(t.id === 'clearAll'){ S.q = ''; S.concept = null; S.homeFilter = 'all'; document.getElementById('q').value = ''; save(); render(); }
+    else if(t.id === 'focusToggle'){
+      var open = document.getElementById('focusPanel').classList.toggle('open');
+      t.setAttribute('aria-expanded', String(open));
+    }
+    else if(t.id === 'themeBtn'){ S.theme = ({ auto:'dark', dark:'light', light:'auto' })[S.theme]; save(); render(); }
+    else if(t.id === 'resetLocal'){ S.laneOverride = {}; S.skipped = []; S.triageIdx = 0; save(); render(); toast('Cleared. Nothing held against you.'); }
+  });
+
+  document.addEventListener('change', function(e){
+    if(e.target.dataset && e.target.dataset.move){
+      S.laneOverride[e.target.dataset.move] = e.target.value;
+      save(); render(); toast('Moved to ' + LANE_BY[e.target.value].name + '.');
+    }
+    else if(e.target.id === 'homeFilter'){ S.homeFilter = e.target.value; save(); render(); }
+    else if(['noAlarm','hideAge','auzmzs'].indexOf(e.target.id) !== -1){ S[e.target.id] = e.target.checked; save(); render(); }
+  });
+
+  document.getElementById('q').addEventListener('input', function(e){ S.q = e.target.value; render(); });
+
+  document.addEventListener('keydown', function(e){
+    if(e.target.matches('input, select, textarea')){
+      if(e.key === 'Escape'){ e.target.blur(); if(e.target.id === 'q'){ S.q = ''; e.target.value = ''; render(); } }
+      return;
+    }
+    if(e.metaKey || e.ctrlKey || e.altKey) return;
+    if(e.key === '/'){ e.preventDefault(); var q = document.getElementById('q'); if(q && !q.closest('[hidden]')) q.focus(); }
+    else if(e.key === 'ArrowRight'){ setLevel(S.level + 1); }
+    else if(e.key === 'ArrowLeft'){ setLevel(S.level - 1); }
+    else if(/^[1-9]$/.test(e.key)){ setLevel(+e.key); }
+    else if(e.key === 'Escape'){ S.concept = null; S.homeFilter = 'all'; S.q = ''; render(); }
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
