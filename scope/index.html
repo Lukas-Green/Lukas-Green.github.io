@@ -278,6 +278,108 @@ body.alarm .home.nowhere{border-color:var(--danger);color:var(--danger);border-s
 .bar{height:4px;background:var(--border-lit);border-radius:2px;overflow:hidden;min-width:60px}
 .bar i{display:block;height:100%;background:var(--violet)}
 
+
+/* ============================================================
+   SHELL — sidebar left, content right. Fixed geometry at every
+   level; only the contents thin out (Rule 15).
+   ============================================================ */
+.shell{display:grid;grid-template-columns:248px minmax(0,1fr);gap:0;max-width:1400px;margin:0 auto;align-items:start}
+.side{position:sticky;top:0;align-self:start;border-right:1px solid var(--border);padding:1.1rem 1rem 3rem;min-height:60vh}
+.side-group{margin-bottom:1.5rem}
+.side-group h4{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 .5rem .4rem}
+.side-link{display:flex;align-items:center;gap:.55rem;width:100%;text-align:left;background:transparent;border:none;border-radius:var(--radius-sm);
+  padding:.42rem .55rem;font-size:.86rem;color:var(--muted-strong);cursor:pointer;transition:background var(--speed),color var(--speed)}
+.side-link:hover{background:var(--surface-2);color:var(--text)}
+.side-link[aria-current="true"]{background:var(--surface-2);color:var(--accent-text);font-weight:600}
+.side-link .g{width:1.1rem;text-align:center;flex-shrink:0;opacity:.8;font-size:.9rem}
+.side-link .n{margin-left:auto;font-family:var(--mono);font-size:.7rem;color:var(--muted)}
+.side-link[aria-current="true"] .n{color:var(--accent-text)}
+.side-cta{width:100%;justify-content:flex-start;margin-bottom:1.2rem}
+.side-note{font-size:.7rem;color:var(--muted);padding:.3rem .55rem;line-height:1.45}
+.side-foot{border-top:1px solid var(--border);padding-top:.8rem;margin-top:1.5rem;display:flex;flex-direction:column;gap:.15rem}
+.content{padding:1.6rem 2rem 5rem;min-width:0}
+.side-toggle{display:none}
+@media(max-width:900px){
+  .shell{grid-template-columns:1fr}
+  .side{position:static;border-right:none;border-bottom:1px solid var(--border);display:none;padding-bottom:1.2rem}
+  .side.open{display:block}
+  .side-toggle{display:inline-flex}
+  .content{padding:1.2rem 1rem 4rem}
+}
+
+/* ============================================================
+   CAPTURE
+   ============================================================ */
+.capture{max-width:760px}
+.capture h2{font-size:1.4rem;margin-bottom:.3rem}
+.capture .lede{color:var(--muted);font-size:.88rem;margin-bottom:1.4rem;line-height:1.6}
+.cap-box{border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);padding:1.2rem 1.3rem;margin-bottom:1rem}
+.cap-box h3{font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-text);margin-bottom:.7rem}
+.rec-row{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.rec-btn{width:60px;height:60px;border-radius:50%;border:2px solid var(--accent);background:transparent;cursor:pointer;display:grid;place-items:center;flex-shrink:0;
+  transition:background var(--speed)}
+.rec-btn .dot{width:20px;height:20px;border-radius:50%;background:var(--accent)}
+.rec-btn.on .dot{border-radius:3px;width:18px;height:18px;background:var(--danger)}
+.rec-btn:hover{background:var(--surface-2)}
+.rec-btn[disabled]{border-color:var(--border-lit);cursor:not-allowed;opacity:.5}
+.rec-meta{display:flex;flex-direction:column;gap:.15rem}
+.rec-time{font-family:var(--mono);font-size:1.3rem;font-weight:700;color:var(--accent-text)}
+.rec-hint{font-size:.76rem;color:var(--muted);max-width:44ch;line-height:1.5}
+.drop{border:1px dashed var(--border-lit);border-radius:var(--radius-sm);padding:1.1rem;text-align:center;font-size:.84rem;color:var(--muted);cursor:pointer;
+  transition:border-color var(--speed),background var(--speed)}
+.drop.over{border-color:var(--accent);background:var(--surface-2)}
+.cap-text{width:100%;min-height:130px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);
+  padding:.8rem .9rem;color:var(--text);font-size:.92rem;line-height:1.6;resize:vertical;outline:none;font-family:var(--sans)}
+.cap-text:focus{border-color:var(--accent)}
+.cap-actions{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.9rem;align-items:center}
+.cap-warn{font-size:.72rem;color:var(--muted);line-height:1.5;margin-top:.5rem}
+audio{width:100%;margin-top:.7rem}
+
+.proposed{border:1px solid var(--accent);border-radius:var(--radius);background:var(--surface);padding:1.1rem 1.2rem;margin-top:1rem}
+.proposed h3{font-size:.95rem;margin-bottom:.2rem}
+.proposed .sub{font-size:.78rem;color:var(--muted);margin-bottom:.9rem}
+.prop-item{display:flex;gap:.7rem;align-items:flex-start;padding:.6rem 0;border-top:1px solid var(--border)}
+.prop-item input{margin-top:.35rem;accent-color:var(--violet);width:16px;height:16px;flex-shrink:0;cursor:pointer}
+.prop-item .body{flex:1;min-width:0}
+.prop-item .txt{font-size:.88rem;line-height:1.5}
+.prop-item .tags{display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.35rem}
+
+/* ============================================================
+   TO-DOS & PEOPLE
+   ============================================================ */
+.todo-head{display:flex;align-items:baseline;gap:.9rem;flex-wrap:wrap;margin-bottom:.3rem}
+.todo-head h2{font-size:1.3rem}
+.todo-head .n{font-family:var(--mono);font-size:.74rem;color:var(--muted)}
+.todo-blurb{font-size:.84rem;color:var(--muted);margin-bottom:1.2rem}
+.todo-list{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);overflow:hidden}
+.todo{display:flex;gap:.75rem;align-items:flex-start;padding:.75rem .95rem;border-bottom:1px solid var(--border)}
+.todo:last-child{border-bottom:none}
+.todo input[type=checkbox]{margin-top:.28rem;width:17px;height:17px;accent-color:var(--accent);cursor:pointer;flex-shrink:0}
+.todo .body{flex:1;min-width:0}
+.todo .txt{font-size:.89rem;line-height:1.5}
+.todo.done .txt{text-decoration:line-through;opacity:.45}
+.todo .tags{display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.35rem;align-items:center}
+.tag{font-family:var(--mono);font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--border-lit);border-radius:3px;padding:.05rem .38rem;color:var(--muted);white-space:nowrap}
+.tag.who{border-color:var(--accent);color:var(--accent-text);cursor:pointer;background:none}
+.tag.proj{border-color:var(--violet);color:var(--violet);cursor:pointer;background:none}
+.todo .kill{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem;line-height:1;padding:.1rem .3rem;opacity:0;transition:opacity var(--speed)}
+.todo:hover .kill,.todo .kill:focus{opacity:1}
+.todo-add{display:flex;gap:.5rem;padding:.7rem .95rem;background:var(--surface-2);border-top:1px solid var(--border)}
+.todo-add input{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.45rem .7rem;font-size:.86rem;outline:none}
+.todo-add input:focus{border-color:var(--accent)}
+.done-toggle{margin-top:.9rem}
+
+.people{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1rem}
+.person{border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);padding:1.1rem 1.2rem}
+.person h3{font-size:1.05rem}
+.person .org{font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-text);margin-bottom:.5rem}
+.person .note{font-size:.83rem;color:var(--muted-strong);line-height:1.55;margin-bottom:.8rem}
+.person .owed{border-top:1px solid var(--border);padding-top:.7rem}
+.person .owed h4{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
+.person .owed li{font-size:.82rem;line-height:1.5;list-style:none;display:flex;gap:.45rem;align-items:flex-start;padding:.16rem 0}
+.person .owed li::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:.52rem}
+.person .owed .clear{font-size:.8rem;color:var(--muted);font-style:italic}
+
 /* ============================================================
    MISC
    ============================================================ */
@@ -307,6 +409,7 @@ kbd{font-family:var(--mono);font-size:.68rem;border:1px solid var(--border-lit);
       <span class="sub" id="brandSub">What exists, what is stuck, what is next</span>
     </div>
     <div class="top-actions">
+      <button class="btn side-toggle" id="sideToggle" aria-expanded="false" aria-controls="side">Menu</button>
       <button class="btn" id="focusToggle" aria-expanded="false" aria-controls="focusPanel">Settings</button>
       <button class="btn" id="themeBtn">Theme: auto</button>
     </div>
@@ -342,6 +445,18 @@ kbd{font-family:var(--mono);font-size:.68rem;border:1px solid var(--border-lit);
       <p>Age is information, not an accusation. If it reads as one today, turn it off.</p>
     </div>
     <div class="focus-block">
+      <h3>Keys</h3>
+      <div class="field" style="margin-bottom:.5rem">
+        <span>Anthropic — reads your memos</span>
+        <input type="password" id="anthropicKey" placeholder="sk-ant-…" autocomplete="off">
+      </div>
+      <div class="field">
+        <span>Speech-to-text — for uploaded audio</span>
+        <input type="password" id="sttKey" placeholder="OpenAI key, for Whisper" autocomplete="off">
+      </div>
+      <p>Both optional. Stored in this browser only, and sent straight to those APIs from this page. Fine for a tool on your own machine; if this ever ships to anyone else the keys must move to a server.</p>
+    </div>
+    <div class="focus-block">
       <h3>Start again</h3>
       <button class="btn sm ghost" id="resetLocal">Reset my local changes</button>
       <p>Clears lane moves and skips made in this browser. The file on disk is untouched, and coming back after three months looks exactly like coming back after a day.</p>
@@ -351,29 +466,28 @@ kbd{font-family:var(--mono);font-size:.68rem;border:1px solid var(--border-lit);
 
 <section class="verdict" id="verdictBar" hidden><div class="wrap"></div></section>
 
-<div class="wrap">
-  <div class="toolbar" id="toolbar" hidden>
-    <div class="field search-wrap">
-      <span>Search</span>
-      <input type="search" id="q" placeholder="name, concept, blocker, branch…" aria-label="Search projects">
+<div class="shell">
+  <nav class="side" id="side" aria-label="Menu"></nav>
+  <div class="content">
+    <div class="toolbar" id="toolbar" hidden>
+      <div class="field search-wrap">
+        <span>Search</span>
+        <input type="search" id="q" placeholder="name, concept, blocker, branch…" aria-label="Search projects">
+      </div>
+      <div class="field">
+        <span>Lives in</span>
+        <select id="homeFilter" aria-label="Filter by where the work lives">
+          <option value="all">Anywhere</option>
+          <option value="branch">Unmerged branch</option>
+          <option value="nowhere">Nowhere (docs only)</option>
+          <option value="main">This repo, main</option>
+          <option value="repo">A separate repo</option>
+        </select>
+      </div>
     </div>
-    <div class="field">
-      <span>Lives in</span>
-      <select id="homeFilter" aria-label="Filter by where the work lives">
-        <option value="all">Anywhere</option>
-        <option value="branch">Unmerged branch</option>
-        <option value="nowhere">Nowhere (docs only)</option>
-        <option value="main">This repo, main</option>
-        <option value="repo">A separate repo</option>
-      </select>
-    </div>
-  </div>
-  <div style="padding:.9rem 0 0">
-    <div class="views" role="tablist" aria-label="View" id="views"></div>
+    <main id="main"></main>
   </div>
 </div>
-
-<main class="wrap" id="main"></main>
 
 <footer class="bot wrap">
   <div id="footL"></div>
@@ -383,6 +497,7 @@ kbd{font-family:var(--mono);font-size:.68rem;border:1px solid var(--border-lit);
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script src="projects.js"></script>
+<script src="workspace.js"></script>
 <script>
 (function(){
   'use strict';
@@ -399,32 +514,38 @@ kbd{font-family:var(--mono);font-size:.68rem;border:1px solid var(--border-lit);
      Nothing here changes WHERE anything is, only how much (Rule 15).
      ============================================================ */
   var LEVELS = {
-    1: { name:'Level 1 · Barely',      cards:1,  effort:'micro',  chroma:0,   shot:false, meta:false, desc:false, blockers:false, concepts:false, verdict:false, alarm:false, tools:false, views:['now'],
+    1: { name:'Level 1 · Barely',      cards:1,  effort:'micro',  chroma:0,   shot:false, meta:false, desc:false, blockers:false, concepts:false, verdict:false, alarm:false, tools:false, views:['now','capture'],
          line:'One thing. Under two minutes. That is the whole ask.' },
-    2: { name:'Level 2 · Low',         cards:1,  effort:'micro',  chroma:15,  shot:false, meta:false, desc:true,  blockers:false, concepts:false, verdict:false, alarm:false, tools:false, views:['now'],
+    2: { name:'Level 2 · Low',         cards:1,  effort:'micro',  chroma:15,  shot:false, meta:false, desc:true,  blockers:false, concepts:false, verdict:false, alarm:false, tools:false, views:['now','capture'],
          line:'Still one thing, but you can see what it belongs to.' },
-    3: { name:'Level 3 · Warming up',  cards:3,  effort:'quick',  chroma:30,  shot:false, meta:false, desc:true,  blockers:false, concepts:false, verdict:false, alarm:false, tools:false, views:['now','lanes','triage'],
+    3: { name:'Level 3 · Warming up',  cards:3,  effort:'quick',  chroma:30,  shot:false, meta:false, desc:true,  blockers:false, concepts:false, verdict:false, alarm:false, tools:false, views:['now','capture','todos','lanes','triage'],
          line:'Three options, fifteen minutes each. Pick one or none.' },
-    4: { name:'Level 4 · Steady',      cards:3,  effort:'quick',  chroma:45,  shot:false, meta:true,  desc:true,  blockers:false, concepts:false, verdict:false, alarm:false, tools:false, views:['now','lanes','triage'],
+    4: { name:'Level 4 · Steady',      cards:3,  effort:'quick',  chroma:45,  shot:false, meta:true,  desc:true,  blockers:false, concepts:false, verdict:false, alarm:false, tools:false, views:['now','capture','todos','people','lanes','triage'],
          line:'Three, with enough context to choose between them.' },
-    5: { name:'Level 5 · Working',     cards:5,  effort:'medium', chroma:60,  shot:true,  meta:true,  desc:true,  blockers:false, concepts:false, verdict:true,  alarm:false, tools:true,  views:['now','lanes','board','triage'],
+    5: { name:'Level 5 · Working',     cards:5,  effort:'medium', chroma:60,  shot:true,  meta:true,  desc:true,  blockers:false, concepts:false, verdict:true,  alarm:false, tools:true,  views:['now','capture','todos','people','lanes','board','triage'],
          line:'The normal board. Five at a time, hour-sized work.' },
-    6: { name:'Level 6 · Good day',    cards:7,  effort:'medium', chroma:75,  shot:true,  meta:true,  desc:true,  blockers:true,  concepts:false, verdict:true,  alarm:false, tools:true,  views:['now','lanes','board','triage'],
+    6: { name:'Level 6 · Good day',    cards:7,  effort:'medium', chroma:75,  shot:true,  meta:true,  desc:true,  blockers:true,  concepts:false, verdict:true,  alarm:false, tools:true,  views:['now','capture','todos','people','lanes','board','triage'],
          line:'Seven, and you can see what is in the way.' },
-    7: { name:'Level 7 · Sharp',       cards:99, effort:'deep',   chroma:90,  shot:true,  meta:true,  desc:true,  blockers:true,  concepts:true,  verdict:true,  alarm:true,  tools:true,  views:['now','lanes','board','clusters','triage'],
+    7: { name:'Level 7 · Sharp',       cards:99, effort:'deep',   chroma:90,  shot:true,  meta:true,  desc:true,  blockers:true,  concepts:true,  verdict:true,  alarm:true,  tools:true,  views:['now','capture','todos','people','lanes','board','clusters','triage'],
          line:'Everything, grouped, with the deep work unlocked.' },
-    8: { name:'Level 8 · Strategic',   cards:99, effort:'deep',   chroma:100, shot:true,  meta:true,  desc:true,  blockers:true,  concepts:true,  verdict:true,  alarm:true,  tools:true,  views:['now','lanes','board','clusters','overlaps','triage'],
+    8: { name:'Level 8 · Strategic',   cards:99, effort:'deep',   chroma:100, shot:true,  meta:true,  desc:true,  blockers:true,  concepts:true,  verdict:true,  alarm:true,  tools:true,  views:['now','capture','todos','people','lanes','board','clusters','overlaps','triage'],
          line:'Plus the overlaps: what you are building more than once.' },
-    9: { name:'Level 9 · Everything',  cards:99, effort:'deep',   chroma:100, shot:true,  meta:true,  desc:true,  blockers:true,  concepts:true,  verdict:true,  alarm:true,  tools:true,  raw:true, views:['now','lanes','board','clusters','overlaps','triage'],
+    9: { name:'Level 9 · Everything',  cards:99, effort:'deep',   chroma:100, shot:true,  meta:true,  desc:true,  blockers:true,  concepts:true,  verdict:true,  alarm:true,  tools:true,  raw:true, views:['now','capture','todos','people','lanes','board','clusters','overlaps','triage'],
          line:'All of it, raw dates included. Come down when you need to.' }
   };
-  var VIEW_ORDER = ['now','lanes','board','clusters','overlaps','triage'];
-  var VIEW_NAME  = { now:'Now', lanes:'Lanes', board:'Board', clusters:'Clusters', overlaps:'Overlaps', triage:'Triage' };
+  var VIEW_ORDER = ['now','capture','todos','people','lanes','board','clusters','overlaps','triage'];
+  var VIEW_NAME  = { now:'Now', capture:'Capture', todos:'To-do', people:'People',
+                     lanes:'Lanes', board:'Board', clusters:'Clusters', overlaps:'Overlaps', triage:'Triage' };
+  var VIEW_GLYPH = { now:'\u25CF', capture:'\u25C9', todos:'\u25A4', people:'\u25C8',
+                     lanes:'\u25A5', board:'\u25A6', clusters:'\u25CE', overlaps:'\u29C9', triage:'\u2325' };
   var EFFORT_RANK = { micro:0, quick:1, medium:2, deep:3 };
   var EFFORT_LABEL = { micro:'2 min', quick:'15 min', medium:'1 hr', deep:'deep' };
   var LANES = DATA.lanes;
   var LANE_BY = {}; LANES.forEach(function(l){ LANE_BY[l.id] = l; });
   var KEY = 'scope.v2';
+  var WS = window.SCOPE_WORKSPACE || { lists:[], clients:[], todos:[] };
+  var LIST_BY = {}; WS.lists.forEach(function(l){ LIST_BY[l.id] = l; });
+  var CLIENT_BY = {}; WS.clients.forEach(function(c){ CLIENT_BY[c.id] = c; });
 
   /* Auzmzs voice — opt-in, never the default (Rule 8: the tool does not
      perform at you unless you asked it to). */
@@ -450,7 +571,10 @@ kbd{font-family:var(--mono);font-size:.68rem;border:1px solid var(--border-lit);
   var defaults = {
     level:4, view:'now', q:'', homeFilter:'all', concept:null,
     theme:'auto', noAlarm:false, hideAge:false, auzmzs:false,
-    laneOverride:{}, skipped:[], triageIdx:0
+    laneOverride:{}, skipped:[], triageIdx:0,
+    listFilter:null, clientFilter:null, showDone:false,
+    todoDone:{}, todoAdds:[], todoKilled:[], memos:[], speechOn:true,
+    anthropicKey:'', sttKey:''
   };
   var S = load();
   function load(){
@@ -464,7 +588,11 @@ kbd{font-family:var(--mono);font-size:.68rem;border:1px solid var(--border-lit);
     try{ localStorage.setItem(KEY, JSON.stringify({
       level:S.level, view:S.view, homeFilter:S.homeFilter, theme:S.theme,
       noAlarm:S.noAlarm, hideAge:S.hideAge, auzmzs:S.auzmzs,
-      laneOverride:S.laneOverride, triageIdx:S.triageIdx
+      laneOverride:S.laneOverride, triageIdx:S.triageIdx,
+      listFilter:S.listFilter, clientFilter:S.clientFilter, showDone:S.showDone,
+      todoDone:S.todoDone, todoAdds:S.todoAdds, todoKilled:S.todoKilled,
+      memos:S.memos.slice(-40), speechOn:S.speechOn,
+      anthropicKey:S.anthropicKey, sttKey:S.sttKey
     })); }catch(e){ /* storage blocked; the board still works */ }
   }
   function L(){ return LEVELS[S.level]; }
@@ -549,6 +677,291 @@ kbd{font-family:var(--mono);font-size:.68rem;border:1px solid var(--border-lit);
          + (p.home && p.home.type === 'branch' ? 3 : 0)
          + (p.home && p.home.type === 'nowhere' ? 2 : 0)
          + (p.blockers||[]).length * 0.4;
+  }
+
+
+  /* ============================================================
+     TO-DOS — seed file plus whatever you added in the browser
+     ============================================================ */
+  function allTodos(){
+    var killed = S.todoKilled || [];
+    return (WS.todos || []).concat(S.todoAdds || [])
+      .filter(function(t){ return killed.indexOf(t.id) === -1; })
+      .map(function(t){ return Object.assign({}, t, { done: !!S.todoDone[t.id] }); });
+  }
+  function openTodos(f){ return allTodos().filter(function(t){ return !t.done && (!f || f(t)); }); }
+  function newId(){ return 'u-' + Date.now().toString(36) + Math.random().toString(36).slice(2,6); }
+
+  /* ============================================================
+     MEMO PARSER — rule-based and legible on purpose. It proposes;
+     you tick what is real (Rule 6 proposes, Rule 9 lets you decline).
+     ============================================================ */
+  var DEMAND_RULES = [
+    ['call',   /\b(call|phone|ring|voicemail|leave a message)\b/],
+    ['email',  /\b(email|e-mail|send|reply|write to|follow up with|forward)\b/],
+    ['text',   /\b(text|message|dm|whatsapp)\b/],
+    ['decide', /\b(decide|pick(?! up)|choose|figure out|work out|answer)\b/],
+    ['admin',  /\b(file|form|cancel|renew|pay|book|schedule|order|register|upload|submit)\b/],
+    ['errand', /\b(buy|pick up|drop off|collect|return|post|mail)\b/],
+    ['read',   /\b(read|review|look at|check|skim)\b/]
+  ];
+  var EFFORT_RULES = [
+    ['micro',  /\b(two minutes|2 ?min|a minute|quick one|tiny)\b/],
+    ['quick',  /\b(fifteen|15 ?min|quick|short)\b/],
+    ['deep',   /\b(deep|afternoon|all day|a day|big one|properly)\b/],
+    ['medium', /\b(an hour|1 ?hour|hour|morning)\b/]
+  ];
+  var ADMIN_WORDS = /\b(llc|ein|bank|insurance|cobid|tax|invoice|licence|license|registration|registered|agent|filing|domain|proton)\b/;
+  var STOPWORDS = ['the','and','for','our','new','all','one','its','his','her','out','but','can','you','are','not'];
+  var GENERIC_ORG = ['client','independent'];
+  var SOMEDAY_WORDS = /\b(someday|one day|eventually|at some point|maybe)\b/;
+
+  function parseMemo(text){
+    var chunks = String(text)
+      .split(/\n+/).join(' . ')
+      .split(/\s*(?:[.;!?]|,?\s+and then\s+|,?\s+then\s+|,?\s+also\s+)\s*/i)
+      .map(function(c){ return c.trim(); })
+      .filter(function(c){ return c.split(/\s+/).length >= 3; });
+
+    return chunks.map(function(chunk){
+      var low = ' ' + chunk.toLowerCase() + ' ';
+
+      /* Match on whole words, and never on an article: "The Villa Health"
+         must not claim every sentence containing the word "the". Longest
+         match wins so "Barry" beats a stray org word. */
+      var client = null, clientHit = 0;
+      WS.clients.forEach(function(c){
+        var pats = [c.name.toLowerCase()];
+        var first = c.name.split(' ')[0].toLowerCase();
+        if(first.length >= 3 && STOPWORDS.indexOf(first) === -1) pats.push(first);
+        if(c.org && c.org.length >= 5 && GENERIC_ORG.indexOf(c.org.toLowerCase()) === -1) pats.push(c.org.toLowerCase());
+        pats.forEach(function(pat){
+          if(pat.length > clientHit && new RegExp('\\b' + pat.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + '\\b').test(low)){
+            client = c.id; clientHit = pat.length;
+          }
+        });
+      });
+
+      var project = null, projHit = 0;
+      DATA.projects.forEach(function(pr){
+        [pr.name, pr.aka].forEach(function(n){
+          if(n && n.length >= 4 && n.length > projHit && low.indexOf(n.toLowerCase()) !== -1){
+            project = pr.id; projHit = n.length;
+          }
+        });
+      });
+      if(!project && client && CLIENT_BY[client] && CLIENT_BY[client].projects.length === 1){
+        project = CLIENT_BY[client].projects[0];
+      }
+
+      var demand = 'build';
+      for(var i=0;i<DEMAND_RULES.length;i++) if(DEMAND_RULES[i][1].test(low)){ demand = DEMAND_RULES[i][0]; break; }
+      var effort = 'quick';
+      for(var j=0;j<EFFORT_RULES.length;j++) if(EFFORT_RULES[j][1].test(low)){ effort = EFFORT_RULES[j][0]; break; }
+
+      var list = client ? 'client'
+               : SOMEDAY_WORDS.test(low) ? 'someday'
+               : ADMIN_WORDS.test(low) ? 'admin'
+               : project ? 'work' : 'life';
+
+      var t = chunk.charAt(0).toUpperCase() + chunk.slice(1);
+      if(!/[.!?]$/.test(t)) t += '.';
+      return { id:newId(), text:t, list:list, client:client, project:project, demand:demand, effort:effort };
+    });
+  }
+
+  /* ============================================================
+     RECORDING — three ways in, because two of them may be blocked.
+     Nothing leaves the machine unless you switch live transcription on.
+     ============================================================ */
+  var CAP = { rec:null, chunks:[], t0:0, timer:null, url:null, speech:null, proposals:[], fileName:null };
+  function canRecord(){
+    return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder && window.isSecureContext);
+  }
+  function speechCtor(){ return window.SpeechRecognition || window.webkitSpeechRecognition || null; }
+
+  function capStatus(){
+    if(canRecord()) return 'Recording is available in this browser.';
+    if(!window.isSecureContext) return 'Recording needs a secure context. Opened from a file, the browser blocks the microphone. Run "python3 -m http.server" inside scope/ and open localhost instead, or use upload and typing below, which both work as they are.';
+    return 'This browser will not give the page a microphone. Upload or type instead.';
+  }
+
+  function startRec(){
+    navigator.mediaDevices.getUserMedia({ audio:true }).then(function(stream){
+      CAP.chunks = [];
+      CAP.rec = new MediaRecorder(stream);
+      CAP.rec.ondataavailable = function(e){ if(e.data.size) CAP.chunks.push(e.data); };
+      CAP.rec.onstop = function(){
+        stream.getTracks().forEach(function(t){ t.stop(); });
+        var blob = new Blob(CAP.chunks, { type: CAP.chunks[0] ? CAP.chunks[0].type : 'audio/webm' });
+        if(CAP.url) URL.revokeObjectURL(CAP.url);
+        CAP.url = URL.createObjectURL(blob);
+        CAP.fileName = 'memo-' + new Date().toISOString().replace(/[:.]/g,'-') + '.webm';
+        render();
+      };
+      CAP.rec.start();
+      CAP.t0 = Date.now();
+      CAP.timer = setInterval(function(){
+        var el = document.getElementById('recTime');
+        if(!el){ return; }
+        var n = Math.floor((Date.now() - CAP.t0)/1000);
+        el.textContent = String(Math.floor(n/60)).padStart(2,'0') + ':' + String(n%60).padStart(2,'0');
+      }, 500);
+      if(S.speechOn) startSpeech();
+      render();
+    }).catch(function(){ toast('The browser refused the microphone.'); });
+  }
+  function stopRec(){
+    if(CAP.rec && CAP.rec.state !== 'inactive') CAP.rec.stop();
+    CAP.rec = null;
+    clearInterval(CAP.timer); CAP.timer = null;
+    stopSpeech();
+  }
+  function startSpeech(){
+    var C = speechCtor(); if(!C) return;
+    try{
+      var r = new C();
+      r.continuous = true; r.interimResults = false; r.lang = 'en-US';
+      r.onresult = function(e){
+        var ta = document.getElementById('capText'); if(!ta) return;
+        for(var i = e.resultIndex; i < e.results.length; i++){
+          if(e.results[i].isFinal) ta.value += (ta.value ? ' ' : '') + e.results[i][0].transcript.trim();
+        }
+      };
+      r.onerror = function(){};
+      r.start(); CAP.speech = r;
+    }catch(err){ /* not available; the textarea still works */ }
+  }
+  function stopSpeech(){ if(CAP.speech){ try{ CAP.speech.stop(); }catch(e){} CAP.speech = null; } }
+
+  function commitProposals(){
+    var boxes = Array.prototype.slice.call(document.querySelectorAll('[data-prop]'));
+    var taken = boxes.filter(function(b){ return b.checked; }).map(function(b){ return b.dataset.prop; });
+    var added = CAP.proposals.filter(function(x){ return taken.indexOf(x.id) !== -1; });
+    if(!added.length){ toast('Nothing ticked.'); return; }
+    S.todoAdds = (S.todoAdds || []).concat(added);
+    S.memos = (S.memos || []).concat([{
+      id:newId(), at:new Date().toISOString().slice(0,16).replace('T',' '),
+      text:(document.getElementById('capText') || {}).value || '', made:added.length
+    }]);
+    CAP.proposals = [];
+    var ta = document.getElementById('capText'); if(ta) ta.value = '';
+    save();
+    S.view = 'todos'; render();
+    toast(added.length + (added.length === 1 ? ' item filed.' : ' items filed.'));
+  }
+
+
+  /* ============================================================
+     THE NETWORK BITS
+     Claude takes text, images and PDFs — not audio. So audio needs a
+     speech-to-text service, and Claude does the part it is actually
+     good at: turning a rambling transcript into structured records.
+     Both keys are optional. Without them the page still works: live
+     dictation is browser-native, and the local parser is the fallback.
+     ============================================================ */
+
+  /* Whisper via OpenAI, because Claude cannot accept an audio file.
+     Swap the URL and model for Deepgram or Groq if you prefer. */
+  function transcribeFile(file){
+    if(!S.sttKey) return Promise.reject(new Error('no-key'));
+    var fd = new FormData();
+    fd.append('file', file);
+    fd.append('model', 'whisper-1');
+    return fetch('https://api.openai.com/v1/audio/transcriptions', {
+      method:'POST', headers:{ 'Authorization':'Bearer ' + S.sttKey }, body: fd
+    }).then(function(r){
+      if(!r.ok) return r.text().then(function(t){ throw new Error('Transcription failed (' + r.status + '). ' + t.slice(0,120)); });
+      return r.json();
+    }).then(function(j){ return j.text || ''; });
+  }
+
+  /* Claude turns the transcript into to-dos. Asking for JSON in the prompt
+     and parsing it, rather than structured outputs, keeps this readable and
+     avoids depending on a request shape this page cannot test offline. */
+  function claudeParse(text){
+    if(!S.anthropicKey) return Promise.reject(new Error('no-key'));
+    var people = WS.clients.map(function(c){ return c.id + ' = ' + c.name + ' (' + c.org + ')'; }).join('\n');
+    var projects = DATA.projects.map(function(p){ return p.id + ' = ' + p.name; }).join('\n');
+    var prompt =
+      'Turn this voice memo into to-do items. It was dictated, so it rambles and may contain false starts.\n\n' +
+      'MEMO:\n<<<\n' + text + '\n>>>\n\nPEOPLE:\n' + people + '\n\nPROJECTS:\n' + projects + '\n\n' +
+      'Return ONLY a JSON array, no prose and no code fences. Each element:\n' +
+      '{"text": one clear action starting with a verb, "list": one of client|work|admin|life|someday, ' +
+      '"client": a people id or null, "project": a project id or null, ' +
+      '"demand": one of call|email|text|decide|admin|read|build|errand, ' +
+      '"effort": one of micro|quick|medium|deep}\n\n' +
+      'Rules: one item per distinct action. Drop filler that is not an action. Keep his wording where it is already clear. ' +
+      'micro means under two minutes. If a person is named, list is "client". Return [] if there is nothing actionable.';
+
+    return fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{
+        'content-type':'application/json',
+        'x-api-key': S.anthropicKey,
+        'anthropic-version':'2023-06-01',
+        'anthropic-dangerous-direct-browser-access':'true'
+      },
+      body: JSON.stringify({
+        model:'claude-opus-5',
+        max_tokens: 4000,
+        messages:[{ role:'user', content: prompt }]
+      })
+    }).then(function(r){
+      if(!r.ok) return r.text().then(function(t){ throw new Error('Claude said ' + r.status + '. ' + t.slice(0,120)); });
+      return r.json();
+    }).then(function(j){
+      var out = (j.content || []).filter(function(b){ return b.type === 'text'; }).map(function(b){ return b.text; }).join('');
+      var m = out.match(/\[[\s\S]*\]/);
+      if(!m) throw new Error('Claude did not return a list.');
+      return JSON.parse(m[0]).map(function(x){
+        return {
+          id:newId(),
+          text:String(x.text || '').trim(),
+          list: LIST_BY[x.list] ? x.list : 'life',
+          client: CLIENT_BY[x.client] ? x.client : null,
+          project: DATA.projects.some(function(p){ return p.id === x.project; }) ? x.project : null,
+          demand: x.demand || 'build',
+          effort: x.effort || 'quick'
+        };
+      }).filter(function(x){ return x.text.length > 2; });
+    });
+  }
+
+  function makeSense(){
+    var ta = document.getElementById('capText');
+    var text = (ta && ta.value || '').trim();
+    if(!text){ toast('Nothing to read yet.'); return; }
+    var btn = document.getElementById('senseBtn');
+    if(btn){ btn.disabled = true; btn.textContent = S.anthropicKey ? 'Claude is reading it…' : 'Reading…'; }
+
+    var job = S.anthropicKey ? claudeParse(text) : Promise.reject(new Error('no-key'));
+    job.catch(function(err){
+      if(err.message !== 'no-key') toast(err.message);
+      return parseMemo(text);   /* local rules still work with no key and no network */
+    }).then(function(items){
+      CAP.proposals = items;
+      CAP.usedClaude = !!S.anthropicKey;
+      render();
+      if(!items.length) toast('Could not find an action in that.');
+    });
+  }
+
+  function exportWorkspace(){
+    var out = allTodos().filter(function(t){ return !t.done; }).map(function(t){
+      var bits = ["      { id:'" + t.id + "', list:'" + t.list + "'"];
+      if(t.client) bits.push("client:'" + t.client + "'");
+      if(t.project) bits.push("project:'" + t.project + "'");
+      bits.push("\n        text:'" + String(t.text).replace(/'/g, "\\'") + "'");
+      bits.push("demand:'" + t.demand + "'");
+      bits.push("effort:'" + t.effort + "' }");
+      return bits.join(', ');
+    }).join(',\n\n');
+    var body = '/* generated by Scope — paste over the todos array in workspace.js */\n\n  todos: [\n' + out + '\n  ]\n';
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([body], { type:'text/plain' }));
+    a.download = 'scope-todos.js'; a.click();
+    toast('Downloaded. Paste it into workspace.js and commit.');
   }
 
   /* ============================================================
@@ -798,6 +1211,206 @@ kbd{font-family:var(--mono);font-size:.68rem;border:1px solid var(--border-lit);
       '<table class="overlap-table"><thead><tr><th>Pair</th><th>Shared</th><th>Overlap</th><th>Status</th></tr></thead><tbody>' + rows + '</tbody></table>';
   }
 
+
+  /* ============================================================
+     SIDEBAR — same position and order at every level. Sections
+     below Views appear as the dial comes up (Rule 15 + Rule 6).
+     ============================================================ */
+  function renderSidebar(){
+    var lv = L(), h = '';
+
+    h += '<button class="btn primary side-cta" data-view="capture">◉ &nbsp;Capture a memo</button>';
+
+    h += '<div class="side-group"><h4>Views</h4>' + VIEW_ORDER.filter(function(v){ return v !== 'capture'; }).map(function(v){
+      var ok = lv.views.indexOf(v) !== -1;
+      return '<button class="side-link' + (ok ? '' : ' locked') + '" data-view="' + v + '"' +
+             ' aria-current="' + (S.view === v && !S.listFilter && !S.clientFilter) + '"' +
+             (ok ? '' : ' style="opacity:.35"') + '>' +
+             '<span class="g">' + VIEW_GLYPH[v] + '</span>' + VIEW_NAME[v] + '</button>';
+    }).join('') + '</div>';
+
+    if(lv.views.indexOf('todos') !== -1){
+      h += '<div class="side-group"><h4>To-do</h4>' + WS.lists.map(function(l){
+        var n = openTodos(function(t){ return t.list === l.id; }).length;
+        return '<button class="side-link" data-list="' + l.id + '" aria-current="' + (S.listFilter === l.id) + '">' +
+               '<span class="g">·</span>' + esc(l.name) + '<span class="n">' + (n || '') + '</span></button>';
+      }).join('') + '</div>';
+    }
+
+    if(lv.views.indexOf('people') !== -1){
+      h += '<div class="side-group"><h4>People</h4>' + WS.clients.map(function(c){
+        var n = openTodos(function(t){ return t.client === c.id; }).length;
+        return '<button class="side-link" data-client="' + c.id + '" aria-current="' + (S.clientFilter === c.id) + '">' +
+               '<span class="g">·</span>' + esc(c.short || c.name) + '<span class="n">' + (n || '') + '</span></button>';
+      }).join('') + '</div>';
+    }
+
+    if(lv.views.indexOf('todos') === -1){
+      h += '<div class="side-note">To-dos and people appear at level 3.</div>';
+    }
+
+    h += '<div class="side-foot">' +
+      '<button class="side-link" id="exportBtn"><span class="g">↓</span>Export to-dos</button>' +
+      '<button class="side-link" id="focusToggle2"><span class="g">⚙</span>Settings</button>' +
+      '</div>';
+
+    document.getElementById('side').innerHTML = h;
+  }
+
+  /* ============================================================
+     CAPTURE
+     ============================================================ */
+  function renderCapture(){
+    var canRec = canRecord(), recording = !!CAP.rec, hasSpeech = !!speechCtor();
+
+    var h = '<div class="capture"><h2>Capture a memo</h2>' +
+      '<p class="lede">Talk, drop an audio file, or type. Then it gets read and turned into to-dos you tick before anything is filed. ' +
+      'Nothing is saved until you tick it.</p>';
+
+    /* 1. speak */
+    h += '<div class="cap-box"><h3>1 · Speak</h3><div class="rec-row">' +
+      '<button class="rec-btn' + (recording ? ' on' : '') + '" id="recBtn"' + (canRec ? '' : ' disabled') + ' aria-label="' +
+        (recording ? 'Stop recording' : 'Start recording') + '"><span class="dot"></span></button>' +
+      '<div class="rec-meta"><span class="rec-time" id="recTime">00:00</span>' +
+      '<span class="rec-hint">' + esc(capStatus()) + '</span></div></div>';
+    if(hasSpeech){
+      h += '<div class="switch-row" style="margin-top:.8rem"><input type="checkbox" id="speechOn"' + (S.speechOn ? ' checked' : '') + '>' +
+           '<label for="speechOn">Transcribe as I talk</label></div>' +
+           '<p class="cap-warn">Uses the browser’s own speech engine. In Chrome that means audio goes to Google. ' +
+           'Turn it off and you still get the recording, just without the words.</p>';
+    } else {
+      h += '<p class="cap-warn">This browser has no built-in speech engine. Chrome, Edge or Safari will dictate; here, type or upload.</p>';
+    }
+    if(CAP.url){
+      h += '<audio controls src="' + CAP.url + '"></audio>' +
+           '<div class="cap-actions"><a class="btn sm" href="' + CAP.url + '" download="' + esc(CAP.fileName || 'memo.webm') + '">Save the audio</a>' +
+           '<span class="cap-warn" style="margin:0">Kept for this session only. The words are what gets stored.</span></div>';
+    }
+    h += '</div>';
+
+    /* 2. upload */
+    h += '<div class="cap-box"><h3>2 · Or drop a recording in</h3>' +
+      '<div class="drop" id="drop" tabindex="0" role="button">' +
+        (CAP.fileName && !CAP.url ? esc(CAP.fileName) : 'Drop an audio file here, or click to choose one') +
+      '</div><input type="file" id="fileIn" accept="audio/*,video/*" hidden>' +
+      '<p class="cap-warn">' + (S.sttKey
+        ? 'Sent to Whisper for transcription, then the text lands below.'
+        : 'Add a speech-to-text key in Settings and dropped files transcribe themselves. Without one, play it back and type what matters — the box below is already waiting.') +
+      '</p></div>';
+
+    /* 3. text */
+    h += '<div class="cap-box"><h3>3 · The words</h3>' +
+      '<textarea class="cap-text" id="capText" placeholder="Ramble here. Full sentences are not required.\n\nLike: call the registered agent and cancel one of them, email Kirk about which Art Inside Out copy is the real one, and pick up a birthday card."></textarea>' +
+      '<div class="cap-actions">' +
+        '<button class="btn primary" id="senseBtn">Make sense of this</button>' +
+        '<button class="btn" id="clearCap">Clear</button>' +
+        '<span class="cap-warn" style="margin:0">' +
+          (S.anthropicKey ? 'Claude reads it.' : 'Read by the built-in rules. Add an Anthropic key in Settings and Claude does it properly.') +
+        '</span>' +
+      '</div></div>';
+
+    /* proposals */
+    if(CAP.proposals.length){
+      h += '<div class="proposed"><h3>' + CAP.proposals.length + (CAP.proposals.length === 1 ? ' thing' : ' things') + ' in there</h3>' +
+        '<p class="sub">' + (CAP.usedClaude ? 'Read by Claude.' : 'Read by the built-in rules.') +
+        ' Untick anything that is not real. Nothing is filed until you press the button.</p>' +
+        CAP.proposals.map(function(x){
+          var c = x.client && CLIENT_BY[x.client], pr = x.project && DATA.projects.filter(function(p){ return p.id === x.project; })[0];
+          return '<div class="prop-item"><input type="checkbox" data-prop="' + x.id + '" checked>' +
+            '<div class="body"><div class="txt">' + esc(x.text) + '</div><div class="tags">' +
+              '<span class="tag">' + esc((LIST_BY[x.list] || {}).name || x.list) + '</span>' +
+              (c ? '<span class="tag who">' + esc(c.name) + '</span>' : '') +
+              (pr ? '<span class="tag proj">' + esc(pr.name) + '</span>' : '') +
+              '<span class="tag">' + esc(x.demand) + '</span>' +
+              '<span class="tag">' + EFFORT_LABEL[x.effort] + '</span>' +
+            '</div></div></div>';
+        }).join('') +
+        '<div class="cap-actions"><button class="btn primary" id="fileBtn">File the ticked ones</button>' +
+        '<button class="btn" id="dropProps">Throw them away</button></div></div>';
+    }
+
+    if((S.memos || []).length){
+      h += '<p class="section-note" style="margin-top:1.6rem">' + S.memos.length +
+           ' memo' + (S.memos.length === 1 ? '' : 's') + ' captured. Last one ' + esc(S.memos[S.memos.length-1].at) + '.</p>';
+    }
+    return h + '</div>';
+  }
+
+  /* ============================================================
+     TO-DOS
+     ============================================================ */
+  function todoRow(t){
+    var c = t.client && CLIENT_BY[t.client];
+    var pr = t.project && DATA.projects.filter(function(p){ return p.id === t.project; })[0];
+    return '<div class="todo' + (t.done ? ' done' : '') + '">' +
+      '<input type="checkbox" data-tick="' + t.id + '"' + (t.done ? ' checked' : '') + ' aria-label="Done">' +
+      '<div class="body"><div class="txt">' + esc(t.text) + '</div><div class="tags">' +
+        (c ? '<button class="tag who" data-client="' + c.id + '">' + esc(c.name) + '</button>' : '') +
+        (pr ? '<button class="tag proj" data-goto="' + pr.id + '">' + esc(pr.name) + '</button>' : '') +
+        '<span class="tag">' + esc(t.demand) + '</span>' +
+        '<span class="tag">' + EFFORT_LABEL[t.effort] + '</span>' +
+      '</div></div>' +
+      '<button class="kill" data-kill="' + t.id + '" title="Remove" aria-label="Remove">×</button></div>';
+  }
+
+  function renderTodos(){
+    var listId = S.listFilter, clientId = S.clientFilter;
+    var all = allTodos().filter(function(t){
+      if(listId && t.list !== listId) return false;
+      if(clientId && t.client !== clientId) return false;
+      return true;
+    });
+    var open = all.filter(function(t){ return !t.done; });
+    var done = all.filter(function(t){ return t.done; });
+
+    var title = clientId ? (CLIENT_BY[clientId] || {}).name
+              : listId ? (LIST_BY[listId] || {}).name : 'Everything';
+    var blurb = clientId ? (CLIENT_BY[clientId] || {}).note
+              : listId ? (LIST_BY[listId] || {}).blurb
+              : 'Every open item, whoever it belongs to.';
+
+    var h = '<div class="todo-head"><h2>' + esc(title) + '</h2><span class="n">' + open.length + ' open</span>' +
+      ((listId || clientId) ? '<button class="btn sm ghost" id="allTodos">Show everything</button>' : '') + '</div>' +
+      '<p class="todo-blurb">' + esc(blurb || '') + '</p>';
+
+    h += '<div class="todo-list">' +
+      (open.length ? open.map(todoRow).join('')
+        : '<div class="todo"><div class="body"><div class="txt" style="color:var(--muted)">Nothing open here. ' +
+          (listId === 'life' ? 'This list starts empty on purpose — it is yours to fill.' : 'That is allowed.') + '</div></div></div>') +
+      '<form class="todo-add" id="addForm"><input id="addInput" placeholder="Add one… (it reads the wording for who, what and how long)" aria-label="Add a to-do">' +
+      '<button class="btn sm primary" type="submit">Add</button></form></div>';
+
+    if(done.length){
+      h += '<button class="btn sm ghost done-toggle" id="toggleDone">' +
+        (S.showDone ? 'Hide' : 'Show') + ' ' + done.length + ' done</button>';
+      if(S.showDone) h += '<div class="todo-list" style="margin-top:.7rem">' + done.map(todoRow).join('') + '</div>';
+    }
+    return h;
+  }
+
+  /* ============================================================
+     PEOPLE
+     ============================================================ */
+  function renderPeople(){
+    return '<div class="todo-head"><h2>People</h2><span class="n">' + WS.clients.length + '</span></div>' +
+      '<p class="todo-blurb">Everything owed to somebody. These are the ones that go quiet and then feel impossible to reopen.</p>' +
+      '<div class="people">' + WS.clients.map(function(c){
+        var owed = openTodos(function(t){ return t.client === c.id; });
+        return '<div class="person"><h3>' + esc(c.name) + '</h3><div class="org">' + esc(c.org) + '</div>' +
+          '<p class="note">' + esc(c.note) + '</p>' +
+          '<div class="owed"><h4>Owed</h4>' +
+          (owed.length ? '<ul>' + owed.map(function(t){ return '<li>' + esc(t.text) + '</li>'; }).join('') + '</ul>'
+                       : '<p class="clear">Nothing outstanding.</p>') +
+          '<div class="cap-actions" style="margin-top:.7rem">' +
+            '<button class="btn sm" data-client="' + c.id + '">Their list</button>' +
+            (c.projects || []).slice(0,2).map(function(pid){
+              var pr = DATA.projects.filter(function(p){ return p.id === pid; })[0];
+              return pr ? '<button class="btn sm ghost" data-goto="' + pid + '">' + esc(pr.name) + '</button>' : '';
+            }).join('') +
+          '</div></div></div>';
+      }).join('') + '</div>';
+  }
+
   /* ============================================================
      RENDER
      ============================================================ */
@@ -817,15 +1430,10 @@ kbd{font-family:var(--mono);font-size:.68rem;border:1px solid var(--border-lit);
     document.getElementById('dialName').textContent = lv.name;
     document.getElementById('dialLine').textContent = lv.line;
 
-    /* views: all six always rendered in the same order; the ones above your
-       level are dimmed and raise the dial when clicked (Rule 15 + Rule 9). */
-    document.getElementById('views').innerHTML = VIEW_ORDER.map(function(v){
-      var ok = lv.views.indexOf(v) !== -1;
-      return '<button role="tab" data-view="' + v + '" class="' + (ok ? '' : 'locked') + '"' +
-             ' aria-selected="' + (S.view === v) + '">' + VIEW_NAME[v] + '</button>';
-    }).join('');
+    renderSidebar();
 
-    document.getElementById('toolbar').hidden = !lv.tools;
+    document.getElementById('toolbar').hidden = !lv.tools ||
+      ['capture','todos','people'].indexOf(S.view) !== -1;
     var list = visible();
 
     /* verdict: counts, never instructions (Rule 8, 21) */
@@ -847,7 +1455,10 @@ kbd{font-family:var(--mono);font-size:.68rem;border:1px solid var(--border-lit);
     }
 
     var out;
-    if(S.view === 'lanes')         out = renderLanes(list);
+    if(S.view === 'capture')       out = renderCapture();
+    else if(S.view === 'todos')    out = renderTodos();
+    else if(S.view === 'people')   out = renderPeople();
+    else if(S.view === 'lanes')    out = renderLanes(list);
     else if(S.view === 'board')    out = renderBoard(list);
     else if(S.view === 'clusters') out = renderClusters(list);
     else if(S.view === 'overlaps') out = renderOverlaps();
@@ -855,9 +1466,7 @@ kbd{font-family:var(--mono);font-size:.68rem;border:1px solid var(--border-lit);
     else                           out = renderNow(list);
     document.getElementById('main').innerHTML = out;
 
-    var confirmed = DATA.projects.filter(laneConfirmed).length;
-    document.getElementById('footL').textContent =
-      DATA.projects.length + ' projects · ' + confirmed + ' lanes confirmed · data ' + DATA.updated;
+    updateFooter();
     document.getElementById('brandSub').textContent = lv.cards === 1
       ? 'One thing at a time' : 'What exists, what is stuck, what is next';
 
@@ -865,8 +1474,17 @@ kbd{font-family:var(--mono);font-size:.68rem;border:1px solid var(--border-lit);
     document.getElementById('hideAge').checked = S.hideAge;
     document.getElementById('auzmzs').checked = S.auzmzs;
     document.getElementById('homeFilter').value = S.homeFilter;
+    document.getElementById('anthropicKey').value = S.anthropicKey || '';
+    document.getElementById('sttKey').value = S.sttKey || '';
     document.getElementById('themeBtn').textContent = 'Theme: ' + S.theme;
     stopClock();
+  }
+
+  function updateFooter(){
+    var confirmed = DATA.projects.filter(laneConfirmed).length;
+    document.getElementById('footL').textContent =
+      DATA.projects.length + ' projects · ' + openTodos().length + ' open to-dos · ' +
+      confirmed + ' lanes confirmed · data ' + DATA.updated;
   }
 
   function setLevel(n){
@@ -908,6 +1526,27 @@ kbd{font-family:var(--mono);font-size:.68rem;border:1px solid var(--border-lit);
         toast(VIEW_NAME[v] + ' needs level ' + need + '. Dial moved up.');
       } else { S.view = v; save(); render(); }
     }
+    else if(t.dataset.list){ S.listFilter = t.dataset.list; S.clientFilter = null; S.view = 'todos'; save(); render(); }
+    else if(t.dataset.client){ S.clientFilter = t.dataset.client; S.listFilter = null; S.view = 'todos'; save(); render(); }
+    else if(t.id === 'allTodos'){ S.listFilter = null; S.clientFilter = null; save(); render(); }
+    else if(t.id === 'toggleDone'){ S.showDone = !S.showDone; save(); render(); }
+    else if(t.dataset.kill){
+      S.todoKilled = (S.todoKilled || []).concat([t.dataset.kill]);
+      S.todoAdds = (S.todoAdds || []).filter(function(x){ return x.id !== t.dataset.kill; });
+      save(); render(); toast('Gone. No record kept.');
+    }
+    else if(t.id === 'recBtn'){ CAP.rec ? stopRec() : startRec(); }
+    else if(t.id === 'drop'){ document.getElementById('fileIn').click(); }
+    else if(t.id === 'senseBtn'){ makeSense(); }
+    else if(t.id === 'clearCap'){ var ta = document.getElementById('capText'); if(ta) ta.value = ''; CAP.proposals = []; render(); }
+    else if(t.id === 'fileBtn'){ commitProposals(); }
+    else if(t.id === 'dropProps'){ CAP.proposals = []; render(); toast('Thrown away.'); }
+    else if(t.id === 'exportBtn'){ exportWorkspace(); }
+    else if(t.id === 'focusToggle2'){ document.getElementById('focusToggle').click(); }
+    else if(t.id === 'sideToggle'){
+      var op = document.getElementById('side').classList.toggle('open');
+      t.setAttribute('aria-expanded', String(op));
+    }
     else if(t.dataset.skip){ S.skipped.push(t.dataset.skip); render(); }
     else if(t.id === 'resetSkips'){ S.skipped = []; render(); }
     else if(t.dataset.park){ S.laneOverride[t.dataset.park] = 'parked'; save(); render(); toast(say('parked')); }
@@ -948,6 +1587,73 @@ kbd{font-family:var(--mono);font-size:.68rem;border:1px solid var(--border-lit);
     }
     else if(e.target.id === 'homeFilter'){ S.homeFilter = e.target.value; save(); render(); }
     else if(['noAlarm','hideAge','auzmzs'].indexOf(e.target.id) !== -1){ S[e.target.id] = e.target.checked; save(); render(); }
+    else if(e.target.id === 'speechOn'){
+      S.speechOn = e.target.checked; save();
+      if(CAP.rec){ S.speechOn ? startSpeech() : stopSpeech(); }
+    }
+    else if(e.target.dataset && e.target.dataset.tick){
+      /* Update in place. A full re-render would move the row out from under
+         the cursor mid-click, and the ground should not shift (Rule 4).
+         Done items stay where they are until you leave the view. */
+      S.todoDone[e.target.dataset.tick] = e.target.checked;
+      save();
+      var row = e.target.closest('.todo');
+      if(row) row.classList.toggle('done', e.target.checked);
+      renderSidebar(); updateFooter();
+    }
+    else if(e.target.id === 'fileIn' && e.target.files && e.target.files[0]){ takeFile(e.target.files[0]); }
+  });
+
+  document.addEventListener('input', function(e){
+    if(e.target.id === 'anthropicKey'){ S.anthropicKey = e.target.value.trim(); save(); }
+    else if(e.target.id === 'sttKey'){ S.sttKey = e.target.value.trim(); save(); }
+  });
+
+  /* add a to-do by typing: the same rules that read a memo read this line */
+  document.addEventListener('submit', function(e){
+    if(e.target.id !== 'addForm') return;
+    e.preventDefault();
+    var input = document.getElementById('addInput'), text = input.value.trim();
+    if(!text) return;
+    var parsed = parseMemo(text)[0] || { id:newId(), text:text, list:'life', client:null, project:null, demand:'build', effort:'quick' };
+    if(S.listFilter) parsed.list = S.listFilter;
+    if(S.clientFilter){ parsed.client = S.clientFilter; parsed.list = 'client'; }
+    S.todoAdds = (S.todoAdds || []).concat([parsed]);
+    input.value = ''; save(); render();
+  });
+
+  /* dropping audio anywhere on the capture panel */
+  function takeFile(file){
+    CAP.fileName = file.name;
+    if(!S.sttKey){
+      if(CAP.url) URL.revokeObjectURL(CAP.url);
+      CAP.url = URL.createObjectURL(file);
+      render();
+      toast('Loaded. Play it back and type the bits that matter.');
+      return;
+    }
+    toast('Transcribing\u2026');
+    transcribeFile(file).then(function(text){
+      var ta = document.getElementById('capText');
+      if(ta){ ta.value = (ta.value ? ta.value + '\n' : '') + text; }
+      toast('Transcribed.');
+    }).catch(function(err){ toast(err.message); });
+  }
+
+  document.addEventListener('dragover', function(e){
+    var d = e.target.closest && e.target.closest('#drop');
+    if(d){ e.preventDefault(); d.classList.add('over'); }
+  });
+  document.addEventListener('dragleave', function(e){
+    var d = e.target.closest && e.target.closest('#drop');
+    if(d) d.classList.remove('over');
+  });
+  document.addEventListener('drop', function(e){
+    var d = e.target.closest && e.target.closest('#drop');
+    if(!d) return;
+    e.preventDefault(); d.classList.remove('over');
+    var f = e.dataTransfer.files && e.dataTransfer.files[0];
+    if(f) takeFile(f);
   });
 
   document.getElementById('q').addEventListener('input', function(e){ S.q = e.target.value; render(); });
@@ -958,7 +1664,10 @@ kbd{font-family:var(--mono);font-size:.68rem;border:1px solid var(--border-lit);
       return;
     }
     if(e.metaKey || e.ctrlKey || e.altKey) return;
-    if(e.key === '/'){ e.preventDefault(); var q = document.getElementById('q'); if(q && !q.closest('[hidden]')) q.focus(); }
+    if(e.key === '/'){
+      var q = document.getElementById('q');
+      if(q && !document.getElementById('toolbar').hidden){ e.preventDefault(); q.focus(); }
+    }
     else if(e.key === 'ArrowRight'){ setLevel(S.level + 1); }
     else if(e.key === 'ArrowLeft'){ setLevel(S.level - 1); }
     else if(/^[1-9]$/.test(e.key)){ setLevel(+e.key); }

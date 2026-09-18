@@ -4,7 +4,7 @@ A project board for 37 projects and a brain that does not reliably start
 things. One page, no build step, no dependencies. Open `scope/index.html` —
 it works straight off disk.
 
-Three documents and a script:
+Four data files, three documents and a script:
 
 - **this file** — how it works and how to edit it
 - **[`docs/RESEARCH.md`](docs/RESEARCH.md)** — the 22 design rules and the
@@ -13,6 +13,7 @@ Three documents and a script:
   unconfirmed cards, what the first six turned up, and the concepts that have
   no card yet
 - **`tools/refresh-dates.js`** — keeps `lastWorked` honest, below
+- **`workspace.js`** — people, lists and to-dos: the half of life that is not a repo
 
 ---
 
@@ -40,6 +41,65 @@ every time you open it, because unpredictability is itself an anxiety input
 (Rule 15).
 
 ---
+
+## Capture
+
+The sidebar's top button. Three ways in, because two of them can be blocked:
+
+1. **Speak** — hit record. With *Transcribe as I talk* on, the browser's own
+   speech engine writes into the box as you go. In Chrome that means audio
+   reaches Google, and the panel says so; turn it off and you still get the
+   recording, just without the words. **Recording needs a secure context** — a
+   page opened straight off disk usually cannot have the microphone. Run
+   `python3 -m http.server` inside `scope/` and open localhost, and it works.
+2. **Drop a recording in** — any audio file. With a speech-to-text key set it
+   transcribes and the text lands in the box. Without one it loads a player so
+   you can play it back and type what matters.
+3. **Type** — always available, never blocked.
+
+Then **Make sense of this** turns the words into to-dos. With an Anthropic key
+Claude reads it; without one a local rule-based parser does, and that still
+works with no key and no network. Either way you get a **proposal with
+checkboxes** — nothing is filed until you tick it and press the button
+(Rule 6 proposes, Rule 9 lets you decline).
+
+It reads who, what and how long out of the wording:
+
+> *"Call the registered agent and cancel one of them. Email Kirk about which
+> Art Inside Out copy is the real one. Also I need to pick up a birthday card."*
+
+| Item | List | Person | Project | Demand |
+|---|---|---|---|---|
+| Call the registered agent… | Business admin | — | — | call |
+| Email Kirk about… | People & clients | Kirk Charlton | Art Inside Out | email |
+| Pick up a birthday card | Life | — | — | errand |
+
+**Why two services.** Claude accepts text, images and PDFs — not audio. So
+audio needs a dedicated speech-to-text step, and Claude does the part it is
+actually good at: reading a rambling transcript and turning it into records.
+
+**Keys** live in Settings, in this browser's storage, and go straight from this
+page to those APIs. That is fine for a tool on your own machine. **If this ever
+ships to anyone else the keys must move to a server** — a key in a public page
+is a key you have given away.
+
+## To-dos and people
+
+A to-do can belong to a person, a project, both or neither. Five lists:
+**People & clients**, **Project work**, **Business admin**, **Life**,
+**Someday**. Life starts empty on purpose.
+
+The **People** view is the one that earns its place: seven clients, each with
+what is currently owed to them. Kirk's email lives under Kirk, not buried in a
+repo. Click a name anywhere — sidebar, to-do tag, person card — to filter to
+just their list.
+
+Ticking something off updates in place rather than re-rendering the list, so
+the row never moves out from under the cursor (Rule 4). Done items stay where
+they are until you leave the view.
+
+Anything you add in the browser lives in localStorage. **Export to-dos** in the
+sidebar writes it back out as a file to paste into `workspace.js` and commit.
 
 ## The nine-level dial
 
@@ -151,6 +211,11 @@ nowhere.
 **`track`** is optional, for a project that genuinely lives in more than one
 place: `track: ['branch:claude/…', 'repo:owner/name']`. The refresh script then
 takes the newest of them.
+
+**`workspace.js`** holds clients and to-dos. A client needs `id`, `name`,
+`short` (the sidebar label), `org`, `projects` and `note`. A to-do needs `id`,
+`list` and `text`; `client`, `project`, `demand` and `effort` are optional and
+the parser fills them in when it can.
 
 **Screenshots** go in `scope/shots/` named by id. Until then each card draws a
 deterministic node-graph tile, so the board never looks half-built.
