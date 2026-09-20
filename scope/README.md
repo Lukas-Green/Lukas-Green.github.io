@@ -13,7 +13,8 @@ Four data files, three documents and a script:
   unconfirmed cards, what the first six turned up, and the concepts that have
   no card yet
 - **`tools/refresh-dates.js`** — keeps `lastWorked` honest, below
-- **`workspace.js`** — people, lists and to-dos: the half of life that is not a repo
+- **`workspace.js`** — the to-do lists. People and to-dos live in
+  `workspace.local.js`, which is gitignored — see Private data below
 
 ---
 
@@ -82,6 +83,31 @@ actually good at: reading a rambling transcript and turning it into records.
 page to those APIs. That is fine for a tool on your own machine. **If this ever
 ships to anyone else the keys must move to a server** — a key in a public page
 is a key you have given away.
+
+## Private data
+
+**This repo is public.** Client names, candid notes about live engagements and
+business detail do not belong in it, so they live in **`workspace.local.js`**,
+matched by `scope/*.local.js` in `.gitignore` and never committed.
+
+Copy `workspace.local.example.js` to `workspace.local.js` and fill it in. It
+can carry three things, all optional:
+
+| Key | Overrides |
+|---|---|
+| `workspace` | the real `clients` and `todos` |
+| `scripts` | call and email openers, which quote real people |
+| `projects` | any field of any project — for wording too candid to publish |
+
+The page loads it after the public files and merges it over the top. On a
+fresh clone the file is absent, the 404 is expected, and the tool runs with an
+empty People view. The published copy shows the shell and no client.
+
+A client marked `archived: true` sorts to the bottom, dims, and reads as closed
+rather than neglected.
+
+**Keep a copy somewhere durable** — it is deliberately not in git, so nothing
+is backing it up for you.
 
 ## To-dos and people
 

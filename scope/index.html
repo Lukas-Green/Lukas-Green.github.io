@@ -379,6 +379,10 @@ audio{width:100%;margin-top:.7rem}
 .person .owed li{font-size:.82rem;line-height:1.5;list-style:none;display:flex;gap:.45rem;align-items:flex-start;padding:.16rem 0}
 .person .owed li::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:.52rem}
 .person .owed .clear{font-size:.8rem;color:var(--muted);font-style:italic}
+.person.archived{opacity:.6}
+.person.archived:hover{opacity:1}
+.tag.archived{border-style:dotted}
+.side-link.archived{opacity:.55}
 
 /* ============================================================
    MISC
@@ -498,6 +502,9 @@ kbd{font-family:var(--mono);font-size:.68rem;border:1px solid var(--border-lit);
 
 <script src="projects.js"></script>
 <script src="workspace.js"></script>
+<!-- Real clients, to-dos and candid notes. Gitignored, never published.
+     Absent on a fresh clone: the 404 is expected and nothing breaks. -->
+<script src="workspace.local.js" onerror="void 0"></script>
 <script>
 (function(){
   'use strict';
@@ -543,7 +550,19 @@ kbd{font-family:var(--mono);font-size:.68rem;border:1px solid var(--border-lit);
   var LANES = DATA.lanes;
   var LANE_BY = {}; LANES.forEach(function(l){ LANE_BY[l.id] = l; });
   var KEY = 'scope.v2';
-  var WS = window.SCOPE_WORKSPACE || { lists:[], clients:[], todos:[] };
+  /* workspace.local.js, when present, supplies the real people, to-dos,
+     call scripts and the candid wording. The committed files carry none of
+     it, so the published copy of this tool shows the shell and no client. */
+  var LOCAL = window.SCOPE_LOCAL || {};
+  var WS = Object.assign({ lists:[], clients:[], todos:[] },
+                         window.SCOPE_WORKSPACE || {},
+                         LOCAL.workspace || {});
+  if(LOCAL.scripts) DATA.scripts = Object.assign({}, DATA.scripts || {}, LOCAL.scripts);
+  if(LOCAL.projects){
+    DATA.projects = DATA.projects.map(function(p){
+      return LOCAL.projects[p.id] ? Object.assign({}, p, LOCAL.projects[p.id]) : p;
+    });
+  }
   var LIST_BY = {}; WS.lists.forEach(function(l){ LIST_BY[l.id] = l; });
   var CLIENT_BY = {}; WS.clients.forEach(function(c){ CLIENT_BY[c.id] = c; });
 
@@ -1238,9 +1257,11 @@ kbd{font-family:var(--mono);font-size:.68rem;border:1px solid var(--border-lit);
     }
 
     if(lv.views.indexOf('people') !== -1){
-      h += '<div class="side-group"><h4>People</h4>' + WS.clients.map(function(c){
+      h += '<div class="side-group"><h4>People</h4>' + WS.clients.slice().sort(function(a,b){
+        return (a.archived ? 1 : 0) - (b.archived ? 1 : 0);
+      }).map(function(c){
         var n = openTodos(function(t){ return t.client === c.id; }).length;
-        return '<button class="side-link" data-client="' + c.id + '" aria-current="' + (S.clientFilter === c.id) + '">' +
+        return '<button class="side-link' + (c.archived ? ' archived' : '') + '" data-client="' + c.id + '" aria-current="' + (S.clientFilter === c.id) + '">' +
                '<span class="g">·</span>' + esc(c.short || c.name) + '<span class="n">' + (n || '') + '</span></button>';
       }).join('') + '</div>';
     }
@@ -1394,13 +1415,18 @@ kbd{font-family:var(--mono);font-size:.68rem;border:1px solid var(--border-lit);
   function renderPeople(){
     return '<div class="todo-head"><h2>People</h2><span class="n">' + WS.clients.length + '</span></div>' +
       '<p class="todo-blurb">Everything owed to somebody. These are the ones that go quiet and then feel impossible to reopen.</p>' +
-      '<div class="people">' + WS.clients.map(function(c){
+      (WS.clients.length ? '' : '<p class="section-note">No people yet. They live in <code>workspace.local.js</code>, which is gitignored \u2014 copy <code>workspace.local.example.js</code> and fill it in.</p>') +
+      '<div class="people">' + WS.clients.slice().sort(function(a,b){
+        return (a.archived ? 1 : 0) - (b.archived ? 1 : 0);
+      }).map(function(c){
         var owed = openTodos(function(t){ return t.client === c.id; });
-        return '<div class="person"><h3>' + esc(c.name) + '</h3><div class="org">' + esc(c.org) + '</div>' +
+        return '<div class="person' + (c.archived ? ' archived' : '') + '"><h3>' + esc(c.name) +
+          (c.archived ? ' <span class="tag archived">archived</span>' : '') + '</h3>' +
+          '<div class="org">' + esc(c.org) + '</div>' +
           '<p class="note">' + esc(c.note) + '</p>' +
           '<div class="owed"><h4>Owed</h4>' +
           (owed.length ? '<ul>' + owed.map(function(t){ return '<li>' + esc(t.text) + '</li>'; }).join('') + '</ul>'
-                       : '<p class="clear">Nothing outstanding.</p>') +
+                       : '<p class="clear">' + (c.archived ? 'Closed. Nothing owed.' : 'Nothing outstanding.') + '</p>') +
           '<div class="cap-actions" style="margin-top:.7rem">' +
             '<button class="btn sm" data-client="' + c.id + '">Their list</button>' +
             (c.projects || []).slice(0,2).map(function(pid){
