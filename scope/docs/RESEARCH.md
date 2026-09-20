@@ -166,7 +166,7 @@ system and reliably outperform vague intentions, with externalised cues at the
 point of performance closing the intention-action gap.
 
 > **Rule 19 — Write every step as an action with a location**, not an aspiration.
-> "Cancel the duplicate registered agent. One phone call." not "sort out the LLC."
+> "Cancel the duplicate filing service. One phone call." not "sort out the LLC."
 
 ## 11. Body doubling works, and it costs nothing
 

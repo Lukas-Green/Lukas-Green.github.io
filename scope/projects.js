@@ -615,14 +615,14 @@ window.SCOPE = {
     },
     {
       id: 'sovereign-tattoo',
-      name: 'Sovereign Tattoo',
+      name: 'Dormant Client Repo',
       tag: 'Client Site',
       cluster: 'client',
       status: 'parked',
       confidence: 'inferred',
       active: false,
       lastWorked: '2026-06-09',
-      home: { type:'repo', ref:'Lukas-Green/sovereign-tattoo' },
+      home: { type:'repo', ref:'a client repo' },
       lane: 'parked',
       laneWhy: 'No record of the engagement at all. Park until that one line exists.',
       laneSet: 'proposed',
@@ -638,7 +638,7 @@ window.SCOPE = {
         { text: 'Archive the repo on GitHub so it stops appearing in the list.', effort: 'micro' },
         { text: 'Decide whether any of it can go on the portfolio.', effort: 'quick' }
       ],
-      links: { repo: 'https://github.com/Lukas-Green/sovereign-tattoo' },
+      links: {},
       image: null
     },
     {
@@ -877,7 +877,7 @@ window.SCOPE = {
     },
     {
       id: 'courier-direct',
-      name: 'Courier Direct',
+      name: 'Courier Client Redesign',
       tag: 'Client Redesign',
       cluster: 'client',
       status: 'prototype',
@@ -889,7 +889,7 @@ window.SCOPE = {
       laneWhy: 'Finished work, one unsent email away from an answer.',
       laneSet: 'proposed',
       micro: 'Delete the two unsent draft emails from the branch.',
-      summary: 'A single-page redesign for a 24/7 courier in Tualatin, built from owner-supplied screenshots after the live site returned 403 to every fetch. Ships with a decisions log, an about page and a demo. Closed: the build is finished and the engagement is not going anywhere.',
+      summary: 'A single-page redesign for a local courier, built from owner-supplied screenshots after the live site returned 403 to every fetch. Ships with a decisions log, an about page and a demo. Closed: the build is finished and the engagement is over.',
       concepts: ['site', 'client-work', 'smb', 'redesign', 'local-business', 'pitch'],
       blockers: [
         'Closed. Kept as finished spec work, not as an open lead.',
@@ -901,12 +901,12 @@ window.SCOPE = {
         { text: 'Check which assets you may publish before using it as a portfolio piece.', effort: 'quick' },
         { text: 'Write it up as spec work and put it on the site.', effort: 'medium' }
       ],
-      links: { local: 'projects/courier-direct/', live: 'https://courier-direct.com' },
+      links: { local: 'projects/courier-direct/' },
       image: null
     },
     {
       id: 'villa-health',
-      name: 'The Villa Health',
+      name: 'Wellness Practice Concept',
       tag: 'Client Site',
       cluster: 'client',
       status: 'prototype',
@@ -918,17 +918,17 @@ window.SCOPE = {
       laneWhy: 'Finished spec work with no record of contact. Park until you decide to pitch.',
       laneSet: 'proposed',
       micro: 'Decide in one word: pitch it, or file it as spec work.',
-      summary: 'A 68KB single-page redesign concept for an integrative practice in Vancouver, Washington \u2014 psychiatry, hormone therapy, weight management, aesthetics, addiction recovery. Editorial wellness direction: cream, sage, clay and gold, Fraunces and Inter. Hero, services bento, team grid, four-step patient journey, testimonials, FAQ, contact. Unsolicited spec work, and the page still carries placeholder portraits, clinician names, phone and hours.',
+      summary: 'A 68KB single-page redesign concept for a healthcare practice. Editorial wellness direction: cream, sage, clay and gold, Fraunces and Inter. Hero, services bento, team grid, four-step patient journey, testimonials, FAQ, contact. Spec work, and the page still carries placeholder portraits, names, phone and hours that would have to go before it is shown to anyone.',
       concepts: ['site', 'client-work', 'smb', 'redesign', 'local-business', 'healthcare'],
       blockers: [
-        'Spec work for a real practice, built without a brief from them.',
-        'Placeholder clinician names, phone and hours are still in the page. It cannot be shown as-is.',
+        'Spec work, built without a brief from the business.',
+        'Placeholder names, phone and hours are still in the page. It cannot be shown as-is.',
         'Single file on a branch, not deployed anywhere.'
       ],
       next: [
         { text: 'Decide in one word: pitch it, or file it as portfolio spec work.', effort: 'micro' },
         { text: 'Strip or clearly mark every placeholder name, number and hour.', effort: 'medium' },
-        { text: 'If pitching, verify the clinician list with the practice first.', effort: 'medium' }
+        { text: 'If pitching, verify every detail with the business first.', effort: 'medium' }
       ],
       links: { local: 'villa-health-preview.html' },
       image: null
@@ -1218,7 +1218,7 @@ window.SCOPE = {
     {
       ids: ['courier-direct', 'villa-health', 'sovereign-tattoo', 'nick-sites'],
       verdict: 'Four local redesigns, no template, no outcomes',
-      note: 'Courier Direct, Villa Health, Sovereign Tattoo and the Nick sites are the same job done four times from scratch, each stranded on a branch or a repo with no record of whether the client ever saw it. The editorial-quant design system on the Nick branch is the template the other three needed.'
+      note: 'Four client redesigns, the same job done from scratch each time, each stranded on a branch or a repo. The editorial-quant design system is the template the other three needed.'
     },
     {
       ids: ['oregon-buys', 'radar'],

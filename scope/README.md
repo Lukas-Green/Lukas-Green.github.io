@@ -66,13 +66,14 @@ checkboxes** — nothing is filed until you tick it and press the button
 
 It reads who, what and how long out of the wording:
 
-> *"Call the registered agent and cancel one of them. Email Kirk about which
-> Art Inside Out copy is the real one. Also I need to pick up a birthday card."*
+> *"Call the filing service and cancel one of them. Email Dana about which
+> copy of the programme site is the real one. Also I need to pick up a
+> birthday card."*
 
 | Item | List | Person | Project | Demand |
 |---|---|---|---|---|
-| Call the registered agent… | Business admin | — | — | call |
-| Email Kirk about… | People & clients | Kirk Charlton | Art Inside Out | email |
+| Call the filing service… | Business admin | — | — | call |
+| Email Dana about… | People & clients | Dana Reyes | Programme site | email |
 | Pick up a birthday card | Life | — | — | errand |
 
 **Why two services.** Claude accepts text, images and PDFs — not audio. So

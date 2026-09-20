@@ -44,9 +44,9 @@ These need no research. You already know; it has just never been written down.
 
 | Card | The one line |
 |---|---|
-| Sovereign Tattoo | Finished, stalled, or dead? |
-| The Villa Health | Pitched, ignored, or never sent? |
-| Courier Direct | Did the Barry email ever go out? |
+| A dormant client repo | Finished, stalled, or dead? |
+| An unsent spec redesign | Pitched, ignored, or never sent? |
+| A finished client redesign | Did the pitch email ever go out? |
 | HQ / Workflow system | Is anything on that branch worth keeping besides CLAUDE.md? |
 | Creating Better Neighbors | What does `cbn-redirect` point from and to? |
 | Art Inside Out | Repo or the inlined copy here — which is canonical? |
@@ -81,9 +81,9 @@ registered** as an OregonBuys supplier. The real blockers are different from
 the ones I guessed: commodity codes unreviewed (codes decide which notices
 reach you, so an incomplete set means opportunities *never arrive*), ESB
 unfiled, and insurance quoted but not bound (an automatic disqualifier for any
-bid needing a certificate up front). Two rules also moved: HB 2295 opened VBE
-to any honorable discharge, and USDOT dropped race and sex presumptions from
-DBE in favour of an individualized narrative.
+bid needing a certificate up front). Two eligibility rules also moved
+recently in ways that may now include the firm; the specifics are in the
+local file.
 
 **Editorial-Quant — a house style, not a one-off.** Its README says so in as
 many words: "a light, paper-canvas design system for senior practitioners.
@@ -130,7 +130,7 @@ being rediscovered.
 | **SEENG jurisdiction modules** | `SEENG.md` architecture | Oregon is the pilot *by design*. Each additional state is a module, which is a product shape rather than a rewrite. |
 | **Scope itself** | This board | A neurodivergence-first project board built on published research. It is either a portfolio piece, an open-source release, or a product. Currently none of the three. |
 | **Runbook from PPS Relief** | Overlaps view | A working ten-step offline guided PWA generalized into the step engine the marketing site already sells. |
-| **COBID certification** | `procurement-context.md` | Not a project — an unlock. ESB, and possibly veteran and DBE. It gates a whole category of public work. |
+| **Small-business certification** | `procurement-context.md` | Not a project — an unlock. It gates a whole category of public work. |
 
 When one of these becomes real, add it to `projects.js` with a lane and a
 two-minute action, and it joins the ladder like everything else.

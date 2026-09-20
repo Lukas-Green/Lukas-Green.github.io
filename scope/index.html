@@ -745,9 +745,9 @@ kbd{font-family:var(--mono);font-size:.68rem;border:1px solid var(--border-lit);
     return chunks.map(function(chunk){
       var low = ' ' + chunk.toLowerCase() + ' ';
 
-      /* Match on whole words, and never on an article: "The Villa Health"
-         must not claim every sentence containing the word "the". Longest
-         match wins so "Barry" beats a stray org word. */
+      /* Match on whole words, and never on an article: a client called
+         "The Something Group" must not claim every sentence containing the
+         word "the". Longest match wins so a first name beats a stray org word. */
       var client = null, clientHit = 0;
       WS.clients.forEach(function(c){
         var pats = [c.name.toLowerCase()];
@@ -1321,7 +1321,7 @@ kbd{font-family:var(--mono);font-size:.68rem;border:1px solid var(--border-lit);
 
     /* 3. text */
     h += '<div class="cap-box"><h3>3 · The words</h3>' +
-      '<textarea class="cap-text" id="capText" placeholder="Ramble here. Full sentences are not required.\n\nLike: call the registered agent and cancel one of them, email Kirk about which Art Inside Out copy is the real one, and pick up a birthday card."></textarea>' +
+      '<textarea class="cap-text" id="capText" placeholder="Ramble here. Full sentences are not required.\n\nLike: call the filing service and cancel one of them, email Dana about which copy of the site is the real one, and pick up a birthday card."></textarea>' +
       '<div class="cap-actions">' +
         '<button class="btn primary" id="senseBtn">Make sense of this</button>' +
         '<button class="btn" id="clearCap">Clear</button>' +
