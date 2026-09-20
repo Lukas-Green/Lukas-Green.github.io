@@ -33,12 +33,9 @@ window.SCOPE = {
 
   /* Rule 18: for call and email steps, hold the opening line so the
      cost of "what do I even say" is already paid. */
-  scripts: {
-    'luxiga-admin': { kind:'call', text:'Hi, I\'m calling to cancel my registered agent service for LUXIGA LLC. I have a second agent on file and only need one. Can you confirm the cancellation and tell me the effective date?' },
-    'courier-direct': { kind:'email', text:'Hi Barry \u2014 I rebuilt your site as a single page focused on getting a quote or a call. No charge to look: [link]. If it is useful we can talk; if not, no hard feelings.' },
-    'villa-health': { kind:'email', text:'Hi \u2014 I put together a concept for The Villa Health site, focused on making it easier to book. It is here if you want a look: [link]. Happy to walk through it or leave it with you.' },
-    'sovereign-tattoo': { kind:'email', text:'Hi \u2014 checking in on the site we started. Do you want to pick it back up, or should I close it out? Either answer is fine, I just want to stop leaving it open.' }
-  },
+  /* Call and email openers live in workspace.local.js. They quote real
+     people and real engagements, so the committed copy is empty. */
+  scripts: {},
 
   clusters: {
     engine:    { name: 'Local-First AI Engine',   blurb: 'One engine: voice and files in, structured records out, on your own hardware.' },
@@ -479,18 +476,18 @@ window.SCOPE = {
       lane: 'the_one',
       laneWhy: 'Nothing else can be invoiced until this clears. Smallest project, largest gate.',
       laneSet: 'proposed',
-      micro: 'Find both registered-agent invoices and put the two amounts in one note.',
-      summary: 'Not a build, but it blocks builds. LUXIGA LLC is registered in Oregon (amended from LUXIK). Outstanding: a duplicate registered agent being paid twice, the CMRA form, Proton Mail on the domain, EIN and a business bank account. Every one of these gates invoicing a real client.',
+      micro: 'Find both invoices and put the two amounts in one note.',
+      summary: 'Not a build, but it blocks builds. LUXIGA LLC is registered in Oregon. A handful of formation and banking items remain open, and together they gate invoicing a client cleanly. The specifics are in the local file.',
       concepts: ['admin', 'llc', 'billing', 'brand'],
       blockers: [
-        'Two registered agents billing at once ($84/yr and $199/yr). One must be cancelled.',
-        'CMRA form needs a document showing a physical address.',
-        'No EIN yet, so no business bank account, so no clean client payments.'
+        'A duplicate service is being paid for twice. One has to be cancelled.',
+        'A mailing-address form is waiting on a supporting document.',
+        'Banking is not set up yet, which blocks clean client payments.'
       ],
       next: [
-        { text: 'Cancel the duplicate registered agent. One phone call.', effort: 'quick' },
-        { text: 'Update car insurance or bank to the temp address to satisfy the CMRA form.', effort: 'medium' },
-        { text: 'Chase the EIN, then open the business account.', effort: 'deep' }
+        { text: 'Cancel the duplicate service. One phone call.', effort: 'quick' },
+        { text: 'Get the supporting document the address form needs.', effort: 'medium' },
+        { text: 'Finish the formation paperwork, then open the account.', effort: 'deep' }
       ],
       links: { local: 'SESSION.md' },
       image: null
@@ -629,18 +626,17 @@ window.SCOPE = {
       lane: 'parked',
       laneWhy: 'No record of the engagement at all. Park until that one line exists.',
       laneSet: 'proposed',
-      micro: 'Answer in one word: finished, stalled, or dead.',
-      summary: 'A client site repo untouched since June. It does not appear on either portfolio, is not in any session log, and there is no note about whether the engagement finished, stalled or was abandoned.',
+      micro: 'Archive the repo on GitHub. One click.',
+      summary: 'A client site repo, last touched in June. Archived: the engagement is closed. Kept on the board only so it stops being rediscovered as an open thread.',
       concepts: ['site', 'client-work', 'smb'],
       blockers: [
-        'No record of the engagement status anywhere.',
-        'Not shown as work on either site, so it earns nothing.',
-        'Three months cold.'
+        'Archived. Nothing outstanding.',
+        'Not shown as work anywhere, so whatever was built earns nothing.',
+        'Check what you are allowed to publish before reusing any of it.'
       ],
       next: [
-        { text: 'Answer in one line: finished, stalled, or dead?', effort: 'quick' },
-        { text: 'If finished, add it to the portfolio as delivered client work.', effort: 'medium' },
-        { text: 'If stalled, send one email to close or restart it.', effort: 'medium' }
+        { text: 'Archive the repo on GitHub so it stops appearing in the list.', effort: 'micro' },
+        { text: 'Decide whether any of it can go on the portfolio.', effort: 'quick' }
       ],
       links: { repo: 'https://github.com/Lukas-Green/sovereign-tattoo' },
       image: null
@@ -863,18 +859,18 @@ window.SCOPE = {
       lane: 'committed',
       laneWhy: 'Newest work, and the certification gate is a form, not a build.',
       laneSet: 'proposed',
-      micro: 'Answer one question: is there military service in your history? That decides VBE.',
-      summary: 'A public-sector pursuit system: a bid-triage skill that scores solicitations against a rubric and defaults to no-bid, a 22KB Oregon procurement reference, and a standing context file. Further along than it looked \u2014 you are already registered as an OregonBuys supplier. What is not done: COBID ESB unfiled, commodity codes unreviewed, insurance quoted but not bound. Two eligibility rules also changed recently: HB 2295 opened VBE to any honorably discharged veteran, and USDOT dropped the race and sex presumptions from DBE in favour of an individualized narrative.',
+      micro: 'Answer the one eligibility question the local file names.',
+      summary: 'A public-sector pursuit system: a bid-triage skill that scores solicitations against a rubric and defaults to no-bid, a 22KB Oregon procurement reference, and a standing context file. Further along than it looked \u2014 supplier registration is already done. Certification, commodity codes and insurance are the remaining gates, and two eligibility rules moved recently in ways that may now include you. The specifics are in the local file.',
       concepts: ['agent', 'procurement', 'government', 'research', 'sales-enablement', 'rubric', 'admin'],
       blockers: [
         'Commodity codes unreviewed. Codes decide which notices reach you, so an incomplete set means opportunities never arrive at all.',
-        'COBID ESB unfiled. Eligibility looks likely: under 19 employees and under roughly $789K three-year average receipts.',
-        'Insurance quoted but not bound. Any solicitation needing a certificate with the bid is an automatic disqualifier.'
+        'Small-business certification not filed, and it gates the set-aside work.',
+        'Insurance quoted but not bound, which disqualifies any bid needing a certificate up front.'
       ],
       next: [
-        { text: 'Check the VBE rule. Since HB 2295 it covers any honorable discharge, not only service-disabled.', effort: 'quick' },
-        { text: 'Review your NIGP commodity codes so design, dev, accessibility and training notices actually reach you.', effort: 'medium' },
-        { text: 'File the COBID ESB application. It is free and you appear to qualify.', effort: 'deep' }
+        { text: 'Check which certification categories you now qualify for. The rules moved recently.', effort: 'quick' },
+        { text: 'Review your commodity codes so design, dev, accessibility and training notices actually reach you.', effort: 'medium' },
+        { text: 'File the small-business certification. It is free and you appear to qualify.', effort: 'deep' }
       ],
       links: { local: 'research/procurement-context.md', live: 'https://oregonbuys.gov' },
       image: null
@@ -892,18 +888,18 @@ window.SCOPE = {
       lane: 'queued',
       laneWhy: 'Finished work, one unsent email away from an answer.',
       laneSet: 'proposed',
-      micro: 'Open barry-email-v2.md and read it once.',
-      summary: 'A single-page redesign for courier-direct.com, a 24/7 courier in Tualatin run by Sue and Barry Miller since 2006. Built from owner-supplied screenshots after the live site returned 403 to every fetch. Ships with a decisions log, an about page, a demo, and two drafted versions of a pitch email to Barry. The work is finished. The email appears never to have been sent.',
+      micro: 'Delete the two unsent draft emails from the branch.',
+      summary: 'A single-page redesign for a 24/7 courier in Tualatin, built from owner-supplied screenshots after the live site returned 403 to every fetch. Ships with a decisions log, an about page and a demo. Closed: the build is finished and the engagement is not going anywhere.',
       concepts: ['site', 'client-work', 'smb', 'redesign', 'local-business', 'pitch'],
       blockers: [
-        'Two drafts of the Barry email and no evidence either went out.',
-        'Three months cold on finished work.',
-        'Lives on a branch, so there is no link you could send even if you wanted to.'
+        'Closed. Kept as finished spec work, not as an open lead.',
+        'Lives on a branch, so it is not linkable as a portfolio piece yet.',
+        'Screenshots came from the owner, so check before publishing any of it.'
       ],
       next: [
-        { text: 'Open barry-email-v2.md, pick one, and send it.', effort: 'quick' },
-        { text: 'Publish the demo somewhere linkable first so the email has a URL.', effort: 'medium' },
-        { text: 'If the answer is no, add it to the portfolio as spec work.', effort: 'medium' }
+        { text: 'Delete the two unsent draft emails from the branch.', effort: 'micro' },
+        { text: 'Check which assets you may publish before using it as a portfolio piece.', effort: 'quick' },
+        { text: 'Write it up as spec work and put it on the site.', effort: 'medium' }
       ],
       links: { local: 'projects/courier-direct/', live: 'https://courier-direct.com' },
       image: null
@@ -921,18 +917,18 @@ window.SCOPE = {
       lane: 'parked',
       laneWhy: 'Finished spec work with no record of contact. Park until you decide to pitch.',
       laneSet: 'proposed',
-      micro: 'Answer in one word: pitched, ignored, or never sent.',
-      summary: 'A preview site for an integrative care clinic in Vancouver, Washington. One file on one branch, untouched since May, with no record of whether it was ever shown to the client. The same shape as Courier Direct and Sovereign Tattoo: a finished-looking local business redesign with no outcome recorded.',
+      micro: 'Decide in one word: pitch it, or file it as spec work.',
+      summary: 'A 68KB single-page redesign concept for an integrative practice in Vancouver, Washington \u2014 psychiatry, hormone therapy, weight management, aesthetics, addiction recovery. Editorial wellness direction: cream, sage, clay and gold, Fraunces and Inter. Hero, services bento, team grid, four-step patient journey, testimonials, FAQ, contact. Unsolicited spec work, and the page still carries placeholder portraits, clinician names, phone and hours.',
       concepts: ['site', 'client-work', 'smb', 'redesign', 'local-business', 'healthcare'],
       blockers: [
-        'No record of whether the client ever saw it.',
-        'Single preview file on a branch, not deployed anywhere.',
-        'Four months cold.'
+        'Spec work for a real practice, built without a brief from them.',
+        'Placeholder clinician names, phone and hours are still in the page. It cannot be shown as-is.',
+        'Single file on a branch, not deployed anywhere.'
       ],
       next: [
-        { text: 'Answer in one line: pitched, ignored, or never sent?', effort: 'quick' },
-        { text: 'Publish it as a linkable preview.', effort: 'medium' },
-        { text: 'Send it, or close the loop and file it as spec work.', effort: 'medium' }
+        { text: 'Decide in one word: pitch it, or file it as portfolio spec work.', effort: 'micro' },
+        { text: 'Strip or clearly mark every placeholder name, number and hour.', effort: 'medium' },
+        { text: 'If pitching, verify the clinician list with the practice first.', effort: 'medium' }
       ],
       links: { local: 'villa-health-preview.html' },
       image: null
@@ -1027,7 +1023,7 @@ window.SCOPE = {
     {
       id: 'nick-sites',
       name: 'Editorial-Quant Template',
-      aka: 'Nick McCarty sites',
+      aka: 'client portfolio sites',
       tag: 'Template System / Client',
       cluster: 'client',
       status: 'prototype',
@@ -1044,15 +1040,15 @@ window.SCOPE = {
       concepts: ['site', 'client-work', 'template', 'design-system', 'portfolio', 'redesign'],
       blockers: [
         'A documented house style that nothing in your own portfolio uses.',
-        'Three nickmccarty repos are open to you with no stated status.',
+        'Three related repos are open to you with no stated status.',
         'Built for portfolios. Whether it stretches to nonprofit sites is untested.'
       ],
       next: [
         { text: 'Open design-system.html and decide whether it is the house template.', effort: 'quick' },
         { text: 'Rebuild one civic site on it as a proof.', effort: 'deep' },
-        { text: 'Note the status of the three nickmccarty repos.', effort: 'quick' }
+        { text: 'Note the status of the three related repos.', effort: 'quick' }
       ],
-      links: { local: 'assets/templates/portfolio/editorial-quant/', repo: 'https://github.com/nickmccarty/OHOH-site-redesign' },
+      links: { local: 'assets/templates/portfolio/editorial-quant/', repo: '' },
       image: null
     },
     {

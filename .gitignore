@@ -1,3 +1,6 @@
 .DS_Store
 *.ai
 redesign images/
+
+# Scope: real client and admin data. Never committed.
+scope/*.local.js
